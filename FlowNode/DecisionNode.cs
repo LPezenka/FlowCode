@@ -16,13 +16,16 @@ namespace FlowNode
             if (Code == null) return;
             try
             {
-                Code = "bool bresult = (" + Code.Replace(";","") + ");";
-                Code.Replace(";;", ";");
+                //Code = "bool bresult = (" + Code.Replace(";","") + ");";
+                //Code.Replace(";;", ";");
 
+                if (Code.EndsWith(";"))
+                    Code = Code.Substring(0, Code.Length - 1);
                 ScriptState = ScriptState.ContinueWithAsync<bool>(Code, ScriptOptions).Result;
+                var v = (bool)ScriptState.ReturnValue;
 
-                var v = ScriptState.Variables.Select(va => va).Where(vn => vn.Name == "bresult").FirstOrDefault();
-                if ((bool)v.Value == true)
+                //var v = ScriptState.Variables.Select(va => va).Where(vn => vn.Name == "bresult").FirstOrDefault();
+                if (v == true)
                     Next = OnTrue;
                 else
                     Next = OnFalse;

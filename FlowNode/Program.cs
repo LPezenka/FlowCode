@@ -173,7 +173,7 @@ foreach (var edge in edges)
 
 foreach (var node in nodes)
 {
-    Console.WriteLine($"ID={node.ID}, Parent={node.Parent}");
+    //Console.WriteLine($"ID={node.ID}, Parent={node.Parent}");
     Node parent = nodes.Select(x => x).Where(x => x.ID == node.Parent).FirstOrDefault();
     node.Parent = parent?.ID;
     if (parent is not null)
@@ -197,15 +197,18 @@ foreach (var dn in nodes)
 }
 
 
-foreach (var node in nodes)
-{
-    Console.WriteLine($"ID={node.ID}, Next={node.Next}");
-}
+//foreach (var node in nodes)
+//{
+//    Console.WriteLine($"ID={node.ID}, Next={node.Next.ID}");
+//}
 
 
 
 //int a = 5, b = 3;
-int min = 0, max = 0;
+//int min = 0, max = 0;
+
+
+
 ScriptOptions scriptOptions = ScriptOptions.Default;
 
 //Add reference to mscorlib
