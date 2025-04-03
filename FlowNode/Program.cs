@@ -6,7 +6,8 @@ using System.Xml.Linq;
 using System.Xml;
 using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
-
+using CargoTrucker;
+using CargoTrucker.Client;
 
 List<Node> nodes = new List<Node>();
 List<Edge> edges = new List<Edge>();
@@ -16,7 +17,7 @@ List<Edge> edges = new List<Edge>();
 
 
 XmlDocument doc = new XmlDocument();
-doc.Load("./data/minmax.drawio");
+doc.Load("./data/cargotrucker1.drawio");
 XmlNode rootNode = GetRootNode(doc.DocumentElement);  //doc.DocumentElement.SelectSingleNode("root");
 
 
@@ -48,7 +49,7 @@ foreach (XmlNode node in rootNode.ChildNodes)
             n = new ActionNode();
         else
         {
-            if (style.Contains("rhombus"))
+            if (style.Contains("rhombus") || style.Contains("mxgraph.flowchart.decision"))
                 n = new DecisionNode();
             else
                 n = new ActionNode();
@@ -60,6 +61,7 @@ foreach (XmlNode node in rootNode.ChildNodes)
         if (code != null)
         {
             code = code.Replace("&gt;", ">");
+            code = code.Replace("&lt;", "<");
             if (code.Length > 0) code = code + ";";
         }
 
@@ -214,11 +216,14 @@ ScriptOptions scriptOptions = ScriptOptions.Default;
 //Add reference to mscorlib
 var mscorlib = typeof(System.Object).Assembly;
 var systemCore = typeof(System.Linq.Enumerable).Assembly;
-scriptOptions = scriptOptions.AddReferences(mscorlib, systemCore);
+var cargoTrucker = typeof(CargoTrucker.Client.GameApi).Assembly;
+
+scriptOptions = scriptOptions.AddReferences(mscorlib, systemCore, cargoTrucker);
 //Add namespaces
 scriptOptions = scriptOptions.AddImports("System");
 scriptOptions = scriptOptions.AddImports("System.Linq");
 scriptOptions = scriptOptions.AddImports("System.Collections.Generic");
+scriptOptions = scriptOptions.AddImports("CargoTrucker.Client.GameApi");
 
 var result = CSharpScript.RunAsync("Console.WriteLine(\"Starting Script\")", scriptOptions).Result;
 ActionNode.ScriptState = result;

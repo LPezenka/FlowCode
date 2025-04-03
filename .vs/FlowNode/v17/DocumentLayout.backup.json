@@ -3,16 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{08A4785A-F29E-4236-8F4E-0C2071637554}|FlowNode\\FlowNode.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\flownode\\decisionnode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{08A4785A-F29E-4236-8F4E-0C2071637554}|FlowNode\\FlowNode.csproj|solutionrelative:flownode\\decisionnode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{08A4785A-F29E-4236-8F4E-0C2071637554}|FlowNode\\FlowNode.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\flownode\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{08A4785A-F29E-4236-8F4E-0C2071637554}|FlowNode\\FlowNode.csproj|solutionrelative:flownode\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{08A4785A-F29E-4236-8F4E-0C2071637554}|FlowNode\\FlowNode.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\flownode\\actionnode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{08A4785A-F29E-4236-8F4E-0C2071637554}|FlowNode\\FlowNode.csproj|solutionrelative:flownode\\actionnode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{08A4785A-F29E-4236-8F4E-0C2071637554}|FlowNode\\FlowNode.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\flownode\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{08A4785A-F29E-4236-8F4E-0C2071637554}|FlowNode\\FlowNode.csproj|solutionrelative:flownode\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{08A4785A-F29E-4236-8F4E-0C2071637554}|FlowNode\\FlowNode.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\flownode\\flownode.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{08A4785A-F29E-4236-8F4E-0C2071637554}|FlowNode\\FlowNode.csproj|solutionrelative:flownode\\flownode.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08A4785A-F29E-4236-8F4E-0C2071637554}|FlowNode\\FlowNode.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\flownode\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{08A4785A-F29E-4236-8F4E-0C2071637554}|FlowNode\\FlowNode.csproj|solutionrelative:flownode\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08A4785A-F29E-4236-8F4E-0C2071637554}|FlowNode\\FlowNode.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\flownode\\field.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{08A4785A-F29E-4236-8F4E-0C2071637554}|FlowNode\\FlowNode.csproj|solutionrelative:flownode\\field.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08A4785A-F29E-4236-8F4E-0C2071637554}|FlowNode\\FlowNode.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\flownode\\decisionnode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{08A4785A-F29E-4236-8F4E-0C2071637554}|FlowNode\\FlowNode.csproj|solutionrelative:flownode\\decisionnode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,13 +50,52 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
+              "Title": "FlowNode",
+              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowNode\\FlowNode.csproj",
+              "RelativeDocumentMoniker": "FlowNode\\FlowNode.csproj",
+              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowNode\\FlowNode.csproj",
+              "RelativeToolTip": "FlowNode\\FlowNode.csproj",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAkwBYAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-03T08:03:57.797Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "field.json",
+              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowNode\\field.json",
+              "RelativeDocumentMoniker": "FlowNode\\field.json",
+              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowNode\\field.json",
+              "RelativeToolTip": "FlowNode\\field.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-03T08:04:24.835Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowNode\\appsettings.json",
+              "RelativeDocumentMoniker": "FlowNode\\appsettings.json",
+              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowNode\\appsettings.json",
+              "RelativeToolTip": "FlowNode\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-03T08:04:20.596Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "DecisionNode.cs",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowNode\\DecisionNode.cs",
               "RelativeDocumentMoniker": "FlowNode\\DecisionNode.cs",
               "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowNode\\DecisionNode.cs",
               "RelativeToolTip": "FlowNode\\DecisionNode.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAUwCQAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAuwB8AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-02T09:22:00.459Z",
               "EditorCaption": ""
@@ -57,20 +108,20 @@
               "RelativeDocumentMoniker": "FlowNode\\ActionNode.cs",
               "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowNode\\ActionNode.cs",
               "RelativeToolTip": "FlowNode\\ActionNode.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAA0wBkAAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAACMAAAAAAAAAAAAUwC0AAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-02T09:16:12.515Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowNode\\Program.cs",
               "RelativeDocumentMoniker": "FlowNode\\Program.cs",
               "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowNode\\Program.cs",
               "RelativeToolTip": "FlowNode\\Program.cs",
-              "ViewState": "AgIAAMgAAAAAAAAAAAAuwMoAAAADAAAAAAAAAA==",
+              "ViewState": "AgIAALQAAAAAAAAAAAAUwL4AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-02T09:16:00.435Z",
               "EditorCaption": ""
