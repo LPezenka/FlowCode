@@ -25,4 +25,13 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="data\cargotrucker1.drawio">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="data\minmax.drawio">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
