@@ -20,6 +20,8 @@ namespace FlowNode
             Node current = n;
             while (current != null)
             {
+                //if (current.GetType() == typeof(CallerNode) || current.Next.GetType() == typeof(CallerNode))
+                //    Console.WriteLine("Calling...");
                 current.Evaluate();
                 current = current.Next;
             }

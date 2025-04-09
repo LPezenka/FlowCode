@@ -39,7 +39,15 @@ namespace FlowNode
                     //Code += ");";
                      
                 }
-                ScriptState = ScriptState.ContinueWithAsync(Code, ScriptOptions).Result;
+
+                if (Code.Contains("Function"))
+                {
+                    Console.WriteLine($"Entering {Code}");
+                }
+                else
+                {
+                    ScriptState = ScriptState.ContinueWithAsync(Code, ScriptOptions).Result;
+                }
             }
             catch (Exception ex)
             {

@@ -51,18 +51,49 @@ foreach (XmlNode node in rootNode.ChildNodes)
         {
             if (style.Contains("rhombus") || style.Contains("mxgraph.flowchart.decision"))
                 n = new DecisionNode();
+            else if (style.Contains("process"))
+                n = new CallerNode(null);
+            else if (style.Contains("terminator"))
+                n = new TerminatorNode();
             else
                 n = new ActionNode();
             // TODO: OnTrue und OnFalse ordentlich setzen
         }
         
         n.ID = id;
+        if (n.GetType() == typeof(CallerNode))
+        {
+            code = code.Replace("</div>", "");
+            code = code.Replace("<div>", "");
+
+            //(n as CallerNode).Variables = rows.Where(x => x.Contains("Variables:")).FirstOrDefault().Split(":").Skip(1).FirstOrDefault();
+            var callerNode = (CallerNode)n;
+            callerNode.Variables = code.Split("(").Skip(1).FirstOrDefault();
+            callerNode.Variables = callerNode.Variables.Replace(")", "");
+            callerNode.ReturnSource = code.Split("=").Skip(1).FirstOrDefault().Trim();
+            callerNode.ReturnSource = callerNode.ReturnSource.Replace("()", "");
+
+            callerNode.ReturnTarget = code.Split("=").FirstOrDefault().Trim();
+        }
+        else if (n.GetType() == typeof(TerminatorNode))
+        {
+            code = code.Replace("return ", "");
+            (n as TerminatorNode).ResultVariable = code;
+        }
 
         if (code != null)
         {
+            //if (code.Contains("Function"))
+            //{
+            //    //n.ID = code.Split(" ").Skip(1).FirstOrDefault().Replace("()", "");
+            //}
+            //else
+            //{
+
             code = code.Replace("&gt;", ">");
             code = code.Replace("&lt;", "<");
             if (code.Length > 0) code = code + ";";
+            //}
         }
 
         n.Code = code;
@@ -196,8 +227,14 @@ foreach (var dn in nodes)
             ldn.OnFalse = nodes.Where(y => y.ID == onFalse).FirstOrDefault();
         }
     }
+    else if (dn.GetType() == typeof(CallerNode))
+    {
+        var target = nodes.Where(x => x.Code != null && x.Code.Contains($"Function {(dn as CallerNode).ReturnSource}")).FirstOrDefault();
+        (dn as CallerNode).TargetNode = target;
+    }
 }
 
+//var callers = nodes.Select(x=> new CallerNode((x as CallerNode).TargetNode)).Where(x=> x.GetType() == typeof(CallerNode)).ToList();
 
 //foreach (var node in nodes)
 //{
@@ -226,10 +263,23 @@ scriptOptions = scriptOptions.AddImports("System.Collections.Generic");
 scriptOptions = scriptOptions.AddImports("CargoTrucker.Client.GameApi");
 
 var result = CSharpScript.RunAsync("Console.WriteLine(\"Starting Script\")", scriptOptions).Result;
+result = result.ContinueWithAsync("int i = 0, j = 1; char a = 'a'; bool b = true, c = false;", scriptOptions).Result;
 ActionNode.ScriptState = result;
 ActionNode.ScriptOptions = scriptOptions;
 
-var primaryNode = nodes.Select(x => x).Where(x => x.ID == "WIyWlLk6GJQsqaUBKTNV-0").FirstOrDefault();
+
+
+
+var primaryNode = nodes.Select(x => x).Where(x => x.ID == "UQ2DM836Tyy0t1lEemUF-0").FirstOrDefault();
+
+
+//var CallerNode = new CallerNode(primaryNode);
+//CallerNode.Variables = "i, j, a, b, c";
+//CallerNode.ReturnSource = "boxes";
+//CallerNode.ReturnTarget = "noBoxes";
+
+//CallerNode.Call();
+
 Node.Run(primaryNode);
 
 
