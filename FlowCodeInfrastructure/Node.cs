@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlowNode
+namespace FlowCodeInfrastructure
 {
-    internal abstract class Node
+    public abstract class Node
     {
         public Node Next { get; set; }
         public string ID { get; set; }

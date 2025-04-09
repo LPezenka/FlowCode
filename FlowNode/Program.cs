@@ -1,26 +1,24 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-
-using FlowNode;
 using System.Xml.Linq;
 using System.Xml;
 using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using CargoTrucker;
 using CargoTrucker.Client;
+using FlowCodeInfrastructure;
+
+Config.SetKeyWord(Config.KeyWord.True, "Ja");
+Config.SetKeyWord(Config.KeyWord.False, "Nein");
+Config.SetKeyWord(Config.KeyWord.Function, "Function");
+
 
 List<Node> nodes = new List<Node>();
 List<Edge> edges = new List<Edge>();
 
-
-//List<Tuple<string, string>> edges = new List<Tuple<string, string>>();
-
-
 XmlDocument doc = new XmlDocument();
 doc.Load("./data/cargotrucker1.drawio");
 XmlNode rootNode = GetRootNode(doc.DocumentElement);  //doc.DocumentElement.SelectSingleNode("root");
-
-
 
 foreach (XmlNode node in rootNode.ChildNodes)
 {
@@ -57,7 +55,6 @@ foreach (XmlNode node in rootNode.ChildNodes)
                 n = new TerminatorNode();
             else
                 n = new ActionNode();
-            // TODO: OnTrue und OnFalse ordentlich setzen
         }
         
         n.ID = id;
@@ -83,17 +80,9 @@ foreach (XmlNode node in rootNode.ChildNodes)
 
         if (code != null)
         {
-            //if (code.Contains("Function"))
-            //{
-            //    //n.ID = code.Split(" ").Skip(1).FirstOrDefault().Replace("()", "");
-            //}
-            //else
-            //{
-
             code = code.Replace("&gt;", ">");
             code = code.Replace("&lt;", "<");
             if (code.Length > 0) code = code + ";";
-            //}
         }
 
         n.Code = code;
@@ -101,96 +90,6 @@ foreach (XmlNode node in rootNode.ChildNodes)
         nodes.Add(n);
     }
 }
-
-//return; 
-
-//var filename = "./data/minmax.drawio";
-//string text = File.ReadAllText(filename);
-//foreach (var line in text.Split('\n'))
-//{
-//    if (line.Contains("<mxCell"))
-//    {
-//        Node n = new Node();
-//        Edge e = new Edge();
-//        var elements = line.Trim().Split(" ");
-//        bool isEdge = false;
-
-//        foreach (var element in elements)
-//        {
-//            if (element.Contains("id="))
-//            {
-//                var id = element.Split("=")[1].Replace("\"", "");
-//                Console.WriteLine($"id={id}");
-//                n.ID = id;
-//                e.ID = id;
-//            }
-//            else if (element.Contains("parent="))
-//            {
-//                var parent = element.Split("=")[1].Replace("\"", "");
-//                Console.WriteLine($"parent={parent}");
-//                n.Parent = parent;
-//            }
-//            else if (element.Contains("value="))
-//            {
-//                var es = element.Split("=\"");
-//                if (es.Length > 0)
-//                {
-//                    var code = es[1];
-//                    code.Replace("\"", "");
-//                    code = code.Replace("&amp;gt;", ">");
-//                    //code = code.Replace("&amp;gt;", "<");
-//                    if (code.Length > 0)
-//                    {
-//                        code = code + ";";
-//                        Console.WriteLine($"code={code}");
-//                        n.Code = code;
-//                    }
-//                }
-
-
-//            }
-//            else if (element.Contains("style="))
-//            {
-//                var style = element.Split("=")[1].Replace("\"", "");
-//                Console.WriteLine($"style={style}");
-//            }
-//            else if (element.Contains("vertex="))
-//            {
-//                var vertex = element.Split("=")[1].Replace("\"", "");
-//                Console.WriteLine($"vertex={vertex}");
-//            }
-//            else if (element.Contains("target="))
-//            {
-//                var target = element.Split("=")[1].Replace("\"", "");
-//                Console.WriteLine($"target={target}");
-//                e.Target = target;
-//            }
-//            else if (element.Contains("source="))
-//            {
-//                var source = element.Split("=")[1].Replace("\"", "");
-//                Console.WriteLine($"source={source}");
-//                e.Source = source;
-//            }
-//            else if (element.Contains("edge="))
-//            {
-//                var edge = element.Split("=")[1].Replace("\"", "");
-//                Console.WriteLine($"edge={edge}");
-//                isEdge = true;
-//            }
-//            //else if (element.Contains("/>"))
-//            //{
-//            //    nodes.Add(n);
-//            //}
-//        }
-//        if (!isEdge)
-//            nodes.Add(n);
-//        else
-//        {
-//            edges.Add(e);
-//        }
-//    }
-//}
-
 
 foreach (var edge in edges)
 {
@@ -218,8 +117,8 @@ foreach (var dn in nodes)
     if (dn.GetType() == typeof(DecisionNode))
     {
         var outgoing = edges.Where(ed => ed.Source == dn.ID).ToList();
-        var onTrue = outgoing.Where(ot => ot.Text == "Ja").FirstOrDefault().Target;
-        var onFalse = outgoing.Where(ot => ot.Text == "Nein").FirstOrDefault().Target;
+        var onTrue = outgoing.Where(ot => ot.Text == Config.GetKeyword(Config.KeyWord.True)).FirstOrDefault().Target;
+        var onFalse = outgoing.Where(ot => ot.Text == Config.GetKeyword(Config.KeyWord.False)).FirstOrDefault().Target;
         var ldn = (dn as DecisionNode);
         if (ldn != null)
         {
@@ -229,24 +128,10 @@ foreach (var dn in nodes)
     }
     else if (dn.GetType() == typeof(CallerNode))
     {
-        var target = nodes.Where(x => x.Code != null && x.Code.Contains($"Function {(dn as CallerNode).ReturnSource}")).FirstOrDefault();
+        var target = nodes.Where(x => x.Code != null && x.Code.Contains($"{Config.GetKeyword(Config.KeyWord.Function)} {(dn as CallerNode).ReturnSource}")).FirstOrDefault();
         (dn as CallerNode).TargetNode = target;
     }
 }
-
-//var callers = nodes.Select(x=> new CallerNode((x as CallerNode).TargetNode)).Where(x=> x.GetType() == typeof(CallerNode)).ToList();
-
-//foreach (var node in nodes)
-//{
-//    Console.WriteLine($"ID={node.ID}, Next={node.Next.ID}");
-//}
-
-
-
-//int a = 5, b = 3;
-//int min = 0, max = 0;
-
-
 
 ScriptOptions scriptOptions = ScriptOptions.Default;
 
@@ -267,21 +152,8 @@ result = result.ContinueWithAsync("int i = 0, j = 1; char a = 'a'; bool b = true
 ActionNode.ScriptState = result;
 ActionNode.ScriptOptions = scriptOptions;
 
-
-
-
 var primaryNode = nodes.Select(x => x).Where(x => x.ID == "UQ2DM836Tyy0t1lEemUF-0").FirstOrDefault();
-
-
-//var CallerNode = new CallerNode(primaryNode);
-//CallerNode.Variables = "i, j, a, b, c";
-//CallerNode.ReturnSource = "boxes";
-//CallerNode.ReturnTarget = "noBoxes";
-
-//CallerNode.Call();
-
 Node.Run(primaryNode);
-
 
 XmlNode GetRootNode(XmlNode node)
 {

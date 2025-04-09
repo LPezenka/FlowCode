@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Scripting;
 using CargoTrucker;
 
-namespace FlowNode
+namespace FlowCodeInfrastructure
 {
-    internal class ActionNode : Node
+    public class ActionNode : Node
     {
         //public string Code { get; set; }
         public static ScriptState ScriptState { get; set; }

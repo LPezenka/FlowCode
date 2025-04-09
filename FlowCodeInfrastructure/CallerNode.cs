@@ -8,9 +8,9 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlowNode
+namespace FlowCodeInfrastructure
 {
-    internal class CallerNode: ActionNode
+    public class CallerNode: ActionNode
     {
         public Node TargetNode { get; set; }
         public string Variables { get; set; }
@@ -30,8 +30,8 @@ namespace FlowNode
 
         public void Call()
         {
-            var state = ActionNode.ScriptState;
-            var options = ActionNode.ScriptOptions;
+            var state = ScriptState;
+            var options = ScriptOptions;
             try
             {
                 var vars = Variables.Split(",");
@@ -57,8 +57,8 @@ namespace FlowNode
                         result += $"{type} {name} = {val};\n";
                     }
                 }
-                ActionNode.ScriptState = CSharpScript.RunAsync(result).Result;
-                Node.Run(TargetNode);
+                ScriptState = CSharpScript.RunAsync(result).Result;
+                Run(TargetNode);
                 //var rval = state.Variables.Where(x => x.Name == ReturnTarget);
                 if (TerminatorNode.ReturnValue  != null)
                 {
@@ -76,12 +76,16 @@ namespace FlowNode
                     }
                 }
             }
-            finally
+            catch (Exception e)
             {
-                ActionNode.ScriptState = state;
-                ActionNode.ScriptOptions = options;
-                ActionNode.Run(Next);
+                Console.WriteLine(e.ToString());
             }
+            //finally
+            //{
+            ScriptState = state;
+            ScriptOptions = options;
+            //Run(Next);
+            //}
         }
 
     }

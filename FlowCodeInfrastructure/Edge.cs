@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlowNode
+namespace FlowCodeInfrastructure
 {
-    internal class Edge
+    public class Edge
     {
         public string ID { get; set; }
         public string Source { get; set; }

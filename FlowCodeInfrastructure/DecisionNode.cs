@@ -1,13 +1,12 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Scripting;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlowNode
+namespace FlowCodeInfrastructure
 {
-    internal class DecisionNode:ActionNode
+    public class DecisionNode : ActionNode
     {
         public Node OnTrue { get; set; }
         public Node OnFalse { get; set; }
@@ -32,7 +31,7 @@ namespace FlowNode
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());   
+                Console.WriteLine(ex.ToString());
             }
         }
     }

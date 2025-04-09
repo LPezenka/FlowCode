@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35913.81 d17.13
+VisualStudioVersion = 17.13.35913.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowNode", "FlowNode\FlowNode.csproj", "{08A4785A-F29E-4236-8F4E-0C2071637554}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowCodeInfrastructure", "FlowCodeInfrastructure\FlowCodeInfrastructure.csproj", "{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{08A4785A-F29E-4236-8F4E-0C2071637554}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08A4785A-F29E-4236-8F4E-0C2071637554}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08A4785A-F29E-4236-8F4E-0C2071637554}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
