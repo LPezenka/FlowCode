@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowNode", "FlowNode\FlowNo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowCodeInfrastructure", "FlowCodeInfrastructure\FlowCodeInfrastructure.csproj", "{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLUtils", "XMLUtils\XMLUtils.csproj", "{C6F2ED50-AC4A-4761-AD7F-D29CA771FA17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NodeControlPrototype", "NodeControlPrototype\NodeControlPrototype\NodeControlPrototype.csproj", "{F677964B-7359-523C-DBA5-138406B16814}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6F2ED50-AC4A-4761-AD7F-D29CA771FA17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6F2ED50-AC4A-4761-AD7F-D29CA771FA17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6F2ED50-AC4A-4761-AD7F-D29CA771FA17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6F2ED50-AC4A-4761-AD7F-D29CA771FA17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F677964B-7359-523C-DBA5-138406B16814}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F677964B-7359-523C-DBA5-138406B16814}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F677964B-7359-523C-DBA5-138406B16814}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F677964B-7359-523C-DBA5-138406B16814}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

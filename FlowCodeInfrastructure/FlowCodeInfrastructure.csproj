@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\XMLUtils\XMLUtils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="CargoTrucker.Client">
       <HintPath>..\FlowNode\lib\CargoTrucker.Client.dll</HintPath>
     </Reference>
