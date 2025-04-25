@@ -19,6 +19,30 @@ namespace NodeControlPrototype
         public string Label { get; set; }
         public Point? CurrentMousePosition { get; set; }
 
+        public Point LabelPosition
+        {
+            get { return (Point)GetValue(LabelPositionProperty); }
+            set { SetValue(LabelPositionProperty, value); }
+        }
+
+        public static readonly DependencyProperty LabelPositionProperty =
+    DependencyProperty.Register(
+        nameof(LabelPosition),
+        typeof(Point),
+        typeof(EdgeControl),
+        new FrameworkPropertyMetadata(
+            new Point(0, 0),
+            FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
+            OnLabelPositionChanged));
+
+        private static void OnLabelPositionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is EdgeControl edge)
+            {
+                edge.InvalidateArrange();
+            }
+        }
+
         static EdgeControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(EdgeControl),
@@ -64,6 +88,9 @@ namespace NodeControlPrototype
                     VisualTreeHelper.GetDpi(this).PixelsPerDip);
 
                 drawingContext.DrawText(formattedText, mid);
+                LabelPosition = new Point((start.X + end.X) / 2 - 40, (start.Y + end.Y) / 2 - 10);
+                InvalidateArrange();
+                UpdateLayout();
             }
         }
 

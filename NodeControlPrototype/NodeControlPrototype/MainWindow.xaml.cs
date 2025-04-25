@@ -98,6 +98,8 @@ namespace NodeControlPrototype
                 To = null
             };
             Panel.SetZIndex(_temporaryEdge, -1);
+
+            _temporaryEdge.Label = "Yes";
             DiagramCanvas.Children.Add(_temporaryEdge);
 
             MouseMove += MainWindow_MouseMove;
