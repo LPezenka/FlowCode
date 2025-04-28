@@ -46,7 +46,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type fc:EdgeControl}">
                     <Canvas Background="Transparent">
-                        <TextBox Text="{Binding Label, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                        <!--<TextBox Text="{Binding Label, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                              Background="White"
                              BorderBrush="Gray"
                              BorderThickness="1"
@@ -56,7 +56,7 @@
                              TextAlignment="Center"
                              Canvas.Left="{Binding LabelPosition.X, RelativeSource={RelativeSource TemplatedParent}}"
                              Canvas.Top="{Binding LabelPosition.Y, RelativeSource={RelativeSource TemplatedParent}}"
-                             />
+                             />-->
                     </Canvas>
                 </ControlTemplate>
             </Setter.Value>

@@ -15,6 +15,7 @@ namespace NodeControlPrototype
         private int? _edgeStartIndex = null;
         private EdgeControl _temporaryEdge = null;
         private readonly List<EdgeControl> _edges = new();
+        private readonly Dictionary<EdgeControl, TextBox> _edgeLabels = new();
 
         public MainWindow()
         {
@@ -99,7 +100,7 @@ namespace NodeControlPrototype
             };
             Panel.SetZIndex(_temporaryEdge, -1);
 
-            _temporaryEdge.Label = "Yes";
+            _temporaryEdge.Label = string.Empty;
             DiagramCanvas.Children.Add(_temporaryEdge);
 
             MouseMove += MainWindow_MouseMove;
@@ -118,7 +119,7 @@ namespace NodeControlPrototype
 
         private void MainWindow_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            var localTempEdge = _temporaryEdge; // kopie, um race condition zu vermeiden
+            var localTempEdge = _temporaryEdge; // Kopie
 
             if (localTempEdge == null || _edgeStartNode == null || !_edgeStartIndex.HasValue)
             {
@@ -137,16 +138,53 @@ namespace NodeControlPrototype
                 localTempEdge.To = targetNode;
                 localTempEdge.ToIndex = targetNode.GetNextFreeInputIndex();
 
+                if (localTempEdge.To == localTempEdge.From)
+                {
+                    CleanupTemporaryEdge();
+                    return;
+                }
+
                 _edgeStartNode.RegisterOutputEdge(_edgeStartIndex.Value, localTempEdge);
-                localTempEdge.Label = "";
 
                 _edges.Add(localTempEdge);
+                localTempEdge.DeleteRequested += Edge_DeleteRequested;
 
-                _edgeStartNode.NodeMoved += (s, ev) => localTempEdge.InvalidateVisual();
-                targetNode.NodeMoved += (s, ev) => localTempEdge.InvalidateVisual();
+                _edgeStartNode.NodeMoved += (s, ev) => UpdateEdges();
+                targetNode.NodeMoved += (s, ev) => UpdateEdges();
+
+                // Label erzeugen
+                var labelBox = new TextBox
+                {
+                    Text = localTempEdge.Label,
+                    Width = 80,
+                    Background = Brushes.White,
+                    BorderBrush = Brushes.Gray,
+                    BorderThickness = new Thickness(1),
+                    FontSize = 12,
+                    Padding = new Thickness(2),
+                    TextAlignment = TextAlignment.Center
+                };
+
+                // Position Label
+                var start = localTempEdge.From.TranslatePoint(
+                    localTempEdge.From.GetConnectionPoints()[localTempEdge.FromIndex ?? 0], DiagramCanvas);
+                var end = localTempEdge.To.TranslatePoint(
+                    localTempEdge.To.GetConnectionPoints()[localTempEdge.ToIndex ?? 0], DiagramCanvas);
+
+                var labelPos = new Point((start.X + end.X) / 2 - 40, (start.Y + end.Y) / 2 - 10);
+
+                Canvas.SetLeft(labelBox, labelPos.X);
+                Canvas.SetTop(labelBox, labelPos.Y);
+
+                labelBox.TextChanged += (s, ev) => localTempEdge.Label = labelBox.Text;
+
+                DiagramCanvas.Children.Add(labelBox);
+
+                _edgeLabels.Add(localTempEdge, labelBox);
             }
             else
             {
+                // Kein Node getroffen -> temporäre Edge entfernen
                 DiagramCanvas.Children.Remove(localTempEdge);
             }
 
@@ -167,6 +205,16 @@ namespace NodeControlPrototype
             foreach (var edge in _edges)
             {
                 edge.InvalidateVisual();
+
+                if (_edgeLabels.TryGetValue(edge, out var labelBox) && edge.From != null && edge.To != null)
+                {
+                    var start = edge.From.TranslatePoint(edge.From.GetConnectionPoints()[edge.FromIndex ?? 0], DiagramCanvas);
+                    var end = edge.To.TranslatePoint(edge.To.GetConnectionPoints()[edge.ToIndex ?? 0], DiagramCanvas);
+                    var labelPos = new Point((start.X + end.X) / 2 - 40, (start.Y + end.Y) / 2 - 10);
+
+                    Canvas.SetLeft(labelBox, labelPos.X);
+                    Canvas.SetTop(labelBox, labelPos.Y);
+                }
             }
         }
 
@@ -177,6 +225,12 @@ namespace NodeControlPrototype
                 edge.From?.UnregisterOutputEdge(edge.FromIndex ?? 0);
                 DiagramCanvas.Children.Remove(edge);
                 _edges.Remove(edge);
+                
+                if (_edgeLabels.TryGetValue(edge, out var label))
+                {
+                    DiagramCanvas.Children.Remove(label);
+                    _edgeLabels.Remove(edge);
+                }
             }
         }
     }

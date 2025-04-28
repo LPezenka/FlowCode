@@ -10,18 +10,34 @@
     <Grid>
         <Canvas x:Name="DiagramCanvas" Background="White">
             <StackPanel>
-            <Button Content="➕ Process Node hinzufügen"
-                Width="150" Height="40"
+                <Button
+                Width="92" Height="92"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Margin="10"
-                Click="AddNode_Click"/>
-            <Button Content="➕ Decision Node hinzufügen"
-    Width="150" Height="40"
+                Click="AddNode_Click"
+                    
+
+                    >
+                    <Image Source="/res/process.png"/>
+                </Button>
+                <Button
+    Width="92" Height="92"
     HorizontalAlignment="Left"
     VerticalAlignment="Top"
     Margin="10"
-    Click="AddDecisionNode_Click"/>
+    Click="AddDecisionNode_Click">
+                    <Image Source="/res/decision.png"/>
+                </Button>
+
+                <Button
+    Width="92" Height="92"
+    HorizontalAlignment="Left"
+    VerticalAlignment="Top"
+    Margin="10"
+    Click="AddDecisionNode_Click">
+                    <Image Source="/res/predefinedprocess.png"/>
+                </Button>
             </StackPanel>
         </Canvas>
     </Grid>
