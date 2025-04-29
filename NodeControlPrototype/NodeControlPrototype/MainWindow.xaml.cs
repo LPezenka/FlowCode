@@ -85,9 +85,21 @@ namespace NodeControlPrototype
                     .OfType<EdgeControl>()
                     .FirstOrDefault(edge => edge.From == _edgeStartNode && edge.FromIndex == _edgeStartIndex);
 
+                //if (existing != null)
+                //{
+                //    DiagramCanvas.Children.Remove(existing);
+                //    _edges.Remove(existing);
+                //}
                 if (existing != null)
                 {
                     DiagramCanvas.Children.Remove(existing);
+
+                    if (existing.LabelBox != null)
+                    {
+                        DiagramCanvas.Children.Remove(existing.LabelBox);
+                        existing.LabelBox = null;
+                    }
+
                     _edges.Remove(existing);
                 }
             }
@@ -180,7 +192,9 @@ namespace NodeControlPrototype
 
                 DiagramCanvas.Children.Add(labelBox);
 
-                _edgeLabels.Add(localTempEdge, labelBox);
+                localTempEdge.LabelBox = labelBox;
+
+                //_edgeLabels.Add(localTempEdge, labelBox);
             }
             else
             {
@@ -223,14 +237,22 @@ namespace NodeControlPrototype
             if (sender is EdgeControl edge)
             {
                 edge.From?.UnregisterOutputEdge(edge.FromIndex ?? 0);
+                //DiagramCanvas.Children.Remove(edge);
+
+                if (edge.LabelBox != null)
+                {
+                    DiagramCanvas.Children.Remove(edge.LabelBox);
+                    edge.LabelBox = null;
+                }
                 DiagramCanvas.Children.Remove(edge);
+                
                 _edges.Remove(edge);
                 
-                if (_edgeLabels.TryGetValue(edge, out var label))
-                {
-                    DiagramCanvas.Children.Remove(label);
-                    _edgeLabels.Remove(edge);
-                }
+                //if (_edgeLabels.TryGetValue(edge, out var label))
+                //{
+                //    DiagramCanvas.Children.Remove(label);
+                //    _edgeLabels.Remove(edge);
+                //}
             }
         }
     }

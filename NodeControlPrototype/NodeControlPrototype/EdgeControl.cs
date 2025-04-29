@@ -12,6 +12,7 @@ namespace NodeControlPrototype
 {
     public class EdgeControl : Control
     {
+        public TextBox LabelBox { get; set; }
         public NodeControlBase From { get; set; }
         public NodeControlBase To { get; set; }
         public int? FromIndex { get; set; } = 0;
@@ -51,47 +52,80 @@ namespace NodeControlPrototype
 
         protected override void OnRender(DrawingContext drawingContext)
         {
+            //base.OnRender(drawingContext);
+
+            //if (From == null) return;
+
+            //Point start = From.TranslatePoint(From.GetConnectionPoints()[(int)(FromIndex ?? 0)], this);
+            //Point end;
+
+            //if (To != null && ToIndex.HasValue)
+            //{
+            //    end = To.TranslatePoint(To.GetConnectionPoints()[(int)ToIndex], this);
+            //}
+            //else if (CurrentMousePosition.HasValue)
+            //{
+            //    end = CurrentMousePosition.Value;
+            //}
+            //else
+            //{
+            //    return;
+            //}
+
+            //var pen = new Pen(Brushes.Black, 2);
+            //drawingContext.DrawLine(pen, start, end);
+            //DrawArrowHead(drawingContext, start, end);
+
+            //if (!string.IsNullOrWhiteSpace(Label))
+            //{
+            //    var mid = new Point((start.X + end.X) / 2, (start.Y + end.Y) / 2);
+            //    var formattedText = new FormattedText(
+            //        Label,
+            //        System.Globalization.CultureInfo.CurrentCulture,
+            //        FlowDirection.LeftToRight,
+            //        new Typeface("Segoe UI"),
+            //        12,
+            //        Brushes.Black,
+            //        VisualTreeHelper.GetDpi(this).PixelsPerDip);
+
+            //    drawingContext.DrawText(formattedText, mid);
+            //    LabelPosition = new Point((start.X + end.X) / 2 - 40, (start.Y + end.Y) / 2 - 10);
+            //    InvalidateArrange();
+            //    UpdateLayout();
+            //}
+
             base.OnRender(drawingContext);
 
-            if (From == null) return;
+            if (From == null || FromIndex == null)
+                return;
 
-            Point start = From.TranslatePoint(From.GetConnectionPoints()[(int)(FromIndex ?? 0)], this);
+            Point start = From.TranslatePoint(From.GetConnectionPoints()[(int)FromIndex], Application.Current.MainWindow);
             Point end;
 
-            if (To != null && ToIndex.HasValue)
+            if (To != null && ToIndex != null)
             {
-                end = To.TranslatePoint(To.GetConnectionPoints()[(int)ToIndex], this);
+                end = To.TranslatePoint(To.GetConnectionPoints()[(int)ToIndex], Application.Current.MainWindow);
             }
             else if (CurrentMousePosition.HasValue)
             {
                 end = CurrentMousePosition.Value;
             }
-            else
-            {
-                return;
-            }
+            else return;
 
             var pen = new Pen(Brushes.Black, 2);
             drawingContext.DrawLine(pen, start, end);
+
+            LabelPosition = new Point((start.X + end.X) / 2 - 40, (start.Y + end.Y) / 2 - 10);
+            InvalidateArrange();
+
+            if (LabelBox != null)
+            {
+                Canvas.SetLeft(LabelBox, LabelPosition.X);
+                Canvas.SetTop(LabelBox, LabelPosition.Y);
+            }
+
             DrawArrowHead(drawingContext, start, end);
 
-            if (!string.IsNullOrWhiteSpace(Label))
-            {
-                var mid = new Point((start.X + end.X) / 2, (start.Y + end.Y) / 2);
-                var formattedText = new FormattedText(
-                    Label,
-                    System.Globalization.CultureInfo.CurrentCulture,
-                    FlowDirection.LeftToRight,
-                    new Typeface("Segoe UI"),
-                    12,
-                    Brushes.Black,
-                    VisualTreeHelper.GetDpi(this).PixelsPerDip);
-
-                drawingContext.DrawText(formattedText, mid);
-                LabelPosition = new Point((start.X + end.X) / 2 - 40, (start.Y + end.Y) / 2 - 10);
-                InvalidateArrange();
-                UpdateLayout();
-            }
         }
 
 
