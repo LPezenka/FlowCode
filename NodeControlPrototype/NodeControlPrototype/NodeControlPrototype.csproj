@@ -15,6 +15,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.13.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Scripting.Common" Version="4.13.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\FlowCodeInfrastructure\FlowCodeInfrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CargoTrucker.Client">
+      <HintPath>..\..\FlowNode\lib\CargoTrucker.Client.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="res\decision.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

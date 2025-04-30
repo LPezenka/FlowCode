@@ -38,6 +38,8 @@
     Click="AddDecisionNode_Click">
                     <Image Source="/res/predefinedprocess.png"/>
                 </Button>
+                <Button Click="Button_Click">Generate</Button>
+                <Button Click="Run_Click">Evaluate</Button>
             </StackPanel>
         </Canvas>
     </Grid>

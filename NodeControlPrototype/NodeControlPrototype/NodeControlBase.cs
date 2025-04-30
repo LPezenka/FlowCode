@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Policy;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -176,6 +177,7 @@ namespace NodeControlPrototype
 
         public event EventHandler<NodeMovedEventArgs> NodeMoved;
         public event EventHandler<ConnectionPointClickedEventArgs> ConnectionPointClicked;
+        public event EventHandler RootRequested;
 
         protected void RaiseNodeMoved() => NodeMoved?.Invoke(this, new NodeMovedEventArgs(this));
 
@@ -187,6 +189,8 @@ namespace NodeControlPrototype
         private int? _hoveredConnectionPointIndex = null;
 
         private readonly Dictionary<int, EdgeControl> occupiedOutputEdges = new();
+
+        public bool IsRoot { get; set; }
 
         public int? GetNextFreeOutputIndex(out EdgeControl? existingEdge)
         {
@@ -273,6 +277,23 @@ namespace NodeControlPrototype
             base.OnMouseLeftButtonUp(e);
             _isDragging = false;
             ReleaseMouseCapture();
+        }
+
+        protected override void OnMouseDoubleClick(MouseButtonEventArgs e)
+        {
+            //IsRoot = !IsRoot;
+            //if (IsRoot)
+            //{
+            //    this.Background = Brushes.LightGray;
+            //}
+            //else
+            //{
+            //    this.Background = Brushes.Transparent;
+            //}
+            //    base.OnMouseDoubleClick(e);
+            RootRequested?.Invoke(this, EventArgs.Empty);
+            e.Handled = true;
+            base.OnMouseDoubleClick(e);
         }
 
         protected override void OnMouseMove(MouseEventArgs e)

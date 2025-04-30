@@ -1,5 +1,9 @@
 ﻿// MainWindow.xaml.cs
+using FlowCodeInfrastructure;
+using Microsoft.CodeAnalysis.CSharp.Scripting;
+using Microsoft.CodeAnalysis.Scripting;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,6 +20,8 @@ namespace NodeControlPrototype
         private EdgeControl _temporaryEdge = null;
         private readonly List<EdgeControl> _edges = new();
         private readonly Dictionary<EdgeControl, TextBox> _edgeLabels = new();
+        private NodeControlBase rootNode = null;
+
 
         public MainWindow()
         {
@@ -31,9 +37,30 @@ namespace NodeControlPrototype
 
             node.ConnectionPointClicked += Node_ConnectionPointClicked;
             node.NodeMoved += (s, e) => UpdateEdges();
-
+            node.RootRequested += Node_RootRequested;
+            //node.MouseDoubleClick += node.
             DiagramCanvas.Children.Add(node);
         }
+
+        private NodeControlBase _currentRoot;
+
+        private void Node_RootRequested(object sender, EventArgs e)
+        {
+            if (_currentRoot != null)
+            {
+                _currentRoot.Background = Brushes.White;
+                _currentRoot.IsRoot = false;
+            }
+
+            _currentRoot = sender as NodeControlBase;
+
+            if (_currentRoot != null)
+            {
+                _currentRoot.Background = Brushes.LightGray;
+                _currentRoot.IsRoot = true;
+            }
+        }
+
 
         private void AddDecisionNode_Click(object sender, RoutedEventArgs e)
         {
@@ -254,6 +281,74 @@ namespace NodeControlPrototype
                 //    _edgeLabels.Remove(edge);
                 //}
             }
+        }
+
+        private VisualTreeNetwork vtn = null;
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            GenerateNetwork();
+        }
+
+        private void GenerateNetwork()
+        {
+            if (_currentRoot == null)
+            {
+                MessageBox.Show("No root node selected!");
+                return;
+            }
+
+            vtn = new VisualTreeNetwork();
+            List<NodeControlBase> nodes = new List<NodeControlBase>();
+
+            foreach (var c in DiagramCanvas.Children)
+            {
+                switch (c)
+                {
+                    case RectangleNodeControl rc:
+                        nodes.Add(rc);
+                        break;
+                    case RhombusNodeControl rc:
+                        nodes.Add(rc);
+                        break;
+                }
+            }
+
+            vtn.Generate(nodes, _edges, _currentRoot);
+        }
+
+        private void Run_Click(object sender, RoutedEventArgs e)
+        {
+            if (vtn == null)
+            {
+                GenerateNetwork();
+            }
+
+            if (_currentRoot == null)
+            {
+                MessageBox.Show("No root node selected!");
+                return;
+            }
+
+            ScriptOptions scriptOptions = ScriptOptions.Default;
+
+            //Add reference to mscorlib
+            var mscorlib = typeof(System.Object).Assembly;
+            var systemCore = typeof(System.Linq.Enumerable).Assembly;
+            var cargoTrucker = typeof(CargoTrucker.Client.GameApi).Assembly;
+
+            scriptOptions = scriptOptions.AddReferences(mscorlib, systemCore, cargoTrucker);
+            //Add namespaces
+            scriptOptions = scriptOptions.AddImports("System");
+            scriptOptions = scriptOptions.AddImports("System.Linq");
+            scriptOptions = scriptOptions.AddImports("System.Collections.Generic");
+            scriptOptions = scriptOptions.AddImports("CargoTrucker.Client.GameApi");
+
+            var result = CSharpScript.RunAsync("Console.WriteLine(\"Starting Script\")", scriptOptions).Result;
+            result = result.ContinueWithAsync("int i = 0, j = 1; char a = 'a'; bool b = true, c = false;", scriptOptions).Result;
+            ActionNode.ScriptState = result;
+            ActionNode.ScriptOptions = scriptOptions;
+
+            FlowCodeInfrastructure.Node.Run(vtn.RootNode);
         }
     }
 }
