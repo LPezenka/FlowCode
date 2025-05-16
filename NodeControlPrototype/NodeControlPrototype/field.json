@@ -1,0 +1,224 @@
+{
+  "Width": 8,
+  "Height": 8,
+  "Cells": [
+    [
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      }
+    ],
+    [
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 2,
+        "BoxCount": 1
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 2,
+        "BoxCount": 1
+      },
+      {
+        "Kind": 0
+      }
+    ],
+    [
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      }
+    ],
+    [
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      }
+    ],
+    [
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      }
+    ],
+    [
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      }
+    ],
+    [
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 2,
+        "BoxCount": 1
+      },
+      {
+        "Kind": 0
+      }
+    ],
+    [
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 1
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      },
+      {
+        "Kind": 0
+      }
+    ]
+  ],
+  "Truck": {
+    "Row": 6,
+    "Column": 1,
+    "Direction": 1,
+    "BoxCount": 0,
+    "Tooltip": "Truck facing East with 0 boxes."
+  }
+}

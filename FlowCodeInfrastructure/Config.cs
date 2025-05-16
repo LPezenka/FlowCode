@@ -40,7 +40,7 @@ namespace FlowCodeInfrastructure
             False
         }
 
-        public static Dictionary<KeyWord, string> KeywordMapper = new Dictionary<KeyWord, string>();
+        public static Dictionary<KeyWord, string> KeywordMapper = new();
 
 
         public static string GetKeyword(KeyWord key)

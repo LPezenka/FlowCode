@@ -18,19 +18,22 @@ namespace NodeControlPrototype
 
             foreach (var v in nodes)
             {
-                switch(v)
+                switch (v)
                 {
                     case RectangleNodeControl rc:
-                        ActionNode an = new ActionNode();
-                        an.ID = $"Node{nodeId++}";
-                        an.Code = rc.NodeData.Title;
+                        ActionNode an = new ActionNode
+                        {
+                            ID = $"Node{nodeId++}",
+                            Code = rc.NodeData.Title
+                        };
                         nodeMapper.Add(rc, an);
                         break;
 
                     case RhombusNodeControl rc:
-                        DecisionNode dn = new DecisionNode();
-                        dn.ID = $"Node{nodeId++}";
-                        dn.Code = rc.NodeData.Title;
+                        DecisionNode dn = new DecisionNode {
+                            ID = $"Node{nodeId++}",
+                            Code = rc.NodeData.Title
+                        };
                         nodeMapper.Add(rc, dn);
                         break;
 
@@ -63,6 +66,26 @@ namespace NodeControlPrototype
                 if (child != null && parent != null) child.Parent = parent.ID;
                 if (parent != null) parent.Next = child;
             }
+
+            foreach (var v in nodes)
+            {
+                switch (v)
+                {
+                    case RectangleNodeControl rc:
+                        break;
+
+                    case RhombusNodeControl rc:
+                        var n = nodeMapper[rc] as DecisionNode;
+                        var onTrue = Edges.Where(e => e.Source == n.ID && e.Text == Config.GetKeyword(Config.KeyWord.True)).FirstOrDefault().Target;
+                        var onFalse = Edges.Where(e => e.Source == n.ID && e.Text == Config.GetKeyword(Config.KeyWord.False)).FirstOrDefault().Target;
+                        n.OnTrue = nodeMapper.Values.Where(nm => nm.ID == onTrue).FirstOrDefault() ;
+                        n.OnFalse = nodeMapper.Values.Where(nm => nm.ID == onFalse).FirstOrDefault();
+
+                        break;
+                }
+            }
+
+
             Nodes = nodeMapper.Values.ToList();
             RootNode = nodeMapper[rootNode];
         }

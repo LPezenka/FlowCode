@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:NodeControlPrototype"
         xmlns:fc="clr-namespace:NodeControlPrototype;assembly=NodeControlPrototype"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="900" Width="800">
     <Grid>
         <Canvas x:Name="DiagramCanvas" Background="White">
             <StackPanel>
@@ -38,8 +38,18 @@
     Click="AddDecisionNode_Click">
                     <Image Source="/res/predefinedprocess.png"/>
                 </Button>
-                <Button Click="Button_Click">Generate</Button>
-                <Button Click="Run_Click">Evaluate</Button>
+                <Button Width="92" Height="92"
+HorizontalAlignment="Left"
+VerticalAlignment="Top"
+Margin="10" Click="Button_Click">
+                    <Image Width="92" Height="92" Source="/res/compile.jpg"/>
+                </Button>
+                <Button Width="92" Height="92"
+HorizontalAlignment="Left"
+VerticalAlignment="Top"
+Margin="10" Click="Run_Click">
+                    <Image Width="92" Height="92" Source="/res/Play.jpg"/>
+                </Button>
             </StackPanel>
         </Canvas>
     </Grid>

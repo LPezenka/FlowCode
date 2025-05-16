@@ -46,7 +46,7 @@ namespace FlowCodeInfrastructure
                 }
                 else
                 {
-                    if (Code.EndsWith(";") == false) Code = $"{Code};";
+                    if (Code.EndsWith(';') == false) Code = $"{Code};";
                     ScriptState = ScriptState.ContinueWithAsync(Code, ScriptOptions).Result;
                 }
             }

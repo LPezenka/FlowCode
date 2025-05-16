@@ -9,6 +9,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using CargoTrucker;
+using CargoTrucker.Client;
 
 namespace NodeControlPrototype
 {
@@ -291,6 +295,9 @@ namespace NodeControlPrototype
 
         private void GenerateNetwork()
         {
+            Config.SetKeyWord(Config.KeyWord.True, "Ja");
+            Config.SetKeyWord(Config.KeyWord.False, "Nein");
+            Config.SetKeyWord(Config.KeyWord.Function, "Function");
             if (_currentRoot == null)
             {
                 MessageBox.Show("No root node selected!");
@@ -298,7 +305,7 @@ namespace NodeControlPrototype
             }
 
             vtn = new VisualTreeNetwork();
-            List<NodeControlBase> nodes = new List<NodeControlBase>();
+            List<NodeControlBase> nodes = new();
 
             foreach (var c in DiagramCanvas.Children)
             {
@@ -318,6 +325,8 @@ namespace NodeControlPrototype
 
         private void Run_Click(object sender, RoutedEventArgs e)
         {
+
+
             if (vtn == null)
             {
                 GenerateNetwork();
@@ -328,6 +337,10 @@ namespace NodeControlPrototype
                 MessageBox.Show("No root node selected!");
                 return;
             }
+            //CargoTrucker.Client.GameApi.Forward();
+            //Forward();
+
+
 
             ScriptOptions scriptOptions = ScriptOptions.Default;
 
@@ -341,8 +354,9 @@ namespace NodeControlPrototype
             scriptOptions = scriptOptions.AddImports("System");
             scriptOptions = scriptOptions.AddImports("System.Linq");
             scriptOptions = scriptOptions.AddImports("System.Collections.Generic");
+            //scriptOptions = scriptOptions.AddImports("System.Diagnostics");
             scriptOptions = scriptOptions.AddImports("CargoTrucker.Client.GameApi");
-
+            
             var result = CSharpScript.RunAsync("Console.WriteLine(\"Starting Script\")", scriptOptions).Result;
             result = result.ContinueWithAsync("int i = 0, j = 1; char a = 'a'; bool b = true, c = false;", scriptOptions).Result;
             ActionNode.ScriptState = result;

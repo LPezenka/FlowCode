@@ -16,7 +16,7 @@ Config.SetKeyWord(Config.KeyWord.Function, "Function");
 //List<Edge> edges = new List<Edge>();
 
 
-DrawIONetwork dion = new DrawIONetwork();
+DrawIONetwork dion = new();
 dion.Load("./data/cargotrucker1.drawio");
 //dion.Load("./data/primecheck.drawio");
 

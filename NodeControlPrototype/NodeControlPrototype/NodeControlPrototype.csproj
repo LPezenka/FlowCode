@@ -1,15 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
+	  <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="res\compile.jpg" />
     <None Remove="res\decision.png" />
+    <None Remove="res\Play.jpg" />
     <None Remove="res\predefinedprocess.png" />
     <None Remove="res\process.png" />
   </ItemGroup>
@@ -24,13 +26,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="CargoTrucker.Client">
-      <HintPath>..\..\FlowNode\lib\CargoTrucker.Client.dll</HintPath>
-    </Reference>
+	  <Reference Include="CargoTrucker.Client">
+		  <HintPath>..\..\FlowNode\lib\CargoTrucker.Client.dll</HintPath>
+		  <Private>True</Private>
+		  <EmbedInteropTypes>False</EmbedInteropTypes>
+	  </Reference>
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="res\compile.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\decision.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\Play.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\predefinedprocess.png">
@@ -39,6 +49,19 @@
     <Resource Include="res\process.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="field.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="CargoTrucker" />
   </ItemGroup>
 
 </Project>
