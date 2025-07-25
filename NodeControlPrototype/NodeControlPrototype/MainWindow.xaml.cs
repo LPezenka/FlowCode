@@ -74,7 +74,7 @@ namespace NodeControlPrototype
                 Height = 80,
                 NodeData = new Node
                 {
-                    Title = $"Decision Node {_nodeCounter++}",
+                    Title = $"Decision Node({_nodeCounter++})",
                     Position = new Point(50 + _nodeCounter * 20, 50 + _nodeCounter * 20)
                 }
             };
@@ -90,7 +90,7 @@ namespace NodeControlPrototype
                 Height = 80,
                 NodeData = new Node
                 {
-                    Title = $"Node {_nodeCounter++}",
+                    Title = $"Node({_nodeCounter++})",
                     Position = new Point(50 + _nodeCounter * 20, 50 + _nodeCounter * 20)
                 }
             };

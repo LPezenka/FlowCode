@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Input;
+using FlowCodeInfrastructure;
 
 namespace NodeControlPrototype
 {
@@ -111,7 +112,7 @@ namespace NodeControlPrototype
                 end = CurrentMousePosition.Value;
             }
             else return;
-
+            
             var pen = new Pen(Brushes.Black, 2);
             drawingContext.DrawLine(pen, start, end);
 
