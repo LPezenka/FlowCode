@@ -22,6 +22,9 @@ namespace FlowCodeInfrastructure
             }
             try
             {
+                bool initVariable = false;
+                string varName = string.Empty;
+
                 if (Code.Contains("Ausgabe:"))
                 {
                     Code = Code.Replace(";", "");
@@ -31,10 +34,23 @@ namespace FlowCodeInfrastructure
                 else if (Code.Contains("Eingabe"))
                 {
                     string[] parts = Code.Split(new[] { '=' });
-                    string varName = parts[0].Trim();
+                    varName = parts[0].Trim();
                     Code = "string lineInput = Console.ReadLine(); ";
                     //Code = Code.Replace(";", "");
-                    Code += varName + " = int.Parse(lineInput);";
+                    var v = ScriptState.Variables.Where(x => x.Name == varName).FirstOrDefault();
+                    string varType = "string;";
+                    initVariable = true;
+                    //if (v is null)
+                    //{
+                    //    if (float.TryParse(lineInput, out float f)) varType = "float";
+                    //    else if (int.TryParse(lineInput, out int intValue)) varType = "int";
+                    //    else if (bool.TryParse(lineInput, out bool boolValue)) varType = "bool";
+                    //    else if (char.TryParse(lineInput, out char charValue)) varType = "char";
+                    //    else varType = "string";
+
+                    //    Code += "int " + varName + "; ";
+                    //}
+                    
                     // TODO für verschiedene Datentypen implementieren oder Typ der Eingabe erkennen und Parsen
                     //Code += ");";
                      
@@ -48,6 +64,39 @@ namespace FlowCodeInfrastructure
                 {
                     if (Code.EndsWith(';') == false) Code = $"{Code};";
                     ScriptState = ScriptState.ContinueWithAsync(Code, ScriptOptions).Result;
+                    if (initVariable)
+                    {
+                        var v = ScriptState.Variables.Where(x => x.Name == "lineInput").FirstOrDefault();
+                        var vVal = v.Value.ToString();
+                        string varType = "string;";
+                        if (int.TryParse(vVal, out int intValue)) varType = "int";
+                        else if (float.TryParse(vVal, out float f)) varType = "float";
+                        else if (bool.TryParse(vVal, out bool boolValue)) varType = "bool";
+                        else if (char.TryParse(vVal, out char charValue)) varType = "char";
+                        else varType = "string";
+                        string postProcess = string.Empty;  
+                        switch (varType)
+                        {
+                            case "float":
+                                postProcess = $"{varType} {varName} = float.Parse(lineInput);";
+                                break;
+                            case "bool":
+                                postProcess = $"{varType} {varName} = bool.Parse(lineInput);";
+                                break;
+                            case "char":
+                                postProcess = $"{varType} {varName} = char.Parse(lineInput);";
+                                break;
+                            case "int":
+                                postProcess = $"{varType} {varName} = int.Parse(lineInput);";
+                                break;
+                            default:
+                                postProcess = $"string {varName} = lineInput;";
+                                break;
+                        }
+
+                        ScriptState = ScriptState.ContinueWithAsync(postProcess, ScriptOptions).Result;
+
+                    }
                 }
             }
             catch (Exception ex)
