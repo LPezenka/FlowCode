@@ -34,7 +34,7 @@ namespace NodeControlPrototype
 
         private void AddNode(NodeControlBase node, Point position)
         {
-            node.Width = 120;
+            node.Width = 240;
             node.Height = 60;
             Canvas.SetLeft(node, position.X);
             Canvas.SetTop(node, position.Y);
@@ -71,7 +71,7 @@ namespace NodeControlPrototype
             var decisionNode = new RhombusNodeControl
             {
                 Width = 180,
-                Height = 80,
+                Height = 90,
                 NodeData = new Node
                 {
                     Title = $"Decision Node({_nodeCounter++})",
@@ -87,7 +87,7 @@ namespace NodeControlPrototype
             var node = new RectangleNodeControl
             {
                 Width = 180,
-                Height = 80,
+                Height = 120,
                 NodeData = new Node
                 {
                     Title = $"Node({_nodeCounter++})",

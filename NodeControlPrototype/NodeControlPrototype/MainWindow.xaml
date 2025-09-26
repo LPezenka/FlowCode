@@ -40,7 +40,7 @@
                             </GeometryGroup>
                         </GeometryDrawing.Geometry>
                         <GeometryDrawing.Pen>
-                            <Pen Thickness="1" Brush="Green" />
+                            <Pen Thickness="0.25" Brush="LightGray" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
 
@@ -52,7 +52,7 @@
                             </GeometryGroup>
                         </GeometryDrawing.Geometry>
                         <GeometryDrawing.Pen>
-                            <Pen Thickness="3" Brush="Green" />
+                            <Pen Thickness="1" Brush="LightGray" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
 
@@ -96,7 +96,7 @@
 HorizontalAlignment="Left"
 VerticalAlignment="Top"
 Margin="10" Click="Button_Click">
-                    <Image Width="92" Height="92" Source="/res/compile.jpg"/>
+                    <Image Width="92" Height="92" Source="/res/compile.png"/>
                 </Button>
                 <Button Width="92" Height="92"
 HorizontalAlignment="Left"

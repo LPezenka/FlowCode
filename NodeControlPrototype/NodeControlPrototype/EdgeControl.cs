@@ -11,6 +11,14 @@ using FlowCodeInfrastructure;
 
 namespace NodeControlPrototype
 {
+    public enum ConnectionDirection
+    {
+        Top,
+        Bottom,
+        Left,
+        Right
+    }
+
     public class EdgeControl : Control
     {
         public TextBox LabelBox { get; set; }
@@ -20,6 +28,13 @@ namespace NodeControlPrototype
         public int? ToIndex { get; set; } = 0;
         public string Label { get; set; }
         public Point? CurrentMousePosition { get; set; }
+
+        public List<Point> ControlPoints { get; set; } = new();
+        private List<ControlPointVisual> _controlPointVisuals = new();
+        private ControlPointVisual _draggingPoint = null;
+        private Point _lastMousePos;
+
+
 
         public Point LabelPosition
         {
@@ -95,6 +110,37 @@ namespace NodeControlPrototype
             //    UpdateLayout();
             //}
 
+            //base.OnRender(drawingContext);
+
+            //if (From == null || FromIndex == null)
+            //    return;
+
+            //Point start = From.TranslatePoint(From.GetConnectionPoints()[(int)FromIndex], Application.Current.MainWindow);
+            //Point end;
+
+            //if (To != null && ToIndex != null)
+            //{
+            //    end = To.TranslatePoint(To.GetConnectionPoints()[(int)ToIndex], Application.Current.MainWindow);
+            //}
+            //else if (CurrentMousePosition.HasValue)
+            //{
+            //    end = CurrentMousePosition.Value;
+            //}
+            //else return;
+
+            //var pen = new Pen(Brushes.Black, 2);
+            //drawingContext.DrawLine(pen, start, end);
+
+            //LabelPosition = new Point((start.X + end.X) / 2 - 40, (start.Y + end.Y) / 2 - 10);
+            //InvalidateArrange();
+
+            //if (LabelBox != null)
+            //{
+            //    Canvas.SetLeft(LabelBox, LabelPosition.X);
+            //    Canvas.SetTop(LabelBox, LabelPosition.Y);
+            //}
+
+            //DrawArrowHead(drawingContext, start, end);
             base.OnRender(drawingContext);
 
             if (From == null || FromIndex == null)
@@ -112,11 +158,65 @@ namespace NodeControlPrototype
                 end = CurrentMousePosition.Value;
             }
             else return;
-            
-            var pen = new Pen(Brushes.Black, 2);
-            drawingContext.DrawLine(pen, start, end);
 
-            LabelPosition = new Point((start.X + end.X) / 2 - 40, (start.Y + end.Y) / 2 - 10);
+            var pen = new Pen(Brushes.Black, 2);
+
+            // Gather all points to form the polyline
+            List<Point> points = new List<Point> { start };
+
+            //List<Point> points = new() { start };
+
+
+            if (ControlPoints == null || ControlPoints.Count == 0)
+            {
+                ConnectionDirection? startDir = GetConnectionDirection(From, FromIndex ?? 0);
+                ConnectionDirection? endDir = GetConnectionDirection(To, ToIndex ?? 0);
+
+
+                var routed = RouteOrthogonally(start, end, startDir, endDir);
+                points.AddRange(routed);
+            }
+            else
+            {
+                points.AddRange(ControlPoints);
+            }
+
+
+            points.Add(end);
+
+
+            for (int i = 0; i < points.Count - 1; i++)
+            {
+                drawingContext.DrawLine(pen, points[i], points[i + 1]);
+            }
+
+            //if (ControlPoints != null && ControlPoints.Count > 0)
+            //{
+            //    points.AddRange(ControlPoints);
+            //}
+            //points.Add(end);
+
+            // Draw the polyline
+            //for (int i = 0; i < points.Count - 1; i++)
+            //{
+            //    drawingContext.DrawLine(pen, points[i], points[i + 1]);
+            //}
+
+            // Compute label position at the middle of the polyline
+
+            if (From.GetType() == typeof(RectangleNodeControl))
+            {
+                if (LabelBox is not null)
+                    LabelBox.Visibility = Visibility.Collapsed;
+            }
+
+            Point labelPos;
+            int middleIndex = (points.Count - 1) / 2;
+            Point lp1 = points[middleIndex];
+            Point lp2 = points[middleIndex + 1];
+            labelPos = new Point((lp1.X + lp2.X) / 2 - 40, (lp1.Y + lp2.Y) / 2 - 10);
+
+            LabelPosition = labelPos;
             InvalidateArrange();
 
             if (LabelBox != null)
@@ -125,8 +225,10 @@ namespace NodeControlPrototype
                 Canvas.SetTop(LabelBox, LabelPosition.Y);
             }
 
-            DrawArrowHead(drawingContext, start, end);
-
+            // Compute arrowhead based on last segment of the polyline
+            Point arrowStart = points[points.Count - 2];
+            Point arrowEnd = points[points.Count - 1];
+            DrawArrowHead(drawingContext, arrowStart, arrowEnd);
         }
 
 
@@ -153,6 +255,46 @@ namespace NodeControlPrototype
 
         protected void RaiseDeleteRequested() => DeleteRequested?.Invoke(this, EventArgs.Empty);
 
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonDown(e);
+
+            if (e.ClickCount == 2)
+            {
+                Point clickPos = e.GetPosition(Application.Current.MainWindow);
+                InsertControlPoint(clickPos);
+                e.Handled = true;
+            }
+        }
+
+        public void InsertControlPoint(Point position)
+        {
+            if (ControlPoints == null)
+                ControlPoints = new List<Point>();
+
+            // Füge den Punkt vor dem letzten Segment ein (wenn es existiert)
+            // Oder einfach in die Mitte
+            int insertIndex = ControlPoints.Count / 2;
+            ControlPoints.Insert(insertIndex, position);
+
+            // Visuelles Element erzeugen
+            var visual = new ControlPointVisual();
+            visual.SetPosition(position);
+            visual.PositionChanged += (s, newPos) =>
+            {
+                ControlPoints[insertIndex] = newPos;
+                InvalidateVisual();
+            };
+
+            // Zur Canvas hinzufügen
+            if (Application.Current.MainWindow is MainWindow main && main.DiagramCanvas != null)
+            {
+                main.DiagramCanvas.Children.Add(visual);
+            }
+
+            InvalidateVisual();
+        }
+
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
             base.OnMouseDown(e);
@@ -165,6 +307,87 @@ namespace NodeControlPrototype
                 RaiseDeleteRequested();
                 e.Handled = true;
             }
+        }
+
+        public List<Point> RouteOrthogonally(Point start, Point end, ConnectionDirection? fromDirection, ConnectionDirection? toDirection)
+        {
+            var points = new List<Point>();
+
+
+            Point current = start;
+
+
+            // Schritt 1: Offset vom Start weg in die gewünschte Richtung
+            current = OffsetPoint(current, fromDirection, 20);
+            points.Add(current);
+
+
+            // Schritt 2: Auf Zielrichtung vorbereiten
+            Point preTarget = OffsetPoint(end, toDirection, 20);
+
+
+            // Schritt 3: Zwischenpunkt einfügen
+            if (fromDirection == ConnectionDirection.Left || fromDirection == ConnectionDirection.Right)
+            {
+                points.Add(new Point(preTarget.X, current.Y));
+            }
+            else
+            {
+                points.Add(new Point(current.X, preTarget.Y));
+            }
+
+
+            points.Add(preTarget);
+            return points;
+        }
+
+
+        private Point OffsetPoint(Point p, ConnectionDirection? direction, double offset)
+        {
+            return direction switch
+            {
+                ConnectionDirection.Top => new Point(p.X, p.Y - offset),
+                ConnectionDirection.Bottom => new Point(p.X, p.Y + offset),
+                ConnectionDirection.Left => new Point(p.X - offset, p.Y),
+                ConnectionDirection.Right => new Point(p.X + offset, p.Y),
+                _ => p
+            };
+        }
+
+
+        private ConnectionDirection? GetConnectionDirection(NodeControlBase node, int ?index)
+        {
+
+            if (node == null || !index.HasValue)
+                return null;
+
+
+            var points = node.GetConnectionPoints();
+
+
+            if (index.Value < 0 || index.Value >= points.Count)
+                return null;
+
+
+            Point point = points[index.Value];
+
+
+            double left = point.X;
+            double right = node.ActualWidth - point.X;
+            double top = point.Y;
+            double bottom = node.ActualHeight - point.Y;
+
+
+            double min = new[] { left, right, top, bottom }.Min();
+
+
+            if (min == top) return ConnectionDirection.Top;
+            if (min == bottom) return ConnectionDirection.Bottom;
+            if (min == left) return ConnectionDirection.Left;
+            if (min == right) return ConnectionDirection.Right;
+
+
+            return null;
         }
     }
 }
