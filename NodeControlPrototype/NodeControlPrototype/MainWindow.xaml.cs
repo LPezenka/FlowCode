@@ -70,8 +70,8 @@ namespace NodeControlPrototype
         {
             var decisionNode = new RhombusNodeControl
             {
-                Width = 180,
-                Height = 90,
+                Width = 60,
+                Height = 60,
                 NodeData = new Node
                 {
                     Title = $"Decision Node({_nodeCounter++})",
@@ -86,8 +86,8 @@ namespace NodeControlPrototype
         {
             var node = new RectangleNodeControl
             {
-                Width = 180,
-                Height = 120,
+                Width = 60,
+                Height = 40,
                 NodeData = new Node
                 {
                     Title = $"Node({_nodeCounter++})",
@@ -158,6 +158,11 @@ namespace NodeControlPrototype
                 _temporaryEdge.CurrentMousePosition = pos;
                 _temporaryEdge.InvalidateVisual();
             }
+        }
+
+        private void AddFunctionNode_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
 
         private void MainWindow_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -327,10 +332,10 @@ namespace NodeControlPrototype
         {
 
 
-            if (vtn == null)
-            {
+            //if (vtn == null)
+            //{
                 GenerateNetwork();
-            }
+            //}
 
             if (_currentRoot == null)
             {

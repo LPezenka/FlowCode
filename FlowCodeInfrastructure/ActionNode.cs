@@ -40,20 +40,6 @@ namespace FlowCodeInfrastructure
                     var v = ScriptState.Variables.Where(x => x.Name == varName).FirstOrDefault();
                     string varType = "string;";
                     initVariable = true;
-                    //if (v is null)
-                    //{
-                    //    if (float.TryParse(lineInput, out float f)) varType = "float";
-                    //    else if (int.TryParse(lineInput, out int intValue)) varType = "int";
-                    //    else if (bool.TryParse(lineInput, out bool boolValue)) varType = "bool";
-                    //    else if (char.TryParse(lineInput, out char charValue)) varType = "char";
-                    //    else varType = "string";
-
-                    //    Code += "int " + varName + "; ";
-                    //}
-                    
-                    // TODO für verschiedene Datentypen implementieren oder Typ der Eingabe erkennen und Parsen
-                    //Code += ");";
-                     
                 }
 
                 if (Code.Contains("Function"))

@@ -89,20 +89,20 @@
     HorizontalAlignment="Left"
     VerticalAlignment="Top"
     Margin="10"
-    Click="AddDecisionNode_Click">
+    Click="AddFunctionNode_Click">
                     <Image Source="/res/predefinedprocess.png"/>
                 </Button>
-                <Button Width="92" Height="92"
+                <!--<Button Width="92" Height="92"
 HorizontalAlignment="Left"
 VerticalAlignment="Top"
 Margin="10" Click="Button_Click">
                     <Image Width="92" Height="92" Source="/res/compile.png"/>
-                </Button>
+                </Button>-->
                 <Button Width="92" Height="92"
 HorizontalAlignment="Left"
 VerticalAlignment="Top"
 Margin="10" Click="Run_Click">
-                    <Image Width="92" Height="92" Source="/res/Play.jpg"/>
+                    <Image Width="92" Height="92" Source="/res/Play.jpg" Stretch="Uniform"/>
                 </Button>
             </StackPanel>
         </Canvas>
