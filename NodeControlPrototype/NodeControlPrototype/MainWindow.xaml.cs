@@ -162,7 +162,17 @@ namespace NodeControlPrototype
 
         private void AddFunctionNode_Click(object sender, RoutedEventArgs e)
         {
-            
+            var processNode = new ProcessNode()
+            {
+                Width = 90,
+                Height = 50,
+                NodeData = new Node
+                {
+                    Title = $"ProcessCall({_nodeCounter++})",
+                    Position = new Point(50 + _nodeCounter * 20, 50 + _nodeCounter * 20)
+                }
+            };
+            AddNode(processNode, processNode.NodeData.Position);
         }
 
         private void MainWindow_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

@@ -3,12 +3,40 @@
   "WorkspaceRootPath": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}|FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\flowcodeinfrastructure\\actionnode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}|FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj|solutionrelative:flowcodeinfrastructure\\actionnode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F677964B-7359-523C-DBA5-138406B16814}|NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\nodecontrolprototype\\nodecontrolprototype\\themes\\generic.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F677964B-7359-523C-DBA5-138406B16814}|NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj|solutionrelative:nodecontrolprototype\\nodecontrolprototype\\themes\\generic.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F677964B-7359-523C-DBA5-138406B16814}|NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\nodecontrolprototype\\nodecontrolprototype\\edgecontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F677964B-7359-523C-DBA5-138406B16814}|NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj|solutionrelative:nodecontrolprototype\\nodecontrolprototype\\edgecontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F677964B-7359-523C-DBA5-138406B16814}|NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\nodecontrolprototype\\nodecontrolprototype\\processnode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F677964B-7359-523C-DBA5-138406B16814}|NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj|solutionrelative:nodecontrolprototype\\nodecontrolprototype\\processnode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F677964B-7359-523C-DBA5-138406B16814}|NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\nodecontrolprototype\\nodecontrolprototype\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F677964B-7359-523C-DBA5-138406B16814}|NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj|solutionrelative:nodecontrolprototype\\nodecontrolprototype\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F677964B-7359-523C-DBA5-138406B16814}|NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\nodecontrolprototype\\nodecontrolprototype\\node.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F677964B-7359-523C-DBA5-138406B16814}|NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj|solutionrelative:nodecontrolprototype\\nodecontrolprototype\\node.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}|FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\flowcodeinfrastructure\\drawionetwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}|FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj|solutionrelative:flowcodeinfrastructure\\drawionetwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}|FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\flowcodeinfrastructure\\terminatornode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}|FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj|solutionrelative:flowcodeinfrastructure\\terminatornode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}|FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\flowcodeinfrastructure\\callernode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}|FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj|solutionrelative:flowcodeinfrastructure\\callernode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}|FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\flowcodeinfrastructure\\actionnode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}|FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj|solutionrelative:flowcodeinfrastructure\\actionnode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F677964B-7359-523C-DBA5-138406B16814}|NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\nodecontrolprototype\\nodecontrolprototype\\visualtreenetwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -31,10 +59,6 @@
       "RelativeMoniker": "D:0:0:{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}|FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj|solutionrelative:flowcodeinfrastructure\\node.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F677964B-7359-523C-DBA5-138406B16814}|NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\nodecontrolprototype\\nodecontrolprototype\\themes\\generic.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{F677964B-7359-523C-DBA5-138406B16814}|NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj|solutionrelative:nodecontrolprototype\\nodecontrolprototype\\themes\\generic.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F677964B-7359-523C-DBA5-138406B16814}|NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\nodecontrolprototype\\nodecontrolprototype\\nodecontrolbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F677964B-7359-523C-DBA5-138406B16814}|NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj|solutionrelative:nodecontrolprototype\\nodecontrolprototype\\nodecontrolbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -45,14 +69,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{F677964B-7359-523C-DBA5-138406B16814}|NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\nodecontrolprototype\\nodecontrolprototype\\field.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{F677964B-7359-523C-DBA5-138406B16814}|NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj|solutionrelative:nodecontrolprototype\\nodecontrolprototype\\field.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F677964B-7359-523C-DBA5-138406B16814}|NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\nodecontrolprototype\\nodecontrolprototype\\edgecontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F677964B-7359-523C-DBA5-138406B16814}|NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj|solutionrelative:nodecontrolprototype\\nodecontrolprototype\\edgecontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F677964B-7359-523C-DBA5-138406B16814}|NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\nodecontrolprototype\\nodecontrolprototype\\node.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F677964B-7359-523C-DBA5-138406B16814}|NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj|solutionrelative:nodecontrolprototype\\nodecontrolprototype\\node.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F677964B-7359-523C-DBA5-138406B16814}|NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\nodecontrolprototype\\nodecontrolprototype\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -77,14 +93,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}|FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\flowcodeinfrastructure\\network.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}|FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj|solutionrelative:flowcodeinfrastructure\\network.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}|FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\flowcodeinfrastructure\\callernode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}|FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj|solutionrelative:flowcodeinfrastructure\\callernode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}|FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\flowcodeinfrastructure\\drawionetwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}|FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj|solutionrelative:flowcodeinfrastructure\\drawionetwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{08A4785A-F29E-4236-8F4E-0C2071637554}|FlowNode\\FlowNode.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\flownode\\data\\cargotrucker1.drawio||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
@@ -123,10 +131,6 @@
       "RelativeMoniker": "D:0:0:{08A4785A-F29E-4236-8F4E-0C2071637554}|FlowNode\\FlowNode.csproj|solutionrelative:flownode\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}|FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\flowcodeinfrastructure\\terminatornode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}|FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj|solutionrelative:flowcodeinfrastructure\\terminatornode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}|FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj|c:\\users\\pc\\documents\\github\\1\\flowcode\\flowcodeinfrastructure\\edge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0F44EB4B-6445-4F95-BA74-7CD265CB78A8}|FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj|solutionrelative:flowcodeinfrastructure\\edge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -142,7 +146,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -157,21 +161,148 @@
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "DecisionNode.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\DecisionNode.cs",
-              "RelativeDocumentMoniker": "FlowCodeInfrastructure\\DecisionNode.cs",
-              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\DecisionNode.cs",
-              "RelativeToolTip": "FlowCodeInfrastructure\\DecisionNode.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAlwCEAAAAQAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "NodeControlPrototype\\NodeControlPrototype\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\MainWindow.xaml.cs",
+              "RelativeToolTip": "NodeControlPrototype\\NodeControlPrototype\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAKIAAAAAAAAAAAA6wKoAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-09T13:25:46.946Z",
+              "WhenOpened": "2025-04-25T12:16:50.073Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CallerNode.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\CallerNode.cs",
+              "RelativeDocumentMoniker": "FlowCodeInfrastructure\\CallerNode.cs",
+              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\CallerNode.cs",
+              "RelativeToolTip": "FlowCodeInfrastructure\\CallerNode.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAgwFoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T13:36:10.181Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TerminatorNode.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\TerminatorNode.cs",
+              "RelativeDocumentMoniker": "FlowCodeInfrastructure\\TerminatorNode.cs",
+              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\TerminatorNode.cs",
+              "RelativeToolTip": "FlowCodeInfrastructure\\TerminatorNode.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAiwBQAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T07:02:17.311Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Generic.xaml",
+              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\Themes\\Generic.xaml",
+              "RelativeDocumentMoniker": "NodeControlPrototype\\NodeControlPrototype\\Themes\\Generic.xaml",
+              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\Themes\\Generic.xaml",
+              "RelativeToolTip": "NodeControlPrototype\\NodeControlPrototype\\Themes\\Generic.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-25T12:26:20.12Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "NodeControlPrototype\\NodeControlPrototype\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\MainWindow.xaml",
+              "RelativeToolTip": "NodeControlPrototype\\NodeControlPrototype\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-05-27T09:29:50.575Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "ProcessNode.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\ProcessNode.cs",
+              "RelativeDocumentMoniker": "NodeControlPrototype\\NodeControlPrototype\\ProcessNode.cs",
+              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\ProcessNode.cs",
+              "RelativeToolTip": "NodeControlPrototype\\NodeControlPrototype\\ProcessNode.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAYwCYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-02T07:18:04.438Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EdgeControl.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\EdgeControl.cs",
+              "RelativeDocumentMoniker": "NodeControlPrototype\\NodeControlPrototype\\EdgeControl.cs",
+              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\EdgeControl.cs",
+              "RelativeToolTip": "NodeControlPrototype\\NodeControlPrototype\\EdgeControl.cs",
+              "ViewState": "AgIAAMcAAAAAAAAAAAAswM8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-25T13:51:49.077Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ActionNode.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\ActionNode.cs",
+              "RelativeDocumentMoniker": "FlowCodeInfrastructure\\ActionNode.cs",
+              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\ActionNode.cs",
+              "RelativeToolTip": "FlowCodeInfrastructure\\ActionNode.cs",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAgwFQAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T13:36:08.25Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Node.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\Node.cs",
+              "RelativeDocumentMoniker": "NodeControlPrototype\\NodeControlPrototype\\Node.cs",
+              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\Node.cs",
+              "RelativeToolTip": "NodeControlPrototype\\NodeControlPrototype\\Node.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAkAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T07:09:12.926Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "RhombusNodeControl.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\RhombusNodeControl.cs",
+              "RelativeDocumentMoniker": "NodeControlPrototype\\NodeControlPrototype\\RhombusNodeControl.cs",
+              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\RhombusNodeControl.cs",
+              "RelativeToolTip": "NodeControlPrototype\\NodeControlPrototype\\RhombusNodeControl.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-25T12:26:35.375Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DrawIONetwork.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\DrawIONetwork.cs",
+              "RelativeDocumentMoniker": "FlowCodeInfrastructure\\DrawIONetwork.cs",
+              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\DrawIONetwork.cs",
+              "RelativeToolTip": "FlowCodeInfrastructure\\DrawIONetwork.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAmwDIAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T07:02:20.463Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "VisualTreeNetwork.cs",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\VisualTreeNetwork.cs",
               "RelativeDocumentMoniker": "NodeControlPrototype\\NodeControlPrototype\\VisualTreeNetwork.cs",
@@ -185,83 +316,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 11,
-              "Title": "EdgeControl.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\EdgeControl.cs",
-              "RelativeDocumentMoniker": "NodeControlPrototype\\NodeControlPrototype\\EdgeControl.cs",
-              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\EdgeControl.cs",
-              "RelativeToolTip": "NodeControlPrototype\\NodeControlPrototype\\EdgeControl.cs",
-              "ViewState": "AgIAAIkBAAAAAAAAAAAAAIkBAAAAAAAAAAAAAA==",
+              "Title": "DecisionNode.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\DecisionNode.cs",
+              "RelativeDocumentMoniker": "FlowCodeInfrastructure\\DecisionNode.cs",
+              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\DecisionNode.cs",
+              "RelativeToolTip": "FlowCodeInfrastructure\\DecisionNode.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAlwCEAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-25T13:51:49.077Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ActionNode.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\ActionNode.cs",
-              "RelativeDocumentMoniker": "FlowCodeInfrastructure\\ActionNode.cs",
-              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\ActionNode.cs",
-              "RelativeToolTip": "FlowCodeInfrastructure\\ActionNode.cs",
-              "ViewState": "AgIAAEQAAAAAAAAAAAAgwFQAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-09T13:36:08.25Z",
+              "WhenOpened": "2025-04-09T13:25:46.946Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "RhombusNodeControl.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\RhombusNodeControl.cs",
-              "RelativeDocumentMoniker": "NodeControlPrototype\\NodeControlPrototype\\RhombusNodeControl.cs",
-              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\RhombusNodeControl.cs",
-              "RelativeToolTip": "NodeControlPrototype\\NodeControlPrototype\\RhombusNodeControl.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-25T12:26:35.375Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "NodeControlPrototype\\NodeControlPrototype\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\MainWindow.xaml",
-              "RelativeToolTip": "NodeControlPrototype\\NodeControlPrototype\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-05-27T09:29:50.575Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "NodeControlPrototype\\NodeControlPrototype\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\MainWindow.xaml.cs",
-              "RelativeToolTip": "NodeControlPrototype\\NodeControlPrototype\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAF4BAAAAAAAAAAAqwGwBAABJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-25T12:16:50.073Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Generic.xaml",
-              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\Themes\\Generic.xaml",
-              "RelativeDocumentMoniker": "NodeControlPrototype\\NodeControlPrototype\\Themes\\Generic.xaml",
-              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\Themes\\Generic.xaml",
-              "RelativeToolTip": "NodeControlPrototype\\NodeControlPrototype\\Themes\\Generic.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-25T12:26:20.12Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 15,
               "Title": "App.xaml.cs",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\App.xaml.cs",
               "RelativeDocumentMoniker": "NodeControlPrototype\\NodeControlPrototype\\App.xaml.cs",
@@ -273,7 +340,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 13,
               "Title": "Node.cs",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\Node.cs",
               "RelativeDocumentMoniker": "FlowCodeInfrastructure\\Node.cs",
@@ -285,7 +352,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 14,
               "Title": "NodeControlBase.cs",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\NodeControlBase.cs",
               "RelativeDocumentMoniker": "NodeControlPrototype\\NodeControlPrototype\\NodeControlBase.cs",
@@ -297,7 +364,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 16,
               "Title": "field.json",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\field.json",
               "RelativeDocumentMoniker": "NodeControlPrototype\\NodeControlPrototype\\field.json",
@@ -309,31 +376,18 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Node.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\Node.cs",
-              "RelativeDocumentMoniker": "NodeControlPrototype\\NodeControlPrototype\\Node.cs",
-              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\Node.cs",
-              "RelativeToolTip": "NodeControlPrototype\\NodeControlPrototype\\Node.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAkAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-30T07:09:12.926Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "App.xaml",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\App.xaml",
               "RelativeDocumentMoniker": "NodeControlPrototype\\NodeControlPrototype\\App.xaml",
               "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\App.xaml",
               "RelativeToolTip": "NodeControlPrototype\\NodeControlPrototype\\App.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-09-25T09:39:27.91Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-25T09:39:27.91Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 18,
               "Title": "RectangleNodeControl.cs",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\RectangleNodeControl.cs",
               "RelativeDocumentMoniker": "NodeControlPrototype\\NodeControlPrototype\\RectangleNodeControl.cs",
@@ -345,7 +399,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 19,
               "Title": "compile.png -  [Deutsch (Deutschland)] - PNG [95x95, 32-Bit, PNG]",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\res\\compile.png",
               "RelativeDocumentMoniker": "NodeControlPrototype\\NodeControlPrototype\\res\\compile.png",
@@ -357,7 +411,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 20,
               "Title": "ControlPointVisual.cs",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\ControlPointVisual.cs",
               "RelativeDocumentMoniker": "NodeControlPrototype\\NodeControlPrototype\\ControlPointVisual.cs",
@@ -369,7 +423,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 29,
               "Title": "FlowNode.csproj",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowNode\\FlowNode.csproj",
               "RelativeDocumentMoniker": "FlowNode\\FlowNode.csproj",
@@ -381,7 +435,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 22,
               "Title": "Network.cs",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\Network.cs",
               "RelativeDocumentMoniker": "FlowCodeInfrastructure\\Network.cs",
@@ -393,7 +447,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 31,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowNode\\appsettings.json",
               "RelativeDocumentMoniker": "FlowNode\\appsettings.json",
@@ -405,7 +459,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 30,
               "Title": "field.json",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowNode\\field.json",
               "RelativeDocumentMoniker": "FlowNode\\field.json",
@@ -417,7 +471,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 28,
               "Title": "FlowCodeInfrastructure.csproj",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj",
               "RelativeDocumentMoniker": "FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj",
@@ -429,7 +483,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 27,
               "Title": "NodeControlPrototype",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj",
               "RelativeDocumentMoniker": "NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj",
@@ -440,7 +494,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 25,
               "Title": "FlowCodeInfrastructure",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj",
               "RelativeDocumentMoniker": "FlowCodeInfrastructure\\FlowCodeInfrastructure.csproj",
@@ -451,7 +505,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 24,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowNode\\Program.cs",
               "RelativeDocumentMoniker": "FlowNode\\Program.cs",
@@ -463,7 +517,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 21,
               "Title": "NodeControlPrototype.csproj",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj",
               "RelativeDocumentMoniker": "NodeControlPrototype\\NodeControlPrototype\\NodeControlPrototype.csproj",
@@ -475,31 +529,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "DrawIONetwork.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\DrawIONetwork.cs",
-              "RelativeDocumentMoniker": "FlowCodeInfrastructure\\DrawIONetwork.cs",
-              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\DrawIONetwork.cs",
-              "RelativeToolTip": "FlowCodeInfrastructure\\DrawIONetwork.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAQwAsAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-30T07:02:20.463Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "TerminatorNode.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\TerminatorNode.cs",
-              "RelativeDocumentMoniker": "FlowCodeInfrastructure\\TerminatorNode.cs",
-              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\TerminatorNode.cs",
-              "RelativeToolTip": "FlowCodeInfrastructure\\TerminatorNode.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAiwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-30T07:02:17.311Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 32,
               "Title": "Edge.cs",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\Edge.cs",
               "RelativeDocumentMoniker": "FlowCodeInfrastructure\\Edge.cs",
@@ -511,7 +541,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 26,
               "Title": "Config.cs",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\Config.cs",
               "RelativeDocumentMoniker": "FlowCodeInfrastructure\\Config.cs",
@@ -523,7 +553,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 33,
               "Title": "XMLNode.cs",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\XMLUtils\\XMLNode.cs",
               "RelativeDocumentMoniker": "XMLUtils\\XMLNode.cs",
@@ -535,20 +565,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "CallerNode.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\CallerNode.cs",
-              "RelativeDocumentMoniker": "FlowCodeInfrastructure\\CallerNode.cs",
-              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowCodeInfrastructure\\CallerNode.cs",
-              "RelativeToolTip": "FlowCodeInfrastructure\\CallerNode.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAuwBMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-09T13:36:10.181Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 23,
               "Title": "cargotrucker1.drawio",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\1\\FlowCode\\FlowNode\\data\\cargotrucker1.drawio",
               "RelativeDocumentMoniker": "FlowNode\\data\\cargotrucker1.drawio",

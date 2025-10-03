@@ -160,6 +160,10 @@ namespace NodeControlPrototype
             else return;
 
             var pen = new Pen(Brushes.Black, 2);
+            if (From.GetType() == typeof(ProcessNode) && FromIndex == 2)
+            {
+                pen.DashStyle = DashStyles.DashDotDot;
+            }
 
             // Gather all points to form the polyline
             List<Point> points = new List<Point> { start };
@@ -209,8 +213,14 @@ namespace NodeControlPrototype
                 if (LabelBox is not null)
                     LabelBox.Visibility = Visibility.Collapsed;
             }
+            else if (From.GetType() == typeof(ProcessNode) && FromIndex != 2)
+            {
+                if (LabelBox is not null)
+                    LabelBox.Visibility = Visibility.Collapsed;
+            }
 
-            Point labelPos;
+
+                Point labelPos;
             int middleIndex = (points.Count - 1) / 2;
             Point lp1 = points[middleIndex];
             Point lp2 = points[middleIndex + 1];
