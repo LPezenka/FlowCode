@@ -146,12 +146,12 @@ namespace NodeControlPrototype
             if (From == null || FromIndex == null)
                 return;
 
-            Point start = From.TranslatePoint(From.GetConnectionPoints()[(int)FromIndex], Application.Current.MainWindow);
+            Point start = From.TranslatePoint(From.GetConnectionPoints()[(int)FromIndex], this);// Application.Current.MainWindow);
             Point end;
 
             if (To != null && ToIndex != null)
             {
-                end = To.TranslatePoint(To.GetConnectionPoints()[(int)ToIndex], Application.Current.MainWindow);
+                end = To.TranslatePoint(To.GetConnectionPoints()[(int)ToIndex], this); // Application.Current.MainWindow);
             }
             else if (CurrentMousePosition.HasValue)
             {

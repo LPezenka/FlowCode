@@ -41,6 +41,13 @@ namespace FlowCodeInfrastructure
                     string varType = "string;";
                     initVariable = true;
                 }
+                else if (Code.Contains("=") && !Code.Contains("=="))
+                {
+                    var parts = Code.Split("=");
+                    Code = $"string lineInput = \"{parts[1]}\";";
+                    varName = parts[0];
+                    initVariable = true;
+                }
 
                 if (Code.Contains("Function"))
                 {
@@ -60,7 +67,7 @@ namespace FlowCodeInfrastructure
                         else if (bool.TryParse(vVal, out bool boolValue)) varType = "bool";
                         else if (char.TryParse(vVal, out char charValue)) varType = "char";
                         else varType = "string";
-                        string postProcess = string.Empty;  
+                        string postProcess = string.Empty;
                         switch (varType)
                         {
                             case "float":
@@ -84,6 +91,14 @@ namespace FlowCodeInfrastructure
 
                     }
                 }
+            }
+            catch(CompilationErrorException cee)
+            {
+                //if (Code.Contains("="))
+                //{
+                //    var parts = Code.Split("=");
+                //    var varname = parts[0];
+                //}
             }
             catch (Exception ex)
             {

@@ -60,11 +60,19 @@
             </DrawingBrush.Drawing>
         </DrawingBrush>
     </Window.Resources>
-    
-    <Grid>
+
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" x:Name="MenuHeader">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Exit" Click="MenuItemExit_Click" />
+                <MenuItem Header="_Export" Click="MenuItemExport_Click" />
+            </MenuItem>
+        </Menu>
+        <Grid>
         <Canvas x:Name="DiagramCanvas" Background="{StaticResource ListBackgroundBrush}">
             <StackPanel>
                 <Button
+                    x:Name="AddNodeButton"
                 Width="92" Height="92"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
@@ -76,6 +84,7 @@
                     <Image Source="/res/process.png"/>
                 </Button>
                 <Button
+                    x:Name="AddDecisionButton"
     Width="92" Height="92"
     HorizontalAlignment="Left"
     VerticalAlignment="Top"
@@ -85,6 +94,7 @@
                 </Button>
 
                 <Button
+                    x:Name="AddProcessCallButton"
     Width="92" Height="92"
     HorizontalAlignment="Left"
     VerticalAlignment="Top"
@@ -98,7 +108,9 @@ VerticalAlignment="Top"
 Margin="10" Click="Button_Click">
                     <Image Width="92" Height="92" Source="/res/compile.png"/>
                 </Button>-->
-                <Button Width="92" Height="92"
+                <Button 
+                    x:Name="RunButton"
+                    Width="92" Height="92"
 HorizontalAlignment="Left"
 VerticalAlignment="Top"
 Margin="10" Click="Run_Click">
@@ -107,4 +119,5 @@ Margin="10" Click="Run_Click">
             </StackPanel>
         </Canvas>
     </Grid>
+    </DockPanel>
 </Window>

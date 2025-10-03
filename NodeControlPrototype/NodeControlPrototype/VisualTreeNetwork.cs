@@ -36,6 +36,13 @@ namespace NodeControlPrototype
                         };
                         nodeMapper.Add(rc, dn);
                         break;
+                    case ProcessNode pc:
+                        CallerNode cn = new CallerNode(null)
+                        {
+                            ID = $"Node{nodeId++}"
+                        };
+                        nodeMapper.Add(pc, cn);
+                        break;
 
                     default:
                         Console.WriteLine("Error!");
@@ -65,6 +72,21 @@ namespace NodeControlPrototype
 
                 if (child != null && parent != null) child.Parent = parent.ID;
                 if (parent != null) parent.Next = child;
+
+                if (parentControl is not null)
+                    if (parentControl is ProcessNode pc)
+                    {
+
+                        if (edge.FromIndex == 2)
+                        {
+                            (parent as CallerNode).TargetNode = child;
+                            (parent as CallerNode).Variables = newEdge.Text;
+                        }
+                        else
+                            (parent as CallerNode).Next = child;
+                    }
+
+
             }
 
             foreach (var v in nodes)

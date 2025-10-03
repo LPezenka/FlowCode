@@ -1,18 +1,22 @@
 ﻿// MainWindow.xaml.cs
+using CargoTrucker;
+using CargoTrucker.Client;
 using FlowCodeInfrastructure;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
+using Microsoft.Win32;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using CargoTrucker;
-using CargoTrucker.Client;
+using System.Windows.Media.Imaging;
+using System.Xml.Linq;
 
 namespace NodeControlPrototype
 {
@@ -332,10 +336,62 @@ namespace NodeControlPrototype
                     case RhombusNodeControl rc:
                         nodes.Add(rc);
                         break;
+                    case ProcessNode pc:
+                        nodes.Add(pc);
+                        break;
                 }
             }
 
             vtn.Generate(nodes, _edges, _currentRoot);
+        }
+
+
+        private void SaveBitmap(string path)
+        {
+            AddNodeButton.Visibility = Visibility.Collapsed;
+            AddDecisionButton.Visibility = Visibility.Collapsed;
+            AddProcessCallButton.Visibility = Visibility.Collapsed;
+            RunButton.Visibility = Visibility.Collapsed;
+            try
+            {
+                var target = DiagramCanvas;
+                if (target == null)
+                    return;
+
+                Rect bounds = VisualTreeHelper.GetDescendantBounds(target);
+
+                RenderTargetBitmap rtb = new RenderTargetBitmap((Int32)bounds.Width, (Int32)bounds.Height, 96, 96, PixelFormats.Pbgra32);
+
+                DrawingVisual dv = new DrawingVisual();
+
+                using (DrawingContext dc = dv.RenderOpen())
+                {
+                    VisualBrush vb = new VisualBrush(target);
+                    dc.DrawRectangle(vb, null, new Rect(new Point(), bounds.Size));
+                }
+
+                rtb.Render(dv);
+
+                PngBitmapEncoder png = new PngBitmapEncoder();
+
+                png.Frames.Add(BitmapFrame.Create(rtb));
+
+                using (Stream stm = File.Create(path))
+                {
+                    png.Save(stm);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                AddNodeButton.Visibility = Visibility.Visible;
+                AddDecisionButton.Visibility = Visibility.Visible;
+                AddProcessCallButton.Visibility = Visibility.Visible;
+                RunButton.Visibility = Visibility.Visible;
+            }
         }
 
         private void Run_Click(object sender, RoutedEventArgs e)
@@ -378,6 +434,22 @@ namespace NodeControlPrototype
             ActionNode.ScriptOptions = scriptOptions;
 
             FlowCodeInfrastructure.Node.Run(vtn.RootNode);
+        }
+
+        private void MenuItemExit_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
+
+        private void MenuItemExport_Click(object sender, RoutedEventArgs e)
+        {
+            var sfd = new SaveFileDialog();
+            sfd.DefaultExt = "png";
+            sfd.Filter = "PNG Files | *.png | All files (*.*)|*.*";
+            if (sfd.ShowDialog() == true)
+            {
+                SaveBitmap(sfd.FileName);
+            }
         }
     }
 }
