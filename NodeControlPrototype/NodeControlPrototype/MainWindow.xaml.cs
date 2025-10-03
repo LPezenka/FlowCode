@@ -164,6 +164,23 @@ namespace NodeControlPrototype
             }
         }
 
+
+        private void AddTerminatorNode_Click(object sender, RoutedEventArgs e)
+        {
+            var terminator = new TerminatorNodeControl
+            {
+                Width = 160,
+                Height = 60,
+                NodeData = new Node
+                {
+                    Title = "Start/End",
+                    Position = new Point(50 + _nodeCounter * 20, 50 + _nodeCounter * 20)
+                },
+                TerminalText = "Start"
+            };
+
+            AddNode(terminator, terminator.NodeData.Position);
+        }
         private void AddFunctionNode_Click(object sender, RoutedEventArgs e)
         {
             var processNode = new ProcessNode()

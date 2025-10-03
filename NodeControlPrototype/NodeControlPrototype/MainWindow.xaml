@@ -102,7 +102,18 @@
     Click="AddFunctionNode_Click">
                     <Image Source="/res/predefinedprocess.png"/>
                 </Button>
-                <!--<Button Width="92" Height="92"
+                    
+                <Button
+                  x:Name="AddTerminalButton"
+  Width="92" Height="92"
+  HorizontalAlignment="Left"
+  VerticalAlignment="Top"
+  Margin="10"
+  Click="AddTerminatorNode_Click">
+                        <Image Source="/res/terminal.png"/>
+                    </Button>
+
+                    <!--<Button Width="92" Height="92"
 HorizontalAlignment="Left"
 VerticalAlignment="Top"
 Margin="10" Click="Button_Click">
