@@ -15,8 +15,16 @@ namespace FlowCodeInfrastructure
 
         public override void Evaluate()
         {
-            ReturnValue = ScriptState.Variables.Where(x => x.Name == ResultVariable).FirstOrDefault().Value;
-            //ReturnName = ResultVariable;
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(ResultVariable))
+                    ReturnValue = ScriptState.Variables.Where(x => x.Name == ResultVariable).FirstOrDefault().Value;
+                //ReturnName = ResultVariable;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

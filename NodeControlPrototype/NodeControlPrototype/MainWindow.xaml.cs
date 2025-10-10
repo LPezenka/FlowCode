@@ -357,6 +357,9 @@ namespace NodeControlPrototype
                     case ProcessNode pc:
                         nodes.Add(pc);
                         break;
+                    case TerminatorNodeControl tc:
+                        nodes.Add(tc);
+                        break;
                 }
             }
 

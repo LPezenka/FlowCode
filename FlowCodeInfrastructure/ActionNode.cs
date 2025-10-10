@@ -46,6 +46,7 @@ namespace FlowCodeInfrastructure
                     var parts = Code.Split("=");
                     Code = $"string lineInput = \"{parts[1]}\";";
                     varName = parts[0];
+                    // TODO: Prüfen, ob die Variable existiert
                     initVariable = true;
                 }
 
