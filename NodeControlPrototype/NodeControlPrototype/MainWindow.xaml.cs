@@ -176,7 +176,7 @@ namespace NodeControlPrototype
                     Title = "Start/End",
                     Position = new Point(50 + _nodeCounter * 20, 50 + _nodeCounter * 20)
                 },
-                TerminalText = "Start"
+                TerminalType = "Start"
             };
 
             AddNode(terminator, terminator.NodeData.Position);
@@ -260,6 +260,7 @@ namespace NodeControlPrototype
                 DiagramCanvas.Children.Add(labelBox);
 
                 localTempEdge.LabelBox = labelBox;
+                // InvalidateVisual();
 
                 //_edgeLabels.Add(localTempEdge, labelBox);
             }
@@ -368,6 +369,7 @@ namespace NodeControlPrototype
             AddNodeButton.Visibility = Visibility.Collapsed;
             AddDecisionButton.Visibility = Visibility.Collapsed;
             AddProcessCallButton.Visibility = Visibility.Collapsed;
+            AddTerminalButton.Visibility = Visibility.Collapsed;
             RunButton.Visibility = Visibility.Collapsed;
             try
             {
@@ -407,6 +409,7 @@ namespace NodeControlPrototype
                 AddNodeButton.Visibility = Visibility.Visible;
                 AddDecisionButton.Visibility = Visibility.Visible;
                 AddProcessCallButton.Visibility = Visibility.Visible;
+                AddTerminalButton.Visibility = Visibility.Visible;
                 RunButton.Visibility = Visibility.Visible;
             }
         }

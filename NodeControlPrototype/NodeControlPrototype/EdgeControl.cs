@@ -208,7 +208,7 @@ namespace NodeControlPrototype
 
             // Compute label position at the middle of the polyline
 
-            if (From.GetType() == typeof(RectangleNodeControl))
+            if (From.GetType() == typeof(RectangleNodeControl) || From.GetType() == typeof(TerminatorNodeControl)) 
             {
                 if (LabelBox is not null)
                     LabelBox.Visibility = Visibility.Collapsed;

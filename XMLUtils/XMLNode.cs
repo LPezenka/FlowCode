@@ -14,7 +14,7 @@ namespace XMLUtils
             if (node.Name == "root")
                 return node;
 
-            XmlNode result = null;
+            XmlNode result;
             foreach (XmlNode localNode in node.ChildNodes)
             {
                 result = GetRootNode(localNode);

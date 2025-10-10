@@ -21,6 +21,67 @@
     </Style>
 
     <Style TargetType="{x:Type fc:TerminatorNodeControl}">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type fc:TerminatorNodeControl}">
+                    <Border Background="{TemplateBinding Background}"
+                        BorderBrush="Black"
+                        BorderThickness="1"
+                        CornerRadius="30"
+                        Padding="5">
+                        <StackPanel>
+                            <!-- Dropdown: Start oder End -->
+                            <ComboBox SelectedValue="{Binding TerminalType, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                      SelectedValuePath="Content"
+                                  HorizontalAlignment="Center"
+                                  Width="100"
+                                  Margin="0,0,0,3" >
+                                <ComboBoxItem Content="Start"/>
+                                <ComboBoxItem Content="End"/>
+                            </ComboBox>
+
+                            <StackPanel Orientation="Horizontal">
+                                <!-- Rückgabevariable, nur sichtbar wenn "Start" -->
+                                <Label x:Name="lblFunctionName" Visibility="Visible">Function Name:</Label>
+                                <TextBox x:Name="FunctionNameBox"
+     Text="{Binding FunctionName, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+     Width="100"
+         BorderThickness="1"
+     HorizontalAlignment="Center"
+     Visibility="Visible"
+     FontSize="12">
+                                </TextBox>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <!-- Rückgabevariable, nur sichtbar wenn "End" -->
+                                <Label x:Name="lblReturnVariable" Visibility="Hidden">Return Variable:</Label>
+                                <TextBox x:Name="ReturnVariableBox"
+                                 Text="{Binding ReturnVariable, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                 Width="100"
+                                     BorderThickness="1"
+                                 HorizontalAlignment="Center"
+                                 Visibility="Hidden"
+                                 FontSize="12">
+                                </TextBox>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding TerminalType, RelativeSource={RelativeSource TemplatedParent}}" Value="End">
+                            <Setter TargetName="ReturnVariableBox" Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding TerminalType, RelativeSource={RelativeSource TemplatedParent}}" Value="Start">
+                            <Setter TargetName="ReturnVariableBox" Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--<Style TargetType="{x:Type fc:TerminatorNodeControl}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type fc:TerminatorNodeControl}">
@@ -41,13 +102,14 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>-->
 
     <Style TargetType="{x:Type fc:ProcessNode}">
+        <Setter Property="Background" Value="White" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type fc:ProcessNode}">
-                    <Border Background="White"
+                    <Border Background="{TemplateBinding Background}"
                         BorderBrush="Black"
                         BorderThickness="1"
                         Padding="0"
@@ -88,22 +150,29 @@
     </Style>
 
     <Style TargetType="{x:Type fc:RhombusNodeControl}">
+        <Setter Property="Background" Value="White" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type fc:RhombusNodeControl}">
-                    <Grid>
-                        <Polygon Fill="White"
+                    <Border Background="{TemplateBinding Background}"
+                        BorderBrush="Black"
+                        BorderThickness="1"
+                        Padding="0"
+                        SnapsToDevicePixels="True">
+                        <Grid>
+                            <Polygon Fill="White"
                              Stroke="Black"
                              StrokeThickness="1"
                              Points="0.5,0 1,0.5 0.5,1 0,0.5"
                              Stretch="Fill"
                              RenderTransformOrigin="0.5,0.5"/>
-                        <TextBox Text="{Binding NodeData.Title, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                            <TextBox Text="{Binding NodeData.Title, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                       HorizontalAlignment="Center"
                                       VerticalAlignment="Center"
                                       FontSize="12"
                                       Margin="10"/>
-                    </Grid>
+                        </Grid>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
