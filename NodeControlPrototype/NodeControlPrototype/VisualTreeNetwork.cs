@@ -115,15 +115,15 @@ namespace NodeControlPrototype
                             //    (parent as CallerNode).Next = child;
                         }
 
-                    if (childControl is not null)
-                        if (childControl is TerminatorNodeControl tn)
-                        {
-                            var v = nodeMapper[tn] as TerminatorNode;
-                            if (v is not null)
-                            {
-                                // Extract text from the textbox in the custom control and write its value to v.ResultVariable
-                            }
-                        }
+                    //if (childControl is not null)
+                    //    if (childControl is TerminatorNodeControl tn)
+                    //    {
+                    //        var v = nodeMapper[tn] as TerminatorNode;
+                    //        if (v is not null)
+                    //        {
+                    //            // Extract text from the textbox in the custom control and write its value to v.ResultVariable
+                    //        }
+                    //    }
 
 
                 }

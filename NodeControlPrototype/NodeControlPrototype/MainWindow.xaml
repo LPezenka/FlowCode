@@ -109,7 +109,8 @@
   HorizontalAlignment="Left"
   VerticalAlignment="Top"
   Margin="10"
-  Click="AddTerminatorNode_Click">
+  Click="AddTerminatorNode_Click"
+                    Background="White">
                         <Image Source="/res/terminal.png"/>
                     </Button>
 
