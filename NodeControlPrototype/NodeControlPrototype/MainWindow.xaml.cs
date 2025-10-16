@@ -452,7 +452,7 @@ namespace NodeControlPrototype
             scriptOptions = scriptOptions.AddImports("CargoTrucker.Client.GameApi");
             
             var result = CSharpScript.RunAsync("Console.WriteLine(\"Starting Script\")", scriptOptions).Result;
-            result = result.ContinueWithAsync("int i = 0, j = 1; char a = 'a'; bool b = true, c = false;", scriptOptions).Result;
+            //result = result.ContinueWithAsync("int i = 0, j = 1; char a = 'a'; bool b = true, c = false;", scriptOptions).Result;
             ActionNode.ScriptState = result;
             ActionNode.ScriptOptions = scriptOptions;
 

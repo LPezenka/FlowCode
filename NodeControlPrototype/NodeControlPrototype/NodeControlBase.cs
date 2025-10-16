@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Xml.Linq;
+using Interfaces;
 
 namespace NodeControlPrototype
 {
@@ -13,7 +14,7 @@ namespace NodeControlPrototype
 
 
 
-    public abstract class NodeControlBase : Control
+    public abstract class NodeControlBase : Control, IHighlightable
     {
         //    public Node NodeData { get; set; }
         //    public abstract List<Point> GetConnectionPoints();
@@ -178,6 +179,8 @@ namespace NodeControlPrototype
         public event EventHandler<NodeMovedEventArgs> NodeMoved;
         public event EventHandler<ConnectionPointClickedEventArgs> ConnectionPointClicked;
         public event EventHandler RootRequested;
+        public event EventHandler HighlightRequested;
+        public bool IsRoot { get; set; }
 
         protected void RaiseNodeMoved() => NodeMoved?.Invoke(this, new NodeMovedEventArgs(this));
 
@@ -189,8 +192,6 @@ namespace NodeControlPrototype
         private int? _hoveredConnectionPointIndex = null;
 
         private readonly Dictionary<int, EdgeControl> occupiedOutputEdges = new();
-
-        public bool IsRoot { get; set; }
 
         public int? GetNextFreeOutputIndex(out EdgeControl? existingEdge)
         {
@@ -293,6 +294,7 @@ namespace NodeControlPrototype
             //    base.OnMouseDoubleClick(e);
             RootRequested?.Invoke(this, EventArgs.Empty);
             e.Handled = true;
+            
             base.OnMouseDoubleClick(e);
         }
 
@@ -335,6 +337,27 @@ namespace NodeControlPrototype
                     }
                 }
                 InvalidateVisual();
+            }
+        }
+
+        public void SetActive(bool active)
+        {
+            if (active)
+            {
+                //HighlightRequested?.Invoke(this, EventArgs.Empty);
+                this.Background = Brushes.Yellow;
+                //this.InvalidateVisual();
+            }
+            else
+            {
+                if (!IsRoot)
+                {
+                    this.Background = Brushes.White;
+                }
+                else
+                {
+                    this.Background = Brushes.AliceBlue;
+                }
             }
         }
     }

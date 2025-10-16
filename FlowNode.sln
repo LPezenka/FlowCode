@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLUtils", "XMLUtils\XMLUti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NodeControlPrototype", "NodeControlPrototype\NodeControlPrototype\NodeControlPrototype.csproj", "{F677964B-7359-523C-DBA5-138406B16814}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{C82175DB-FDAF-36DF-F55D-B0F96F20AF6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{F677964B-7359-523C-DBA5-138406B16814}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F677964B-7359-523C-DBA5-138406B16814}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F677964B-7359-523C-DBA5-138406B16814}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C82175DB-FDAF-36DF-F55D-B0F96F20AF6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C82175DB-FDAF-36DF-F55D-B0F96F20AF6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C82175DB-FDAF-36DF-F55D-B0F96F20AF6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C82175DB-FDAF-36DF-F55D-B0F96F20AF6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

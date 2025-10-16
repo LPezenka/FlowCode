@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\FlowCodeInfrastructure\FlowCodeInfrastructure.csproj" />
+    <ProjectReference Include="..\..\Interfaces\Interfaces.csproj" />
   </ItemGroup>
 
   <ItemGroup>

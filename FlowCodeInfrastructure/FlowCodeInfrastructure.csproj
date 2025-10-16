@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj" />
     <ProjectReference Include="..\XMLUtils\XMLUtils.csproj" />
   </ItemGroup>
 
