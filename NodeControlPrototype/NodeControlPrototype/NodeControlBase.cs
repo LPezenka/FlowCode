@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Interfaces;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Security.Policy;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Xml.Linq;
-using Interfaces;
 
 namespace NodeControlPrototype
 {
@@ -14,7 +16,7 @@ namespace NodeControlPrototype
 
 
 
-    public abstract class NodeControlBase : Control, IHighlightable
+    public abstract class NodeControlBase : Control, IHighlightable, INotifyPropertyChanged
     {
         //    public Node NodeData { get; set; }
         //    public abstract List<Point> GetConnectionPoints();
@@ -180,7 +182,14 @@ namespace NodeControlPrototype
         public event EventHandler<ConnectionPointClickedEventArgs> ConnectionPointClicked;
         public event EventHandler RootRequested;
         public event EventHandler HighlightRequested;
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         public bool IsRoot { get; set; }
+
+        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "Background")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         protected void RaiseNodeMoved() => NodeMoved?.Invoke(this, new NodeMovedEventArgs(this));
 
@@ -345,20 +354,21 @@ namespace NodeControlPrototype
             if (active)
             {
                 //HighlightRequested?.Invoke(this, EventArgs.Empty);
-                this.Background = Brushes.Yellow;
+                Background = Brushes.Yellow;
                 //this.InvalidateVisual();
             }
             else
             {
                 if (!IsRoot)
                 {
-                    this.Background = Brushes.White;
+                    Background = Brushes.White;
                 }
                 else
                 {
-                    this.Background = Brushes.AliceBlue;
+                    Background = Brushes.AliceBlue;
                 }
             }
+            NotifyPropertyChanged("Background");
         }
     }
 

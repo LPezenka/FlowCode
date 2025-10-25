@@ -3,12 +3,14 @@ using CargoTrucker;
 using CargoTrucker.Client;
 using FlowCodeInfrastructure;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.Win32;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Packaging;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -16,6 +18,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace NodeControlPrototype
@@ -29,10 +32,11 @@ namespace NodeControlPrototype
         private readonly List<EdgeControl> _edges = new();
         private readonly Dictionary<EdgeControl, TextBox> _edgeLabels = new();
         private NodeControlBase rootNode = null;
-
+        private List<NodeControlBase> canvasNodes = new();
 
         public MainWindow()
         {
+            this.WindowState = WindowState.Maximized;
             InitializeComponent();
         }
 
@@ -48,6 +52,7 @@ namespace NodeControlPrototype
             node.RootRequested += Node_RootRequested;
             //node.MouseDoubleClick += node.
             DiagramCanvas.Children.Add(node);
+            canvasNodes.Add(node);
         }
 
         private NodeControlBase _currentRoot;
@@ -232,34 +237,7 @@ namespace NodeControlPrototype
                 targetNode.NodeMoved += (s, ev) => UpdateEdges();
 
                 // Label erzeugen
-                var labelBox = new TextBox
-                {
-                    Text = localTempEdge.Label,
-                    Width = 80,
-                    Background = Brushes.White,
-                    BorderBrush = Brushes.Gray,
-                    BorderThickness = new Thickness(1),
-                    FontSize = 12,
-                    Padding = new Thickness(2),
-                    TextAlignment = TextAlignment.Center
-                };
-
-                // Position Label
-                var start = localTempEdge.From.TranslatePoint(
-                    localTempEdge.From.GetConnectionPoints()[localTempEdge.FromIndex ?? 0], DiagramCanvas);
-                var end = localTempEdge.To.TranslatePoint(
-                    localTempEdge.To.GetConnectionPoints()[localTempEdge.ToIndex ?? 0], DiagramCanvas);
-
-                var labelPos = new Point((start.X + end.X) / 2 - 40, (start.Y + end.Y) / 2 - 10);
-
-                Canvas.SetLeft(labelBox, labelPos.X);
-                Canvas.SetTop(labelBox, labelPos.Y);
-
-                labelBox.TextChanged += (s, ev) => localTempEdge.Label = labelBox.Text;
-
-                DiagramCanvas.Children.Add(labelBox);
-
-                localTempEdge.LabelBox = labelBox;
+                GenerateEdgeLabel(localTempEdge);
                 // InvalidateVisual();
 
                 //_edgeLabels.Add(localTempEdge, labelBox);
@@ -271,6 +249,38 @@ namespace NodeControlPrototype
             }
 
             CleanupTemporaryEdge();
+        }
+
+        private void GenerateEdgeLabel(EdgeControl localTempEdge)
+        {
+            var labelBox = new TextBox
+            {
+                Text = localTempEdge.Label,
+                Width = 80,
+                Background = Brushes.White,
+                BorderBrush = Brushes.Gray,
+                BorderThickness = new Thickness(1),
+                FontSize = 12,
+                Padding = new Thickness(2),
+                TextAlignment = TextAlignment.Center
+            };
+
+            // Position Label
+            var start = localTempEdge.From.TranslatePoint(
+                localTempEdge.From.GetConnectionPoints()[localTempEdge.FromIndex ?? 0], DiagramCanvas);
+            var end = localTempEdge.To.TranslatePoint(
+                localTempEdge.To.GetConnectionPoints()[localTempEdge.ToIndex ?? 0], DiagramCanvas);
+
+            var labelPos = new Point((start.X + end.X) / 2 - 40, (start.Y + end.Y) / 2 - 10);
+
+            Canvas.SetLeft(labelBox, labelPos.X);
+            Canvas.SetTop(labelBox, labelPos.Y);
+
+            labelBox.TextChanged += (s, ev) => localTempEdge.Label = labelBox.Text;
+
+            DiagramCanvas.Children.Add(labelBox);
+
+            localTempEdge.LabelBox = labelBox;
         }
 
         private void CleanupTemporaryEdge()
@@ -313,9 +323,9 @@ namespace NodeControlPrototype
                     edge.LabelBox = null;
                 }
                 DiagramCanvas.Children.Remove(edge);
-                
+
                 _edges.Remove(edge);
-                
+
                 //if (_edgeLabels.TryGetValue(edge, out var label))
                 //{
                 //    DiagramCanvas.Children.Remove(label);
@@ -423,7 +433,7 @@ namespace NodeControlPrototype
 
             //if (vtn == null)
             //{
-                GenerateNetwork();
+            GenerateNetwork();
             //}
 
             if (_currentRoot == null)
@@ -450,7 +460,7 @@ namespace NodeControlPrototype
             scriptOptions = scriptOptions.AddImports("System.Collections.Generic");
             //scriptOptions = scriptOptions.AddImports("System.Diagnostics");
             scriptOptions = scriptOptions.AddImports("CargoTrucker.Client.GameApi");
-            
+
             var result = CSharpScript.RunAsync("Console.WriteLine(\"Starting Script\")", scriptOptions).Result;
             //result = result.ContinueWithAsync("int i = 0, j = 1; char a = 'a'; bool b = true, c = false;", scriptOptions).Result;
             ActionNode.ScriptState = result;
@@ -474,5 +484,227 @@ namespace NodeControlPrototype
                 SaveBitmap(sfd.FileName);
             }
         }
+
+
+        private void MenuItemLoad_Click(object sender, RoutedEventArgs e)
+        {
+            var ofd = new OpenFileDialog();
+            ofd.DefaultExt = "vtn";
+            if (ofd.ShowDialog() == true)
+            {
+                LoadXML(ofd.FileName);
+            }
+        }
+
+
+        private void LoadXML(string fname)
+        {
+            XDocument doc = XDocument.Load(fname);
+            Console.WriteLine(doc);
+            // Parse document and generate Nodes and edges
+            
+            foreach (var c in doc.Root.Elements("Node"))
+            {
+                //Console.WriteLine(c);
+                var id = c.Attribute("ID").Value;
+                var code = c.Attribute("Code").Value;
+                var position = Point.Parse(c.Attribute("Position").Value);
+                var nodeType = c.Attribute("Type")?.Value;
+                NodeControlBase node; //= new RectangleNodeControl();
+
+                switch(nodeType)
+                {
+                    case "Sequence":
+                        node = new RectangleNodeControl();
+                        break;
+                    case "Decision":
+                        node = new RhombusNodeControl();
+                        break;
+                    case "PredefinedProcess":
+                        node = new ProcessNode();
+                        break;
+                    case "Terminal":
+                        node = new TerminatorNodeControl();
+                        break;
+                    default:
+                        node = new RectangleNodeControl();
+                        break;
+                }
+
+                node.NodeData = new Node()
+                {
+                    Id = new Guid(id),
+                    Title = code,
+                    Position = position
+                };
+                node.Width = 60;
+                node.Height = 40;
+                AddNode(node, position);
+                DiagramCanvas.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                DiagramCanvas.Arrange(new Rect(
+                0, 0,
+                this.Width,
+                this.Height));
+            }
+
+
+            InvalidateVisual();
+            foreach (var e in doc.Root.Elements("Edge"))
+            {
+                var from = canvasNodes.Where(x=>x.NodeData.Id.ToString() == e.Attribute("From").Value).FirstOrDefault();
+                var to = canvasNodes.Where(x => x.NodeData.Id.ToString() == e.Attribute("To").Value).FirstOrDefault();
+                var from_idx = int.Parse(e.Attribute("FromIndex").Value);
+                var to_idx = int.Parse(e.Attribute("ToIndex").Value);
+                var lbl = e.Attribute("Label").Value;
+
+                InsertEdge(from, to, from_idx, to_idx, lbl);
+
+            }
+            InvalidateVisual();
+        }
+
+        private void InsertEdge(NodeControlBase? from, NodeControlBase? to, int from_idx, int to_idx, string lbl)
+        {
+            EdgeControl newEdge = new EdgeControl()
+            {
+                Label = lbl,
+                ToIndex = to_idx,
+                FromIndex = from_idx,
+                To = to,
+                From = from
+            };
+
+
+            from.RegisterOutputEdge(from_idx, newEdge);
+
+            newEdge.DeleteRequested += Edge_DeleteRequested;
+
+            //from.NodeMoved += (s, ev) => UpdateEdges();
+            //to.NodeMoved += (s, ev) => UpdateEdges();
+            _edges.Add(newEdge);
+            DiagramCanvas.Children.Add(newEdge);
+            GenerateEdgeLabel(newEdge);
+        }
+
+
+        private void MenuItemSave_Click(object sender, RoutedEventArgs e)
+        {
+            var sfd = new SaveFileDialog();
+            sfd.DefaultExt = "vtn";
+            sfd.Filter = "Visual Tree Network Files | *.vtn | All files (*.*)|*.*";
+            if (sfd.ShowDialog() == true)
+            {
+                SaveXML(sfd.FileName);
+            }
+        }
+
+
+        private void SaveXML(string path)
+        {
+            List<NodeControlBase> visitedNodes = new();
+            XElement root = new XElement("VisualTreeNetwork");
+            foreach (EdgeControl e in _edges)
+            {
+                NodeControlBase from = e.From;
+                NodeControlBase to = e.To;
+
+                if (!visitedNodes.Contains(from))
+                {
+                    XElement xe = GenerateXML(from);
+                    root.Add(xe);
+                    visitedNodes.Add(from);
+                }
+
+
+                if (!visitedNodes.Contains(to))
+                {
+                    XElement xe = GenerateXML(to);
+                    root.Add(xe);
+                    visitedNodes.Add(to);
+                }
+
+                XElement edgeElement = GenerateXML(e);
+                root.Add(edgeElement);
+            }
+            root.Save(path);
+        }
+
+        XElement GenerateXML(EdgeControl edge)
+        {
+            XElement x = new XElement("Edge");
+            XAttribute from = new XAttribute("From", edge.From.NodeData.Id);
+            XAttribute to = new XAttribute("To", edge.To.NodeData.Id);
+            XAttribute label = new XAttribute("Label", edge.Label);
+            XAttribute fromIndex = new XAttribute("FromIndex", edge.FromIndex);
+            XAttribute toIndex = new XAttribute("ToIndex", edge.ToIndex);
+
+            x.Add(toIndex);
+            x.Add(fromIndex);
+            x.Add(from);
+            x.Add(to);
+            x.Add(label);
+            return x;
+        }
+
+        XElement GenerateXML(NodeControlBase node)
+        {
+            XElement x = new XElement("Node");
+            XAttribute id = new XAttribute("ID", node.NodeData.Id.ToString());
+            x.Add(id);
+            XAttribute a = new XAttribute("Code", node.NodeData.Title);
+            x.Add(a);
+            XAttribute pos = new XAttribute("Position", node.NodeData.Position);
+            x.Add(pos);
+
+            string type = "Sequence";
+
+            if (node is RhombusNodeControl rcn)
+            {
+                type = "Decision";
+                var edges = _edges.Where(e => e.From == node).ToList();
+                var yesEdge = edges.Where(e => e.Label == FlowCodeInfrastructure.Config.GetKeyword(Config.KeyWord.True)).FirstOrDefault();
+                if (yesEdge is not null)
+                {
+                    var yesTo = yesEdge.To;
+                    XAttribute yes = new XAttribute("OnTrue", yesTo.NodeData.Id);
+                    x.Add(yes);
+                }
+
+                var noEdge = edges.Where(e => e.Label == FlowCodeInfrastructure.Config.GetKeyword(Config.KeyWord.False)).FirstOrDefault();
+                if (noEdge is not null)
+                {
+                    var noTo = noEdge.To;
+                    XAttribute no = new XAttribute("OnFalse", noTo.NodeData.Id);
+                    x.Add(no);
+                }
+
+            }
+            else if (node is RectangleNodeControl rc)
+            {
+                type = "Sequence";
+            }
+            else if (node is TerminatorNodeControl tnc)
+            {
+                type = "Terminal";
+                XAttribute functionName = new XAttribute("FunctionName", tnc.FunctionName);
+                x.Add(functionName);
+                XAttribute returnVariable = new XAttribute("ReturnVariable", tnc.ReturnVariable);
+                x.Add(returnVariable);
+            }
+            else if (node is ProcessNode pn)
+            {
+                type = "PredefinedProcess";
+                XAttribute target = new XAttribute("Target", pn.TargetNode.Id);
+
+            }
+
+            XAttribute t = new XAttribute("Type", type);
+            x.Add(t);
+
+            return x;
+        }
+
     }
 }
+
+

@@ -23,7 +23,7 @@ namespace FlowCodeInfrastructure
             Node current = n;
             while (current != null)
             {
-                long ticks = DateTime.Now.Ticks;
+                //long ticks = DateTime.Now.Ticks;
 
                 if (current.GraphicalNode != null)
                 {
@@ -38,10 +38,10 @@ namespace FlowCodeInfrastructure
                 //while (dt.Second < 4)
                 //    dt = new DateTime(DateTime.Now.Ticks - ticks);
 
-                /*if (current.GraphicalNode != null)
+                if (current.GraphicalNode != null)
                 {
                     current.GraphicalNode.SetActive(false);
-                }*/
+                }
                 current = current.Next;
             }
         }
