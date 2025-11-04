@@ -9,6 +9,7 @@ using Microsoft.Win32;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.IO.Packaging;
 using System.Linq;
@@ -61,7 +62,7 @@ namespace NodeControlPrototype
         {
             if (_currentRoot != null)
             {
-                _currentRoot.Background = Brushes.White;
+                _currentRoot.Background = _currentRoot.OriginalBackground;
                 _currentRoot.IsRoot = false;
             }
 
@@ -69,7 +70,7 @@ namespace NodeControlPrototype
 
             if (_currentRoot != null)
             {
-                _currentRoot.Background = Brushes.LightGray;
+                _currentRoot.Background = Brushes.Gold;
                 _currentRoot.IsRoot = true;
             }
         }
@@ -77,10 +78,11 @@ namespace NodeControlPrototype
 
         private void AddDecisionNode_Click(object sender, RoutedEventArgs e)
         {
-            var decisionNode = new RhombusNodeControl
+            var decisionNode = new DecisionNodeControl
             {
                 Width = 60,
                 Height = 60,
+                OriginalBackground = Brushes.Red,
                 NodeData = new Node
                 {
                     Title = $"Decision Node({_nodeCounter++})",
@@ -93,10 +95,11 @@ namespace NodeControlPrototype
 
         private void AddNode_Click(object sender, RoutedEventArgs e)
         {
-            var node = new RectangleNodeControl
+            var node = new SequenceNodeControl
             {
                 Width = 60,
                 Height = 40,
+                OriginalBackground = Brushes.Gray,
                 NodeData = new Node
                 {
                     Title = $"Node({_nodeCounter++})",
@@ -172,10 +175,11 @@ namespace NodeControlPrototype
 
         private void AddTerminatorNode_Click(object sender, RoutedEventArgs e)
         {
-            var terminator = new TerminatorNodeControl
+            var terminator = new TerminalNodeControl
             {
                 Width = 160,
                 Height = 60,
+                OriginalBackground = Brushes.LightGreen,
                 NodeData = new Node
                 {
                     Title = "Start/End",
@@ -188,10 +192,11 @@ namespace NodeControlPrototype
         }
         private void AddFunctionNode_Click(object sender, RoutedEventArgs e)
         {
-            var processNode = new ProcessNode()
+            var processNode = new ProcessNodeControl()
             {
                 Width = 90,
                 Height = 50,
+                OriginalBackground = Brushes.Orange,
                 NodeData = new Node
                 {
                     Title = $"ProcessCall({_nodeCounter++})",
@@ -358,16 +363,16 @@ namespace NodeControlPrototype
             {
                 switch (c)
                 {
-                    case RectangleNodeControl rc:
+                    case SequenceNodeControl rc:
                         nodes.Add(rc);
                         break;
-                    case RhombusNodeControl rc:
+                    case DecisionNodeControl rc:
                         nodes.Add(rc);
                         break;
-                    case ProcessNode pc:
+                    case ProcessNodeControl pc:
                         nodes.Add(pc);
                         break;
-                    case TerminatorNodeControl tc:
+                    case TerminalNodeControl tc:
                         nodes.Add(tc);
                         break;
                 }
@@ -515,19 +520,19 @@ namespace NodeControlPrototype
                 switch(nodeType)
                 {
                     case "Sequence":
-                        node = new RectangleNodeControl();
+                        node = new SequenceNodeControl();
                         break;
                     case "Decision":
-                        node = new RhombusNodeControl();
+                        node = new DecisionNodeControl();
                         break;
                     case "PredefinedProcess":
-                        node = new ProcessNode();
+                        node = new ProcessNodeControl();
                         break;
                     case "Terminal":
-                        node = new TerminatorNodeControl();
+                        node = new TerminalNodeControl();
                         break;
                     default:
-                        node = new RectangleNodeControl();
+                        node = new SequenceNodeControl();
                         break;
                 }
 
@@ -594,116 +599,9 @@ namespace NodeControlPrototype
             sfd.Filter = "Visual Tree Network Files | *.vtn | All files (*.*)|*.*";
             if (sfd.ShowDialog() == true)
             {
-                SaveXML(sfd.FileName);
+                XMLWriter.SaveXML(sfd.FileName, _edges);
             }
         }
-
-
-        private void SaveXML(string path)
-        {
-            List<NodeControlBase> visitedNodes = new();
-            XElement root = new XElement("VisualTreeNetwork");
-            foreach (EdgeControl e in _edges)
-            {
-                NodeControlBase from = e.From;
-                NodeControlBase to = e.To;
-
-                if (!visitedNodes.Contains(from))
-                {
-                    XElement xe = GenerateXML(from);
-                    root.Add(xe);
-                    visitedNodes.Add(from);
-                }
-
-
-                if (!visitedNodes.Contains(to))
-                {
-                    XElement xe = GenerateXML(to);
-                    root.Add(xe);
-                    visitedNodes.Add(to);
-                }
-
-                XElement edgeElement = GenerateXML(e);
-                root.Add(edgeElement);
-            }
-            root.Save(path);
-        }
-
-        XElement GenerateXML(EdgeControl edge)
-        {
-            XElement x = new XElement("Edge");
-            XAttribute from = new XAttribute("From", edge.From.NodeData.Id);
-            XAttribute to = new XAttribute("To", edge.To.NodeData.Id);
-            XAttribute label = new XAttribute("Label", edge.Label);
-            XAttribute fromIndex = new XAttribute("FromIndex", edge.FromIndex);
-            XAttribute toIndex = new XAttribute("ToIndex", edge.ToIndex);
-
-            x.Add(toIndex);
-            x.Add(fromIndex);
-            x.Add(from);
-            x.Add(to);
-            x.Add(label);
-            return x;
-        }
-
-        XElement GenerateXML(NodeControlBase node)
-        {
-            XElement x = new XElement("Node");
-            XAttribute id = new XAttribute("ID", node.NodeData.Id.ToString());
-            x.Add(id);
-            XAttribute a = new XAttribute("Code", node.NodeData.Title);
-            x.Add(a);
-            XAttribute pos = new XAttribute("Position", node.NodeData.Position);
-            x.Add(pos);
-
-            string type = "Sequence";
-
-            if (node is RhombusNodeControl rcn)
-            {
-                type = "Decision";
-                var edges = _edges.Where(e => e.From == node).ToList();
-                var yesEdge = edges.Where(e => e.Label == FlowCodeInfrastructure.Config.GetKeyword(Config.KeyWord.True)).FirstOrDefault();
-                if (yesEdge is not null)
-                {
-                    var yesTo = yesEdge.To;
-                    XAttribute yes = new XAttribute("OnTrue", yesTo.NodeData.Id);
-                    x.Add(yes);
-                }
-
-                var noEdge = edges.Where(e => e.Label == FlowCodeInfrastructure.Config.GetKeyword(Config.KeyWord.False)).FirstOrDefault();
-                if (noEdge is not null)
-                {
-                    var noTo = noEdge.To;
-                    XAttribute no = new XAttribute("OnFalse", noTo.NodeData.Id);
-                    x.Add(no);
-                }
-
-            }
-            else if (node is RectangleNodeControl rc)
-            {
-                type = "Sequence";
-            }
-            else if (node is TerminatorNodeControl tnc)
-            {
-                type = "Terminal";
-                XAttribute functionName = new XAttribute("FunctionName", tnc.FunctionName);
-                x.Add(functionName);
-                XAttribute returnVariable = new XAttribute("ReturnVariable", tnc.ReturnVariable);
-                x.Add(returnVariable);
-            }
-            else if (node is ProcessNode pn)
-            {
-                type = "PredefinedProcess";
-                XAttribute target = new XAttribute("Target", pn.TargetNode.Id);
-
-            }
-
-            XAttribute t = new XAttribute("Type", type);
-            x.Add(t);
-
-            return x;
-        }
-
     }
 }
 

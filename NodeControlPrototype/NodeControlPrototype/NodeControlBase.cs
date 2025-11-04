@@ -174,6 +174,7 @@ namespace NodeControlPrototype
         //    }
         //}
 
+        public Brush OriginalBackground { get; set; } = Brushes.Gray;
         public Node NodeData { get; set; }
         protected int FirstOutputIndex { get; set; } = 1; // Standard: ein Eingang bei Index 0
         public abstract List<Point> GetConnectionPoints();
@@ -354,21 +355,29 @@ namespace NodeControlPrototype
             if (active)
             {
                 //HighlightRequested?.Invoke(this, EventArgs.Empty);
-                Background = Brushes.Yellow;
-                //this.InvalidateVisual();
+                //Background = Brushes.Yellow;
+                NotifyPropertyChanged("Background");
+                this.InvalidateVisual();
             }
             else
             {
                 if (!IsRoot)
                 {
-                    Background = Brushes.White;
+                    //Background = Brushes.White;
+                    Background = Brushes.Gold;
                 }
                 else
                 {
-                    Background = Brushes.AliceBlue;
+                    //Background = Brushes.AliceBlue;
+                    Background = OriginalBackground;
                 }
+                Task.Run(async () => {
+                    await Task.Delay(500);
+                    Dispatcher.Invoke(() => NotifyPropertyChanged("Background"));
+                    this.InvalidateVisual();
+                });
             }
-            NotifyPropertyChanged("Background");
+            
         }
     }
 

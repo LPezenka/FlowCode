@@ -58,18 +58,18 @@ using System.Windows.Media;
 
 namespace NodeControlPrototype
 {
-    public class TerminatorNodeControl : NodeControlBase
+    public class TerminalNodeControl : NodeControlBase
     {
         public static readonly DependencyProperty TerminalTypeProperty =
-            DependencyProperty.Register(nameof(TerminalType), typeof(string), typeof(TerminatorNodeControl),
+            DependencyProperty.Register(nameof(TerminalType), typeof(string), typeof(TerminalNodeControl),
                 new FrameworkPropertyMetadata("Start", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnTerminalTypeChanged));
 
         public static readonly DependencyProperty ReturnVariableProperty =
-            DependencyProperty.Register(nameof(ReturnVariable), typeof(string), typeof(TerminatorNodeControl),
+            DependencyProperty.Register(nameof(ReturnVariable), typeof(string), typeof(TerminalNodeControl),
                 new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public static readonly DependencyProperty FunctionNameProperty =
-            DependencyProperty.Register(nameof(FunctionName), typeof(string), typeof(TerminatorNodeControl),
+            DependencyProperty.Register(nameof(FunctionName), typeof(string), typeof(TerminalNodeControl),
                 new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
@@ -119,16 +119,16 @@ namespace NodeControlPrototype
             set => SetValue(ReturnVariableProperty, value);
         }
 
-        public TerminatorNodeControl()
+        public TerminalNodeControl()
         {
-            DefaultStyleKey = typeof(TerminatorNodeControl);
+            DefaultStyleKey = typeof(TerminalNodeControl);
             //ReturnVariable = "No Return Variable set";
         }
 
-        static TerminatorNodeControl()
+        static TerminalNodeControl()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(TerminatorNodeControl),
-                new FrameworkPropertyMetadata(typeof(TerminatorNodeControl)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(TerminalNodeControl),
+                new FrameworkPropertyMetadata(typeof(TerminalNodeControl)));
         }
 
         public override List<Point> GetConnectionPoints() => new()
@@ -149,7 +149,7 @@ namespace NodeControlPrototype
 
         private static void OnTerminalTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is TerminatorNodeControl node)
+            if (d is TerminalNodeControl node)
             {
                 node.InvalidateVisual();
                 node.TerminalType = e.NewValue as string;

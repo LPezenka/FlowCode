@@ -7,18 +7,18 @@ using System.Windows;
 
 namespace NodeControlPrototype
 {
-    public class RhombusNodeControl : NodeControlBase
+    public class DecisionNodeControl : NodeControlBase
     {
 
-        public RhombusNodeControl()
+        public DecisionNodeControl()
         {
             FirstOutputIndex = 1; 
         }
 
-            static RhombusNodeControl()
+            static DecisionNodeControl()
             {
-                DefaultStyleKeyProperty.OverrideMetadata(typeof(RhombusNodeControl),
-                    new FrameworkPropertyMetadata(typeof(RhombusNodeControl)));
+                DefaultStyleKeyProperty.OverrideMetadata(typeof(DecisionNodeControl),
+                    new FrameworkPropertyMetadata(typeof(DecisionNodeControl)));
         }
 
             public override List<Point> GetConnectionPoints() => new()

@@ -7,11 +7,11 @@ using System.Windows;
 
 namespace NodeControlPrototype
 {
-    internal class ProcessNode : NodeControlBase
+    internal class ProcessNodeControl : NodeControlBase
     {
         // New Control: ProcessControl
         public static readonly DependencyProperty TargetNodeProperty = DependencyProperty.Register(
-nameof(TargetNode), typeof(Node), typeof(ProcessNode), new PropertyMetadata(null));
+nameof(TargetNode), typeof(Node), typeof(ProcessNodeControl), new PropertyMetadata(null));
 
 
         public Node TargetNode
@@ -20,14 +20,14 @@ nameof(TargetNode), typeof(Node), typeof(ProcessNode), new PropertyMetadata(null
             set => SetValue(TargetNodeProperty, value);
         }
 
-        static ProcessNode()
+        static ProcessNodeControl()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ProcessNode),
-            new FrameworkPropertyMetadata(typeof(ProcessNode)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ProcessNodeControl),
+            new FrameworkPropertyMetadata(typeof(ProcessNodeControl)));
         }
 
 
-        public ProcessNode()
+        public ProcessNodeControl()
         {
             Width = 180;
             Height = 80;

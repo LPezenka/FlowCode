@@ -10,12 +10,12 @@ using System.Windows;
 
 namespace NodeControlPrototype
 {
-    public class RectangleNodeControl : NodeControlBase
+    public class SequenceNodeControl : NodeControlBase
     {
-        static RectangleNodeControl()
+        static SequenceNodeControl()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(RectangleNodeControl),
-                new FrameworkPropertyMetadata(typeof(RectangleNodeControl)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(SequenceNodeControl),
+                new FrameworkPropertyMetadata(typeof(SequenceNodeControl)));
         }
 
 

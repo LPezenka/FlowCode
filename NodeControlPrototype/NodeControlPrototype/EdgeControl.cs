@@ -160,7 +160,7 @@ namespace NodeControlPrototype
             else return;
 
             var pen = new Pen(Brushes.Black, 2);
-            if (From.GetType() == typeof(ProcessNode) && FromIndex == 2)
+            if (From.GetType() == typeof(ProcessNodeControl) && FromIndex == 2)
             {
                 pen.DashStyle = DashStyles.DashDotDot;
             }
@@ -208,12 +208,12 @@ namespace NodeControlPrototype
 
             // Compute label position at the middle of the polyline
 
-            if (From.GetType() == typeof(RectangleNodeControl) || From.GetType() == typeof(TerminatorNodeControl)) 
+            if (From.GetType() == typeof(SequenceNodeControl) || From.GetType() == typeof(TerminalNodeControl)) 
             {
                 if (LabelBox is not null)
                     LabelBox.Visibility = Visibility.Collapsed;
             }
-            else if (From.GetType() == typeof(ProcessNode) && FromIndex != 2)
+            else if (From.GetType() == typeof(ProcessNodeControl) && FromIndex != 2)
             {
                 if (LabelBox is not null)
                     LabelBox.Visibility = Visibility.Collapsed;

@@ -23,7 +23,7 @@ namespace NodeControlPrototype
                 {
                     switch (v)
                     {
-                        case RectangleNodeControl rc:
+                        case SequenceNodeControl rc:
                             ActionNode an = new ActionNode
                             {
                                 ID = $"Node{nodeId++}",
@@ -33,7 +33,7 @@ namespace NodeControlPrototype
                             nodeMapper.Add(rc, an);
                             break;
 
-                        case RhombusNodeControl rc:
+                        case DecisionNodeControl rc:
                             DecisionNode dn = new DecisionNode
                             {
                                 ID = $"Node{nodeId++}",
@@ -41,7 +41,7 @@ namespace NodeControlPrototype
                             };
                             nodeMapper.Add(rc, dn);
                             break;
-                        case ProcessNode pc:
+                        case ProcessNodeControl pc:
                             var code = pc.NodeData.Title;
                             var variables = code.Split("(").Skip(1).FirstOrDefault();
                             variables = variables.Replace(")", "");
@@ -62,7 +62,7 @@ namespace NodeControlPrototype
                             };
                             nodeMapper.Add(pc, cn);
                             break;
-                        case TerminatorNodeControl pc:
+                        case TerminalNodeControl pc:
                             TerminatorNode tn = new TerminatorNode()
                             {
                                 ID = $"Node{nodeId++}",
@@ -102,7 +102,7 @@ namespace NodeControlPrototype
                     if (parent != null) parent.Next = child;
 
                     if (parentControl is not null)
-                        if (parentControl is ProcessNode pc)
+                        if (parentControl is ProcessNodeControl pc)
                         {
 
 
@@ -117,7 +117,7 @@ namespace NodeControlPrototype
                         }
 
                     if (childControl is not null)
-                        if (childControl is TerminatorNodeControl tn)
+                        if (childControl is TerminalNodeControl tn)
                         {
                             var v = nodeMapper[tn] as TerminatorNode;
                             if (v is not null)
@@ -133,10 +133,10 @@ namespace NodeControlPrototype
                 {
                     switch (v)
                     {
-                        case RectangleNodeControl rc:
+                        case SequenceNodeControl rc:
                             break;
 
-                        case RhombusNodeControl rc:
+                        case DecisionNodeControl rc:
                             try
                             {
                                 var n = nodeMapper[rc] as DecisionNode;
@@ -151,7 +151,7 @@ namespace NodeControlPrototype
                             }
                             break;
 
-                        case ProcessNode pn:
+                        case ProcessNodeControl pn:
                             var c = nodeMapper[pn] as CallerNode;
                             string fname = pn.NodeData.Title.ToString();
                             if (fname.Contains("="))
@@ -167,8 +167,8 @@ namespace NodeControlPrototype
                             //   .Select(x => x)
                             //   .FirstOrDefault();
 
-                            var target = nodeMapper.Where(x => x.Key.GetType() == typeof(TerminatorNodeControl))
-                                .Where(x => fname == (x.Key as TerminatorNodeControl).FunctionName)
+                            var target = nodeMapper.Where(x => x.Key.GetType() == typeof(TerminalNodeControl))
+                                .Where(x => fname == (x.Key as TerminalNodeControl).FunctionName)
                                 .Select(x => x.Value)
                                 .FirstOrDefault();
                             c.TargetNode = target;

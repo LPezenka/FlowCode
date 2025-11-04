@@ -37,7 +37,7 @@ namespace FlowCodeInfrastructure
                 //DateTime dt = new DateTime(DateTime.Now.Ticks - ticks);
                 //while (dt.Second < 4)
                 //    dt = new DateTime(DateTime.Now.Ticks - ticks);
-
+                //Thread.Sleep(2000); 
                 if (current.GraphicalNode != null)
                 {
                     current.GraphicalNode.SetActive(false);

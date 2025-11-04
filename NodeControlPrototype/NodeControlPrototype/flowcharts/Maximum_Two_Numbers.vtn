@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualTreeNetwork>
+  <Node ID="f386e34e-281f-4934-8328-eb0582935514" Code="Ausgabe: &quot;A eingeben&quot;" Position="610.8000000000001,13.199999999999989" Type="Sequence" />
+  <Node ID="359575c6-2dbe-4b92-889b-37724489e04a" Code="a = Eingabe" Position="611.5999999999999,107.60000000000005" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="f386e34e-281f-4934-8328-eb0582935514" To="359575c6-2dbe-4b92-889b-37724489e04a" Label="" />
+  <Node ID="c7b17498-7839-454f-9064-2b76ff72c273" Code="Ausgabe: &quot;B eingeben&quot;" Position="610.8,198.79999999999998" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="359575c6-2dbe-4b92-889b-37724489e04a" To="c7b17498-7839-454f-9064-2b76ff72c273" Label="" />
+  <Node ID="e97284b2-3a98-4942-9296-89cc93cf4d49" Code="b = Eingabe" Position="610,290.00000000000006" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="c7b17498-7839-454f-9064-2b76ff72c273" To="e97284b2-3a98-4942-9296-89cc93cf4d49" Label="" />
+  <Node ID="e0706867-61a9-46a7-9e2e-cd45f2bd4fd3" Code="a == b" Position="612.4,413.2" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="1" From="e97284b2-3a98-4942-9296-89cc93cf4d49" To="e0706867-61a9-46a7-9e2e-cd45f2bd4fd3" Label="" />
+  <Node ID="0c9f430a-1bde-4128-b156-b56f5c29694c" Code="Ausgabe: &quot;Die Zahlen sind gleich&quot;" Position="342,531.5999999999999" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="e0706867-61a9-46a7-9e2e-cd45f2bd4fd3" To="0c9f430a-1bde-4128-b156-b56f5c29694c" Label="Ja" />
+  <Node ID="bfa64b4c-cd0a-4e28-98a6-33f60ded65a4" Code="a &gt; b" Position="854.8,513.1999999999999" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="2" From="e0706867-61a9-46a7-9e2e-cd45f2bd4fd3" To="bfa64b4c-cd0a-4e28-98a6-33f60ded65a4" Label="Nein" />
+  <Node ID="7a6a1b0b-7f01-456f-b476-e1e3b189d9a1" Code="Ausgabe: &quot;A ist das Maximum&quot;" Position="684.4,639.6" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="bfa64b4c-cd0a-4e28-98a6-33f60ded65a4" To="7a6a1b0b-7f01-456f-b476-e1e3b189d9a1" Label="Ja" />
+  <Node ID="043a733d-61fa-4f37-a864-af964bbc3592" Code="Ausgabe: &quot;B ist das Maximum&quot;" Position="1055.6,634" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="bfa64b4c-cd0a-4e28-98a6-33f60ded65a4" To="043a733d-61fa-4f37-a864-af964bbc3592" Label="Nein" />
+</VisualTreeNetwork>
