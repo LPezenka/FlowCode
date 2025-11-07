@@ -37,7 +37,8 @@ namespace NodeControlPrototype
                             DecisionNode dn = new DecisionNode
                             {
                                 ID = $"Node{nodeId++}",
-                                Code = rc.NodeData.Title
+                                Code = rc.NodeData.Title,
+                                GraphicalNode = rc
                             };
                             nodeMapper.Add(rc, dn);
                             break;
@@ -58,7 +59,8 @@ namespace NodeControlPrototype
                                 Variables = variables,
                                 ReturnSource = returnSource,
                                 ReturnTarget = returnTarget,
-                                TargetNode = null
+                                TargetNode = null,
+                                GraphicalNode = pc
                             };
                             nodeMapper.Add(pc, cn);
                             break;
@@ -67,7 +69,8 @@ namespace NodeControlPrototype
                             {
                                 ID = $"Node{nodeId++}",
                                 ResultVariable = pc.ReturnVariable,
-                                Code = pc.FunctionName //pc.NodeData.Title
+                                Code = pc.FunctionName, //pc.NodeData.Title
+                                GraphicalNode = pc
                             };
                             nodeMapper.Add(pc, tn);
                             break;

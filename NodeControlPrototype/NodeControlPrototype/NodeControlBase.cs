@@ -352,31 +352,39 @@ namespace NodeControlPrototype
 
         public void SetActive(bool active)
         {
-            if (active)
+
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                //HighlightRequested?.Invoke(this, EventArgs.Empty);
-                //Background = Brushes.Yellow;
-                NotifyPropertyChanged("Background");
-                this.InvalidateVisual();
-            }
-            else
-            {
-                if (!IsRoot)
+
+                if (active)
                 {
-                    //Background = Brushes.White;
-                    Background = Brushes.Gold;
+                    //HighlightRequested?.Invoke(this, EventArgs.Empty);
+                    Background = Brushes.Magenta;
+                    NotifyPropertyChanged("Background");
+                    this.InvalidateVisual();
                 }
                 else
                 {
-                    //Background = Brushes.AliceBlue;
-                    Background = OriginalBackground;
+                    if (!IsRoot)
+                    {
+                        Background = OriginalBackground;// Brushes.White;
+                        //Background = Brushes.Gold;
+                    }
+                    else
+                    {
+                        Background = Brushes.Gold;
+                        //Background = OriginalBackground;
+                    }
+                    //Task.Run(async () =>
+                    //{
+                    //await Task.Delay(100);
+                    //Dispatcher.Invoke(() =>
+                    NotifyPropertyChanged("Background");
+                    //);
+                        this.InvalidateVisual();
+                    //});
                 }
-                Task.Run(async () => {
-                    await Task.Delay(500);
-                    Dispatcher.Invoke(() => NotifyPropertyChanged("Background"));
-                    this.InvalidateVisual();
-                });
-            }
+            });
             
         }
     }

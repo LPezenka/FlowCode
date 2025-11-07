@@ -471,7 +471,11 @@ namespace NodeControlPrototype
             ActionNode.ScriptState = result;
             ActionNode.ScriptOptions = scriptOptions;
 
-            FlowCodeInfrastructure.Node.Run(vtn.RootNode);
+            Thread t = new Thread(() =>
+            {
+                FlowCodeInfrastructure.Node.Run(vtn.RootNode);
+            });
+            t.Start();
         }
 
         private void MenuItemExit_Click(object sender, RoutedEventArgs e)
@@ -507,7 +511,14 @@ namespace NodeControlPrototype
             XDocument doc = XDocument.Load(fname);
             Console.WriteLine(doc);
             // Parse document and generate Nodes and edges
-            
+
+            string rootId = string.Empty;
+            var potentialRoot = doc.Root.Elements("Root").FirstOrDefault();
+            if (!(potentialRoot is null))
+            {
+                rootId = potentialRoot.Attribute("ID")?.Value;
+            }
+
             foreach (var c in doc.Root.Elements("Node"))
             {
                 //Console.WriteLine(c);
@@ -544,6 +555,11 @@ namespace NodeControlPrototype
                 };
                 node.Width = 60;
                 node.Height = 40;
+                if (rootId != string.Empty)
+                    if (node.NodeData.Id == Guid.Parse(rootId))
+                    {
+                        Node_RootRequested(node, EventArgs.Empty);
+                    }
                 AddNode(node, position);
                 DiagramCanvas.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
                 DiagramCanvas.Arrange(new Rect(
@@ -566,6 +582,8 @@ namespace NodeControlPrototype
 
             }
             InvalidateVisual();
+
+
         }
 
         private void InsertEdge(NodeControlBase? from, NodeControlBase? to, int from_idx, int to_idx, string lbl)

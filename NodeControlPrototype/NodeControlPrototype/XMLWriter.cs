@@ -20,6 +20,12 @@ namespace NodeControlPrototype
                 NodeControlBase from = e.From;
                 NodeControlBase to = e.To;
 
+                var potentialRoot = GenerateRoot(from);
+                if (potentialRoot != null)
+                {
+                    root.Add(potentialRoot);
+                }
+
                 if (!visitedNodes.Contains(from))
                 {
                     XElement xe = GenerateXML(from, edges);
@@ -27,6 +33,11 @@ namespace NodeControlPrototype
                     visitedNodes.Add(from);
                 }
 
+                potentialRoot = GenerateRoot(to);
+                if (potentialRoot != null)
+                {
+                    root.Add(potentialRoot);
+                }
 
                 if (!visitedNodes.Contains(to))
                 {
@@ -39,6 +50,16 @@ namespace NodeControlPrototype
                 root.Add(edgeElement);
             }
             root.Save(path);
+        }
+
+        public static XElement GenerateRoot(NodeControlBase node)
+        {
+            if (node.IsRoot == false) return null;
+
+            XElement x = new XElement("Root");
+            XAttribute id = new XAttribute("ID", node.NodeData.Id.ToString());
+            x.Add(id);
+            return x;
         }
 
         public static XElement GenerateXML(EdgeControl edge)

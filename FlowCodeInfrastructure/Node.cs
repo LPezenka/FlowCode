@@ -10,6 +10,7 @@ namespace FlowCodeInfrastructure
 {
     public abstract class Node
     {
+        public static int Delay { get; set; } = 500;
         public IHighlightable GraphicalNode;
         public Node Next { get; set; }
         public string ID { get; set; }
@@ -37,10 +38,10 @@ namespace FlowCodeInfrastructure
                 //DateTime dt = new DateTime(DateTime.Now.Ticks - ticks);
                 //while (dt.Second < 4)
                 //    dt = new DateTime(DateTime.Now.Ticks - ticks);
-                //Thread.Sleep(2000); 
+                Thread.Sleep(Delay); 
                 if (current.GraphicalNode != null)
                 {
-                    current.GraphicalNode.SetActive(false);
+                  current.GraphicalNode.SetActive(false);
                 }
                 current = current.Next;
             }
