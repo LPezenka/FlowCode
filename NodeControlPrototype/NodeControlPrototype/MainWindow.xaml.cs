@@ -26,6 +26,10 @@ namespace NodeControlPrototype
 {
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Vertical offset to previous node
+        /// </summary>
+        private int offset = 25;
         private int _nodeCounter = 0;
         private NodeControlBase _edgeStartNode = null;
         private int? _edgeStartIndex = null;
@@ -34,17 +38,24 @@ namespace NodeControlPrototype
         private readonly Dictionary<EdgeControl, TextBox> _edgeLabels = new();
         private NodeControlBase rootNode = null;
         private List<NodeControlBase> canvasNodes = new();
-
+        private Point lastNodePosition; 
         public MainWindow()
         {
             this.WindowState = WindowState.Maximized;
             InitializeComponent();
+            lastNodePosition = new Point(Application.Current.MainWindow.Width / 2, 15);
         }
 
         private void AddNode(NodeControlBase node, Point position)
         {
             node.Width = 240;
             node.Height = 60;
+            position = new Point(
+                lastNodePosition.X, 
+                lastNodePosition.Y + node.Height + offset);
+            
+            lastNodePosition = position;
+
             Canvas.SetLeft(node, position.X);
             Canvas.SetTop(node, position.Y);
 
