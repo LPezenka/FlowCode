@@ -24,7 +24,7 @@ using System.Xml.Linq;
 
 namespace NodeControlPrototype
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IObserver<string>
     {
         /// <summary>
         /// Vertical offset to previous node
@@ -46,14 +46,24 @@ namespace NodeControlPrototype
             lastNodePosition = new Point(Application.Current.MainWindow.Width / 2, 15);
         }
 
-        private void AddNode(NodeControlBase node, Point position)
+        private void AddNode(NodeControlBase node, Point? nodePosition)
         {
             node.Width = 240;
             node.Height = 60;
-            position = new Point(
-                lastNodePosition.X, 
+            Point position;
+            if (nodePosition != null)
+            {
+                position = (Point)nodePosition;
+            }
+            else
+            {
+                position = new Point(
+                lastNodePosition.X,
                 lastNodePosition.Y + node.Height + offset);
-            
+
+                node.NodeData.Position = position;
+            }
+
             lastNodePosition = position;
 
             Canvas.SetLeft(node, position.X);
@@ -97,11 +107,11 @@ namespace NodeControlPrototype
                 NodeData = new Node
                 {
                     Title = $"Decision Node({_nodeCounter++})",
-                    Position = new Point(50 + _nodeCounter * 20, 50 + _nodeCounter * 20)
+                    //Position = null //new Point(50 + _nodeCounter * 20, 50 + _nodeCounter * 20)
                 }
             };
 
-            AddNode(decisionNode, decisionNode.NodeData.Position);
+            AddNode(decisionNode, null); // decisionNode.NodeData.Position);
         }
 
         private void AddNode_Click(object sender, RoutedEventArgs e)
@@ -114,10 +124,10 @@ namespace NodeControlPrototype
                 NodeData = new Node
                 {
                     Title = $"Node({_nodeCounter++})",
-                    Position = new Point(50 + _nodeCounter * 20, 50 + _nodeCounter * 20)
+                    //Position = new Point(50 + _nodeCounter * 20, 50 + _nodeCounter * 20)
                 }
             };
-            AddNode(node, node.NodeData.Position);
+            AddNode(node, null);// node.NodeData.Position);
         }
 
         private void Node_ConnectionPointClicked(object sender, ConnectionPointClickedEventArgs e)
@@ -481,7 +491,7 @@ namespace NodeControlPrototype
             //result = result.ContinueWithAsync("int i = 0, j = 1; char a = 'a'; bool b = true, c = false;", scriptOptions).Result;
             ActionNode.ScriptState = result;
             ActionNode.ScriptOptions = scriptOptions;
-
+            ActionNode.InputHandler = new InputHandler();
             Thread t = new Thread(() =>
             {
                 FlowCodeInfrastructure.Node.Run(vtn.RootNode);
@@ -630,6 +640,21 @@ namespace NodeControlPrototype
             {
                 XMLWriter.SaveXML(sfd.FileName, _edges);
             }
+        }
+
+        public void OnCompleted()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnError(Exception error)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnNext(string value)
+        {
+            Console.Write("Message to observers: " + value);
         }
     }
 }

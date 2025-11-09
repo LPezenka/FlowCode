@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Scripting;
 using CargoTrucker;
+using Interfaces;
 
 namespace FlowCodeInfrastructure
 {
     public class ActionNode : Node
     {
+        public static IInputHandler InputHandler { get; set; }
         //public string Code { get; set; }
         public static ScriptState ScriptState { get; set; }
         public static ScriptOptions ScriptOptions { get; set; }
@@ -23,19 +25,28 @@ namespace FlowCodeInfrastructure
             try
             {
                 bool initVariable = false;
+                bool customInput = false;
                 string varName = string.Empty;
 
                 if (Code.Contains("Ausgabe:"))
-                {
-                    Code = Code.Replace(";", "");
-                    Code = Code.Replace("Ausgabe:", "Console.WriteLine(");
-                    Code += ");";
+                {    
+                        Code = Code.Replace(";", "");
+                        Code = Code.Replace("Ausgabe:", "Console.WriteLine(");
+                        Code += ");";
                 }
                 else if (Code.Contains("Eingabe"))
                 {
+
                     string[] parts = Code.Split(new[] { '=' });
                     varName = parts[0].Trim();
-                    Code = "string lineInput = Console.ReadLine(); ";
+                    if (InputHandler is null)
+                    {
+                        Code = "string lineInput = Console.ReadLine(); ";
+                    }
+                    else
+                    { 
+                        customInput = true;
+                    }
                     //Code = Code.Replace(";", "");
                     var v = ScriptState.Variables.Where(x => x.Name == varName).FirstOrDefault();
                     string varType = "string;";
@@ -61,6 +72,11 @@ namespace FlowCodeInfrastructure
                 else
                 {
                     if (Code.EndsWith(';') == false) Code = $"{Code};";
+                    if (customInput)
+                    {
+                        Code = "string lineInput = \"" + InputHandler.ReadInput("Bitte Wert eingeben: ") + "\";";
+                    }
+
                     ScriptState = ScriptState.ContinueWithAsync(Code, ScriptOptions).Result;
                     if (initVariable)
                     {
