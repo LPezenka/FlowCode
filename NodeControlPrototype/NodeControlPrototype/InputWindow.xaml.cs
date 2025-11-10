@@ -26,6 +26,7 @@ namespace NodeControlPrototype
         public InputWindow(string prompt)
         {
             InitializeComponent();
+            this.SizeToContent = SizeToContent.WidthAndHeight;
         }
 
         private void ButtonConfirm_Click(object sender, RoutedEventArgs e)

@@ -23,6 +23,7 @@ namespace NodeControlPrototype
         {
             InitializeComponent();
             LabelOutput.Content = prompt;
+            this.SizeToContent = SizeToContent.WidthAndHeight;
         }
 
         public void Dispose()
