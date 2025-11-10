@@ -492,6 +492,7 @@ namespace NodeControlPrototype
             ActionNode.ScriptState = result;
             ActionNode.ScriptOptions = scriptOptions;
             ActionNode.InputHandler = new InputHandler();
+            ActionNode.OutputHandler = new OutputHandler();
             Thread t = new Thread(() =>
             {
                 FlowCodeInfrastructure.Node.Run(vtn.RootNode);

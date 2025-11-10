@@ -11,6 +11,7 @@ namespace FlowCodeInfrastructure
 {
     public class ActionNode : Node
     {
+        public static IOutputHandler OutputHandler { get; set; }
         public static IInputHandler InputHandler { get; set; }
         //public string Code { get; set; }
         public static ScriptState ScriptState { get; set; }
@@ -26,13 +27,36 @@ namespace FlowCodeInfrastructure
             {
                 bool initVariable = false;
                 bool customInput = false;
+                bool customOutput = false;
+                string outputText = string.Empty;
                 string varName = string.Empty;
 
                 if (Code.Contains("Ausgabe:"))
-                {    
+                {
+                    if (OutputHandler is not null)
+                    {
+                        if (Code.Contains("\""))
+                        {
+                            outputText = Code.Split(":")[1].Trim().Replace("\"", "");
+                        }
+                        else
+                        {
+                            var parts = Code.Split(new[] { ':' }, 2);
+                            varName = parts[1].Trim();
+                            var v = ScriptState.Variables.Where(x => x.Name == varName).FirstOrDefault();
+                            if (v is not null)
+                            {
+                                outputText = v.Value.ToString();
+                            }
+                        }
+                        customOutput = true;
+                    }
+                    else
+                    {
                         Code = Code.Replace(";", "");
                         Code = Code.Replace("Ausgabe:", "Console.WriteLine(");
                         Code += ");";
+                    }
                 }
                 else if (Code.Contains("Eingabe"))
                 {
@@ -77,7 +101,12 @@ namespace FlowCodeInfrastructure
                         Code = "string lineInput = \"" + InputHandler.ReadInput("Bitte Wert eingeben: ") + "\";";
                     }
 
-                    ScriptState = ScriptState.ContinueWithAsync(Code, ScriptOptions).Result;
+                    if (customOutput)
+                    {
+                        OutputHandler.ShowOutput(outputText);
+                    }
+                    else
+                        ScriptState = ScriptState.ContinueWithAsync(Code, ScriptOptions).Result;
                     if (initVariable)
                     {
                         var v = ScriptState.Variables.Where(x => x.Name == "lineInput").FirstOrDefault();

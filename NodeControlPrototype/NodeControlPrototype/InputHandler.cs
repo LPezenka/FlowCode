@@ -14,16 +14,6 @@ namespace NodeControlPrototype
         public InputWindow Dialog { get; set; }
         public string Response { get; set; }
 
-        public void OnError(Exception error)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnNext(string value)
-        {
-            Response = value;
-        }
-
         public string ReadInput(string prompt = "")
         {
             return Application.Current.Dispatcher.Invoke(() =>
