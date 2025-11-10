@@ -51,8 +51,10 @@ namespace NodeControlPrototype
 
         private void AddNode(NodeControlBase node, Point? nodePosition)
         {
-            //node.Width = 240;
-            //node.Height = 60;
+            node.Width = 240;
+            node.Height = 90;
+            //node.Width = double.NaN;
+            //node.Height = double.NaN;
             Point position;
             if (nodePosition != null)
             {

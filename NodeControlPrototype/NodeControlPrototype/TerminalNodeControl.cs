@@ -106,14 +106,17 @@ namespace NodeControlPrototype
                         lble.Visibility= tbe.Visibility = Visibility.Visible;
                         lblf.Visibility = tbf.Visibility = Visibility.Collapsed;
                         tbiv.Visibility = lbliv.Visibility = Visibility.Collapsed;
-                        Height = (lble.ActualHeight + cmbtype.ActualHeight) * 2;
+                        //Height = (lble.ActualHeight + cmbtype.ActualHeight) * 2;
+                        Height = Width = double.NaN;
                     }
                     else
                     {
                         lble.Visibility = tbe.Visibility = Visibility.Collapsed;
                         lblf.Visibility = tbf.Visibility = Visibility.Visible;
                         tbiv.Visibility = lbliv.Visibility = Visibility.Visible;
-                        Height = lblf.ActualHeight + lbliv.ActualHeight + cmbtype.ActualHeight;
+                        //Height = lblf.ActualHeight + lbliv.ActualHeight + cmbtype.ActualHeight;
+                        Height = Width = double.NaN;
+
                     }
                 }
             }

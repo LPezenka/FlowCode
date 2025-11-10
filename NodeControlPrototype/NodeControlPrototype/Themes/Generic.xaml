@@ -30,23 +30,23 @@
                         BorderBrush="Black"
                         BorderThickness="1"
                         CornerRadius="30"
-                        Padding="5">
+                        Margin="10">
                         <StackPanel>
                             <!-- Dropdown: Start oder End -->
                             <ComboBox SelectedValue="{Binding TerminalType, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                       SelectedValuePath="Content"
                                   HorizontalAlignment="Center"
                                   Width="100"
-                                  Margin="0,0,0,3"
-                                      x:Name="cmbType">
+                                      x:Name="cmbType"
+                                      Margin="4">
                                 <ComboBoxItem Content="Start"/>
                                 <ComboBoxItem Content="End"/>
                             </ComboBox>
 
                             <StackPanel Orientation="Horizontal">
                                 <!-- Rückgabevariable, nur sichtbar wenn "Start" -->
-                                <Label x:Name="lblFunctionName" Visibility="Visible">Function Name:</Label>
-                                <TextBox x:Name="FunctionNameBox"
+                                <Label x:Name="lblFunctionName" Visibility="Visible" Margin="4">Function Name:</Label>
+                                <TextBox x:Name="FunctionNameBox" Margin="4"
      Text="{Binding FunctionName, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
      Width="100"
          BorderThickness="1"
@@ -58,27 +58,27 @@
 
                             <StackPanel Orientation="Horizontal">
                                 <!-- Eingabevariablen, nur sichtbar wenn "Start" -->
-                                <Label x:Name="lblInputVariables" Visibility="Visible">Input Variables:</Label>
+                                <Label x:Name="lblInputVariables" Visibility="Visible" Margin="4">Input Variables:</Label>
                                 <TextBox x:Name="InputVariablesTextBox"
                                  Text="{Binding InputVariables, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                  Width="100"
                                      BorderThickness="1"
                                  HorizontalAlignment="Center"
                                  Visibility="Visible"
-                                 FontSize="12">
+                                 FontSize="12" Margin="4" >
                                 </TextBox>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal">
                                 <!-- Rückgabevariable, nur sichtbar wenn "End" -->
-                                <Label x:Name="lblReturnVariable" Visibility="Hidden">Return Variable:</Label>
+                                <Label x:Name="lblReturnVariable" Visibility="Hidden"  Margin="4">Return Variable:</Label>
                                 <TextBox x:Name="ReturnVariableBox"
                                  Text="{Binding ReturnVariable, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                  Width="100"
                                      BorderThickness="1"
                                  HorizontalAlignment="Center"
                                  Visibility="Hidden"
-                                 FontSize="12">
+                                 FontSize="12"  Margin="4">
                                 </TextBox>
                             </StackPanel>
                         </StackPanel>
