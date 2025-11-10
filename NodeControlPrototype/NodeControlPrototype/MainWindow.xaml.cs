@@ -39,6 +39,9 @@ namespace NodeControlPrototype
         private NodeControlBase rootNode = null;
         private List<NodeControlBase> canvasNodes = new();
         private Point lastNodePosition; 
+        private double scaleValue = 1.0f;
+
+
         public MainWindow()
         {
             this.WindowState = WindowState.Maximized;
@@ -662,6 +665,23 @@ namespace NodeControlPrototype
         public void OnNext(string value)
         {
             Console.Write("Message to observers: " + value);
+        }
+
+        private void DiagramCanvas_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            // Determine the direction of the zoom (in or out)
+            bool zoomIn = e.Delta > 0;
+
+            // Set the scale value based on the direction of the zoom
+            scaleValue += zoomIn ? 0.1 : -0.1;
+
+            // Set the maximum and minimum scale values
+            scaleValue = scaleValue < 0.1 ? 0.1 : scaleValue;
+            scaleValue = scaleValue > 10.0 ? 10.0 : scaleValue;
+
+            // Apply the scale transformation to the ItemsControl
+            ScaleTransform scaleTransform = new ScaleTransform(scaleValue, scaleValue);
+            DiagramCanvas.LayoutTransform = scaleTransform;
         }
     }
 }

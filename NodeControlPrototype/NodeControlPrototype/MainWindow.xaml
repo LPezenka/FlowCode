@@ -72,7 +72,7 @@
         </Menu>
         <Grid>
             <ScrollViewer>
-        <Canvas x:Name="DiagramCanvas" Background="{StaticResource ListBackgroundBrush}">
+        <Canvas x:Name="DiagramCanvas" Background="{StaticResource ListBackgroundBrush}" MouseWheel="DiagramCanvas_MouseWheel">
             <StackPanel>
                 <Button
                     x:Name="AddNodeButton"
