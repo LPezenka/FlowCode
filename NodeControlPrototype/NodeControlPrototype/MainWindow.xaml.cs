@@ -51,8 +51,8 @@ namespace NodeControlPrototype
 
         private void AddNode(NodeControlBase node, Point? nodePosition)
         {
-            node.Width = 240;
-            node.Height = 60;
+            //node.Width = 240;
+            //node.Height = 60;
             Point position;
             if (nodePosition != null)
             {
@@ -104,8 +104,8 @@ namespace NodeControlPrototype
         {
             var decisionNode = new DecisionNodeControl
             {
-                Width = 60,
-                Height = 60,
+                Width = 240,
+                Height = 160,
                 OriginalBackground = Brushes.Red,
                 NodeData = new Node
                 {
@@ -121,7 +121,7 @@ namespace NodeControlPrototype
         {
             var node = new SequenceNodeControl
             {
-                Width = 60,
+                Width = 120,
                 Height = 40,
                 OriginalBackground = Brushes.Gray,
                 NodeData = new Node
@@ -202,7 +202,7 @@ namespace NodeControlPrototype
             var terminator = new TerminalNodeControl
             {
                 Width = 160,
-                Height = 60,
+                Height = 120,
                 OriginalBackground = Brushes.LightGreen,
                 NodeData = new Node
                 {
@@ -218,8 +218,8 @@ namespace NodeControlPrototype
         {
             var processNode = new ProcessNodeControl()
             {
-                Width = 90,
-                Height = 50,
+                Width = 120,
+                Height = 60,
                 OriginalBackground = Brushes.Orange,
                 NodeData = new Node
                 {
@@ -586,6 +586,8 @@ namespace NodeControlPrototype
                 };
                 node.Width = 60;
                 node.Height = 40;
+
+
                 if (rootId != string.Empty)
                     if (node.NodeData.Id == Guid.Parse(rootId))
                     {

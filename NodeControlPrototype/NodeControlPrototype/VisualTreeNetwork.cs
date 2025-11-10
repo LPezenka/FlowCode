@@ -46,8 +46,13 @@ namespace NodeControlPrototype
                             var code = pc.NodeData.Title;
                             var variables = code.Split("(").Skip(1).FirstOrDefault();
                             variables = variables.Replace(")", "");
-                            var returnSource = code.Split("=").Skip(1).FirstOrDefault().Trim();
-                            returnSource = returnSource.Replace("()", "");
+                            string returnSource = string.Empty;
+                            if (code.Contains("="))
+                                returnSource = code.Split("=").Skip(1).FirstOrDefault().Trim();
+                            else
+                                returnSource = code;
+
+                                returnSource = returnSource.Replace("()", "");
                             var returnTarget = code.Split("=").FirstOrDefault().Trim();
 
 
@@ -65,12 +70,14 @@ namespace NodeControlPrototype
                             nodeMapper.Add(pc, cn);
                             break;
                         case TerminalNodeControl pc:
+                            var inVariables = pc.InputVariables.Split(",").ToList();
                             TerminatorNode tn = new TerminatorNode()
                             {
                                 ID = $"Node{nodeId++}",
                                 ResultVariable = pc.ReturnVariable,
                                 Code = pc.FunctionName, //pc.NodeData.Title
-                                GraphicalNode = pc
+                                GraphicalNode = pc,
+                                InputVariables = inVariables
                             };
                             nodeMapper.Add(pc, tn);
                             break;

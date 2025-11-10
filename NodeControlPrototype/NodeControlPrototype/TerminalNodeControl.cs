@@ -72,6 +72,10 @@ namespace NodeControlPrototype
             DependencyProperty.Register(nameof(FunctionName), typeof(string), typeof(TerminalNodeControl),
                 new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
+        public static readonly DependencyProperty InputVariablesProperty =
+            DependencyProperty.Register(nameof(InputVariables), typeof(string), typeof(TerminalNodeControl),
+                new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
 
         public string TerminalType
         {
@@ -91,20 +95,35 @@ namespace NodeControlPrototype
                     var tbf = (TextBox)t.FindName("FunctionNameBox", this);
                     var lblf = (Label)t.FindName("lblFunctionName", this);
 
+                    var tbiv = (TextBox)t.FindName("InputVariablesTextBox", this);
+                    var lbliv = (Label)t.FindName("lblInputVariables", this);
+
+                    var cmbtype = (ComboBox)t.FindName("cmbType", this);
+
                     if (value == "End")
                     {
-
+//                        Height = 90;
                         lble.Visibility= tbe.Visibility = Visibility.Visible;
                         lblf.Visibility = tbf.Visibility = Visibility.Collapsed;
+                        tbiv.Visibility = lbliv.Visibility = Visibility.Collapsed;
+                        Height = (lble.ActualHeight + cmbtype.ActualHeight) * 2;
                     }
                     else
                     {
                         lble.Visibility = tbe.Visibility = Visibility.Collapsed;
                         lblf.Visibility = tbf.Visibility = Visibility.Visible;
+                        tbiv.Visibility = lbliv.Visibility = Visibility.Visible;
+                        Height = lblf.ActualHeight + lbliv.ActualHeight + cmbtype.ActualHeight;
 
                     }
                 }
             }
+        }
+
+        public string InputVariables
+        {
+            get => (string)GetValue(InputVariablesProperty);
+            set => SetValue(InputVariablesProperty, value);
         }
 
         public string FunctionName

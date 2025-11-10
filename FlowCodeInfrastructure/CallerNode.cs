@@ -36,14 +36,24 @@ namespace FlowCodeInfrastructure
             {
                 var vars = Variables.Split(",");
                 string result = string.Empty;
-                foreach (var v in vars)
+                TerminatorNode terminatorNode = TargetNode as TerminatorNode;
+                for (int i = 0; i < vars.Length; i++)
                 {
+                    var v = vars[i];
+                    var tv = terminatorNode.InputVariables[i];
+
                     var stateVariable = state.Variables.Where(x => x.Name == v.Trim()).FirstOrDefault();
                     if (stateVariable != null)
                     {
                         string type = stateVariable.Type.ToString();
                         string val = stateVariable.Value.ToString();
-                        string name = stateVariable.Name.ToString();
+                        string name;
+                        if (terminatorNode.InputVariables.Count > i)
+                            name = terminatorNode.InputVariables[i];
+                        else
+                            name = stateVariable.Name;
+
+                        //string name = tv; // stateVariable.Name.ToString();
 
                         if (type == "System.Boolean") type = "bool";
                         else if (type == "System.Int32") type = "int";

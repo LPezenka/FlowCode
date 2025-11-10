@@ -12,6 +12,7 @@ namespace FlowCodeInfrastructure
         //public static string ReturnName { get; set; }
         public string ResultVariable { get; set; }
         
+        public List<string> InputVariables { get; set; }
 
         public override void Evaluate()
         {

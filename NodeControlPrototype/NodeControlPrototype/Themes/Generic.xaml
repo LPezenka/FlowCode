@@ -37,7 +37,8 @@
                                       SelectedValuePath="Content"
                                   HorizontalAlignment="Center"
                                   Width="100"
-                                  Margin="0,0,0,3" >
+                                  Margin="0,0,0,3"
+                                      x:Name="cmbType">
                                 <ComboBoxItem Content="Start"/>
                                 <ComboBoxItem Content="End"/>
                             </ComboBox>
@@ -52,6 +53,19 @@
      HorizontalAlignment="Center"
      Visibility="Visible"
      FontSize="12">
+                                </TextBox>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <!-- Eingabevariablen, nur sichtbar wenn "Start" -->
+                                <Label x:Name="lblInputVariables" Visibility="Visible">Input Variables:</Label>
+                                <TextBox x:Name="InputVariablesTextBox"
+                                 Text="{Binding InputVariables, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                 Width="100"
+                                     BorderThickness="1"
+                                 HorizontalAlignment="Center"
+                                 Visibility="Visible"
+                                 FontSize="12">
                                 </TextBox>
                             </StackPanel>
 
