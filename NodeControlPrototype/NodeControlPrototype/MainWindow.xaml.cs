@@ -562,7 +562,13 @@ namespace NodeControlPrototype
                         node = new ProcessNodeControl();
                         break;
                     case "Terminal":
-                        node = new TerminalNodeControl();
+                        var fName = c.Attribute("FunctionName")?.Value;
+                        var returnVariable = c.Attribute("ReturnVariable")?.Value;
+                        node = new TerminalNodeControl()
+                        {
+                            FunctionName = fName,
+                            ReturnVariable = returnVariable
+                        };
                         break;
                     default:
                         node = new SequenceNodeControl();

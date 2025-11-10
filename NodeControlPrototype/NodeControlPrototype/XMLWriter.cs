@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -127,8 +128,14 @@ namespace NodeControlPrototype
             else if (node is ProcessNodeControl pn)
             {
                 type = "PredefinedProcess";
-                XAttribute target = new XAttribute("Target", pn.TargetNode.Id);
+                string call = pn.NodeData.Title;
+                string fname = call.Split("(")[0];
+                if (fname.Contains("="))
+                    fname = fname.Split("=")[0].Trim();
+                string variables = call.Split("(")[1].Split(")")[0];
 
+                XAttribute target = new XAttribute("Target", fname);
+                XAttribute variable = new XAttribute("Variables", variables);
             }
 
             XAttribute t = new XAttribute("Type", type);

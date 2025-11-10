@@ -70,8 +70,8 @@
                 <MenuItem Header="_Load" Click="MenuItemLoad_Click" />
             </MenuItem>
         </Menu>
-            <ScrollViewer>
         <Grid>
+            <ScrollViewer>
         <Canvas x:Name="DiagramCanvas" Background="{StaticResource ListBackgroundBrush}">
             <StackPanel>
                 <Button
@@ -126,14 +126,15 @@ Margin="10" Click="Button_Click">
                 <Button 
                     x:Name="RunButton"
                     Width="92" Height="92"
+                    Background="White"
 HorizontalAlignment="Left"
 VerticalAlignment="Top"
 Margin="10" Click="Run_Click">
-                    <Image Width="92" Height="92" Source="/res/Play.jpg" Stretch="Uniform"/>
+                    <Image Width="80" Height="80" Source="/res/Play.jpg" Stretch="Uniform"/>
                 </Button>
             </StackPanel>
         </Canvas>
-        </Grid>
             </ScrollViewer>
+        </Grid>
     </DockPanel>
 </Window>
