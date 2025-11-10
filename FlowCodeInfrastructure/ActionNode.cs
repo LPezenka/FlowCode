@@ -84,7 +84,12 @@ namespace FlowCodeInfrastructure
                     var v = ScriptState.Variables.Where(x => x.Name == varName).FirstOrDefault();
                     if (v is null)
                     {
-                        Code = $"string lineInput = \"{parts[1]}\";";
+                        var rightHandVariable = parts[1].Trim();
+                        var rhv = ScriptState.Variables.Where(x => x.Name == rightHandVariable).FirstOrDefault();
+                        if (rhv is not null)
+                            Code = $"string lineInput = {parts[1]}.ToString();";
+                        else
+                            Code = $"string lineInput = \"{parts[1]}\";";
                         initVariable = true;
                     }
                 }
