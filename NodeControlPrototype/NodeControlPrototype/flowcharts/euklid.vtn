@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualTreeNetwork>
+  <Node ID="92137a72-a410-4e96-9a3c-6ae4c23b64a3" Code="b = Eingabe" Position="405.5999999999999,264.2" Type="Sequence" />
+  <Node ID="274484b9-b147-4068-8925-7d6e808348f3" Code="ggT = Euklid(a,b)" Position="412.40000000000003,412.4000000000001" Type="PredefinedProcess" />
+  <Edge ToIndex="0" FromIndex="1" From="92137a72-a410-4e96-9a3c-6ae4c23b64a3" To="274484b9-b147-4068-8925-7d6e808348f3" Label="" />
+  <Root ID="0efbf56d-afce-43d6-b8af-db777f6676c5" />
+  <Node ID="0efbf56d-afce-43d6-b8af-db777f6676c5" Code="a = Eingabe" Position="400,130" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="0efbf56d-afce-43d6-b8af-db777f6676c5" To="92137a72-a410-4e96-9a3c-6ae4c23b64a3" Label="" />
+  <Node ID="807aed0d-ad3f-454a-a3b9-6f37a65cbaa7" Code="Ausgabe: ggT" Position="411.6,553.8000000000001" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="274484b9-b147-4068-8925-7d6e808348f3" To="807aed0d-ad3f-454a-a3b9-6f37a65cbaa7" Label="" />
+  <Node ID="1440d8b7-add0-4618-888f-004b6384869e" Code="Start/End" Position="882.6,71.80000000000001" FunctionName="Euklid" ReturnVariable="" Type="Terminal" />
+  <Node ID="cca09608-65ce-4b6c-b56e-de359cae06ff" Code="y == 0" Position="878.8,280.00000000000006" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="1" From="1440d8b7-add0-4618-888f-004b6384869e" To="cca09608-65ce-4b6c-b56e-de359cae06ff" Label="" />
+  <Node ID="ea537c3f-b426-4851-bcc7-cbf69545854d" Code="erg = x" Position="721.2,463.40000000000003" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="cca09608-65ce-4b6c-b56e-de359cae06ff" To="ea537c3f-b426-4851-bcc7-cbf69545854d" Label="Ja" />
+  <Node ID="8c60457e-25cf-4afd-bf48-415b216518b3" Code="rest = 0" Position="1095,405.80000000000007" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="cca09608-65ce-4b6c-b56e-de359cae06ff" To="8c60457e-25cf-4afd-bf48-415b216518b3" Label="Nein" />
+  <Node ID="aabf3d12-9153-432e-b1d9-c12ff7510a46" Code="erg = Euklid(y, rest)" Position="1107.0000000000002,789.1999999999999" Type="PredefinedProcess" />
+  <Node ID="a8614106-e169-4a27-981c-9606e3ba7530" Code="Start/End" Position="876.5999999999998,911.8000000000001" FunctionName="" ReturnVariable="erg" Type="Terminal" />
+  <Edge ToIndex="0" FromIndex="1" From="aabf3d12-9153-432e-b1d9-c12ff7510a46" To="a8614106-e169-4a27-981c-9606e3ba7530" Label="" />
+  <Edge ToIndex="0" FromIndex="1" From="ea537c3f-b426-4851-bcc7-cbf69545854d" To="a8614106-e169-4a27-981c-9606e3ba7530" Label="" />
+  <Node ID="44d14d9f-491b-4f4d-9b30-909f85521f9a" Code="rest = x % y" Position="1100.6,548.8000000000001" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="8c60457e-25cf-4afd-bf48-415b216518b3" To="44d14d9f-491b-4f4d-9b30-909f85521f9a" Label="" />
+  <Node ID="01d8b231-0b93-415b-9404-8582e0024d2b" Code="erg = 0" Position="1106.6,670.8" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="44d14d9f-491b-4f4d-9b30-909f85521f9a" To="01d8b231-0b93-415b-9404-8582e0024d2b" Label="" />
+  <Edge ToIndex="0" FromIndex="1" From="01d8b231-0b93-415b-9404-8582e0024d2b" To="aabf3d12-9153-432e-b1d9-c12ff7510a46" Label="" />
+</VisualTreeNetwork>

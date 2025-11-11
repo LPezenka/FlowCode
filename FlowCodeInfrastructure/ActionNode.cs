@@ -25,6 +25,7 @@ namespace FlowCodeInfrastructure
             }
             try
             {
+                string originalCode = Code;
                 bool initVariable = false;
                 bool customInput = false;
                 bool customOutput = false;
@@ -143,7 +144,7 @@ namespace FlowCodeInfrastructure
                         }
 
                         ScriptState = ScriptState.ContinueWithAsync(postProcess, ScriptOptions).Result;
-
+                        Code = originalCode;
                     }
                 }
             }
