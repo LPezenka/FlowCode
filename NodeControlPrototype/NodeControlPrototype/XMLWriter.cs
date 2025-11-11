@@ -124,6 +124,8 @@ namespace NodeControlPrototype
                 x.Add(functionName);
                 XAttribute returnVariable = new XAttribute("ReturnVariable", tnc.ReturnVariable);
                 x.Add(returnVariable);
+                XAttribute inputVariables = new XAttribute("InputVariables", tnc.InputVariables);
+                x.Add(inputVariables);
             }
             else if (node is ProcessNodeControl pn)
             {

@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NodeControlPrototype", "Nod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{C82175DB-FDAF-36DF-F55D-B0F96F20AF6D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exporters", "Exporters\Exporters.csproj", "{520AEA58-830E-40B9-9E07-54FC6478CDB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{C82175DB-FDAF-36DF-F55D-B0F96F20AF6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C82175DB-FDAF-36DF-F55D-B0F96F20AF6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C82175DB-FDAF-36DF-F55D-B0F96F20AF6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{520AEA58-830E-40B9-9E07-54FC6478CDB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{520AEA58-830E-40B9-9E07-54FC6478CDB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{520AEA58-830E-40B9-9E07-54FC6478CDB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{520AEA58-830E-40B9-9E07-54FC6478CDB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

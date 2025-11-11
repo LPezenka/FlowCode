@@ -82,22 +82,22 @@ namespace NodeControlPrototype
             canvasNodes.Add(node);
         }
 
-        private NodeControlBase _currentRoot;
+        private NodeControlBase currentRoot;
 
         private void Node_RootRequested(object sender, EventArgs e)
         {
-            if (_currentRoot != null)
+            if (currentRoot != null)
             {
-                _currentRoot.Background = _currentRoot.OriginalBackground;
-                _currentRoot.IsRoot = false;
+                currentRoot.Background = currentRoot.OriginalBackground;
+                currentRoot.IsRoot = false;
             }
 
-            _currentRoot = sender as NodeControlBase;
+            currentRoot = sender as NodeControlBase;
 
-            if (_currentRoot != null)
+            if (currentRoot != null)
             {
-                _currentRoot.Background = Brushes.Gold;
-                _currentRoot.IsRoot = true;
+                currentRoot.Background = Brushes.Gold;
+                currentRoot.IsRoot = true;
             }
         }
 
@@ -376,7 +376,7 @@ namespace NodeControlPrototype
             Config.SetKeyWord(Config.KeyWord.True, "Ja");
             Config.SetKeyWord(Config.KeyWord.False, "Nein");
             Config.SetKeyWord(Config.KeyWord.Function, "Function");
-            if (_currentRoot == null)
+            if (currentRoot == null)
             {
                 MessageBox.Show("No root node selected!");
                 return;
@@ -404,7 +404,7 @@ namespace NodeControlPrototype
                 }
             }
 
-            vtn.Generate(nodes, _edges, _currentRoot);
+            vtn.Generate(nodes, _edges, currentRoot);
         }
 
 
@@ -420,29 +420,7 @@ namespace NodeControlPrototype
                 var target = DiagramCanvas;
                 if (target == null)
                     return;
-
-                Rect bounds = VisualTreeHelper.GetDescendantBounds(target);
-
-                RenderTargetBitmap rtb = new RenderTargetBitmap((Int32)bounds.Width, (Int32)bounds.Height, 96, 96, PixelFormats.Pbgra32);
-
-                DrawingVisual dv = new DrawingVisual();
-
-                using (DrawingContext dc = dv.RenderOpen())
-                {
-                    VisualBrush vb = new VisualBrush(target);
-                    dc.DrawRectangle(vb, null, new Rect(new Point(), bounds.Size));
-                }
-
-                rtb.Render(dv);
-
-                PngBitmapEncoder png = new PngBitmapEncoder();
-
-                png.Frames.Add(BitmapFrame.Create(rtb));
-
-                using (Stream stm = File.Create(path))
-                {
-                    png.Save(stm);
-                }
+                BitmapExporter.ExportBitmap(path, target);
             }
             catch (Exception ex)
             {
@@ -458,24 +436,41 @@ namespace NodeControlPrototype
             }
         }
 
+        //private void ExportBitmap(string path, Canvas target)
+        //{
+        //    Rect bounds = VisualTreeHelper.GetDescendantBounds(target);
+
+        //    RenderTargetBitmap rtb = new RenderTargetBitmap((Int32)bounds.Width, (Int32)bounds.Height, 96, 96, PixelFormats.Pbgra32);
+
+        //    DrawingVisual dv = new DrawingVisual();
+
+        //    using (DrawingContext dc = dv.RenderOpen())
+        //    {
+        //        VisualBrush vb = new VisualBrush(target);
+        //        dc.DrawRectangle(vb, null, new Rect(new Point(), bounds.Size));
+        //    }
+
+        //    rtb.Render(dv);
+
+        //    PngBitmapEncoder png = new PngBitmapEncoder();
+
+        //    png.Frames.Add(BitmapFrame.Create(rtb));
+
+        //    using (Stream stm = File.Create(path))
+        //    {
+        //        png.Save(stm);
+        //    }
+        //}
+
         private void Run_Click(object sender, RoutedEventArgs e)
         {
-
-
-            //if (vtn == null)
-            //{
             GenerateNetwork();
-            //}
-
-            if (_currentRoot == null)
+         
+            if (currentRoot == null)
             {
                 MessageBox.Show("No root node selected!");
                 return;
             }
-            //CargoTrucker.Client.GameApi.Forward();
-            //Forward();
-
-
 
             ScriptOptions scriptOptions = ScriptOptions.Default;
 
@@ -498,6 +493,9 @@ namespace NodeControlPrototype
             ActionNode.ScriptOptions = scriptOptions;
             ActionNode.InputHandler = new InputHandler();
             ActionNode.OutputHandler = new OutputHandler();
+
+            // Start network parsing in new thread. This is necessary in order to highlight the nodes
+            // in the GUI using Dispatcher.Invoke()
             Thread t = new Thread(() =>
             {
                 FlowCodeInfrastructure.Node.Run(vtn.RootNode);
@@ -514,7 +512,7 @@ namespace NodeControlPrototype
         {
             var sfd = new SaveFileDialog();
             sfd.DefaultExt = "png";
-            sfd.Filter = "PNG Files | *.png | All files (*.*)|*.*";
+            sfd.Filter = "PNG Files|*.png |All files (*.*)|*.*";
             if (sfd.ShowDialog() == true)
             {
                 SaveBitmap(sfd.FileName);
@@ -555,7 +553,7 @@ namespace NodeControlPrototype
                 var nodeType = c.Attribute("Type")?.Value;
                 NodeControlBase node; //= new RectangleNodeControl();
 
-                switch(nodeType)
+                switch (nodeType)
                 {
                     case "Sequence":
                         node = new SequenceNodeControl();
@@ -569,11 +567,14 @@ namespace NodeControlPrototype
                     case "Terminal":
                         var fName = c.Attribute("FunctionName")?.Value;
                         var returnVariable = c.Attribute("ReturnVariable")?.Value;
+                        var inputVariables = c.Attribute("InputVariables")?.Value;
                         node = new TerminalNodeControl()
                         {
                             FunctionName = fName,
-                            ReturnVariable = returnVariable
+                            ReturnVariable = returnVariable,
+                            InputVariables = inputVariables
                         };
+
                         break;
                     default:
                         node = new SequenceNodeControl();
@@ -605,9 +606,17 @@ namespace NodeControlPrototype
 
 
             InvalidateVisual();
+            LoadEdges(doc);
+            InvalidateVisual();
+            UpdateTerminals();
+
+        }
+
+        private void LoadEdges(XDocument doc)
+        {
             foreach (var e in doc.Root.Elements("Edge"))
             {
-                var from = canvasNodes.Where(x=>x.NodeData.Id.ToString() == e.Attribute("From").Value).FirstOrDefault();
+                var from = canvasNodes.Where(x => x.NodeData.Id.ToString() == e.Attribute("From").Value).FirstOrDefault();
                 var to = canvasNodes.Where(x => x.NodeData.Id.ToString() == e.Attribute("To").Value).FirstOrDefault();
                 var from_idx = int.Parse(e.Attribute("FromIndex").Value);
                 var to_idx = int.Parse(e.Attribute("ToIndex").Value);
@@ -616,9 +625,17 @@ namespace NodeControlPrototype
                 InsertEdge(from, to, from_idx, to_idx, lbl);
 
             }
-            InvalidateVisual();
+        }
 
-
+        private void UpdateTerminals()
+        {
+            foreach (TerminalNodeControl tnc in canvasNodes.Where(x => x.GetType() == typeof(TerminalNodeControl)))
+            {
+                if (tnc.FunctionName != string.Empty)
+                    tnc.TerminalType = "Start";
+                else
+                    tnc.TerminalType = "End";
+            }
         }
 
         private void InsertEdge(NodeControlBase? from, NodeControlBase? to, int from_idx, int to_idx, string lbl)
@@ -649,7 +666,7 @@ namespace NodeControlPrototype
         {
             var sfd = new SaveFileDialog();
             sfd.DefaultExt = "vtn";
-            sfd.Filter = "Visual Tree Network Files | *.vtn | All files (*.*)|*.*";
+            sfd.Filter = "Visual Tree Network Files|*.vtn|All files (*.*)|*.*";
             if (sfd.ShowDialog() == true)
             {
                 XMLWriter.SaveXML(sfd.FileName, _edges);
