@@ -37,7 +37,9 @@ namespace FlowCodeInfrastructure
             Continue,
             Return,
             True,
-            False
+            False,
+            Input,
+            Output
         }
 
         public static Dictionary<KeyWord, string> KeywordMapper = new();

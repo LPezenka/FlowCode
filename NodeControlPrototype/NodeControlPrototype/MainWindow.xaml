@@ -70,6 +70,9 @@
                 <MenuItem Header="_Load" Click="MenuItemLoad_Click" />
                 <MenuItem Header="_Exit" Click="MenuItemExit_Click" />
             </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Header="_Preferences" Click="Preferences_Click" />
+            </MenuItem>
         </Menu>
         <Grid>
             <ScrollViewer>

@@ -150,8 +150,8 @@ namespace NodeControlPrototype
                             try
                             {
                                 var n = nodeMapper[rc] as DecisionNode;
-                                var onTrue = Edges.Where(e => e.Source == n.ID && e.Text.ToLower() == Config.GetKeyword(Config.KeyWord.True).ToLower()).FirstOrDefault().Target;
-                                var onFalse = Edges.Where(e => e.Source == n.ID && e.Text.ToLower() == Config.GetKeyword(Config.KeyWord.False).ToLower()).FirstOrDefault().Target;
+                                var onTrue = Edges.Where(e => e.Source == n.ID && e.Text.ToLower() == Config.GetKeyword(Config.KeyWord.True).ToLower()).FirstOrDefault()?.Target;
+                                var onFalse = Edges.Where(e => e.Source == n.ID && e.Text.ToLower() == Config.GetKeyword(Config.KeyWord.False).ToLower()).FirstOrDefault()?.Target;
                                 n.OnTrue = nodeMapper.Values.Where(nm => nm.ID == onTrue).FirstOrDefault();
                                 n.OnFalse = nodeMapper.Values.Where(nm => nm.ID == onFalse).FirstOrDefault();
                             }

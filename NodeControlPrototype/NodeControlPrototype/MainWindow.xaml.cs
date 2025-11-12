@@ -82,6 +82,12 @@ namespace NodeControlPrototype
             this.WindowState = WindowState.Maximized;
             InitializeComponent();
             lastNodePosition = new Point(Application.Current.MainWindow.Width / 2, 15);
+
+            Config.SetKeyWord(Config.KeyWord.True, "Ja");
+            Config.SetKeyWord(Config.KeyWord.False, "Nein");
+            Config.SetKeyWord(Config.KeyWord.Function, "Function");
+            Config.SetKeyWord(Config.KeyWord.Input, "Eingabe");
+            Config.SetKeyWord(Config.KeyWord.Output, "Ausgabe");
         }
 
         private void AddNode(NodeControlBase node, Point? nodePosition)
@@ -408,9 +414,7 @@ namespace NodeControlPrototype
 
         private void GenerateNetwork()
         {
-            Config.SetKeyWord(Config.KeyWord.True, "Ja");
-            Config.SetKeyWord(Config.KeyWord.False, "Nein");
-            Config.SetKeyWord(Config.KeyWord.Function, "Function");
+
             if (currentRoot == null)
             {
                 MessageBox.Show("No root node selected!");
@@ -759,6 +763,12 @@ namespace NodeControlPrototype
                 DiagramCanvas.Children.Remove(node);
             }
 
+        }
+
+        private void Preferences_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow sw = new SettingsWindow();
+            sw.ShowDialog();
         }
     }
 }

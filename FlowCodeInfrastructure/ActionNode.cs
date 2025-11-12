@@ -32,7 +32,7 @@ namespace FlowCodeInfrastructure
                 string outputText = string.Empty;
                 string varName = string.Empty;
 
-                if (Code.Contains("Ausgabe:"))
+                if (Code.Contains(Config.GetKeyword(Config.KeyWord.Output)))
                 {
                     if (OutputHandler is not null)
                     {
@@ -59,7 +59,7 @@ namespace FlowCodeInfrastructure
                         Code += ");";
                     }
                 }
-                else if (Code.Contains("Eingabe"))
+                else if (Code.Contains(Config.GetKeyword(Config.KeyWord.Input)))
                 {
 
                     string[] parts = Code.Split(new[] { '=' });
@@ -95,7 +95,7 @@ namespace FlowCodeInfrastructure
                     }
                 }
 
-                if (Code.Contains("Function"))
+                if (Code.Contains(Config.GetKeyword(Config.KeyWord.Function)))
                 {
                     Console.WriteLine($"Entering {Code}");
                 }
