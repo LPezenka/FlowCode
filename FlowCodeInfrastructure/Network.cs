@@ -19,7 +19,8 @@ namespace FlowCodeInfrastructure
         }
         public void FromDrawIOFile(string fname)
         {
-
+            var dion = new DrawIONetwork();
+            dion.Load(fname);
         }
     }
 }

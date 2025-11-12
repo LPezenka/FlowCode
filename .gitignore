@@ -97,3 +97,7 @@ nunit-*.xml
 *.scc
 /.vs/FlowNode/CopilotIndices
 /.vs/FlowNode/v17
+/.vs/FlowNode/copilot-chat
+/.vs/FlowNode/DesignTimeBuild
+/.vs/FlowNode/FileContentIndex
+/.vs/ProjectEvaluation
