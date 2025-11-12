@@ -18,3 +18,5 @@ An input handler can be passed to the ActionNode class to handle input.
 
 ### Frontend 
 Flowcharts can be modelled in a WPF application. All currently supported node types can be used.
+
+![Euclidean Algorithm as Flowchart](/Screenshots/Euklid.png)
