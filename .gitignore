@@ -95,3 +95,5 @@ nunit-*.xml
 *.pidb
 *.svclog
 *.scc
+/.vs/FlowNode/CopilotIndices
+/.vs/FlowNode/v17
