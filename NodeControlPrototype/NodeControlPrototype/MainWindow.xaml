@@ -64,10 +64,11 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top" x:Name="MenuHeader">
             <MenuItem Header="_File">
-                <MenuItem Header="_Exit" Click="MenuItemExit_Click" />
+                <MenuItem Header="_New" Click="MenuItemNew_Click" />
                 <MenuItem Header="_Export" Click="MenuItemExport_Click" />
                 <MenuItem Header="_Save" Click="MenuItemSave_Click" />
                 <MenuItem Header="_Load" Click="MenuItemLoad_Click" />
+                <MenuItem Header="_Exit" Click="MenuItemExit_Click" />
             </MenuItem>
         </Menu>
         <Grid>

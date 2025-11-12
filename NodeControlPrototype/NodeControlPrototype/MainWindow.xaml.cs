@@ -62,11 +62,6 @@ namespace NodeControlPrototype
         private readonly Dictionary<EdgeControl, TextBox> edgeLabels = new();
 
         /// <summary>
-        /// Reference to the designated root node (currently not used; see <c>currentRoot</c>).
-        /// </summary>
-        private NodeControlBase rootNode = null;
-
-        /// <summary>
         /// All node controls present on the canvas, used for lookups (e.g., when loading edges) and updates.
         /// </summary>
         private List<NodeControlBase> canvasNodes = new();
@@ -743,6 +738,27 @@ namespace NodeControlPrototype
             // Apply the scale transformation to the ItemsControl
             ScaleTransform scaleTransform = new ScaleTransform(scaleValue, scaleValue);
             DiagramCanvas.LayoutTransform = scaleTransform;
+        }
+
+        private void MenuItemNew_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var edge in edges.ToList())
+            {
+                edge.From?.UnregisterOutputEdge(edge.FromIndex ?? 0);
+                if (edge.LabelBox != null)
+                {
+                    DiagramCanvas.Children.Remove(edge.LabelBox);
+                    edge.LabelBox = null;
+                }
+                DiagramCanvas.Children.Remove(edge);
+                edges.Remove(edge);
+            }
+
+            foreach (var node in canvasNodes.ToList())
+            {
+                DiagramCanvas.Children.Remove(node);
+            }
+
         }
     }
 }
