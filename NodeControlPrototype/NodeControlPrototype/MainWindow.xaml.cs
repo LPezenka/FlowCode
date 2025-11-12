@@ -27,18 +27,58 @@ namespace NodeControlPrototype
     public partial class MainWindow : Window, IObserver<string>
     {
         /// <summary>
-        /// Vertical offset to previous node
+        /// Vertical spacing (in pixels) used when auto-placing newly added nodes below the last one.
         /// </summary>
         private int offset = 25;
-        private int _nodeCounter = 0;
+
+        /// <summary>
+        /// Incremental counter used to generate unique node titles and default positions.
+        /// </summary>
+        private int nodeCount = 0;
+
+        /// <summary>
+        /// Node where an interactive edge creation (drag) was started.
+        /// </summary>
         private NodeControlBase _edgeStartNode = null;
+
+        /// <summary>
+        /// Connection point index on the start node for the interactive edge creation.
+        /// </summary>
         private int? _edgeStartIndex = null;
+
+        /// <summary>
+        /// Temporary edge shown while the user is dragging to connect two nodes.
+        /// </summary>
         private EdgeControl _temporaryEdge = null;
-        private readonly List<EdgeControl> _edges = new();
-        private readonly Dictionary<EdgeControl, TextBox> _edgeLabels = new();
+
+        /// <summary>
+        /// Collection of all committed edges currently present on the canvas.
+        /// </summary>
+        private readonly List<EdgeControl> edges = new();
+
+        /// <summary>
+        /// Optional mapping of edges to their label TextBoxes on the canvas (legacy/aux; labels are also stored on EdgeControl.LabelBox).
+        /// </summary>
+        private readonly Dictionary<EdgeControl, TextBox> edgeLabels = new();
+
+        /// <summary>
+        /// Reference to the designated root node (currently not used; see <c>currentRoot</c>).
+        /// </summary>
         private NodeControlBase rootNode = null;
+
+        /// <summary>
+        /// All node controls present on the canvas, used for lookups (e.g., when loading edges) and updates.
+        /// </summary>
         private List<NodeControlBase> canvasNodes = new();
-        private Point lastNodePosition; 
+
+        /// <summary>
+        /// Remembered position used as the baseline for auto-placing the next node.
+        /// </summary>
+        private Point lastNodePosition;
+
+        /// <summary>
+        /// Current zoom scale applied to the diagram canvas via LayoutTransform.
+        /// </summary>
         private double scaleValue = 1.0f;
 
 
@@ -111,7 +151,7 @@ namespace NodeControlPrototype
                 OriginalBackground = Brushes.Red,
                 NodeData = new Node
                 {
-                    Title = $"Decision Node({_nodeCounter++})",
+                    Title = $"Decision Node({nodeCount++})",
                     //Position = null //new Point(50 + _nodeCounter * 20, 50 + _nodeCounter * 20)
                 }
             };
@@ -128,7 +168,7 @@ namespace NodeControlPrototype
                 OriginalBackground = Brushes.Gray,
                 NodeData = new Node
                 {
-                    Title = $"Node({_nodeCounter++})",
+                    Title = $"Node({nodeCount++})",
                     //Position = new Point(50 + _nodeCounter * 20, 50 + _nodeCounter * 20)
                 }
             };
@@ -169,7 +209,7 @@ namespace NodeControlPrototype
                         existing.LabelBox = null;
                     }
 
-                    _edges.Remove(existing);
+                    edges.Remove(existing);
                 }
             }
 
@@ -209,7 +249,7 @@ namespace NodeControlPrototype
                 NodeData = new Node
                 {
                     Title = "Start/End",
-                    Position = new Point(50 + _nodeCounter * 20, 50 + _nodeCounter * 20)
+                    Position = new Point(50 + nodeCount * 20, 50 + nodeCount * 20)
                 },
                 TerminalType = "Start"
             };
@@ -225,8 +265,8 @@ namespace NodeControlPrototype
                 OriginalBackground = Brushes.Orange,
                 NodeData = new Node
                 {
-                    Title = $"ProcessCall({_nodeCounter++})",
-                    Position = new Point(50 + _nodeCounter * 20, 50 + _nodeCounter * 20)
+                    Title = $"ProcessCall({nodeCount++})",
+                    Position = new Point(50 + nodeCount * 20, 50 + nodeCount * 20)
                 }
             };
             AddNode(processNode, processNode.NodeData.Position);
@@ -261,7 +301,7 @@ namespace NodeControlPrototype
 
                 _edgeStartNode.RegisterOutputEdge(_edgeStartIndex.Value, localTempEdge);
 
-                _edges.Add(localTempEdge);
+                edges.Add(localTempEdge);
                 localTempEdge.DeleteRequested += Edge_DeleteRequested;
 
                 _edgeStartNode.NodeMoved += (s, ev) => UpdateEdges();
@@ -325,11 +365,11 @@ namespace NodeControlPrototype
         }
         private void UpdateEdges()
         {
-            foreach (var edge in _edges)
+            foreach (var edge in edges)
             {
                 edge.InvalidateVisual();
 
-                if (_edgeLabels.TryGetValue(edge, out var labelBox) && edge.From != null && edge.To != null)
+                if (edgeLabels.TryGetValue(edge, out var labelBox) && edge.From != null && edge.To != null)
                 {
                     var start = edge.From.TranslatePoint(edge.From.GetConnectionPoints()[edge.FromIndex ?? 0], DiagramCanvas);
                     var end = edge.To.TranslatePoint(edge.To.GetConnectionPoints()[edge.ToIndex ?? 0], DiagramCanvas);
@@ -355,7 +395,7 @@ namespace NodeControlPrototype
                 }
                 DiagramCanvas.Children.Remove(edge);
 
-                _edges.Remove(edge);
+                edges.Remove(edge);
 
                 //if (_edgeLabels.TryGetValue(edge, out var label))
                 //{
@@ -404,7 +444,7 @@ namespace NodeControlPrototype
                 }
             }
 
-            vtn.Generate(nodes, _edges, currentRoot);
+            vtn.Generate(nodes, edges, currentRoot);
         }
 
 
@@ -656,7 +696,7 @@ namespace NodeControlPrototype
 
             //from.NodeMoved += (s, ev) => UpdateEdges();
             //to.NodeMoved += (s, ev) => UpdateEdges();
-            _edges.Add(newEdge);
+            edges.Add(newEdge);
             DiagramCanvas.Children.Add(newEdge);
             GenerateEdgeLabel(newEdge);
         }
@@ -669,7 +709,7 @@ namespace NodeControlPrototype
             sfd.Filter = "Visual Tree Network Files|*.vtn|All files (*.*)|*.*";
             if (sfd.ShowDialog() == true)
             {
-                XMLWriter.SaveXML(sfd.FileName, _edges);
+                XMLWriter.SaveXML(sfd.FileName, edges);
             }
         }
 
