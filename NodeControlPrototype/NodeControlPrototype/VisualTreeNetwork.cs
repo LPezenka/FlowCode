@@ -53,8 +53,11 @@ namespace NodeControlPrototype
                             else
                                 returnSource = code;
 
-                                returnSource = returnSource.Replace("()", "");
-                            var returnTarget = code.Split("=").FirstOrDefault().Trim();
+                            returnSource = returnSource.Split("(")[0];
+                            //returnSource = returnSource.Replace("()", "");
+                            var returnTarget = returnSource;
+                            if (code.Contains("="))
+                                returnTarget = code.Split("=").FirstOrDefault().Trim();
 
 
 
@@ -166,12 +169,11 @@ namespace NodeControlPrototype
                             var c = nodeMapper[pn] as CallerNode;
                             string fname = pn.NodeData.Title.ToString();
                             if (fname.Contains("="))
-                            {
                                 fname = fname.Split("=")[1];
-                                if (fname.Contains("("))
-                                    fname = fname.Split("(")[0];
-                                fname = fname.Trim();
-                            }
+                            
+                            if (fname.Contains("("))
+                                fname = fname.Split("(").FirstOrDefault();
+                            fname = fname.Trim();
                             //var targetNode = nodeMapper.Keys
                             //   .Where(x => x.GetType() == typeof(TerminatorNodeControl))
                             //   .Where(x => fname.Contains((x as TerminatorNodeControl).FunctionName))

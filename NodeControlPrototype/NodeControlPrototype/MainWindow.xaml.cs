@@ -774,7 +774,16 @@ namespace NodeControlPrototype
 
         private void DeleteZone_DragEnter(object sender, DragEventArgs e)
         {
-
+            if (e.Data.GetDataPresent(typeof(FrameworkElement)))
+            {
+                e.Effects = DragDropEffects.Move;
+                DeleteZone.Background = Brushes.Red;
+                DeleteZoneText.Text = "Release to delete";
+            }
+            else
+            {
+                e.Effects = DragDropEffects.None;
+            }
         }
 
         private void DeleteZone_DragLeave(object sender, DragEventArgs e)
