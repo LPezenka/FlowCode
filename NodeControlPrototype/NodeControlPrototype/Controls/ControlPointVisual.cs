@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 
-namespace NodeControlPrototype
+namespace NodeControlPrototype.Controls
 {
     public class ControlPointVisual : UserControl
     {

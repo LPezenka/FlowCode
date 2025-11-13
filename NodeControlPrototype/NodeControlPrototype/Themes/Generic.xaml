@@ -1,5 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:fc="clr-namespace:NodeControlPrototype">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:fc="clr-namespace:NodeControlPrototype.Controls">
     <Style TargetType="{x:Type fc:SequenceNodeControl}">
         <Setter Property="Background" Value="#84A9C0" />
         <Setter Property="Template">

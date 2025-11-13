@@ -9,7 +9,7 @@ using System.Windows;
 using System.Windows.Input;
 using FlowCodeInfrastructure;
 
-namespace NodeControlPrototype
+namespace NodeControlPrototype.Controls
 {
     public enum ConnectionDirection
     {

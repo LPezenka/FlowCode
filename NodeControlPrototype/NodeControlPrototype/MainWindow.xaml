@@ -75,10 +75,14 @@
             </MenuItem>
         </Menu>
         <Grid>
-            <ScrollViewer>
-        <Canvas x:Name="DiagramCanvas" Background="{StaticResource ListBackgroundBrush}" MouseWheel="DiagramCanvas_MouseWheel">
-            <StackPanel>
-                <Button
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <ScrollViewer Grid.Column="0" Grid.Row="0" Height="Auto">
+            <Canvas x:Name="DiagramCanvas" Background="{StaticResource ListBackgroundBrush}" MouseWheel="DiagramCanvas_MouseWheel">
+                        <StackPanel>
+                            <Button
                     x:Name="AddNodeButton"
                 Width="92" Height="92"
                 HorizontalAlignment="Left"
@@ -88,29 +92,29 @@
                     
 
                     >
-                    <Image Source="/res/process.png"/>
-                </Button>
-                <Button
+                                <Image Source="/res/process.png"/>
+                            </Button>
+                            <Button
                     x:Name="AddDecisionButton"
     Width="92" Height="92"
     HorizontalAlignment="Left"
     VerticalAlignment="Top"
     Margin="10"
     Click="AddDecisionNode_Click">
-                    <Image Source="/res/decision.png"/>
-                </Button>
+                                <Image Source="/res/decision.png"/>
+                            </Button>
 
-                <Button
+                            <Button
                     x:Name="AddProcessCallButton"
     Width="92" Height="92"
     HorizontalAlignment="Left"
     VerticalAlignment="Top"
     Margin="10"
     Click="AddFunctionNode_Click">
-                    <Image Source="/res/predefinedprocess.png"/>
-                </Button>
-                    
-                <Button
+                                <Image Source="/res/predefinedprocess.png"/>
+                            </Button>
+
+                            <Button
                   x:Name="AddTerminalButton"
   Width="92" Height="92"
   HorizontalAlignment="Left"
@@ -118,27 +122,49 @@
   Margin="10"
   Click="AddTerminatorNode_Click"
                     Background="White">
-                        <Image Source="/res/terminal.png"/>
-                    </Button>
+                                <Image Source="/res/terminal.png"/>
+                            </Button>
 
-                    <!--<Button Width="92" Height="92"
+                            <!--<Button Width="92" Height="92"
 HorizontalAlignment="Left"
 VerticalAlignment="Top"
 Margin="10" Click="Button_Click">
                     <Image Width="92" Height="92" Source="/res/compile.png"/>
                 </Button>-->
-                <Button 
+                            <Button 
                     x:Name="RunButton"
                     Width="92" Height="92"
                     Background="White"
 HorizontalAlignment="Left"
 VerticalAlignment="Top"
 Margin="10" Click="Run_Click">
-                    <Image Width="80" Height="80" Source="/res/Play.jpg" Stretch="Uniform"/>
-                </Button>
-            </StackPanel>
-        </Canvas>
-            </ScrollViewer>
+                                <Image Width="80" Height="80" Source="/res/Play.jpg" Stretch="Uniform"/>
+                            </Button>
+                        </StackPanel>
+                    </Canvas>
+
+                </ScrollViewer>
+            <Border x:Name="DeleteZone"
+            Grid.Column="0"
+            Grid.Row="1"
+            Margin="5"
+            CornerRadius="8"
+            Background="LightGray"
+            BorderBrush="DarkGray"
+            BorderThickness="1"
+            AllowDrop="True"
+            DragEnter="DeleteZone_DragEnter"
+            DragLeave="DeleteZone_DragLeave"
+            DragOver="DeleteZone_DragOver"
+            Drop="DeleteZone_Drop">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <!-- Replace with your bin icon -->
+                    <TextBlock Text="🗑" FontSize="32" HorizontalAlignment="Center" />
+                    <TextBlock x:Name="DeleteZoneText"
+                       Text="Drop here to delete"
+                       HorizontalAlignment="Center" />
+                </StackPanel>
+            </Border>
         </Grid>
     </DockPanel>
 </Window>

@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace NodeControlPrototype
+namespace NodeControlPrototype.Controls
 {
     public class TerminalNodeControl : NodeControlBase
     {
@@ -38,7 +38,7 @@ namespace NodeControlPrototype
                 //Console.WriteLine($"Setting Type to {value}");
                 SetValue(TerminalTypeProperty, value);
 
-                var t = this.Template;
+                var t = Template;
                 if (t is not null)
                 {
 
@@ -116,7 +116,7 @@ namespace NodeControlPrototype
             if (TerminalType?.ToLower() == "start")
             {
                 IsRoot = !IsRoot;
-                this.Background = IsRoot ? Brushes.LightGreen : Brushes.Transparent;
+                Background = IsRoot ? Brushes.LightGreen : Brushes.Transparent;
             }
             base.OnMouseDoubleClick(e);
         }

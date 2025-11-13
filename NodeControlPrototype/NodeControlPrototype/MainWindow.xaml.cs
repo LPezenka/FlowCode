@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.Win32;
+using NodeControlPrototype.Controls;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -39,17 +40,17 @@ namespace NodeControlPrototype
         /// <summary>
         /// Node where an interactive edge creation (drag) was started.
         /// </summary>
-        private NodeControlBase _edgeStartNode = null;
+        private NodeControlBase edgeStartNode = null;
 
         /// <summary>
         /// Connection point index on the start node for the interactive edge creation.
         /// </summary>
-        private int? _edgeStartIndex = null;
+        private int? edgeStartIndex = null;
 
         /// <summary>
         /// Temporary edge shown while the user is dragging to connect two nodes.
         /// </summary>
-        private EdgeControl _temporaryEdge = null;
+        private EdgeControl temporaryEdge = null;
 
         /// <summary>
         /// Collection of all committed edges currently present on the canvas.
@@ -150,7 +151,7 @@ namespace NodeControlPrototype
                 Width = 240,
                 Height = 160,
                 OriginalBackground = Brushes.Red,
-                NodeData = new Node
+                NodeData = new Controls.Node
                 {
                     Title = $"Decision Node({nodeCount++})",
                     //Position = null //new Point(50 + _nodeCounter * 20, 50 + _nodeCounter * 20)
@@ -167,7 +168,7 @@ namespace NodeControlPrototype
                 Width = 120,
                 Height = 40,
                 OriginalBackground = Brushes.Gray,
-                NodeData = new Node
+                NodeData = new Controls.Node
                 {
                     Title = $"Node({nodeCount++})",
                     //Position = new Point(50 + _nodeCounter * 20, 50 + _nodeCounter * 20)
@@ -178,22 +179,22 @@ namespace NodeControlPrototype
 
         private void Node_ConnectionPointClicked(object sender, ConnectionPointClickedEventArgs e)
         {
-            if (_temporaryEdge != null)
+            if (temporaryEdge != null)
             {
-                DiagramCanvas.Children.Remove(_temporaryEdge);
-                _temporaryEdge = null;
+                DiagramCanvas.Children.Remove(temporaryEdge);
+                temporaryEdge = null;
             }
 
-            _edgeStartNode = e.Node;
-            _edgeStartIndex = e.ConnectionPointIndex;
+            edgeStartNode = e.Node;
+            edgeStartIndex = e.ConnectionPointIndex;
 
-            if (_edgeStartNode != null && _edgeStartIndex.HasValue)
+            if (edgeStartNode != null && edgeStartIndex.HasValue)
             {
-                _edgeStartNode.UnregisterOutputEdge(_edgeStartIndex.Value);
+                edgeStartNode.UnregisterOutputEdge(edgeStartIndex.Value);
 
                 var existing = DiagramCanvas.Children
                     .OfType<EdgeControl>()
-                    .FirstOrDefault(edge => edge.From == _edgeStartNode && edge.FromIndex == _edgeStartIndex);
+                    .FirstOrDefault(edge => edge.From == edgeStartNode && edge.FromIndex == edgeStartIndex);
 
                 //if (existing != null)
                 //{
@@ -214,16 +215,16 @@ namespace NodeControlPrototype
                 }
             }
 
-            _temporaryEdge = new EdgeControl
+            temporaryEdge = new EdgeControl
             {
-                From = _edgeStartNode,
-                FromIndex = _edgeStartIndex,
+                From = edgeStartNode,
+                FromIndex = edgeStartIndex,
                 To = null
             };
-            Panel.SetZIndex(_temporaryEdge, -1);
+            Panel.SetZIndex(temporaryEdge, -1);
 
-            _temporaryEdge.Label = string.Empty;
-            DiagramCanvas.Children.Add(_temporaryEdge);
+            temporaryEdge.Label = string.Empty;
+            DiagramCanvas.Children.Add(temporaryEdge);
 
             MouseMove += MainWindow_MouseMove;
             MouseLeftButtonUp += MainWindow_MouseLeftButtonUp;
@@ -231,11 +232,11 @@ namespace NodeControlPrototype
 
         private void MainWindow_MouseMove(object sender, MouseEventArgs e)
         {
-            if (_temporaryEdge != null)
+            if (temporaryEdge != null)
             {
                 Point pos = e.GetPosition(DiagramCanvas);
-                _temporaryEdge.CurrentMousePosition = pos;
-                _temporaryEdge.InvalidateVisual();
+                temporaryEdge.CurrentMousePosition = pos;
+                temporaryEdge.InvalidateVisual();
             }
         }
 
@@ -247,7 +248,7 @@ namespace NodeControlPrototype
                 Width = 160,
                 Height = 120,
                 OriginalBackground = Brushes.LightGreen,
-                NodeData = new Node
+                NodeData = new Controls.Node
                 {
                     Title = "Start/End",
                     Position = new Point(50 + nodeCount * 20, 50 + nodeCount * 20)
@@ -264,7 +265,7 @@ namespace NodeControlPrototype
                 Width = 120,
                 Height = 60,
                 OriginalBackground = Brushes.Orange,
-                NodeData = new Node
+                NodeData = new Controls.Node
                 {
                     Title = $"ProcessCall({nodeCount++})",
                     Position = new Point(50 + nodeCount * 20, 50 + nodeCount * 20)
@@ -275,9 +276,9 @@ namespace NodeControlPrototype
 
         private void MainWindow_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            var localTempEdge = _temporaryEdge; // Kopie
+            var localTempEdge = temporaryEdge; // Kopie
 
-            if (localTempEdge == null || _edgeStartNode == null || !_edgeStartIndex.HasValue)
+            if (localTempEdge == null || edgeStartNode == null || !edgeStartIndex.HasValue)
             {
                 CleanupTemporaryEdge();
                 return;
@@ -300,12 +301,12 @@ namespace NodeControlPrototype
                     return;
                 }
 
-                _edgeStartNode.RegisterOutputEdge(_edgeStartIndex.Value, localTempEdge);
+                edgeStartNode.RegisterOutputEdge(edgeStartIndex.Value, localTempEdge);
 
                 edges.Add(localTempEdge);
                 localTempEdge.DeleteRequested += Edge_DeleteRequested;
 
-                _edgeStartNode.NodeMoved += (s, ev) => UpdateEdges();
+                edgeStartNode.NodeMoved += (s, ev) => UpdateEdges();
                 targetNode.NodeMoved += (s, ev) => UpdateEdges();
 
                 // Label erzeugen
@@ -357,9 +358,9 @@ namespace NodeControlPrototype
 
         private void CleanupTemporaryEdge()
         {
-            _temporaryEdge = null;
-            _edgeStartNode = null;
-            _edgeStartIndex = null;
+            temporaryEdge = null;
+            edgeStartNode = null;
+            edgeStartIndex = null;
 
             MouseMove -= MainWindow_MouseMove;
             MouseLeftButtonUp -= MainWindow_MouseLeftButtonUp;
@@ -620,7 +621,7 @@ namespace NodeControlPrototype
                         break;
                 }
 
-                node.NodeData = new Node()
+                node.NodeData = new Controls.Node()
                 {
                     Id = new Guid(id),
                     Title = code,
@@ -769,6 +770,26 @@ namespace NodeControlPrototype
         {
             SettingsWindow sw = new SettingsWindow();
             sw.ShowDialog();
+        }
+
+        private void DeleteZone_DragEnter(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void DeleteZone_DragLeave(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void DeleteZone_DragOver(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void DeleteZone_Drop(object sender, DragEventArgs e)
+        {
+
         }
     }
 }

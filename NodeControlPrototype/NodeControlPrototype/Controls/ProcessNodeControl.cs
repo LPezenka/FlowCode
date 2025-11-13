@@ -1,11 +1,12 @@
-﻿using System;
+﻿using NodeControlPrototype.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace NodeControlPrototype
+namespace NodeControlPrototype.Controls
 {
     internal class ProcessNodeControl : NodeControlBase
     {

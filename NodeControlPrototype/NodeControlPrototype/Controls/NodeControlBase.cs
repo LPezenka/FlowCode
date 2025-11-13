@@ -10,7 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Xml.Linq;
 
-namespace NodeControlPrototype
+namespace NodeControlPrototype.Controls
 {
     // FlowchartControlLibrary/NodeControlBase.cs
 
@@ -252,7 +252,7 @@ namespace NodeControlPrototype
             for (int i = 0; i < connectionPoints.Count; i++)
             {
                 Point point = connectionPoints[i];
-                Brush brush = (i >= FirstOutputIndex && occupiedOutputEdges.ContainsKey(i)) ? Brushes.Red : Brushes.Green;
+                Brush brush = i >= FirstOutputIndex && occupiedOutputEdges.ContainsKey(i) ? Brushes.Red : Brushes.Green;
 
                 if (_hoveredConnectionPointIndex == i)
                 {
@@ -361,7 +361,7 @@ namespace NodeControlPrototype
                     //HighlightRequested?.Invoke(this, EventArgs.Empty);
                     Background = Brushes.Magenta;
                     NotifyPropertyChanged("Background");
-                    this.InvalidateVisual();
+                    InvalidateVisual();
                 }
                 else
                 {
@@ -381,7 +381,7 @@ namespace NodeControlPrototype
                     //Dispatcher.Invoke(() =>
                     NotifyPropertyChanged("Background");
                     //);
-                        this.InvalidateVisual();
+                        InvalidateVisual();
                     //});
                 }
             });
