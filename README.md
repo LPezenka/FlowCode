@@ -16,7 +16,13 @@ Loops can be modelled with decision nodes.
 
 An input handler can be passed to the ActionNode class to handle input. 
 
+#### To Do
+Compound expressions on the right hand side of the assignment operator are currently not supported. For example, y = x + 1 would have to be modelled as y = 0, and then y = x + 1. 
+
 ### Frontend 
 Flowcharts can be modelled in a WPF application. All currently supported node types can be used.
 
-![Euclidean Algorithm as Flowchart](/Screenshots/Euklid.png)
+![Euclidean Algorithm as Flowchart](/Screenshots/Euklid.png "Euclidean Algorithm in FlowCode")
+
+
+![CargoTrucker & FlowCode](/Screenshots/CargoTrucker.png "Integration of FlowCode with CargoTrucker")
