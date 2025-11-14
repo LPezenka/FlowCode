@@ -833,6 +833,28 @@ namespace NodeControlPrototype
                 LogError(messsage);
             });
         }
+
+        private void Window_Drop(object sender, DragEventArgs e)
+        {
+            
+
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                // Note that you can have more than one file.
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+                foreach (string f in files)
+                {
+
+                    if (f.EndsWith(".vtn"))
+                        LoadXML(f);
+                    else if (f == "field.json") // Maybe not smart
+                    {
+                        File.Replace(f, "field.json", "field.json.old");
+                    }
+                }
+            }
+        }
     }
 }
 
