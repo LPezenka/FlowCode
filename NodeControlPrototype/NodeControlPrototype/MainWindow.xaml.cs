@@ -22,10 +22,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Xml;
 using System.Xml.Linq;
+using Interfaces;
 
 namespace NodeControlPrototype
 {
-    public partial class MainWindow : Window, IObserver<string>
+    public partial class MainWindow : Window, IErrorLogger
     {
         /// <summary>
         /// Vertical spacing (in pixels) used when auto-placing newly added nodes below the last one.
@@ -505,7 +506,7 @@ namespace NodeControlPrototype
         private void Run_Click(object sender, RoutedEventArgs e)
         {
             GenerateNetwork();
-         
+            vtn.ErrorLogger = this;
             if (currentRoot == null)
             {
                 MessageBox.Show("No root node selected!");
@@ -538,9 +539,26 @@ namespace NodeControlPrototype
             // in the GUI using Dispatcher.Invoke()
             Thread t = new Thread(() =>
             {
-                FlowCodeInfrastructure.Node.Run(vtn.RootNode);
+                vtn.Evaluate();
+                //FlowCodeInfrastructure.Node.Run(vtn.RootNode);
             });
-            t.Start();
+            //try
+            //{
+                t.Start();
+            //}
+            //catch(Exception ex)
+            //{
+            //    if (!Directory.Exists("./dump"))
+            //        Directory.CreateDirectory("./dump");
+            //    XMLWriter.SaveXML("./dump/error.vtdump", edges);
+            //}
+        }
+
+        private void LogError(string messsage)
+        {
+            if (!Directory.Exists("./dump"))
+                    Directory.CreateDirectory("./dump");
+                XMLWriter.SaveXML("./dump/error.vtdump", edges);
         }
 
         private void MenuItemExit_Click(object sender, RoutedEventArgs e)
@@ -621,9 +639,15 @@ namespace NodeControlPrototype
                         break;
                 }
 
+                Guid newGuid;
+                if (!Guid.TryParse(id, out newGuid))
+                {
+                    newGuid = Guid.NewGuid();
+                }
+
                 node.NodeData = new Controls.Node()
                 {
-                    Id = new Guid(id),
+                    Id = newGuid,
                     Title = code,
                     Position = position
                 };
@@ -723,6 +747,7 @@ namespace NodeControlPrototype
             throw new NotImplementedException();
         }
 
+
         public void OnNext(string value)
         {
             Console.Write("Message to observers: " + value);
@@ -799,6 +824,14 @@ namespace NodeControlPrototype
         private void DeleteZone_Drop(object sender, DragEventArgs e)
         {
 
+        }
+
+        void IErrorLogger.LogError(string messsage)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                LogError(messsage);
+            });
         }
     }
 }

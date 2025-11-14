@@ -27,42 +27,8 @@ namespace FlowCodeInfrastructure
                 root.Add(xe);
             }
 
-
-
-            //foreach (Edge e in network.Edges)
-            //{
-            //    Node from = e.Source;
-            //    Node to = e.Target;
-
-            //    var potentialRoot = GenerateRoot(from);
-            //    if (potentialRoot != null)
-            //    {
-            //        root.Add(potentialRoot);
-            //    }
-
-            //    if (!visitedNodes.Contains(from))
-            //    {
-            //        XElement xe = GenerateXML(from, edges);
-            //        root.Add(xe);
-            //        visitedNodes.Add(from);
-            //    }
-
-            //    potentialRoot = GenerateRoot(to);
-            //    if (potentialRoot != null)
-            //    {
-            //        root.Add(potentialRoot);
-            //    }
-
-            //    if (!visitedNodes.Contains(to))
-            //    {
-            //        XElement xe = GenerateXML(to, edges);
-            //        root.Add(xe);
-            //        visitedNodes.Add(to);
-            //    }
-
-            //    XElement edgeElement = GenerateXML(e);
-            //    root.Add(edgeElement);
-            //}
+            if (!Directory.Exists("./dump"))
+                Directory.CreateDirectory("./dump");
             root.Save(path);
         }
 

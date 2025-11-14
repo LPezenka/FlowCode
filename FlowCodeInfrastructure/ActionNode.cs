@@ -82,6 +82,9 @@ namespace FlowCodeInfrastructure
                     var parts = Code.Split("=");
                     varName = parts[0].Trim();
 
+                    // TODO: recognize arithmetics on the right side of the assignment operator, evaluate,
+                    // store the result into a temporary variable and then assign it
+
                     var v = ScriptState.Variables.Where(x => x.Name == varName).FirstOrDefault();
                     if (v is null)
                     {
@@ -150,16 +153,18 @@ namespace FlowCodeInfrastructure
             }
             catch(CompilationErrorException cee)
             {
-                Console.WriteLine(cee.ToString());
+                //Console.WriteLine(cee.ToString());
                 //if (Code.Contains("="))
                 //{
                 //    var parts = Code.Split("=");
                 //    var varname = parts[0];
                 //}
+                throw cee;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                //Console.WriteLine(ex.ToString());
+                throw ex;
             }
         }
     }

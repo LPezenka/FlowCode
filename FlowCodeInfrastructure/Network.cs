@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace FlowCodeInfrastructure
 {
     public class Network
     {
+        public IErrorLogger ErrorLogger { get; set; }
         public List<Node> Nodes { get; set; }
         public List<Edge> Edges { get; set; }
         public Node RootNode { get; set; }
@@ -28,11 +30,13 @@ namespace FlowCodeInfrastructure
             try
             {
                 if (RootNode is not null)
-                    RootNode.Evaluate();
+                    Node.Run(RootNode);
             }
             catch (Exception ex)
             {
+                Console.Error.WriteLine(ex.ToString());
                 XMLWriter.SaveXML(this, "dump/error.dump");
+                ErrorLogger.LogError(ex.Message);
             }
         }
     }
