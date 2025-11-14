@@ -32,8 +32,15 @@ namespace FlowCodeInfrastructure
                 }
                 //if (current.GetType() == typeof(CallerNode) || current.Next.GetType() == typeof(CallerNode))
                 //    Console.WriteLine("Calling...");
-                current.Evaluate();
-
+                try
+                {
+                    current.Evaluate();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                    throw ex;
+                }
                 // Add a delay.Should be specified as a class Level Config
                 //DateTime dt = new DateTime(DateTime.Now.Ticks - ticks);
                 //while (dt.Second < 4)

@@ -22,5 +22,18 @@ namespace FlowCodeInfrastructure
             var dion = new DrawIONetwork();
             dion.Load(fname);
         }
+
+        public void Evaluate()
+        {
+            try
+            {
+                if (RootNode is not null)
+                    RootNode.Evaluate();
+            }
+            catch (Exception ex)
+            {
+                XMLWriter.SaveXML(this, "dump/error.dump");
+            }
+        }
     }
 }
