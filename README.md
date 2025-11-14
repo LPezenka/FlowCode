@@ -29,4 +29,4 @@ Flowcharts can be modelled in a WPF application. All currently supported node ty
 ![Euclidean Algorithm as Flowchart](/Screenshots/Euklid.png "Euclidean Algorithm in FlowCode")
 
 
-![CargoTrucker & FlowCode](/Screenshots/CargoTrucker.png "Integration of FlowCode with Cargotrucker")
+![CargoTrucker & FlowCode](/Screenshots/Cargotrucker.png "Integration of FlowCode with Cargotrucker")
