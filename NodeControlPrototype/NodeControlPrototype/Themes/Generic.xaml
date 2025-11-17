@@ -1,5 +1,24 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:fc="clr-namespace:NodeControlPrototype.Controls">
+    <Style TargetType="{x:Type fc:DeleteZone}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type fc:DeleteZone}">
+                    <Border Background="{TemplateBinding Background}" Width="240" Height="240" BorderThickness="2" BorderBrush="Red" CornerRadius="240">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Text="🗑" FontSize="32" HorizontalAlignment="Center" />
+                            <TextBlock x:Name="DeleteZoneText"
+           Text="Drop here to delete"
+           HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    
     <Style TargetType="{x:Type fc:SequenceNodeControl}">
         <Setter Property="Background" Value="#84A9C0" />
         <Setter Property="Template">
@@ -217,4 +236,17 @@
         </Setter>
     </Style>
 
+
+    <!--<Style TargetType="{x:Type local:DeleteZone}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:DeleteZone}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
 </ResourceDictionary>

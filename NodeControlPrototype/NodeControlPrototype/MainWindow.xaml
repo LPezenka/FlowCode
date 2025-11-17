@@ -145,7 +145,7 @@ Margin="10" Click="Run_Click">
                     </Canvas>
 
                 </ScrollViewer>
-            <Border x:Name="DeleteZone"
+            <!--<Border x:Name="DeleteZone"
             Grid.Column="0"
             Grid.Row="1"
             Margin="5"
@@ -159,13 +159,14 @@ Margin="10" Click="Run_Click">
             DragOver="DeleteZone_DragOver"
             Drop="DeleteZone_Drop">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <!-- Replace with your bin icon -->
+                    --><!-- Replace with your bin icon --><!--
                     <TextBlock Text="🗑" FontSize="32" HorizontalAlignment="Center" />
                     <TextBlock x:Name="DeleteZoneText"
                        Text="Drop here to delete"
                        HorizontalAlignment="Center" />
                 </StackPanel>
-            </Border>
+            </Border>-->
+
         </Grid>
     </DockPanel>
 </Window>
