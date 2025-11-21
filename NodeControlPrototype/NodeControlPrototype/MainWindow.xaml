@@ -7,7 +7,8 @@
         xmlns:fc="clr-namespace:NodeControlPrototype;assembly=NodeControlPrototype"
         mc:Ignorable="d"
         Title="FlowCode Visual Programming Editor" Height="900" Width="800"
-        AllowDrop="True" Drop="Window_Drop">
+        AllowDrop="True" Drop="Window_Drop"
+        SizeChanged="Window_SizeChanged">
 
     <Window.Resources>
         <DrawingBrush x:Key="ListBackgroundBrush" Viewport="0,0,100,100" ViewportUnits="Absolute" TileMode="Tile">

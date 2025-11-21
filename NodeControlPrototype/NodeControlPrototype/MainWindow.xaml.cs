@@ -135,13 +135,20 @@ namespace NodeControlPrototype
             _dz.Visibility = Visibility.Visible;
         }
 
+
+
+
         protected override void OnRender(DrawingContext drawingContext)
         {
-            Canvas.SetLeft(_dz, DiagramCanvas.ActualWidth - _dz.ActualWidth);
-            Canvas.SetTop(_dz, DiagramCanvas.ActualHeight - _dz.ActualHeight);
+            ResetDeletionZone();
         }
 
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
+        {
+            ResetDeletionZone();
+        }
+
+        private void ResetDeletionZone()
         {
             Canvas.SetLeft(_dz, DiagramCanvas.ActualWidth - _dz.ActualWidth);
             Canvas.SetTop(_dz, DiagramCanvas.ActualHeight - _dz.ActualHeight);
@@ -203,8 +210,8 @@ namespace NodeControlPrototype
 
         private void AddNode(NodeControlBase node, Point? nodePosition)
         {
-            node.Width = 240;
-            node.Height = 90;
+            //node.Width = 240;
+            //node.Height = 90;
             //node.Width = double.NaN;
             //node.Height = double.NaN;
             Point position;
@@ -259,9 +266,9 @@ namespace NodeControlPrototype
         {
             var decisionNode = new DecisionNodeControl
             {
-                Width = 240,
+                Width = 180,
                 Height = 160,
-                OriginalBackground = Brushes.Red,
+                OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0xf6, 0xae, 0x2d)),
                 NodeData = new Controls.Node
                 {
                     Title = $"Decision Node({_nodeCount++})",
@@ -276,10 +283,11 @@ namespace NodeControlPrototype
         {
             var node = new SequenceNodeControl
             {
-                Width = 120,
-                Height = 40,
+                Width = 180,
+                Height = 90,
                 //OriginalBackground = SequenceNodeControl.TemplateBrush,
-                    //33658aff
+                //33658aff
+                OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0x33, 0x65, 0x8a)),
                 NodeData = new Controls.Node
                 {
                     Title = $"Node({_nodeCount++})",
@@ -296,7 +304,7 @@ namespace NodeControlPrototype
                 DiagramCanvas.Children.Remove(_temporaryEdge);
                 _temporaryEdge = null;
             }
-
+            
             _edgeStartNode = e.Node;
             _edgeStartIndex = e.ConnectionPointIndex;
 
@@ -357,11 +365,11 @@ namespace NodeControlPrototype
         {
             var terminator = new TerminalNodeControl
             {
-                Width = 160,
+                Width = 240,
                 Height = 160,
             //    OriginalBackground =  new SolidColorBrush(
             //Color.FromArgb(0xff, 0xf6, 0xae, 0x2d)),
-
+                OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0xf2, 0x64, 0x19)),
                 NodeData = new Controls.Node
                 {
                     Title = "Start/End",
@@ -376,9 +384,9 @@ namespace NodeControlPrototype
         {
             var processNode = new ProcessNodeControl()
             {
-                Width = 120,
-                Height = 60,
-                //OriginalBackground = Brushes.Orange,
+                Width = 180,
+                Height = 90,
+                OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0x86, 0xbb, 0xd8)),
                 NodeData = new Controls.Node
                 {
                     Title = $"ProcessCall({_nodeCount++})",
@@ -727,13 +735,29 @@ namespace NodeControlPrototype
                 switch (nodeType)
                 {
                     case "Sequence":
-                        node = new SequenceNodeControl();
+                        node = new SequenceNodeControl()
+                        {
+                            Width = 180,
+                            Height = 90
+                        };
+                        node.OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0x33, 0x65, 0x8a));
                         break;
                     case "Decision":
-                        node = new DecisionNodeControl();
+                        node = new DecisionNodeControl()
+                        {
+                            Width = 180,
+                            Height = 160,
+                        };
+                        node.OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0xf6, 0xae, 0x2d));
                         break;
                     case "PredefinedProcess":
-                        node = new ProcessNodeControl();
+                        node = new ProcessNodeControl()
+                        {
+                            Width = 180,
+                            Height = 90
+                        };
+                        node.OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0x86, 0xbb, 0xd8));
+
                         break;
                     case "Terminal":
                         var fName = c.Attribute("FunctionName")?.Value;
@@ -743,8 +767,13 @@ namespace NodeControlPrototype
                         {
                             FunctionName = fName,
                             ReturnVariable = returnVariable,
-                            InputVariables = inputVariables
+                            InputVariables = inputVariables,
+                            Width = 240,
+                            Height = 160
                         };
+
+                        node.OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0xf2, 0x64, 0x19));
+
 
                         break;
                     default:
@@ -764,8 +793,8 @@ namespace NodeControlPrototype
                     Title = code,
                     Position = position
                 };
-                node.Width = 60;
-                node.Height = 40;
+                //node.Width = 60;
+                //node.Height = 40;
 
 
                 if (rootId != string.Empty)
@@ -881,6 +910,7 @@ namespace NodeControlPrototype
             // Apply the scale transformation to the ItemsControl
             ScaleTransform scaleTransform = new ScaleTransform(scaleValue, scaleValue);
             DiagramCanvas.LayoutTransform = scaleTransform;
+            ResetDeletionZone();
         }
 
         private void MenuItemNew_Click(object sender, RoutedEventArgs e)
@@ -967,6 +997,11 @@ namespace NodeControlPrototype
                     }
                 }
             }
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            ResetDeletionZone();
         }
     }
 }
