@@ -763,6 +763,8 @@ namespace NodeControlPrototype
                 var nodeType = c.Attribute("Type")?.Value;
                 NodeControlBase node; //= new RectangleNodeControl();
 
+                byte alpha = 0, r = 0, g = 0, b = 0;
+
                 switch (nodeType)
                 {
                     case "Sequence":
@@ -771,7 +773,9 @@ namespace NodeControlPrototype
                             Width = 180,
                             Height = 90
                         };
-                        node.OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0x33, 0x65, 0x8a));
+                        //node.OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0x33, 0x65, 0x8a));
+                        GetNodeColorColor("SequenceNodeColor", out alpha, out r, out g, out b);
+                        node.OriginalBackground = new SolidColorBrush(Color.FromArgb(alpha, r, g, b));
                         break;
                     case "Decision":
                         node = new DecisionNodeControl()
@@ -779,7 +783,10 @@ namespace NodeControlPrototype
                             Width = 180,
                             Height = 160,
                         };
-                        node.OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0xf6, 0xae, 0x2d));
+                        GetNodeColorColor("DecisionNodeColor", out alpha, out r, out  g, out b);
+                        node.OriginalBackground = new SolidColorBrush(Color.FromArgb(alpha, r, g, b));
+
+                        //node.OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0xf6, 0xae, 0x2d));
                         break;
                     case "PredefinedProcess":
                         node = new ProcessNodeControl()
@@ -787,8 +794,10 @@ namespace NodeControlPrototype
                             Width = 180,
                             Height = 90
                         };
-                        node.OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0x86, 0xbb, 0xd8));
-                        
+                        //node.OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0x86, 0xbb, 0xd8));
+                        GetNodeColorColor("ProcessNodeColor", out alpha, out r, out g, out b);
+                        node.OriginalBackground = new SolidColorBrush(Color.FromArgb(alpha, r, g, b));
+
                         break;
                     case "Terminal":
                         var fName = c.Attribute("FunctionName")?.Value;
@@ -803,7 +812,8 @@ namespace NodeControlPrototype
                             Height = 160
                         };
 
-                        node.OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0xf2, 0x64, 0x19));
+                        GetNodeColorColor("TerminatorNodeColor", out alpha, out r, out g, out b);
+                        node.OriginalBackground = new SolidColorBrush(Color.FromArgb(alpha, r, g, b));
 
 
                         break;
