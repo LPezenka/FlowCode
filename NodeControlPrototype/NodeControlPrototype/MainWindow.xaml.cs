@@ -91,6 +91,7 @@ namespace NodeControlPrototype
             //dz.DragEnter += dz.OnDragEnter;
             _dz.MouseEnter += Dz_MouseEnter;
             _dz.MouseLeave += Dz_MouseLeave;
+            _dz.MouseDown += _dz_MouseDown;
             _dz.Visibility = Visibility.Hidden;
             //_dz.BackgroundColor = Brushes.Red;
             //_dz.AllowDrop = true;
@@ -108,10 +109,18 @@ namespace NodeControlPrototype
 
             DiagramCanvas.MouseDown += MainWindow_MouseDown;
 
+
+
             //SequenceNodeControl.TemplateBrush = new SolidColorBrush(Color.FromArgb(0xff, 0x33, 0x65, 0x8a));
             //DecisionNodeControl.TemplateBrush = new SolidColorBrush(Color.FromArgb(0xff, 0xf6, 0xae, 0x2d));
             //ProcessNodeControl.TemplateBrush = new SolidColorBrush(Color.FromArgb(0xff, 0x86, 0xbb, 0xd8));
             //TerminalNodeControl.TemplateBrush = new SolidColorBrush(Color.FromArgb(0xff, 0xf2, 0x64, 0x19));
+        }
+
+        private void _dz_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DeleteSelectedNode();
+            ToggleDeleteZone(false);
         }
 
         private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
@@ -142,38 +151,42 @@ namespace NodeControlPrototype
         {
             if (e.Key == Key.Delete)
             {
-
-                List<EdgeControl> edgesToDelete = new();
-                foreach (var edge in edges.Where(x=>x.From == NodeControlBase.LastSelected || x.To == NodeControlBase.LastSelected))
-                {
-                    var from = edge.From;
-                    var to = edge.To;
-                    var fidx = edge.FromIndex;
-                    var tidx = edge.ToIndex;
-
-                    if (fidx is not null)
-                        from.UnregisterOutputEdge((int)fidx);
-                    if (tidx is not null)
-                        to.UnregisterOutputEdge((int)tidx);
-
-                    edgesToDelete.Add(edge);
-
-
-                }
-
-                foreach (var edge in edgesToDelete)
-                {
-                    edges.Remove(edge);
-                    DiagramCanvas.Children.Remove(edge);
-                }
-
-                DiagramCanvas.Children.Remove(NodeControlBase.LastSelected);
-                canvasNodes.Remove(NodeControlBase.LastSelected);
-
-                NodeControlBase.LastSelected = null;
+                DeleteSelectedNode();
             }
-            
+
             base.OnKeyDown(e);
+        }
+
+        private void DeleteSelectedNode()
+        {
+            List<EdgeControl> edgesToDelete = new();
+            foreach (var edge in edges.Where(x => x.From == NodeControlBase.LastSelected || x.To == NodeControlBase.LastSelected))
+            {
+                var from = edge.From;
+                var to = edge.To;
+                var fidx = edge.FromIndex;
+                var tidx = edge.ToIndex;
+
+                if (fidx is not null)
+                    from.UnregisterOutputEdge((int)fidx);
+                if (tidx is not null)
+                    to.UnregisterOutputEdge((int)tidx);
+
+                edgesToDelete.Add(edge);
+
+
+            }
+
+            foreach (var edge in edgesToDelete)
+            {
+                edges.Remove(edge);
+                DiagramCanvas.Children.Remove(edge);
+            }
+
+            DiagramCanvas.Children.Remove(NodeControlBase.LastSelected);
+            canvasNodes.Remove(NodeControlBase.LastSelected);
+
+            NodeControlBase.LastSelected = null;
         }
 
         private void Dz_MouseEnter(object sender, MouseEventArgs e)
@@ -216,6 +229,7 @@ namespace NodeControlPrototype
             node.ConnectionPointClicked += Node_ConnectionPointClicked;
             node.NodeMoved += (s, e) => UpdateEdges();
             node.RootRequested += Node_RootRequested;
+            node.ToggleDeletionZone += (s, e) => ToggleDeleteZone(true);
             //node.MouseDoubleClick += node.
             DiagramCanvas.Children.Add(node);
             canvasNodes.Add(node);

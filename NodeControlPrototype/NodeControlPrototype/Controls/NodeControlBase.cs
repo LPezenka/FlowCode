@@ -31,6 +31,7 @@ namespace NodeControlPrototype.Controls
         public event EventHandler<ConnectionPointClickedEventArgs> ConnectionPointClicked;
         public event EventHandler RootRequested;
         public event EventHandler HighlightRequested;
+        public event EventHandler ToggleDeletionZone;
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public bool IsRoot { get; set; }
@@ -125,8 +126,13 @@ namespace NodeControlPrototype.Controls
             
             SetActive(true);
             LastSelected = this;
+            ToggleDeletionZone?.Invoke(this, EventArgs.Empty);
+            //Application.Current.Dispatcher.Invoke(() =>
+            //{
+            //}
 
-            var pos = e.GetPosition(this);
+
+                var pos = e.GetPosition(this);
             var points = GetConnectionPoints();
             for (int i = 0; i < points.Count; i++)
             {
