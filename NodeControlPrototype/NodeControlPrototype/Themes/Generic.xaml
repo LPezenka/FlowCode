@@ -20,7 +20,7 @@
     
     
     <Style TargetType="{x:Type fc:SequenceNodeControl}">
-        <Setter Property="Background" Value="#84A9C0" />
+        <Setter Property="Background" Value="#ff33658a" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type fc:SequenceNodeControl}">
@@ -41,7 +41,7 @@
     </Style>
 
     <Style TargetType="{x:Type fc:TerminalNodeControl}">
-        <Setter Property="Background" Value="LightGreen" />
+        <Setter Property="Background" Value="#fff26419" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type fc:TerminalNodeControl}">
@@ -55,7 +55,8 @@
                             <ComboBox SelectedValue="{Binding TerminalType, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                       SelectedValuePath="Content"
                                   HorizontalAlignment="Center"
-                                  Width="100"
+                                  Width="Auto"
+                                      Height="Auto"
                                       x:Name="cmbType"
                                       Margin="4">
                                 <ComboBoxItem Content="Start"/>
@@ -139,7 +140,7 @@
     </Style>-->
 
     <Style TargetType="{x:Type fc:ProcessNodeControl}">
-        <Setter Property="Background" Value="Orange" />
+        <Setter Property="Background" Value="#ff86bbd8" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type fc:ProcessNodeControl}">
@@ -184,7 +185,7 @@
     </Style>
 
     <Style TargetType="{x:Type fc:DecisionNodeControl}">
-        <Setter Property="Background" Value="#542E71" />
+        <Setter Property="Background" Value="#f6ae2dff" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type fc:DecisionNodeControl}">

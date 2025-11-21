@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualTreeNetwork>
+  <Node ID="8b0ab919-1e14-4500-8a13-ee10600c0827" Code="Ausgabe: &quot;Zahl eingeben&quot;" Position="1839.8857142857144,-3.114285714285689" Type="Sequence" />
+  <Node ID="bd73a616-c494-4352-8c51-cfdcf74a358d" Code="zahl = Eingabe" Position="1834.1714285714284,132.5142857142857" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="8b0ab919-1e14-4500-8a13-ee10600c0827" To="bd73a616-c494-4352-8c51-cfdcf74a358d" Label="" />
+  <Node ID="1808cfc1-8439-477c-9fc5-353581a84a69" Code="zahl == 1 || zahl == 2" Position="300.00000000000006,334.9999999999999" OnTrue="7781651d-e2df-4fe8-ad6a-42d1593eab30" OnFalse="0931e48f-51f1-45a6-b02c-a3dc0cfd4be4" Type="Decision" />
+  <Node ID="7781651d-e2df-4fe8-ad6a-42d1593eab30" Code="Ausgabe: &quot;Primzahl&quot;" Position="107,495" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="1808cfc1-8439-477c-9fc5-353581a84a69" To="7781651d-e2df-4fe8-ad6a-42d1593eab30" Label="Ja" />
+  <Node ID="0931e48f-51f1-45a6-b02c-a3dc0cfd4be4" Code="i = 2" Position="529,454.11111111111126" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="1808cfc1-8439-477c-9fc5-353581a84a69" To="0931e48f-51f1-45a6-b02c-a3dc0cfd4be4" Label="Nein" />
+  <Node ID="9d75fd43-4345-4dfb-a268-e08adc567099" Code="zahl % i == 0" Position="530.0000000000001,610" OnTrue="62231b97-262c-4815-b25c-3d92965ae892" OnFalse="6a80d793-7759-42ad-8251-c6b3d2436f60" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="1" From="0931e48f-51f1-45a6-b02c-a3dc0cfd4be4" To="9d75fd43-4345-4dfb-a268-e08adc567099" Label="" />
+  <Node ID="62231b97-262c-4815-b25c-3d92965ae892" Code="zahl == i" Position="314.6285714285715,697.0571428571429" OnTrue="aff6215c-cb34-46aa-a07c-a24c94d20731" OnFalse="911bf487-3cdb-4162-8c1a-5cfcd67de31a" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="1" From="9d75fd43-4345-4dfb-a268-e08adc567099" To="62231b97-262c-4815-b25c-3d92965ae892" Label="Ja" />
+  <Node ID="aff6215c-cb34-46aa-a07c-a24c94d20731" Code="Ausgabe: &quot;Primzahl&quot;" Position="103,832.9999999999999" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="62231b97-262c-4815-b25c-3d92965ae892" To="aff6215c-cb34-46aa-a07c-a24c94d20731" Label="Ja" />
+  <Node ID="911bf487-3cdb-4162-8c1a-5cfcd67de31a" Code="Ausgabe: &quot;Keine Primzahl&quot;" Position="498.2857142857142,877.4285714285714" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="62231b97-262c-4815-b25c-3d92965ae892" To="911bf487-3cdb-4162-8c1a-5cfcd67de31a" Label="Nein" />
+  <Node ID="6a80d793-7759-42ad-8251-c6b3d2436f60" Code="i = i + 1" Position="858.2857142857142,795.8571428571431" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="9d75fd43-4345-4dfb-a268-e08adc567099" To="6a80d793-7759-42ad-8251-c6b3d2436f60" Label="Nein" />
+  <Edge ToIndex="0" FromIndex="1" From="6a80d793-7759-42ad-8251-c6b3d2436f60" To="9d75fd43-4345-4dfb-a268-e08adc567099" Label="" />
+  <Node ID="ad4e72bc-91a9-4427-9cbf-d6be8c0e01a6" Code="Start/End" Position="295.7142857142856,68.28571428571433" FunctionName="IsPrime" ReturnVariable="" InputVariables="zahl" Type="Terminal" />
+  <Edge ToIndex="0" FromIndex="1" From="ad4e72bc-91a9-4427-9cbf-d6be8c0e01a6" To="1808cfc1-8439-477c-9fc5-353581a84a69" Label="" />
+  <Root ID="4b9e623f-0bf4-4163-9e50-cd1d9e33e0c1" />
+  <Node ID="4b9e623f-0bf4-4163-9e50-cd1d9e33e0c1" Code="int n = 1" Position="1072.428571428571,53.28571428571428" Type="Sequence" />
+  <Node ID="844c9fb2-74a7-4dc5-a970-1e11d054cec2" Code="IsPrime(n)" Position="1071.4285714285713,252.28571428571428" Type="PredefinedProcess" />
+  <Edge ToIndex="0" FromIndex="1" From="4b9e623f-0bf4-4163-9e50-cd1d9e33e0c1" To="844c9fb2-74a7-4dc5-a970-1e11d054cec2" Label="" />
+  <Node ID="d93dd358-46a8-47a4-ab45-a92539937a07" Code="n = n + 1" Position="1072.7142857142856,437.14285714285717" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="844c9fb2-74a7-4dc5-a970-1e11d054cec2" To="d93dd358-46a8-47a4-ab45-a92539937a07" Label="" />
+  <Node ID="d4630766-b7c6-4d2c-a9c5-d6f46883779a" Code="n &lt; 100" Position="1214.4285714285713,691.2857142857143" OnFalse="ba735526-5510-4e19-910b-2e64abfb4f95" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="1" From="d93dd358-46a8-47a4-ab45-a92539937a07" To="d4630766-b7c6-4d2c-a9c5-d6f46883779a" Label="Ja" />
+  <Node ID="ba735526-5510-4e19-910b-2e64abfb4f95" Code="Node(2)" Position="1575.428571428571,847.2857142857144" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="d4630766-b7c6-4d2c-a9c5-d6f46883779a" To="ba735526-5510-4e19-910b-2e64abfb4f95" Label="Nein" />
+</VisualTreeNetwork>

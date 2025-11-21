@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace NodeControlPrototype.Controls
 {
@@ -18,7 +19,10 @@ namespace NodeControlPrototype.Controls
                 new FrameworkPropertyMetadata(typeof(SequenceNodeControl)));
         }
 
-
+        public SequenceNodeControl():base()
+        {
+            //Background = OriginalBackground;
+        }
 
         public override List<Point> GetConnectionPoints() => new()
         {

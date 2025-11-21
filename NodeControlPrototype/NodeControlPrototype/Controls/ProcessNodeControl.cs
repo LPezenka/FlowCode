@@ -28,10 +28,11 @@ nameof(TargetNode), typeof(Node), typeof(ProcessNodeControl), new PropertyMetada
         }
 
 
-        public ProcessNodeControl()
+        public ProcessNodeControl():base()
         {
-            Width = 180;
-            Height = 80;
+            //Width = 180;
+            //Height = 80;
+            //Background = OriginalBackground;
         }
 
 

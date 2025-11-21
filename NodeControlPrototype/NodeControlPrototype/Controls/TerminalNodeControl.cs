@@ -93,10 +93,11 @@ namespace NodeControlPrototype.Controls
             set => SetValue(ReturnVariableProperty, value);
         }
 
-        public TerminalNodeControl()
+        public TerminalNodeControl():base()
         {
             DefaultStyleKey = typeof(TerminalNodeControl);
             //ReturnVariable = "No Return Variable set";
+            //Background = OriginalBackground;
         }
 
         static TerminalNodeControl()

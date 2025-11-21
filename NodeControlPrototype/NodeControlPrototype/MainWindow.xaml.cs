@@ -91,6 +91,7 @@ namespace NodeControlPrototype
             //dz.DragEnter += dz.OnDragEnter;
             _dz.MouseEnter += Dz_MouseEnter;
             _dz.MouseLeave += Dz_MouseLeave;
+            _dz.Visibility = Visibility.Hidden;
             //_dz.BackgroundColor = Brushes.Red;
             //_dz.AllowDrop = true;
 
@@ -104,6 +105,75 @@ namespace NodeControlPrototype
             Config.SetKeyWord(Config.KeyWord.Function, "Function");
             Config.SetKeyWord(Config.KeyWord.Input, "Eingabe");
             Config.SetKeyWord(Config.KeyWord.Output, "Ausgabe");
+
+            DiagramCanvas.MouseDown += MainWindow_MouseDown;
+
+            //SequenceNodeControl.TemplateBrush = new SolidColorBrush(Color.FromArgb(0xff, 0x33, 0x65, 0x8a));
+            //DecisionNodeControl.TemplateBrush = new SolidColorBrush(Color.FromArgb(0xff, 0xf6, 0xae, 0x2d));
+            //ProcessNodeControl.TemplateBrush = new SolidColorBrush(Color.FromArgb(0xff, 0x86, 0xbb, 0xd8));
+            //TerminalNodeControl.TemplateBrush = new SolidColorBrush(Color.FromArgb(0xff, 0xf2, 0x64, 0x19));
+        }
+
+        private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            NodeControlBase.LastSelected?.SetActive(false);
+            _dz.Visibility = Visibility.Hidden;
+        }
+
+
+        public void ToggleDeleteZone(bool active)
+        {
+            _dz.Visibility = Visibility.Visible;
+        }
+
+        protected override void OnRender(DrawingContext drawingContext)
+        {
+            Canvas.SetLeft(_dz, DiagramCanvas.ActualWidth - _dz.ActualWidth);
+            Canvas.SetTop(_dz, DiagramCanvas.ActualHeight - _dz.ActualHeight);
+        }
+
+        protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
+        {
+            Canvas.SetLeft(_dz, DiagramCanvas.ActualWidth - _dz.ActualWidth);
+            Canvas.SetTop(_dz, DiagramCanvas.ActualHeight - _dz.ActualHeight);
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete)
+            {
+
+                List<EdgeControl> edgesToDelete = new();
+                foreach (var edge in edges.Where(x=>x.From == NodeControlBase.LastSelected || x.To == NodeControlBase.LastSelected))
+                {
+                    var from = edge.From;
+                    var to = edge.To;
+                    var fidx = edge.FromIndex;
+                    var tidx = edge.ToIndex;
+
+                    if (fidx is not null)
+                        from.UnregisterOutputEdge((int)fidx);
+                    if (tidx is not null)
+                        to.UnregisterOutputEdge((int)tidx);
+
+                    edgesToDelete.Add(edge);
+
+
+                }
+
+                foreach (var edge in edgesToDelete)
+                {
+                    edges.Remove(edge);
+                    DiagramCanvas.Children.Remove(edge);
+                }
+
+                DiagramCanvas.Children.Remove(NodeControlBase.LastSelected);
+                canvasNodes.Remove(NodeControlBase.LastSelected);
+
+                NodeControlBase.LastSelected = null;
+            }
+            
+            base.OnKeyDown(e);
         }
 
         private void Dz_MouseEnter(object sender, MouseEventArgs e)
@@ -194,7 +264,8 @@ namespace NodeControlPrototype
             {
                 Width = 120,
                 Height = 40,
-                OriginalBackground = Brushes.Gray,
+                //OriginalBackground = SequenceNodeControl.TemplateBrush,
+                    //33658aff
                 NodeData = new Controls.Node
                 {
                     Title = $"Node({_nodeCount++})",
@@ -273,8 +344,10 @@ namespace NodeControlPrototype
             var terminator = new TerminalNodeControl
             {
                 Width = 160,
-                Height = 120,
-                OriginalBackground = Brushes.LightGreen,
+                Height = 160,
+            //    OriginalBackground =  new SolidColorBrush(
+            //Color.FromArgb(0xff, 0xf6, 0xae, 0x2d)),
+
                 NodeData = new Controls.Node
                 {
                     Title = "Start/End",
@@ -291,7 +364,7 @@ namespace NodeControlPrototype
             {
                 Width = 120,
                 Height = 60,
-                OriginalBackground = Brushes.Orange,
+                //OriginalBackground = Brushes.Orange,
                 NodeData = new Controls.Node
                 {
                     Title = $"ProcessCall({_nodeCount++})",

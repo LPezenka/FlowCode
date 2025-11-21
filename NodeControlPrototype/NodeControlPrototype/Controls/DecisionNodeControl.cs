@@ -10,7 +10,7 @@ namespace NodeControlPrototype.Controls
     public class DecisionNodeControl : NodeControlBase
     {
 
-        public DecisionNodeControl()
+        public DecisionNodeControl() : base()
         {
             FirstOutputIndex = 1; 
         }

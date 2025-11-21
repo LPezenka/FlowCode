@@ -18,6 +18,10 @@ namespace NodeControlPrototype.Controls
 
     public abstract class NodeControlBase : Control, IHighlightable, INotifyPropertyChanged
     {
+
+        public static NodeControlBase LastSelected { get; set; } = null;
+
+        //public static Brush TemplateBrush { get; set; }
         public Brush OriginalBackground { get; set; } = Brushes.Gray;
         public Node NodeData { get; set; }
         protected int FirstOutputIndex { get; set; } = 1; // Standard: ein Eingang bei Index 0
@@ -46,6 +50,12 @@ namespace NodeControlPrototype.Controls
         private int? _hoveredConnectionPointIndex = null;
 
         private readonly Dictionary<int, EdgeControl> occupiedOutputEdges = new();
+
+
+        protected NodeControlBase()
+        {
+            //Background = TemplateBrush;
+        }
 
         public int? GetNextFreeOutputIndex(out EdgeControl? existingEdge)
         {
@@ -110,6 +120,11 @@ namespace NodeControlPrototype.Controls
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             base.OnMouseLeftButtonDown(e);
+            if (LastSelected is not null)
+                LastSelected.SetActive(false);
+            
+            SetActive(true);
+            LastSelected = this;
 
             var pos = e.GetPosition(this);
             var points = GetConnectionPoints();
@@ -125,6 +140,7 @@ namespace NodeControlPrototype.Controls
             _isDragging = true;
             _dragStart = e.GetPosition(Parent as UIElement);
             CaptureMouse();
+            e.Handled = true;
         }
 
         protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)

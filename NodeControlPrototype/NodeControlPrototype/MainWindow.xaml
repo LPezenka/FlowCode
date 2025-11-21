@@ -76,10 +76,10 @@
             </MenuItem>
         </Menu>
         <Grid>
-            <Grid.RowDefinitions>
+            <!--<Grid.RowDefinitions>
                 <RowDefinition Height="9*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
-            </Grid.RowDefinitions>
+            </Grid.RowDefinitions>-->
             <ScrollViewer Grid.Column="0" Grid.Row="0" Height="Auto">
             <Canvas x:Name="DiagramCanvas" Background="{StaticResource ListBackgroundBrush}" MouseWheel="DiagramCanvas_MouseWheel">
                         <StackPanel>
