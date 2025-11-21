@@ -23,6 +23,7 @@ using System.Windows.Media.Imaging;
 using System.Xml;
 using System.Xml.Linq;
 using Interfaces;
+using System.Configuration;
 
 namespace NodeControlPrototype
 {
@@ -264,11 +265,14 @@ namespace NodeControlPrototype
 
         private void AddDecisionNode_Click(object sender, RoutedEventArgs e)
         {
+            byte alpha, r, g, b;
+            GetNodeColorColor("DecisionNodeColor", out alpha, out r, out g, out b);
+
             var decisionNode = new DecisionNodeControl
             {
                 Width = 180,
                 Height = 160,
-                OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0xf6, 0xae, 0x2d)),
+                OriginalBackground = new SolidColorBrush(Color.FromArgb(alpha, r, g, b)),//Color.FromArgb(0xff, 0xf6, 0xae, 0x2d)),
                 NodeData = new Controls.Node
                 {
                     Title = $"Decision Node({_nodeCount++})",
@@ -279,15 +283,26 @@ namespace NodeControlPrototype
             AddNode(decisionNode, null); // decisionNode.NodeData.Position);
         }
 
+        private static void GetNodeColorColor(string nodeType, out byte alpha, out byte r, out byte g, out byte b)
+        {
+            var nodeColor = ConfigurationManager.AppSettings[nodeType];
+            alpha = byte.Parse(nodeColor.Substring(0, 2), NumberStyles.HexNumber);
+            r = byte.Parse(nodeColor.Substring(2, 2), NumberStyles.HexNumber);
+            g = byte.Parse(nodeColor.Substring(4, 2), NumberStyles.HexNumber);
+            b = byte.Parse(nodeColor.Substring(6, 2), NumberStyles.HexNumber);
+        }
+
         private void AddNode_Click(object sender, RoutedEventArgs e)
         {
+            GetNodeColorColor("SequenceNodeColor", out byte alpha, out byte r, out byte g, out byte b);
+
             var node = new SequenceNodeControl
             {
                 Width = 180,
                 Height = 90,
                 //OriginalBackground = SequenceNodeControl.TemplateBrush,
                 //33658aff
-                OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0x33, 0x65, 0x8a)),
+                OriginalBackground = new SolidColorBrush(Color.FromArgb(alpha, r,g,b)),// Color.FromArgb(0xff, 0x33, 0x65, 0x8a)),
                 NodeData = new Controls.Node
                 {
                     Title = $"Node({_nodeCount++})",
@@ -363,13 +378,21 @@ namespace NodeControlPrototype
 
         private void AddTerminatorNode_Click(object sender, RoutedEventArgs e)
         {
+            //var nodeColor = ConfigurationManager.AppSettings["TerminatorNodeColor"];
+            //var alpha = byte.Parse(nodeColor.Substring(0, 2), NumberStyles.HexNumber);
+            //var r = byte.Parse(nodeColor.Substring(2, 2), NumberStyles.HexNumber);
+            //var g = byte.Parse(nodeColor.Substring(4, 2), NumberStyles.HexNumber);
+            //var b = byte.Parse(nodeColor.Substring(6, 2), NumberStyles.HexNumber);
+
+            GetNodeColorColor("TerminatorNodeColor", out byte alpha, out byte r, out byte g, out byte b);
+
             var terminator = new TerminalNodeControl
             {
                 Width = 240,
                 Height = 160,
             //    OriginalBackground =  new SolidColorBrush(
             //Color.FromArgb(0xff, 0xf6, 0xae, 0x2d)),
-                OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0xf2, 0x64, 0x19)),
+                OriginalBackground = new SolidColorBrush( Color.FromArgb(alpha,r,g,b) ),//Color.FromArgb(0xff, 0xf2, 0x64, 0x19)),
                 NodeData = new Controls.Node
                 {
                     Title = "Start/End",
@@ -382,11 +405,19 @@ namespace NodeControlPrototype
         }
         private void AddFunctionNode_Click(object sender, RoutedEventArgs e)
         {
+            //var nodeColor = ConfigurationManager.AppSettings["ProcessNodeColor"];
+            //var alpha = byte.Parse(nodeColor.Substring(0, 2), NumberStyles.HexNumber);
+            //var r = byte.Parse(nodeColor.Substring(2, 2), NumberStyles.HexNumber);
+            //var g = byte.Parse(nodeColor.Substring(4, 2), NumberStyles.HexNumber);
+            //var b = byte.Parse(nodeColor.Substring(6, 2), NumberStyles.HexNumber);
+
+            GetNodeColorColor("ProcessNodeColor", out byte alpha, out byte r, out byte g, out byte b);
+
             var processNode = new ProcessNodeControl()
             {
                 Width = 180,
                 Height = 90,
-                OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0x86, 0xbb, 0xd8)),
+                OriginalBackground = new SolidColorBrush(Color.FromArgb(alpha,r,g,b)), //0xff, 0x86, 0xbb, 0xd8)),
                 NodeData = new Controls.Node
                 {
                     Title = $"ProcessCall({_nodeCount++})",
@@ -757,7 +788,7 @@ namespace NodeControlPrototype
                             Height = 90
                         };
                         node.OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0x86, 0xbb, 0xd8));
-
+                        
                         break;
                     case "Terminal":
                         var fName = c.Attribute("FunctionName")?.Value;
