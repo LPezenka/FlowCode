@@ -10,6 +10,7 @@ namespace FlowCodeInfrastructure
 {
     public abstract class Node
     {
+        public static IVariableLogger variableLogger { get; set; } = null;
         public static int Delay { get; set; } = 500;
         public IHighlightable GraphicalNode;
         public Node Next { get; set; }

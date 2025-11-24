@@ -80,8 +80,9 @@ namespace NodeControlPrototype
         private double scaleValue = 1.0f;
 
 
-        private DeleteZone _dz;
-        private OutputControl oc;
+        private DeleteZone _deletionZone;
+        private OutputControl _outputLogger;
+        private OutputControl _variableLogger;
 
         public MainWindow()
         {
@@ -89,18 +90,18 @@ namespace NodeControlPrototype
             InitializeComponent();
             _lastNodePosition = new Point(Application.Current.MainWindow.Width / 2, 15);
             //DeleteZone 
-            _dz = new DeleteZone();
+            _deletionZone = new DeleteZone();
             //dz.DragEnter += dz.OnDragEnter;
-            _dz.MouseEnter += Dz_MouseEnter;
-            _dz.MouseLeave += Dz_MouseLeave;
-            _dz.MouseDown += _dz_MouseDown;
-            _dz.Visibility = Visibility.Hidden;
+            _deletionZone.MouseEnter += Dz_MouseEnter;
+            _deletionZone.MouseLeave += Dz_MouseLeave;
+            _deletionZone.MouseDown += _dz_MouseDown;
+            _deletionZone.Visibility = Visibility.Hidden;
             //_dz.BackgroundColor = Brushes.Red;
             //_dz.AllowDrop = true;
 
-            Canvas.SetLeft(_dz, 400);
-            Canvas.SetTop(_dz, 400);
-            DiagramCanvas.Children.Add(_dz);
+            Canvas.SetLeft(_deletionZone, 400);
+            Canvas.SetTop(_deletionZone, 400);
+            DiagramCanvas.Children.Add(_deletionZone);
 
 
             Config.SetKeyWord(Config.KeyWord.True, "Ja");
@@ -111,8 +112,14 @@ namespace NodeControlPrototype
 
             DiagramCanvas.MouseDown += MainWindow_MouseDown;
 
-            oc = new OutputControl();
-            DiagramCanvas.Children.Add(oc);
+            _outputLogger = new OutputControl();
+            DiagramCanvas.Children.Add(_outputLogger);
+
+            _variableLogger = new OutputControl();
+            DiagramCanvas.Children.Add(_variableLogger);
+
+            FlowCodeInfrastructure.Node.variableLogger = _variableLogger;
+
             //oc.ShowOutput("Hallo");
             //oc.ShowOutput("Welt");
 
@@ -127,8 +134,13 @@ namespace NodeControlPrototype
 
         private void RepositionOutput()
         {
-            Canvas.SetLeft(oc, DiagramCanvas.ActualWidth - 300);
-            Canvas.SetTop(oc, 60);
+            Canvas.SetLeft(_outputLogger, DiagramCanvas.ActualWidth - 300);
+            Canvas.SetTop(_outputLogger, 60);
+
+            Canvas.SetLeft(_variableLogger, DiagramCanvas.ActualWidth - 500);
+            Canvas.SetTop(_variableLogger, 60);
+            _variableLogger.SetTitle("Variables");
+            _variableLogger.Background = Brushes.Blue;
         }
 
         private void _dz_MouseDown(object sender, MouseButtonEventArgs e)
@@ -140,13 +152,13 @@ namespace NodeControlPrototype
         private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
         {
             NodeControlBase.LastSelected?.SetActive(false);
-            _dz.Visibility = Visibility.Hidden;
+            _deletionZone.Visibility = Visibility.Hidden;
         }
 
 
         public void ToggleDeleteZone(bool active)
         {
-            _dz.Visibility = Visibility.Visible;
+            _deletionZone.Visibility = Visibility.Visible;
         }
 
 
@@ -167,8 +179,8 @@ namespace NodeControlPrototype
 
         private void ResetDeletionZone()
         {
-            Canvas.SetLeft(_dz, DiagramCanvas.ActualWidth - _dz.ActualWidth);
-            Canvas.SetTop(_dz, DiagramCanvas.ActualHeight - _dz.ActualHeight);
+            Canvas.SetLeft(_deletionZone, DiagramCanvas.ActualWidth - _deletionZone.ActualWidth);
+            Canvas.SetTop(_deletionZone, DiagramCanvas.ActualHeight - _deletionZone.ActualHeight);
         }
 
         protected override void OnKeyDown(KeyEventArgs e)
@@ -217,12 +229,12 @@ namespace NodeControlPrototype
         {
 
             //throw new NotImplementedException();
-            _dz.BackgroundColor = Brushes.Red;
+            _deletionZone.BackgroundColor = Brushes.Red;
         }
 
         private void Dz_MouseLeave(object sender, MouseEventArgs e)
         {
-            _dz.BackgroundColor = Brushes.Transparent;
+            _deletionZone.BackgroundColor = Brushes.Transparent;
         }
 
         private void AddNode(NodeControlBase node, Point? nodePosition)
@@ -677,7 +689,7 @@ namespace NodeControlPrototype
 
         private void Run_Click(object sender, RoutedEventArgs e)
         {
-            oc?.Reset();
+            _outputLogger?.Reset();
             GenerateNetwork();
             vtn.ErrorLogger = this;
             if (currentRoot == null)
@@ -706,7 +718,7 @@ namespace NodeControlPrototype
             ActionNode.ScriptState = result;
             ActionNode.ScriptOptions = scriptOptions;
             ActionNode.InputHandler = new InputHandler();
-            ActionNode.OutputHandler = oc;// new OutputHandler();
+            ActionNode.OutputHandler = _outputLogger;// new OutputHandler();
 
             // Start network parsing in new thread. This is necessary in order to highlight the nodes
             // in the GUI using Dispatcher.Invoke()

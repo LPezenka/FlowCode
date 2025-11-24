@@ -1,5 +1,6 @@
 ﻿using Interfaces;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -48,7 +49,7 @@ namespace NodeControlPrototype.Controls
     ///     <MyNamespace:OutputWindow/>
     ///
     /// </summary>
-    public class OutputControl : Control, IOutputHandler, INotifyPropertyChanged
+    public class OutputControl : Control, IOutputHandler, INotifyPropertyChanged, IVariableLogger
     {
         public List<string> OutputMessages { get; set; } = new List<string>();
 
@@ -136,6 +137,43 @@ namespace NodeControlPrototype.Controls
                 var pos = e.GetPosition(this);
                 InvalidateVisual();
             }
+        }
+
+        public Brush BackgroundColor
+        {
+            get
+            {
+                return Background;
+            }
+            set
+            {
+                Background = value;
+                NotifyPropertyChanged("Background");
+            }
+        }
+
+        public void SetTitle(string title)
+        {
+            var t = Template;
+            if (t is not null)
+            {
+                var heading = t.FindName("Heading", this) as Label;
+                heading.Content = title;
+                NotifyPropertyChanged("Heading");
+            }
+        }
+
+        public void LogVariables(IEnumerable variables)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                OutputMessages.Clear();
+                foreach (var v in variables)
+                {
+                    var variable = (v as Microsoft.CodeAnalysis.Scripting.ScriptVariable);
+                    ShowOutput($"{variable.Name} : {variable.Value} ({variable.Type})");
+                }
+            });
         }
     }
 }
