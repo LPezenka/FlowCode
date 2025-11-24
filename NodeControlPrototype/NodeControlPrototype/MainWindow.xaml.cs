@@ -81,6 +81,7 @@ namespace NodeControlPrototype
 
 
         private DeleteZone _dz;
+        private OutputControl oc;
 
         public MainWindow()
         {
@@ -110,12 +111,24 @@ namespace NodeControlPrototype
 
             DiagramCanvas.MouseDown += MainWindow_MouseDown;
 
+            oc = new OutputControl();
+            DiagramCanvas.Children.Add(oc);
+            //oc.ShowOutput("Hallo");
+            //oc.ShowOutput("Welt");
 
+            
 
             //SequenceNodeControl.TemplateBrush = new SolidColorBrush(Color.FromArgb(0xff, 0x33, 0x65, 0x8a));
             //DecisionNodeControl.TemplateBrush = new SolidColorBrush(Color.FromArgb(0xff, 0xf6, 0xae, 0x2d));
             //ProcessNodeControl.TemplateBrush = new SolidColorBrush(Color.FromArgb(0xff, 0x86, 0xbb, 0xd8));
             //TerminalNodeControl.TemplateBrush = new SolidColorBrush(Color.FromArgb(0xff, 0xf2, 0x64, 0x19));
+        }
+
+
+        private void RepositionOutput()
+        {
+            Canvas.SetLeft(oc, DiagramCanvas.ActualWidth - 300);
+            Canvas.SetTop(oc, 60);
         }
 
         private void _dz_MouseDown(object sender, MouseButtonEventArgs e)
@@ -142,11 +155,14 @@ namespace NodeControlPrototype
         protected override void OnRender(DrawingContext drawingContext)
         {
             ResetDeletionZone();
+            RepositionOutput();
         }
 
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
         {
             ResetDeletionZone();
+            RepositionOutput();
+
         }
 
         private void ResetDeletionZone()
@@ -657,6 +673,7 @@ namespace NodeControlPrototype
 
         private void Run_Click(object sender, RoutedEventArgs e)
         {
+            oc?.Reset();
             GenerateNetwork();
             vtn.ErrorLogger = this;
             if (currentRoot == null)
@@ -685,7 +702,7 @@ namespace NodeControlPrototype
             ActionNode.ScriptState = result;
             ActionNode.ScriptOptions = scriptOptions;
             ActionNode.InputHandler = new InputHandler();
-            ActionNode.OutputHandler = new OutputHandler();
+            ActionNode.OutputHandler = oc;// new OutputHandler();
 
             // Start network parsing in new thread. This is necessary in order to highlight the nodes
             // in the GUI using Dispatcher.Invoke()
@@ -952,6 +969,7 @@ namespace NodeControlPrototype
             ScaleTransform scaleTransform = new ScaleTransform(scaleValue, scaleValue);
             DiagramCanvas.LayoutTransform = scaleTransform;
             ResetDeletionZone();
+            RepositionOutput();
         }
 
         private void MenuItemNew_Click(object sender, RoutedEventArgs e)

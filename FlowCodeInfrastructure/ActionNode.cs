@@ -20,9 +20,8 @@ namespace FlowCodeInfrastructure
         public override void Evaluate()
         {
             if (Code == null)
-            {
                 return;
-            }
+            
             try
             {
                 string originalCode = Code;
@@ -104,7 +103,10 @@ namespace FlowCodeInfrastructure
                 }
                 else
                 {
-                    if (Code.EndsWith(';') == false) Code = $"{Code};";
+                    // This is going to be a line of code for the scripting engine
+                    if (!customInput && ! customOutput && !Code.EndsWith(';')) 
+                        Code = $"{Code};";
+                    
                     if (customInput)
                     {
                         Code = "string lineInput = \"" + InputHandler.ReadInput("Bitte Wert eingeben: ") + "\";";

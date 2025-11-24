@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualTreeNetwork>
+  <Node ID="055ed754-0879-4807-aaec-376419db610f" Code="i &lt; 50" Position="400,430" OnTrue="ae488b6f-c85d-4447-8211-e07280facd8e" OnFalse="6c63607d-eaf2-4ddd-afd3-0da0235d1adf" Type="Decision" />
+  <Node ID="ae488b6f-c85d-4447-8211-e07280facd8e" Code="i = i + 1" Position="727,472" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="055ed754-0879-4807-aaec-376419db610f" To="ae488b6f-c85d-4447-8211-e07280facd8e" Label="Ja" />
+  <Node ID="67b020b8-e538-4dd0-bdef-59cc0730c273" Code="Ausgabe: i" Position="398,308.5" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="ae488b6f-c85d-4447-8211-e07280facd8e" To="67b020b8-e538-4dd0-bdef-59cc0730c273" Label="" />
+  <Edge ToIndex="0" FromIndex="1" From="67b020b8-e538-4dd0-bdef-59cc0730c273" To="055ed754-0879-4807-aaec-376419db610f" Label="" />
+  <Root ID="8ccfcb90-b2f1-405a-8499-ffd607d874ef" />
+  <Node ID="8ccfcb90-b2f1-405a-8499-ffd607d874ef" Code="i = 0" Position="400,130" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="8ccfcb90-b2f1-405a-8499-ffd607d874ef" To="67b020b8-e538-4dd0-bdef-59cc0730c273" Label="" />
+  <Node ID="6c63607d-eaf2-4ddd-afd3-0da0235d1adf" Code="Ausgabe: &quot;Fertig&quot;" Position="173,539" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="055ed754-0879-4807-aaec-376419db610f" To="6c63607d-eaf2-4ddd-afd3-0da0235d1adf" Label="Nein" />
+</VisualTreeNetwork>

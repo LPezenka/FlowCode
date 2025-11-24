@@ -250,4 +250,33 @@
             </Setter.Value>
         </Setter>
     </Style>-->
+
+    <!--<Style TargetType="{x:Type local:OutputWindow}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:OutputWindow}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
+
+    <Style TargetType="{x:Type fc:OutputControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type fc:OutputControl}">
+                    <Border BorderBrush="Red" BorderThickness="3" Width="200" Height="400">
+                        <StackPanel>
+                            <Label Background="Red" FontSize="16" Foreground="White">Ausgabe:</Label>
+                        <ListBox x:Name="Messages" ItemsSource="{Binding OutputMessages, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="300"></ListBox>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
 </ResourceDictionary>
