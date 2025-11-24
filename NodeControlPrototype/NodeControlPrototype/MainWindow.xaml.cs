@@ -267,6 +267,8 @@ namespace NodeControlPrototype
             {
                 currentRoot.Background = currentRoot.OriginalBackground;
                 currentRoot.IsRoot = false;
+                NodeControlBase.LastSelected = null;
+                ToggleDeleteZone(false);
             }
 
             currentRoot = sender as NodeControlBase;
@@ -275,6 +277,8 @@ namespace NodeControlPrototype
             {
                 currentRoot.Background = Brushes.Gold;
                 currentRoot.IsRoot = true;
+                NodeControlBase.LastSelected = null;
+                ToggleDeleteZone(false);
             }
         }
 

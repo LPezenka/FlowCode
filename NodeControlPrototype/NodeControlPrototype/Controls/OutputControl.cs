@@ -51,7 +51,9 @@ namespace NodeControlPrototype.Controls
     public class OutputControl : Control, IOutputHandler, INotifyPropertyChanged
     {
         public List<string> OutputMessages { get; set; } = new List<string>();
-        
+
+        private bool _isDragging;
+        private Point _dragStart;
 
         static OutputControl()
         {
@@ -87,6 +89,52 @@ namespace NodeControlPrototype.Controls
                 OutputMessages.Clear();
                 var messages = t.FindName("Messages", this) as ListBox;
                 messages?.Items.Refresh();
+            }
+        }
+
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonDown(e);
+
+            var pos = e.GetPosition(this);
+            _isDragging = true;
+            _dragStart = e.GetPosition(Parent as UIElement);
+            CaptureMouse();
+            e.Handled = true;
+        }
+
+        protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonUp(e);
+            _isDragging = false;
+            ReleaseMouseCapture();
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+            if (_isDragging && e.LeftButton == MouseButtonState.Pressed)
+            {
+                var parent = Parent as Canvas;
+                if (parent != null)
+                {
+                    Point currentPos = e.GetPosition(parent);
+                    double offsetX = currentPos.X - _dragStart.X;
+                    double offsetY = currentPos.Y - _dragStart.Y;
+
+                    double newLeft = Canvas.GetLeft(this) + offsetX;
+                    double newTop = Canvas.GetTop(this) + offsetY;
+
+                    Canvas.SetLeft(this, newLeft);
+                    Canvas.SetTop(this, newTop);
+                    _dragStart = currentPos;
+
+                }
+            }
+            else
+            {
+                var pos = e.GetPosition(this);
+                InvalidateVisual();
             }
         }
     }
