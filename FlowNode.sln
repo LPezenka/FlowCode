@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowCodeInfrastructure", "F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLUtils", "XMLUtils\XMLUtils.csproj", "{C6F2ED50-AC4A-4761-AD7F-D29CA771FA17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NodeControlPrototype", "NodeControlPrototype\NodeControlPrototype\NodeControlPrototype.csproj", "{F677964B-7359-523C-DBA5-138406B16814}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowEditor", "FlowEditor\FlowEditor\FlowEditor.csproj", "{F677964B-7359-523C-DBA5-138406B16814}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{C82175DB-FDAF-36DF-F55D-B0F96F20AF6D}"
 EndProject
