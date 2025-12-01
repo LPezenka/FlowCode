@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
-namespace NodeControlPrototype.Controls
+namespace FlowEditor.Controls
 {
     public class SequenceNodeControl : NodeControlBase
     {

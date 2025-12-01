@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NodeControlPrototype.Controls
+namespace FlowEditor.Controls
 {
     public class Node
     {

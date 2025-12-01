@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace NodeControlPrototype
+namespace FlowEditor
 {
     class OutputHandler : IOutputHandler
     {

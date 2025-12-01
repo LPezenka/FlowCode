@@ -1,5 +1,5 @@
 ﻿using FlowCodeInfrastructure;
-using NodeControlPrototype.Controls;
+using FlowEditor.Controls;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace NodeControlPrototype
+namespace FlowEditor
 {
     internal class XMLWriter
     {

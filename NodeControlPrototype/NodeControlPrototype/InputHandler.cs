@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Threading;
 using Interfaces;
 
-namespace NodeControlPrototype
+namespace FlowEditor
 {
     public class InputHandler : IInputHandler
     {

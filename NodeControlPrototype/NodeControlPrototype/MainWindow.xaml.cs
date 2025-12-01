@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.Win32;
-using NodeControlPrototype.Controls;
+using FlowEditor.Controls;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -25,7 +25,7 @@ using System.Xml.Linq;
 using Interfaces;
 using System.Configuration;
 
-namespace NodeControlPrototype
+namespace FlowEditor
 {
     public partial class MainWindow : Window, IErrorLogger
     {

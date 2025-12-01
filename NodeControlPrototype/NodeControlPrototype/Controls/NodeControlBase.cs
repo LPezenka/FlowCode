@@ -10,7 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Xml.Linq;
 
-namespace NodeControlPrototype.Controls
+namespace FlowEditor.Controls
 {
     // FlowchartControlLibrary/NodeControlBase.cs
 
