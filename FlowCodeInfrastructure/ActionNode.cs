@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Scripting;
 using CargoTrucker;
 using Interfaces;
+using System.Text.RegularExpressions;
 
 namespace FlowCodeInfrastructure
 {
@@ -16,6 +17,43 @@ namespace FlowCodeInfrastructure
         //public string Code { get; set; }
         public static ScriptState ScriptState { get; set; }
         public static ScriptOptions ScriptOptions { get; set; }
+
+
+        private (ScriptState, string) HandleAssignment(ScriptState scriptState, string code, ref bool initVariable, ref string varName)
+        {
+            if (Regex.IsMatch(code, @"(?<!\=)\=(?!\=)") == false)
+                return (scriptState, code);
+            initVariable = false;
+            var parts = code.Split("=");
+            // TODO: something a = b == c doesn't work because of the split
+            // fix that by finding the first occurence and manually taking substrings
+
+            varName = parts[0].Trim();
+            var filterName = varName;
+            var v = ScriptState.Variables.Where(x => x.Name == filterName).FirstOrDefault();
+            if (v is null)
+            {
+                var rightHandVariable = parts[1].Trim();
+                var rhv = ScriptState.Variables.Where(x => x.Name == rightHandVariable).FirstOrDefault();
+                if (rhv is not null)
+                    code = $"string lineInput = {parts[1]}.ToString();";
+                else
+                        if (parts[1].Contains("*")
+                                || parts[1].Contains("+")
+                                || parts[1].Contains("-")
+                                || parts[1].Contains("/"))
+                {
+                    string rightHandCode = "var tv = " + parts[1] + ";";
+                    code = rightHandCode +
+                        System.Environment.NewLine +
+                        $"string lineInput = tv.ToString()";
+                }
+                else
+                    code = $"string lineInput = \"{parts[1]}\";";
+                initVariable = true;
+            }
+            return (scriptState, code);
+        }
 
         public override void Evaluate()
         {
@@ -76,36 +114,37 @@ namespace FlowCodeInfrastructure
                     string varType = "string;";
                     initVariable = true;
                 }
-                else if (Code.Contains("=") && !Code.Contains("=="))
+                else if (Code.Contains("="))// && !Code.Contains("=="))
                 {
-                    var parts = Code.Split("=");
-                    varName = parts[0].Trim();
+                    (ScriptState, Code) = HandleAssignment(ScriptState, Code, ref initVariable, ref varName);
+                    //var parts = Code.Split("=");
+                    //varName = parts[0].Trim();
 
-                    // TODO: recognize arithmetics on the right side of the assignment operator, evaluate,
-                    // store the result into a temporary variable and then assign it
+                    //// TODO: recognize arithmetics on the right side of the assignment operator, evaluate,
+                    //// store the result into a temporary variable and then assign it
 
-                    var v = ScriptState.Variables.Where(x => x.Name == varName).FirstOrDefault();
-                    if (v is null)
-                    {
-                        var rightHandVariable = parts[1].Trim();
-                        var rhv = ScriptState.Variables.Where(x => x.Name == rightHandVariable).FirstOrDefault();
-                        if (rhv is not null)
-                            Code = $"string lineInput = {parts[1]}.ToString();";
-                        else
-                                if (       parts[1].Contains("*")
-                                        || parts[1].Contains("+")
-                                        || parts[1].Contains("-")
-                                        || parts[1].Contains("/"))
-                        {
-                            string rightHandCode = "var tv = " + parts[1] + ";";
-                            Code = rightHandCode +
-                                System.Environment.NewLine +
-                                $"string lineInput = tv.ToString()";
-                        }
-                        else
-                            Code = $"string lineInput = \"{parts[1]}\";";
-                        initVariable = true;
-                    }
+                    //var v = ScriptState.Variables.Where(x => x.Name == varName).FirstOrDefault();
+                    //if (v is null)
+                    //{
+                    //    var rightHandVariable = parts[1].Trim();
+                    //    var rhv = ScriptState.Variables.Where(x => x.Name == rightHandVariable).FirstOrDefault();
+                    //    if (rhv is not null)
+                    //        Code = $"string lineInput = {parts[1]}.ToString();";
+                    //    else
+                    //            if (       parts[1].Contains("*")
+                    //                    || parts[1].Contains("+")
+                    //                    || parts[1].Contains("-")
+                    //                    || parts[1].Contains("/"))
+                    //    {
+                    //        string rightHandCode = "var tv = " + parts[1] + ";";
+                    //        Code = rightHandCode +
+                    //            System.Environment.NewLine +
+                    //            $"string lineInput = tv.ToString()";
+                    //    }
+                    //    else
+                    //        Code = $"string lineInput = \"{parts[1]}\";";
+                    //    initVariable = true;
+                    //}
                 }
 
                 if (Code.Contains(Config.GetKeyword(Config.KeyWord.Function)))
