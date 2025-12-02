@@ -88,33 +88,19 @@ namespace FlowCodeInfrastructure
             try
             {
                 string originalCode = Code;
+                string code = originalCode;
                 bool initVariable = false;
                 bool customInput = false;
                 bool customOutput = false;
                 string outputText = string.Empty;
                 string varName = string.Empty;
-                (ScriptState, Code) = HandleOutput(ScriptState, Code, ref initVariable, ref customOutput, ref outputText, ref varName);
+                (ScriptState, code) = HandleOutput(ScriptState, code, ref initVariable, ref customOutput, ref outputText, ref varName);
+                (ScriptState, code) = HandleInput(ScriptState, code, ref initVariable, ref customInput, ref varName);
+                (ScriptState, code) = HandleAssignment(ScriptState, code, ref initVariable, ref varName);
 
-                if (Code.Contains(Config.GetKeyword(Config.KeyWord.Input)))
-                {
-
-                    string[] parts = Code.Split(new[] { '=' });
-                    varName = parts[0].Trim();
-                    if (InputHandler is null)
-                    {
-                        Code = "string lineInput = Console.ReadLine(); ";
-                    }
-                    else
-                    {
-                        customInput = true;
-                    }
-                    //Code = Code.Replace(";", "");
-                    var v = ScriptState.Variables.Where(x => x.Name == varName).FirstOrDefault();
-                    string varType = "string;";
-                    initVariable = true;
-                }
-
-                (ScriptState, Code) = HandleAssignment(ScriptState, Code, ref initVariable, ref varName);
+                // Temporary assignment to keep stuff working
+                // TODO: change all Code to code
+                Code = code
 
                 if (Code.Contains(Config.GetKeyword(Config.KeyWord.Function)))
                 {
@@ -187,6 +173,29 @@ namespace FlowCodeInfrastructure
                 // TODO: log to file
                 throw ex;
             }
+        }
+
+        private (ScriptState, string) HandleInput(ScriptState scriptState,string code, ref bool initVariable, ref bool customInput, ref string varName)
+        {
+            if (Code.Contains(Config.GetKeyword(Config.KeyWord.Input)) == false)
+                return (scriptState, code);
+            
+            string[] parts = code.Split(['=']);
+            varName = parts[0].Trim();
+            var filterName = varName;
+            if (InputHandler is null)
+            {
+                code = "string lineInput = Console.ReadLine(); ";
+            }
+            else
+            {
+                customInput = true;
+            }
+
+            var v = ScriptState.Variables.Where(x => x.Name == filterName).FirstOrDefault();
+            string varType = "string;";
+            initVariable = true;
+            return (scriptState, code);
         }
 
         private (ScriptState, string) HandleOutput(ScriptState scriptState, string code, ref bool initVariable, ref bool customOutput, ref string outputText, ref string varName)
