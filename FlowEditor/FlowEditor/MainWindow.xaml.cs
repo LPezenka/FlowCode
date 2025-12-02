@@ -777,7 +777,7 @@ namespace FlowEditor
         private void LoadXML(string fname)
         {
             XDocument doc = XDocument.Load(fname);
-            Console.WriteLine(doc);
+            //Console.WriteLine(doc);
             // Parse document and generate Nodes and edges
 
             string rootId = string.Empty;
