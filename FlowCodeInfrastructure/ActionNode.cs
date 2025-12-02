@@ -92,6 +92,17 @@ namespace FlowCodeInfrastructure
                         if (rhv is not null)
                             Code = $"string lineInput = {parts[1]}.ToString();";
                         else
+                                if (       parts[1].Contains("*")
+                                        || parts[1].Contains("+")
+                                        || parts[1].Contains("-")
+                                        || parts[1].Contains("/"))
+                        {
+                            string rightHandCode = "var tv = " + parts[1] + ";";
+                            Code = rightHandCode +
+                                System.Environment.NewLine +
+                                $"string lineInput = tv.ToString()";
+                        }
+                        else
                             Code = $"string lineInput = \"{parts[1]}\";";
                         initVariable = true;
                     }
