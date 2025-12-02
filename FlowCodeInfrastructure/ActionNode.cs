@@ -76,15 +76,15 @@ namespace FlowCodeInfrastructure
                         code = $"string lineInput = \"{rightHandPart.Trim()}\";";
                 }
             }
-                initVariable = true;
-                return (ScriptState, code);
+            initVariable = true;
+            return (ScriptState, code);
         }
 
         public override void Evaluate()
         {
             if (Code == null)
                 return;
-            
+
             try
             {
                 string originalCode = Code;
@@ -93,35 +93,9 @@ namespace FlowCodeInfrastructure
                 bool customOutput = false;
                 string outputText = string.Empty;
                 string varName = string.Empty;
+                (ScriptState, Code) = HandleOutput(ScriptState, Code, ref initVariable, ref customOutput, ref outputText, ref varName);
 
-                if (Code.Contains(Config.GetKeyword(Config.KeyWord.Output)))
-                {
-                    if (OutputHandler is not null)
-                    {
-                        if (Code.Contains("\""))
-                        {
-                            outputText = Code.Split(":")[1].Trim().Replace("\"", "");
-                        }
-                        else
-                        {
-                            var parts = Code.Split(new[] { ':' }, 2);
-                            varName = parts[1].Trim();
-                            var v = ScriptState.Variables.Where(x => x.Name == varName).FirstOrDefault();
-                            if (v is not null)
-                            {
-                                outputText = v.Value.ToString();
-                            }
-                        }
-                        customOutput = true;
-                    }
-                    else
-                    {
-                        Code = Code.Replace(";", "");
-                        Code = Code.Replace(Config.GetKeyword(Config.KeyWord.Output), "Console.WriteLine(");
-                        Code += ");";
-                    }
-                }
-                else if (Code.Contains(Config.GetKeyword(Config.KeyWord.Input)))
+                if (Code.Contains(Config.GetKeyword(Config.KeyWord.Input)))
                 {
 
                     string[] parts = Code.Split(new[] { '=' });
@@ -131,7 +105,7 @@ namespace FlowCodeInfrastructure
                         Code = "string lineInput = Console.ReadLine(); ";
                     }
                     else
-                    { 
+                    {
                         customInput = true;
                     }
                     //Code = Code.Replace(";", "");
@@ -150,9 +124,9 @@ namespace FlowCodeInfrastructure
                 else
                 {
                     // This is going to be a line of code for the scripting engine
-                    if (!customInput && ! customOutput && !Code.EndsWith(';')) 
+                    if (!customInput && !customOutput && !Code.EndsWith(';'))
                         Code = $"{Code};";
-                    
+
                     if (customInput)
                     {
                         Code = "string lineInput = \"" + InputHandler.ReadInput("Bitte Wert eingeben: ") + "\";";
@@ -203,7 +177,7 @@ namespace FlowCodeInfrastructure
                     }
                 }
             }
-            catch(CompilationErrorException cee)
+            catch (CompilationErrorException cee)
             {
                 // TODO: log to file
                 throw cee;
@@ -214,5 +188,40 @@ namespace FlowCodeInfrastructure
                 throw ex;
             }
         }
+
+        private (ScriptState, string) HandleOutput(ScriptState scriptState, string code, ref bool initVariable, ref bool customOutput, ref string outputText, ref string varName)
+        {
+            if (!code.Contains(Config.GetKeyword(Config.KeyWord.Output)))
+                return (scriptState, code);
+
+            if (OutputHandler is not null)
+            {
+                if (code.Contains("\"")) // This is simply a string
+                {
+                    outputText = Code.Split(":")[1].Trim().Replace("\"", "");
+                }
+                else
+                {
+                    var parts = Code.Split(new[] { ':' }, 2);
+                    varName = parts[1].Trim();
+                    var filterName = varName;
+                    var v = ScriptState.Variables.Where(x => x.Name == filterName).FirstOrDefault();
+                    if (v is not null)
+                    {
+                        outputText = v.Value.ToString();
+                    }
+                }
+                customOutput = true;
+            }
+            else
+            {
+                code = code.Replace(";", "");
+                code = code.Replace(Config.GetKeyword(Config.KeyWord.Output), "Console.WriteLine(");
+                code += ");";
+            }
+
+            return (scriptState, code);
+        }
+
     }
 }
