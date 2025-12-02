@@ -72,9 +72,9 @@ namespace FlowCodeInfrastructure
                         //System.Environment.NewLine +
                         //    $"string lineInput = tv.ToString()";
                     }
-                    else
-                        code = $"string lineInput = \"{rightHandPart.Trim()}\";";
                 }
+                else
+                    code = $"string lineInput = \"{rightHandPart.Trim()}\";";
             }
             initVariable = true;
             return (ScriptState, code);
@@ -175,11 +175,11 @@ namespace FlowCodeInfrastructure
             }
         }
 
-        private (ScriptState, string) HandleInput(ScriptState scriptState,string code, ref bool initVariable, ref bool customInput, ref string varName)
+        private (ScriptState, string) HandleInput(ScriptState scriptState, string code, ref bool initVariable, ref bool customInput, ref string varName)
         {
             if (Code.Contains(Config.GetKeyword(Config.KeyWord.Input)) == false)
                 return (scriptState, code);
-            
+
             string[] parts = code.Split(['=']);
             varName = parts[0].Trim();
             var filterName = varName;

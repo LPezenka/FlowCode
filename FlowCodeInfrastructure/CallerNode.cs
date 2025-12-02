@@ -37,6 +37,8 @@ namespace FlowCodeInfrastructure
                 var vars = Variables.Split(",");
                 string result = string.Empty;
                 TerminatorNode terminatorNode = TargetNode as TerminatorNode;
+                if (terminatorNode is null) return; // Improper function name
+
                 for (int i = 0; i < vars.Length; i++)
                 {
                     var v = vars[i];
