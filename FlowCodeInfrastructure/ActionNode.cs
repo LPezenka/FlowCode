@@ -100,9 +100,9 @@ namespace FlowCodeInfrastructure
 
                 // Temporary assignment to keep stuff working
                 // TODO: change all Code to code
-                Code = code
+                //Code = code;
 
-                if (Code.Contains(Config.GetKeyword(Config.KeyWord.Function)))
+                if (code.Contains(Config.GetKeyword(Config.KeyWord.Function)))
                 {
                     // TODO: Improve Logging. Simply writing to the console won't do
                     //Console.WriteLine($"Entering {Code}");
@@ -110,12 +110,12 @@ namespace FlowCodeInfrastructure
                 else
                 {
                     // This is going to be a line of code for the scripting engine
-                    if (!customInput && !customOutput && !Code.EndsWith(';'))
-                        Code = $"{Code};";
+                    if (!customInput && !customOutput && !code.EndsWith(';'))
+                        code = $"{code};";
 
                     if (customInput)
                     {
-                        Code = "string lineInput = \"" + InputHandler.ReadInput("Bitte Wert eingeben: ") + "\";";
+                        code = "string lineInput = \"" + InputHandler.ReadInput("Bitte Wert eingeben: ") + "\";";
                     }
 
                     if (customOutput)
@@ -125,7 +125,7 @@ namespace FlowCodeInfrastructure
                     else
                     {
                         // TODO: Consider moving this or find another way to get rid of lineInput
-                        ScriptState = ScriptState.ContinueWithAsync(Code, ScriptOptions).Result;
+                        ScriptState = ScriptState.ContinueWithAsync(code, ScriptOptions).Result;
                     }
                     if (initVariable)
                     {
@@ -159,7 +159,7 @@ namespace FlowCodeInfrastructure
 
                         ScriptState = ScriptState.ContinueWithAsync(postProcess, ScriptOptions).Result;
                         variableLogger?.LogVariables(ScriptState.Variables);
-                        Code = originalCode;
+                        //Code = originalCode;
                     }
                 }
             }
