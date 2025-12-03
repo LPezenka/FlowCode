@@ -81,6 +81,7 @@
                 <RowDefinition Height="9*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>-->
+            
             <ScrollViewer Grid.Column="0" Grid.Row="0" Height="Auto">
             <Canvas x:Name="DiagramCanvas" Background="{StaticResource ListBackgroundBrush}" MouseWheel="DiagramCanvas_MouseWheel">
                         <StackPanel>
@@ -146,6 +147,9 @@ Margin="10" Click="Run_Click">
                     </Canvas>
 
                 </ScrollViewer>
+            <Canvas x:Name="Overlay" Grid.Column="0" Grid.Row="0" Background="{x:Null}" Width="Auto" Height="Auto">
+
+            </Canvas>
             <!--<Border x:Name="DeleteZone"
             Grid.Column="0"
             Grid.Row="1"

@@ -113,10 +113,12 @@ namespace FlowEditor
             DiagramCanvas.MouseDown += MainWindow_MouseDown;
 
             _outputLogger = new OutputControl();
-            DiagramCanvas.Children.Add(_outputLogger);
+            Overlay.Children.Add(_outputLogger);
 
             _variableLogger = new OutputControl();
-            DiagramCanvas.Children.Add(_variableLogger);
+            Overlay.Children.Add(_variableLogger);
+
+            //Canvas.SetZIndex(_variableLogger, -10);
 
             FlowCodeInfrastructure.Node.variableLogger = _variableLogger;
 
@@ -134,11 +136,14 @@ namespace FlowEditor
 
         private void RepositionOutput()
         {
-            Canvas.SetLeft(_outputLogger, DiagramCanvas.ActualWidth - 300);
+            Canvas.SetLeft(_outputLogger, Overlay.ActualWidth - 300);
             Canvas.SetTop(_outputLogger, 60);
 
-            Canvas.SetLeft(_variableLogger, DiagramCanvas.ActualWidth - 500);
+            Canvas.SetLeft(_variableLogger, Overlay.ActualWidth - 500);
             Canvas.SetTop(_variableLogger, 60);
+
+            //Canvas.SetLeft(_variableLogger, DiagramCanvas.ActualWidth - 500);
+            //Canvas.SetTop(_variableLogger, 60);
             _variableLogger.SetTitle("Variables");
             _variableLogger.Background = Brushes.Blue;
         }
