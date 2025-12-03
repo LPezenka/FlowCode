@@ -83,6 +83,7 @@ namespace FlowEditor
         private DeleteZone _deletionZone;
         private OutputControl _outputLogger;
         private OutputControl _variableLogger;
+        private OutputControl _callStack;
 
         public MainWindow()
         {
@@ -120,6 +121,10 @@ namespace FlowEditor
 
             _variableLogger = new OutputControl();
             Overlay.Children.Add(_variableLogger);
+
+            _callStack = new OutputControl();
+            Overlay.Children.Add(_callStack);
+
 
             //Canvas.SetZIndex(_variableLogger, -10);
 
@@ -184,10 +189,18 @@ namespace FlowEditor
             Canvas.SetLeft(_variableLogger, Overlay.ActualWidth - 500);
             Canvas.SetTop(_variableLogger, 60);
 
+            Canvas.SetLeft(_callStack, Overlay.ActualWidth - 700);
+            Canvas.SetTop(_callStack, 60);
+
+
             //Canvas.SetLeft(_variableLogger, DiagramCanvas.ActualWidth - 500);
             //Canvas.SetTop(_variableLogger, 60);
             _variableLogger.SetTitle("Variables");
             _variableLogger.Background = Brushes.Blue;
+
+            _callStack.SetTitle("Call Stack");
+            _callStack.Background = Brushes.Green;
+
         }
 
         private void _dz_MouseDown(object sender, MouseButtonEventArgs e)

@@ -158,9 +158,9 @@ namespace FlowCodeInfrastructure
                         }
 
                         ScriptState = ScriptState.ContinueWithAsync(postProcess, ScriptOptions).Result;
-                        variableLogger?.LogVariables(ScriptState.Variables);
                         //Code = originalCode;
                     }
+                    variableLogger?.LogVariables(ScriptState.Variables);
                 }
             }
             catch (CompilationErrorException cee)

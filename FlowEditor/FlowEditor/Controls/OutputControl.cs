@@ -75,9 +75,11 @@ namespace FlowEditor.Controls
                 var t = Template;
                 if (t is not null)
                 {
-                    OutputMessages.Add(output);
+                    OutputMessages.Insert(0, output);
                     var messages = t.FindName("Messages", this) as ListBox;
+                    //Stack<string> strings = new Stack<string>();
                     messages?.Items.Refresh();
+
                 }
             });
         }
