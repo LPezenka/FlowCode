@@ -101,7 +101,7 @@ namespace FlowEditor
 
             Canvas.SetLeft(_deletionZone, 400);
             Canvas.SetTop(_deletionZone, 400);
-            DiagramCanvas.Children.Add(_deletionZone);
+            Overlay.Children.Add(_deletionZone);
 
 
             Config.SetKeyWord(Config.KeyWord.True, "Ja");
@@ -184,8 +184,8 @@ namespace FlowEditor
 
         private void ResetDeletionZone()
         {
-            Canvas.SetLeft(_deletionZone, DiagramCanvas.ActualWidth - _deletionZone.ActualWidth);
-            Canvas.SetTop(_deletionZone, DiagramCanvas.ActualHeight - _deletionZone.ActualHeight);
+            Canvas.SetLeft(_deletionZone, Overlay.ActualWidth - _deletionZone.ActualWidth);
+            Canvas.SetTop(_deletionZone, Overlay.ActualHeight - _deletionZone.ActualHeight);
         }
 
         protected override void OnKeyDown(KeyEventArgs e)

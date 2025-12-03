@@ -84,8 +84,13 @@
             
             <ScrollViewer Grid.Column="0" Grid.Row="0" Height="Auto">
             <Canvas x:Name="DiagramCanvas" Background="{StaticResource ListBackgroundBrush}" MouseWheel="DiagramCanvas_MouseWheel">
-                        <StackPanel>
-                            <Button
+                        
+                    </Canvas>
+
+                </ScrollViewer>
+            <Canvas x:Name="Overlay" Grid.Column="0" Grid.Row="0" Background="{x:Null}" Width="Auto" Height="Auto">
+                <StackPanel>
+                    <Button
                     x:Name="AddNodeButton"
                 Width="92" Height="92"
                 HorizontalAlignment="Left"
@@ -95,29 +100,29 @@
                     
 
                     >
-                                <Image Source="/res/process.png"/>
-                            </Button>
-                            <Button
+                        <Image Source="/res/process.png"/>
+                    </Button>
+                    <Button
                     x:Name="AddDecisionButton"
     Width="92" Height="92"
     HorizontalAlignment="Left"
     VerticalAlignment="Top"
     Margin="10"
     Click="AddDecisionNode_Click">
-                                <Image Source="/res/decision.png"/>
-                            </Button>
+                        <Image Source="/res/decision.png"/>
+                    </Button>
 
-                            <Button
+                    <Button
                     x:Name="AddProcessCallButton"
     Width="92" Height="92"
     HorizontalAlignment="Left"
     VerticalAlignment="Top"
     Margin="10"
     Click="AddFunctionNode_Click">
-                                <Image Source="/res/predefinedprocess.png"/>
-                            </Button>
+                        <Image Source="/res/predefinedprocess.png"/>
+                    </Button>
 
-                            <Button
+                    <Button
                   x:Name="AddTerminalButton"
   Width="92" Height="92"
   HorizontalAlignment="Left"
@@ -125,30 +130,18 @@
   Margin="10"
   Click="AddTerminatorNode_Click"
                     Background="White">
-                                <Image Source="/res/terminal.png"/>
-                            </Button>
-
-                            <!--<Button Width="92" Height="92"
-HorizontalAlignment="Left"
-VerticalAlignment="Top"
-Margin="10" Click="Button_Click">
-                    <Image Width="92" Height="92" Source="/res/compile.png"/>
-                </Button>-->
-                            <Button 
+                        <Image Source="/res/terminal.png"/>
+                    </Button>
+                    <Button 
                     x:Name="RunButton"
                     Width="92" Height="92"
                     Background="White"
 HorizontalAlignment="Left"
 VerticalAlignment="Top"
 Margin="10" Click="Run_Click">
-                                <Image Width="80" Height="80" Source="/res/Play.jpg" Stretch="Uniform"/>
-                            </Button>
-                        </StackPanel>
-                    </Canvas>
-
-                </ScrollViewer>
-            <Canvas x:Name="Overlay" Grid.Column="0" Grid.Row="0" Background="{x:Null}" Width="Auto" Height="Auto">
-
+                        <Image Width="80" Height="80" Source="/res/Play.jpg" Stretch="Uniform"/>
+                    </Button>
+                </StackPanel>
             </Canvas>
             <!--<Border x:Name="DeleteZone"
             Grid.Column="0"
