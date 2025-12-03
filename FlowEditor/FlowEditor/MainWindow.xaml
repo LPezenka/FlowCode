@@ -8,7 +8,8 @@
         mc:Ignorable="d"
         Title="FlowCode Visual Programming Editor" Height="900" Width="800"
         AllowDrop="True" Drop="Window_Drop"
-        SizeChanged="Window_SizeChanged">
+        SizeChanged="Window_SizeChanged"
+        KeyDown="Window_KeyDown">
 
     <Window.Resources>
         <DrawingBrush x:Key="ListBackgroundBrush" Viewport="0,0,100,100" ViewportUnits="Absolute" TileMode="Tile">
@@ -84,8 +85,10 @@
             
             <ScrollViewer Grid.Column="0" Grid.Row="0" Height="Auto">
             <Canvas x:Name="DiagramCanvas" Background="{StaticResource ListBackgroundBrush}" MouseWheel="DiagramCanvas_MouseWheel">
-                        
-                    </Canvas>
+                    <!--<Canvas.RenderTransform>
+                        <MatrixTransform x:Name="mt"/>
+                    </Canvas.RenderTransform>-->
+                </Canvas>
 
                 </ScrollViewer>
             <Canvas x:Name="Overlay" Grid.Column="0" Grid.Row="0" Background="{x:Null}" Width="Auto" Height="Auto">

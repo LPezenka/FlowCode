@@ -111,6 +111,9 @@ namespace FlowEditor
             Config.SetKeyWord(Config.KeyWord.Output, "Ausgabe");
 
             DiagramCanvas.MouseDown += MainWindow_MouseDown;
+            //DiagramCanvas.MouseRightButtonDown += DiagramCanvas_MouseRightButtonDown;
+            //DiagramCanvas.MouseRightButtonUp += DiagramCanvas_MouseRightButtonUp;
+            //DiagramCanvas.MouseMove += DiagramCanvas_MouseMove;
 
             _outputLogger = new OutputControl();
             Overlay.Children.Add(_outputLogger);
@@ -132,6 +135,45 @@ namespace FlowEditor
             //ProcessNodeControl.TemplateBrush = new SolidColorBrush(Color.FromArgb(0xff, 0x86, 0xbb, 0xd8));
             //TerminalNodeControl.TemplateBrush = new SolidColorBrush(Color.FromArgb(0xff, 0xf2, 0x64, 0x19));
         }
+
+
+        //private void DiagramCanvas_MouseMove(object sender, MouseEventArgs e)
+        //{
+        //    if (_isDragged == false)
+        //        return;
+
+        //    base.OnMouseMove(e);
+        //    if (e.RightButton == MouseButtonState.Pressed && IsMouseCaptured)
+        //    {
+
+        //        var pos = e.GetPosition(this);
+        //        var matrix =  mt.Matrix; // it's a struct
+        //        matrix.Translate(pos.X - _last.X, pos.Y - _last.Y);
+        //        mt.Matrix = matrix;
+        //        _last = pos;
+
+        //    }
+        //}
+
+        //private void DiagramCanvas_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        //{
+        //    base.OnMouseRightButtonUp(e);
+        //    ReleaseMouseCapture();
+        //    _isDragged = false;
+        //}
+
+        //bool _isDragged = false;
+        //Point _last;
+        //private void DiagramCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    base.OnMouseRightButtonDown(e);
+        //    CaptureMouse();
+        //    //_last = e.GetPosition(canvas);
+        //    _last = e.GetPosition(this);
+
+        //    _isDragged = true;
+        //    _outputLogger.ShowOutput("_isDragged = true!");
+        //}
 
 
         private void RepositionOutput()
@@ -402,6 +444,7 @@ namespace FlowEditor
             MouseLeftButtonUp += MainWindow_MouseLeftButtonUp;
         }
 
+
         private void MainWindow_MouseMove(object sender, MouseEventArgs e)
         {
             if (_temporaryEdge != null)
@@ -415,12 +458,6 @@ namespace FlowEditor
 
         private void AddTerminatorNode_Click(object sender, RoutedEventArgs e)
         {
-            //var nodeColor = ConfigurationManager.AppSettings["TerminatorNodeColor"];
-            //var alpha = byte.Parse(nodeColor.Substring(0, 2), NumberStyles.HexNumber);
-            //var r = byte.Parse(nodeColor.Substring(2, 2), NumberStyles.HexNumber);
-            //var g = byte.Parse(nodeColor.Substring(4, 2), NumberStyles.HexNumber);
-            //var b = byte.Parse(nodeColor.Substring(6, 2), NumberStyles.HexNumber);
-
             GetNodeColorColor("TerminatorNodeColor", out byte alpha, out byte r, out byte g, out byte b);
 
             var terminator = new TerminalNodeControl
@@ -442,12 +479,6 @@ namespace FlowEditor
         }
         private void AddFunctionNode_Click(object sender, RoutedEventArgs e)
         {
-            //var nodeColor = ConfigurationManager.AppSettings["ProcessNodeColor"];
-            //var alpha = byte.Parse(nodeColor.Substring(0, 2), NumberStyles.HexNumber);
-            //var r = byte.Parse(nodeColor.Substring(2, 2), NumberStyles.HexNumber);
-            //var g = byte.Parse(nodeColor.Substring(4, 2), NumberStyles.HexNumber);
-            //var b = byte.Parse(nodeColor.Substring(6, 2), NumberStyles.HexNumber);
-
             GetNodeColorColor("ProcessNodeColor", out byte alpha, out byte r, out byte g, out byte b);
 
             var processNode = new ProcessNodeControl()
@@ -1082,6 +1113,33 @@ namespace FlowEditor
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ResetDeletionZone();
+        }
+
+        // Pan with WASD and arrow keys
+        // TODO: Implement mouse panning
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            double offsetX = 0.0;
+            double offsetY = 0.0;
+            if (e.Key == Key.W || e.Key == Key.Up) // pan up
+                offsetY = -10.0;
+            if (e.Key == Key.A || e.Key == Key.Left) // pan left
+                offsetX = -10.0;
+            if (e.Key == Key.S || e.Key == Key.Down) // pan down
+                offsetY = 10.0;
+            if (e.Key == Key.D || e.Key == Key.Right) // pan right
+                offsetX = 10.0;
+
+            foreach (NodeControlBase n in canvasNodes)
+            {
+                var l = Canvas.GetLeft(n);
+                var t = Canvas.GetTop(n);
+
+                Canvas.SetLeft(n, l + offsetX); 
+                Canvas.SetTop(n, t + offsetY);
+            }
+
+
         }
     }
 }
