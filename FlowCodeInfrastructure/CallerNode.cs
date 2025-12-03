@@ -39,6 +39,9 @@ namespace FlowCodeInfrastructure
                 TerminatorNode terminatorNode = TargetNode as TerminatorNode;
                 if (terminatorNode is null) return; // Improper function name
 
+                //TODO: Refresh Call Stack
+
+
                 for (int i = 0; i < vars.Length; i++)
                 {
                     var v = vars[i];
@@ -96,6 +99,10 @@ namespace FlowCodeInfrastructure
             //{
             ScriptState = state;
             ScriptOptions = options;
+
+            //TODO: Refresh Call Stack
+
+
             //Run(Next);
             //}
         }
