@@ -26,8 +26,8 @@ namespace FlowEditor.Controls
 
         public override List<Point> GetConnectionPoints() => new()
         {
-            new Point(ActualWidth / 2, 0),             // Eingang: Mitte oben
-                new Point(ActualWidth / 2, ActualHeight),   // Ausgang: Mitte unten
+            new Point(ActualWidth / 2, -1),             // Eingang: Mitte oben
+                new Point(ActualWidth / 2, ActualHeight + 1),   // Ausgang: Mitte unten
             new Point(0, ActualHeight / 2),
             new Point(ActualWidth, ActualHeight / 2)
             //new Point(ActualWidth / 2, 0),
