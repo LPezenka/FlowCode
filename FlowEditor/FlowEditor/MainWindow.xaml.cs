@@ -24,6 +24,7 @@ using System.Xml;
 using System.Xml.Linq;
 using Interfaces;
 using System.Configuration;
+using FlowEditor.Windows;
 
 namespace FlowEditor
 {
@@ -87,6 +88,9 @@ namespace FlowEditor
 
         public MainWindow()
         {
+            WelcomeWindow ww = new WelcomeWindow("./res/tips.json");
+            ww.ShowDialog();
+
             this.WindowState = WindowState.Maximized;
             InitializeComponent();
             _lastNodePosition = new Point(Application.Current.MainWindow.Width / 2, 15);
@@ -129,7 +133,7 @@ namespace FlowEditor
             //Canvas.SetZIndex(_variableLogger, -10);
 
             FlowCodeInfrastructure.Node.variableLogger = _variableLogger;
-
+            FlowCodeInfrastructure.CallerNode.StackDisplay = _callStack;
             //oc.ShowOutput("Hallo");
             //oc.ShowOutput("Welt");
 
@@ -1142,17 +1146,21 @@ namespace FlowEditor
                 offsetY = 10.0;
             if (e.Key == Key.D || e.Key == Key.Right) // pan right
                 offsetX = 10.0;
+            PanNodes(offsetX, offsetY);
 
+        }
+
+        private void PanNodes(double offsetX, double offsetY)
+        {
             foreach (NodeControlBase n in canvasNodes)
             {
                 var l = Canvas.GetLeft(n);
                 var t = Canvas.GetTop(n);
 
-                Canvas.SetLeft(n, l + offsetX); 
+                Canvas.SetLeft(n, l + offsetX);
                 Canvas.SetTop(n, t + offsetY);
             }
-
-
+            UpdateEdges();
         }
     }
 }

@@ -49,7 +49,7 @@ namespace FlowEditor.Controls
     ///     <MyNamespace:OutputWindow/>
     ///
     /// </summary>
-    public class OutputControl : Control, IOutputHandler, INotifyPropertyChanged, IVariableLogger
+    public class OutputControl : Control, IOutputHandler, INotifyPropertyChanged, IVariableLogger, ICallStack
     {
         public List<string> OutputMessages { get; set; } = new List<string>();
 
@@ -176,6 +176,30 @@ namespace FlowEditor.Controls
                     ShowOutput($"{variable.Name} : {variable.Value} ({variable.Type})");
                 }
             });
+        }
+
+        public void Push(string functionName)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                    ShowOutput(functionName);
+            });
+        }
+
+        public void Pop()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                var t = Template;
+                if (t is not null)
+                {
+                    OutputMessages.RemoveAt(0);
+                    var messages = t.FindName("Messages", this) as ListBox;
+                    messages?.Items.Refresh();
+
+                }
+            });
+
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Scripting;
+﻿using Interfaces;
+using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace FlowCodeInfrastructure
         public string ReturnTarget { get; set; }
         public string ReturnSource { get; set; }
 
-
+        public static ICallStack StackDisplay { get; set; }
         public CallerNode(Node target):base()
         {
             TargetNode = target;
@@ -40,7 +41,7 @@ namespace FlowCodeInfrastructure
                 if (terminatorNode is null) return; // Improper function name
 
                 //TODO: Refresh Call Stack
-
+                StackDisplay?.Push(TargetNode.Code);
 
                 for (int i = 0; i < vars.Length; i++)
                 {
@@ -101,7 +102,7 @@ namespace FlowCodeInfrastructure
             ScriptOptions = options;
 
             //TODO: Refresh Call Stack
-
+            StackDisplay?.Pop();
 
             //Run(Next);
             //}
