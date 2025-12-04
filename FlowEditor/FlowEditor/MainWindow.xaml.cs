@@ -589,9 +589,10 @@ namespace FlowEditor
                 nodeY3 + connectionsIn[(int)localTempEdge.ToIndex].Y
                 );
 
-            localTempEdge.ControlPoints.Insert(0, lineStart);
-            localTempEdge.ControlPoints.Add(lineEnd);
-            for (int i = 1; i < localTempEdge.ControlPoints.Count; i++)
+            List<Point> existingPoints = new List<Point>(localTempEdge.ControlPoints);
+            existingPoints.Insert(0, lineStart);
+            existingPoints.Add(lineEnd);
+            for (int i = 1; i < existingPoints.Count; i++)
             {
                 //double x1 = localTempEdge.ControlPoints[i - 1].X;
                 //double y1 = localTempEdge.ControlPoints[i - 1].Y;
@@ -608,18 +609,62 @@ namespace FlowEditor
                 //    );
 
                 bool bottomHit = LineLineIntersection(
-                    localTempEdge.ControlPoints[i - 1],
-                    localTempEdge.ControlPoints[i],
+                    existingPoints[i - 1],
+                    existingPoints[i],
                     new Point(nodeX1, nodeY2),
                     new Point(nodeX2, nodeY2)
                     );
+
+                if (bottomHit)
+                    RerouteEdge(localTempEdge);
 
                 //double dx = localTempEdge.ControlPoints[i].X - localTempEdge.ControlPoints[i-1].X;
                 //double dy = localTempEdge.ControlPoints[i].Y - localTempEdge.ControlPoints[i - 1].Y;
                 // This is a straight line. 
             }
-            localTempEdge.ControlPoints.RemoveAt(0);
-            localTempEdge.ControlPoints.RemoveAt(localTempEdge.ControlPoints.Count - 1);
+            UpdateEdges();
+            //localTempEdge.ControlPoints.RemoveAt(0);
+            //localTempEdge.ControlPoints.RemoveAt(localTempEdge.ControlPoints.Count - 1);
+            //localTempEdge.ControlPoints.Remove(lineStart);
+            //localTempEdge.ControlPoints.Remove(lineEnd);
+
+        }
+
+        private void RerouteEdge(EdgeControl localTempEdge)
+        {
+            var connectionsOut = _edgeStartNode.GetConnectionPoints();
+            var connectionsIn = localTempEdge.To.GetConnectionPoints();
+
+            double nodeX1 = Canvas.GetLeft(_edgeStartNode);
+            double nodeY1 = Canvas.GetTop(_edgeStartNode);
+            double nodeX2 = nodeX1 + _edgeStartNode.ActualWidth;
+            double nodeY2 = nodeY1 + _edgeStartNode.ActualHeight;
+
+            double nodeX3 = Canvas.GetLeft(localTempEdge.To);
+            double nodeY3 = Canvas.GetTop(localTempEdge.To);
+            double nodeX4 = nodeX3 + localTempEdge.To.ActualWidth;
+            double nodeY4 = nodeY3 + localTempEdge.To.ActualHeight;
+
+            Point lineStart = new Point(
+                nodeX1 + connectionsOut[(int)localTempEdge.FromIndex].X,
+                nodeY1 + connectionsOut[(int)localTempEdge.FromIndex].Y
+                );
+
+            Point lineEnd = new Point(
+                nodeX3 + connectionsIn[(int)localTempEdge.ToIndex].X,
+                nodeY3 + connectionsIn[(int)localTempEdge.ToIndex].Y
+                );
+
+            // Avoid magic numebrs
+            Point down = new Point(lineStart.X, lineStart.Y + 30);
+            Point downRight = new Point(down.X + 150, down.Y);
+            Point aboveRight = new Point(downRight.X, lineEnd.Y - 30);
+            Point above = new Point(lineEnd.X, lineEnd.Y - 30);
+
+            localTempEdge.ControlPoints.Add(down);
+            localTempEdge.ControlPoints.Add(downRight);
+            localTempEdge.ControlPoints.Add(aboveRight);
+            localTempEdge.ControlPoints.Add(above);
         }
 
         private bool LineLineIntersection(Point p1, Point p2, Point p3, Point p4)
