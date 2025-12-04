@@ -39,7 +39,10 @@ namespace FlowEditor.Windows
             if (_tips.Count > 0)
             {
                 HelpText.Text = _tips[0].Text;
-                HelpImage.Source = new BitmapImage(new Uri(_tips[0].Source));
+                var imgpath = System.IO.Path.Combine(Environment.CurrentDirectory, "res", "terminal.png");
+                if (!File.Exists(imgpath)) return;
+                HelpImage.Source = new BitmapImage(new Uri(imgpath));
+                //new System.Uri(_tips[0].Source));
             }
         }
 
