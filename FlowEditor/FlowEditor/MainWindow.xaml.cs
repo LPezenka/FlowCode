@@ -1282,6 +1282,19 @@ namespace FlowEditor
                 Canvas.SetLeft(n, l + offsetX);
                 Canvas.SetTop(n, t + offsetY);
             }
+
+
+            foreach (EdgeControl e in edges)
+            {
+                for (int i = 0; i < e.ControlPoints.Count; i++)
+                {
+                    var p = e.ControlPoints[i];
+                    p.X += offsetX;
+                    p.Y += offsetY;
+                    e.ControlPoints[i] = p;
+                }
+            }
+
             UpdateEdges();
         }
     }
