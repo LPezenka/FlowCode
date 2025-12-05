@@ -493,7 +493,7 @@ namespace FlowEditor
         private void AddTerminatorNode_Click(object sender, RoutedEventArgs e)
         {
             GetNodeColorColor("TerminatorNodeColor", out byte alpha, out byte r, out byte g, out byte b);
-            GetNodeColorColor("TermionatorTextColor", out byte alphaText, out byte rText, out byte gText, out byte bText);
+            GetNodeColorColor("TerminatorTextColor", out byte alphaText, out byte rText, out byte gText, out byte bText);
 
             var terminator = new TerminalNodeControl
             {
@@ -1322,15 +1322,21 @@ namespace FlowEditor
         {
             double offsetX = 0.0;
             double offsetY = 0.0;
-            if (e.Key == Key.W || e.Key == Key.Up) // pan up
-                offsetY = -10.0;
-            if (e.Key == Key.A || e.Key == Key.Left) // pan left
-                offsetX = -10.0;
-            if (e.Key == Key.S || e.Key == Key.Down) // pan down
-                offsetY = 10.0;
-            if (e.Key == Key.D || e.Key == Key.Right) // pan right
-                offsetX = 10.0;
-            PanNodes(offsetX, offsetY);
+
+            var focussed = FocusManager.GetFocusedElement(this) as TextBox;
+            if (focussed is null)
+            {
+
+                if (e.Key == Key.W || e.Key == Key.Up) // pan up
+                    offsetY = -10.0;
+                if (e.Key == Key.A || e.Key == Key.Left) // pan left
+                    offsetX = -10.0;
+                if (e.Key == Key.S || e.Key == Key.Down) // pan down
+                    offsetY = 10.0;
+                if (e.Key == Key.D || e.Key == Key.Right) // pan right
+                    offsetX = 10.0;
+                PanNodes(offsetX, offsetY);
+            }
 
         }
 
