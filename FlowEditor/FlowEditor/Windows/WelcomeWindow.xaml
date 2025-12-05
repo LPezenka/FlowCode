@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlowEditor.Windows"
         mc:Ignorable="d"
-        Title="FlowEditor" Height="400" Width="400">
+        Title="FlowEditor" Height="400" Width="500">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="14*"></RowDefinition>
@@ -13,10 +13,14 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <TextBlock TextWrapping="Wrap" Padding="15px" x:Name="HelpText" Grid.Column="0" Grid.Row="0" Text="Lorem Ipsum et dolor something this is simply a help text"></TextBlock>
-        <Image x:Name="HelpImage" Grid.Row="0" Grid.Column="1" Source="/res/compile.jpg" Width="200"></Image>
-        <Button x:Name="OkButton" Content="OK" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Click="OkButton_Click"></Button>
+        <Image Stretch="Fill" x:Name="HelpImage" Grid.Row="0" Grid.Column="1" Source="/res/compile.jpg" Width="300" Height="300"></Image>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <Button x:Name="Previous" Content="Vorheriger Tipp" Click="Previous_Click"></Button>
+            <Button x:Name="OkButton" Content="OK" Click="OkButton_Click"></Button>
+            <Button Content="Nächster Tipp" Click="Button_Click"></Button>
+        </StackPanel>
     </Grid>
 </Window>

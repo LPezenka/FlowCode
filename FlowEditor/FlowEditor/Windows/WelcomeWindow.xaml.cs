@@ -35,15 +35,24 @@ namespace FlowEditor.Windows
         public WelcomeWindow(string path)
         {
             InitializeComponent();
+            this.ResizeMode = ResizeMode.NoResize;
             ParseJSON(path);
-            if (_tips.Count > 0)
+            DisplayHint();
+            
+        }
+
+        private bool DisplayHint()
+        {
+            if (_tips.Count > _tipCounter)
             {
-                HelpText.Text = _tips[0].Text;
-                var imgpath = System.IO.Path.Combine(Environment.CurrentDirectory, "res", "terminal.png");
-                if (!File.Exists(imgpath)) return;
+                HelpText.Text = _tips[_tipCounter].Text;
+                var imgpath = System.IO.Path.Combine(Environment.CurrentDirectory, _tips[_tipCounter].Source);
+                if (!File.Exists(imgpath)) return false;
                 HelpImage.Source = new BitmapImage(new Uri(imgpath));
-                //new System.Uri(_tips[0].Source));
+   
             }
+
+            return true;
         }
 
         private void ParseJSON(string path)
@@ -55,6 +64,22 @@ namespace FlowEditor.Windows
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            _tipCounter++;
+            if (_tipCounter > _tips.Count)
+                _tipCounter = 0;
+            DisplayHint();
+        }
+
+        private void Previous_Click(object sender, RoutedEventArgs e)
+        {
+            _tipCounter--;
+            if (_tipCounter < 0)
+                _tipCounter = _tips.Count;
+            DisplayHint();
         }
     }
 }

@@ -1,7 +1,7 @@
 [
   {
-    "Text": "Dies ist ein Tipp zur benutzung des Flow Editors",
-    "Source": "./res/compile.jpg"
+    "Text": "Eine Kopfgesteuerte Schleife (For-Schleife oder Zählschleife) braucht eine Initialisierung, eine Bedingung (mit ja / nein zu beantworten), einen Schleifenrumpf und ein Inkrement (eine Aktualisierung)",
+    "Source": "./Hints/For-Loop-With-Output.png"
   },
   {
     "Text": "Noch ein Tipp",
