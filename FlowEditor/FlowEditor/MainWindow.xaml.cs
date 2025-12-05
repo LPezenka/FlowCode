@@ -351,6 +351,8 @@ namespace FlowEditor
             if (currentRoot != null)
             {
                 currentRoot.Background = currentRoot.OriginalBackground;
+                currentRoot.BorderBrush = Brushes.Black;
+                currentRoot.BorderThickness = new Thickness(0.0);
                 currentRoot.IsRoot = false;
                 NodeControlBase.LastSelected = null;
                 ToggleDeleteZone(false);
@@ -360,7 +362,9 @@ namespace FlowEditor
 
             if (currentRoot != null)
             {
-                currentRoot.Background = Brushes.Gold;
+                //currentRoot.Background = Brushes.Gold;
+                currentRoot.BorderBrush = Brushes.OrangeRed;
+                currentRoot.BorderThickness = new Thickness(9.0);
                 currentRoot.IsRoot = true;
                 NodeControlBase.LastSelected = null;
                 ToggleDeleteZone(false);
@@ -489,6 +493,7 @@ namespace FlowEditor
         private void AddTerminatorNode_Click(object sender, RoutedEventArgs e)
         {
             GetNodeColorColor("TerminatorNodeColor", out byte alpha, out byte r, out byte g, out byte b);
+            GetNodeColorColor("TermionatorTextColor", out byte alphaText, out byte rText, out byte gText, out byte bText);
 
             var terminator = new TerminalNodeControl
             {
@@ -497,6 +502,7 @@ namespace FlowEditor
             //    OriginalBackground =  new SolidColorBrush(
             //Color.FromArgb(0xff, 0xf6, 0xae, 0x2d)),
                 OriginalBackground = new SolidColorBrush( Color.FromArgb(alpha,r,g,b) ),//Color.FromArgb(0xff, 0xf2, 0x64, 0x19)),
+                Foreground = new SolidColorBrush(Color.FromArgb(alphaText, rText, gText, bText)),
                 NodeData = new Controls.Node
                 {
                     Title = "Start/End",
@@ -510,12 +516,14 @@ namespace FlowEditor
         private void AddFunctionNode_Click(object sender, RoutedEventArgs e)
         {
             GetNodeColorColor("ProcessNodeColor", out byte alpha, out byte r, out byte g, out byte b);
+            GetNodeColorColor("ProcessTextColor", out byte alphaText, out byte rText, out byte gText, out byte bText);
 
             var processNode = new ProcessNodeControl()
             {
                 Width = 180,
                 Height = 90,
                 OriginalBackground = new SolidColorBrush(Color.FromArgb(alpha,r,g,b)), //0xff, 0x86, 0xbb, 0xd8)),
+                Foreground = new SolidColorBrush(Color.FromArgb(alphaText, rText, gText, bText)),
                 NodeData = new Controls.Node
                 {
                     Title = $"ProcessCall({_nodeCount++})",
@@ -911,6 +919,10 @@ namespace FlowEditor
                 return;
             }
 
+            
+            NodeControlBase.LastSelected?.SetActive(false);
+            _deletionZone.Visibility = Visibility.Hidden;
+
             ScriptOptions scriptOptions = ScriptOptions.Default;
 
             //Add reference to mscorlib
@@ -1010,7 +1022,7 @@ namespace FlowEditor
                 NodeControlBase node; //= new RectangleNodeControl();
 
                 byte alpha = 0, r = 0, g = 0, b = 0;
-
+                byte alphaText = 0, rText = 0, gText = 0, bText = 0;
                 switch (nodeType)
                 {
                     case "Sequence":
@@ -1021,6 +1033,8 @@ namespace FlowEditor
                         };
                         //node.OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0x33, 0x65, 0x8a));
                         GetNodeColorColor("SequenceNodeColor", out alpha, out r, out g, out b);
+                        GetNodeColorColor("SequenceTextColor", out alphaText, out rText, out gText, out bText);
+                        node.Foreground = new SolidColorBrush(Color.FromArgb(alphaText, rText, gText, bText));
                         node.OriginalBackground = new SolidColorBrush(Color.FromArgb(alpha, r, g, b));
                         break;
                     case "Decision":
@@ -1030,6 +1044,8 @@ namespace FlowEditor
                             Height = 160,
                         };
                         GetNodeColorColor("DecisionNodeColor", out alpha, out r, out  g, out b);
+                        GetNodeColorColor("DecisionTextColor", out alphaText, out rText, out gText, out bText);
+                        node.Foreground = new SolidColorBrush(Color.FromArgb(alphaText, rText, gText, bText));
                         node.OriginalBackground = new SolidColorBrush(Color.FromArgb(alpha, r, g, b));
 
                         //node.OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0xf6, 0xae, 0x2d));
@@ -1041,7 +1057,10 @@ namespace FlowEditor
                             Height = 90
                         };
                         //node.OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0x86, 0xbb, 0xd8));
+
                         GetNodeColorColor("ProcessNodeColor", out alpha, out r, out g, out b);
+                        GetNodeColorColor("ProcessTextColor", out alphaText, out rText, out gText, out bText);
+                        node.Foreground = new SolidColorBrush(Color.FromArgb(alphaText, rText, gText, bText));
                         node.OriginalBackground = new SolidColorBrush(Color.FromArgb(alpha, r, g, b));
 
                         break;
@@ -1059,6 +1078,8 @@ namespace FlowEditor
                         };
 
                         GetNodeColorColor("TerminatorNodeColor", out alpha, out r, out g, out b);
+                        GetNodeColorColor("TerminatorTextColor", out alphaText, out rText, out gText, out bText);
+                        node.Foreground = new SolidColorBrush(Color.FromArgb(alphaText, rText, gText, bText));
                         node.OriginalBackground = new SolidColorBrush(Color.FromArgb(alpha, r, g, b));
 
 

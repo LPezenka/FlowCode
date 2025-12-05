@@ -216,7 +216,7 @@ namespace FlowEditor.Controls
             }
         }
 
-        public void SetActive(bool active)
+        public virtual void SetActive(bool active)
         {
 
             Application.Current.Dispatcher.Invoke(() =>
@@ -225,22 +225,28 @@ namespace FlowEditor.Controls
                 if (active)
                 {
                     //HighlightRequested?.Invoke(this, EventArgs.Empty);
-                    Background = Brushes.Magenta;
+                    //Background = Brushes.Magenta;
+                    BorderBrush = Brushes.LightGreen;
+                    BorderThickness = new Thickness(9.0);
                     NotifyPropertyChanged("Background");
                     InvalidateVisual();
                 }
                 else
                 {
-                    if (!IsRoot)
-                    {
+                    //if (!IsRoot)
+                    //{
                         Background = OriginalBackground;// Brushes.White;
+                        BorderBrush = Brushes.Black;
+                        BorderThickness = new Thickness(1.0);
                         //Background = Brushes.Gold;
-                    }
-                    else
-                    {
-                        Background = Brushes.Gold;
-                        //Background = OriginalBackground;
-                    }
+                    //}
+                    //else
+                    //{
+                    //    //Background = Brushes.Gold;
+                    //    //Background = OriginalBackground;
+                    //    //BorderBrush = Brushes.Black;
+                    //    //BorderThickness = new Thickness(1.0);
+                    //}
                     //Task.Run(async () =>
                     //{
                     //await Task.Delay(100);

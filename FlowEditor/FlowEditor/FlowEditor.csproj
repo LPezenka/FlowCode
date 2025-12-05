@@ -13,7 +13,9 @@
     <None Remove="res\compile.jpg" />
     <None Remove="res\compile.png" />
     <None Remove="res\decision.png" />
+    <None Remove="res\play-button.png" />
     <None Remove="res\Play.jpg" />
+    <None Remove="res\predefined.png" />
     <None Remove="res\predefinedprocess.png" />
     <None Remove="res\process.png" />
     <None Remove="res\terminal.png" />
@@ -51,8 +53,12 @@
     <Resource Include="res\decision.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="res\play-button.png" />
     <Resource Include="res\Play.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\predefined.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\predefinedprocess.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
