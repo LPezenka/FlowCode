@@ -644,6 +644,7 @@ namespace FlowEditor
                 // This is a straight line. 
             }
 
+            // TODO: At some point, try to minimize / optimize rms distance from controlpoints to edge
             if (reRoute) 
             {
                 localTempEdge.ControlPoints.Clear();

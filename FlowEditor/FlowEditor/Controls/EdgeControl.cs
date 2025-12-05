@@ -269,12 +269,14 @@ namespace FlowEditor.Controls
         {
             base.OnMouseLeftButtonDown(e);
 
-            if (e.ClickCount == 2)
-            {
-                Point clickPos = e.GetPosition(Application.Current.MainWindow);
-                InsertControlPoint(clickPos);
-                e.Handled = true;
-            }
+            //Probably not needed anymore, as edges are automatically re-routed
+            //
+            //if (e.ClickCount == 2)
+            //{
+            //    Point clickPos = e.GetPosition(Application.Current.MainWindow);
+            //    InsertControlPoint(clickPos);
+            //    e.Handled = true;
+            //}
         }
 
         public void InsertControlPoint(Point position)
