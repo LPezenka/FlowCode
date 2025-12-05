@@ -33,6 +33,7 @@
                                FontSize="12"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
+                               Foreground="{TemplateBinding Foreground}"
                                  Background="{TemplateBinding Background}"/>
                     </Border>
                 </ControlTemplate>
@@ -206,7 +207,7 @@
                                       VerticalAlignment="Center"
                                       FontSize="12"
                                       Margin="10"
-                                     Foreground="White"
+                                     Foreground="{TemplateBinding Foreground}"
                                      Background="{TemplateBinding Background}"/>
                         </Grid>
                     </Border>

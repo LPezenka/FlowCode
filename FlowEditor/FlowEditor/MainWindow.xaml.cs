@@ -372,12 +372,14 @@ namespace FlowEditor
         {
             byte alpha, r, g, b;
             GetNodeColorColor("DecisionNodeColor", out alpha, out r, out g, out b);
+            GetNodeColorColor("DecisionTextColor", out byte alphaText, out byte rText, out byte gText, out byte bText);
 
             var decisionNode = new DecisionNodeControl
             {
                 Width = 180,
                 Height = 160,
-                OriginalBackground = new SolidColorBrush(Color.FromArgb(alpha, r, g, b)),//Color.FromArgb(0xff, 0xf6, 0xae, 0x2d)),
+                OriginalBackground = new SolidColorBrush(Color.FromArgb(alpha, r, g, b)),//Color.FromArgb(0xff, 0xf6, 0xae, 0x2d)),,
+                Foreground = new SolidColorBrush(Color.FromArgb(alphaText, rText, gText, bText)),
                 NodeData = new Controls.Node
                 {
                     Title = $"Decision Node({_nodeCount++})",
@@ -400,6 +402,7 @@ namespace FlowEditor
         private void AddNode_Click(object sender, RoutedEventArgs e)
         {
             GetNodeColorColor("SequenceNodeColor", out byte alpha, out byte r, out byte g, out byte b);
+            GetNodeColorColor("SequenceTextColor", out byte alphaText, out byte rText, out byte gText, out byte bText);
 
             var node = new SequenceNodeControl
             {
@@ -408,6 +411,7 @@ namespace FlowEditor
                 //OriginalBackground = SequenceNodeControl.TemplateBrush,
                 //33658aff
                 OriginalBackground = new SolidColorBrush(Color.FromArgb(alpha, r,g,b)),// Color.FromArgb(0xff, 0x33, 0x65, 0x8a)),
+                Foreground = new SolidColorBrush(Color.FromArgb(alphaText, rText, gText, bText)),
                 NodeData = new Controls.Node
                 {
                     Title = $"Node({_nodeCount++})",
