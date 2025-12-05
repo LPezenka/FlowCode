@@ -703,9 +703,14 @@ namespace FlowEditor
                 nodeY3 + connectionsIn[(int)localTempEdge.ToIndex].Y
                 );
 
-            // Avoid magic numebrs
+
+            int goRight = (lineStart.X > lineEnd.X) ? 1:-1;
+
+            // Avoid magic numbers
+            double xOffset = Math.Max(localTempEdge.From.ActualWidth, localTempEdge.To.ActualWidth) * 2 / 3;
+
             Point down = new Point(lineStart.X, lineStart.Y + 30);
-            Point downRight = new Point(down.X + 150, down.Y);
+            Point downRight = new Point(down.X + xOffset * goRight, down.Y);
             Point aboveRight = new Point(downRight.X, lineEnd.Y - 30);
             Point above = new Point(lineEnd.X, lineEnd.Y - 30);
 

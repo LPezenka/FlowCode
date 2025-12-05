@@ -6,5 +6,13 @@
   {
     "Text": "Eine fußgesteuerte Schleife (Do-While Schleife) braucht eine Initialisierung, eine Bedingung (mit ja / nein zu beantworten), einen Schleifenrumpf und ein Inkrement (eine Aktualisierung)",
     "Source": "Hints/do-while-loop.png"
+  },
+  {
+    "Text": "Im Variablenfenster siehst Du zu jedem Zeitpunkt, welchen Wert Deine Variablen haben - nutze dieses Werkzeug zur Fehlersuche!",
+    "Source": "Hints/variableview.png"
+  },
+  {
+    "Text": "Im Aufrufsfenster siehst Du zu jedem Zeitpunkt, welche Unterprogramme und Funktionen bisher aufgerufen wurden und in welcher Reihenfolge. Das macht das Verständnis von rekursiven Algorithmen viel einfacher!",
+    "Source":  "Hints/fibonacci.png"
   }
 ]

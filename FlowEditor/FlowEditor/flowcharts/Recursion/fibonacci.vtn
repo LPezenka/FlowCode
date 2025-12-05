@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualTreeNetwork>
+  <Node ID="59bd901e-f675-4ad3-9fa7-8d3b1f1e7fa2" Code="Start/End" Position="113,14.5" FunctionName="Main" ReturnVariable="" InputVariables="" Type="Terminal" />
+  <Node ID="c8de127b-9bb4-4f66-bc60-a5a881455928" Code="a = 1" Position="143.5,216.49999999999997" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="59bd901e-f675-4ad3-9fa7-8d3b1f1e7fa2" To="c8de127b-9bb4-4f66-bc60-a5a881455928" Label="" />
+  <Node ID="4ced205d-b6d5-49ab-9504-5293c6fb7564" Code="b = 1" Position="142.5,343" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="c8de127b-9bb4-4f66-bc60-a5a881455928" To="4ced205d-b6d5-49ab-9504-5293c6fb7564" Label="" />
+  <Node ID="2100d746-7724-4406-9af8-a0489388ac7f" Code="f = Fib(a,b)" Position="142,471.9999999999999" Type="PredefinedProcess" />
+  <Edge ToIndex="0" FromIndex="1" From="4ced205d-b6d5-49ab-9504-5293c6fb7564" To="2100d746-7724-4406-9af8-a0489388ac7f" Label="" />
+  <Node ID="0f53e889-be75-46cb-acfa-6f9435096754" Code="z = x + y" Position="424,224.5000000000001" Type="Sequence" />
+  <Node ID="0dec5b9f-9b5e-40a6-9723-fc04bc3b46e8" Code="Ausgabe: z" Position="424.5,354.50000000000006" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="0f53e889-be75-46cb-acfa-6f9435096754" To="0dec5b9f-9b5e-40a6-9723-fc04bc3b46e8" Label="" />
+  <Node ID="5fa5862d-071b-474f-9be1-b5deb6a8949b" Code="Start/End" Position="394,23.49999999999997" FunctionName="Fib" ReturnVariable="" InputVariables="x, y" Type="Terminal" />
+  <Edge ToIndex="0" FromIndex="1" From="5fa5862d-071b-474f-9be1-b5deb6a8949b" To="0f53e889-be75-46cb-acfa-6f9435096754" Label="" />
+  <Node ID="3a0ed15f-67cf-4e08-a7f3-7011feb91c01" Code="f = Fib(y,z)" Position="424.5,488.49999999999994" Type="PredefinedProcess" />
+  <Edge ToIndex="0" FromIndex="1" From="0dec5b9f-9b5e-40a6-9723-fc04bc3b46e8" To="3a0ed15f-67cf-4e08-a7f3-7011feb91c01" Label="" />
+</VisualTreeNetwork>
