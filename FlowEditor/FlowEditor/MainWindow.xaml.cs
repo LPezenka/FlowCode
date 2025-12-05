@@ -329,12 +329,19 @@ namespace FlowEditor
             Canvas.SetTop(node, position.Y);
 
             node.ConnectionPointClicked += Node_ConnectionPointClicked;
-            node.NodeMoved += (s, e) => UpdateEdges();
+            node.NodeMoved += (s, e) => CheckAndUpdateEdges();
             node.RootRequested += Node_RootRequested;
             node.ToggleDeletionZone += (s, e) => ToggleDeleteZone(true);
             //node.MouseDoubleClick += node.
             DiagramCanvas.Children.Add(node);
             canvasNodes.Add(node);
+        }
+
+        private void CheckAndUpdateEdges()
+        {
+            UpdateEdges();
+            foreach (EdgeControl e in edges)
+                CheckSelfIntersection(e);
         }
 
         private NodeControlBase currentRoot;
@@ -570,13 +577,21 @@ namespace FlowEditor
         // if yes -> reroute towards nearest canvas edge
         private void CheckSelfIntersection(EdgeControl localTempEdge)
         {
-            var connectionsOut = _edgeStartNode.GetConnectionPoints();
+            var connectionsOut = localTempEdge.From.GetConnectionPoints();
+            //var connectionsOut = _edgeStartNode.GetConnectionPoints();
             var connectionsIn = localTempEdge.To.GetConnectionPoints();
 
-            double nodeX1 = Canvas.GetLeft(_edgeStartNode);
-            double nodeY1 = Canvas.GetTop(_edgeStartNode);
-            double nodeX2 = nodeX1 + _edgeStartNode.ActualWidth;
-            double nodeY2 = nodeY1 + _edgeStartNode.ActualHeight;
+            //double nodeX1 = Canvas.GetLeft(_edgeStartNode);
+            //double nodeY1 = Canvas.GetTop(_edgeStartNode);
+            //double nodeX2 = nodeX1 + _edgeStartNode.ActualWidth;
+            //double nodeY2 = nodeY1 + _edgeStartNode.ActualHeight;
+
+
+            double nodeX1 = Canvas.GetLeft(localTempEdge.From);
+            double nodeY1 = Canvas.GetTop(localTempEdge.From);
+            double nodeX2 = nodeX1 + localTempEdge.From.ActualWidth;
+            double nodeY2 = nodeY1 + localTempEdge.From.ActualHeight;
+
 
             double nodeX3 = Canvas.GetLeft(localTempEdge.To);
             double nodeY3 = Canvas.GetTop(localTempEdge.To);
@@ -596,6 +611,7 @@ namespace FlowEditor
             List<Point> existingPoints = new List<Point>(localTempEdge.ControlPoints);
             existingPoints.Insert(0, lineStart);
             existingPoints.Add(lineEnd);
+            bool reRoute = false;
             for (int i = 1; i < existingPoints.Count; i++)
             {
                 //double x1 = localTempEdge.ControlPoints[i - 1].X;
@@ -620,12 +636,20 @@ namespace FlowEditor
                     );
 
                 if (bottomHit)
-                    RerouteEdge(localTempEdge);
-
+                {
+                    reRoute = true;
+                }
                 //double dx = localTempEdge.ControlPoints[i].X - localTempEdge.ControlPoints[i-1].X;
                 //double dy = localTempEdge.ControlPoints[i].Y - localTempEdge.ControlPoints[i - 1].Y;
                 // This is a straight line. 
             }
+
+            if (reRoute) 
+            {
+                localTempEdge.ControlPoints.Clear();
+                RerouteEdge(localTempEdge);
+            }
+
             UpdateEdges();
             //localTempEdge.ControlPoints.RemoveAt(0);
             //localTempEdge.ControlPoints.RemoveAt(localTempEdge.ControlPoints.Count - 1);
@@ -636,13 +660,13 @@ namespace FlowEditor
 
         private void RerouteEdge(EdgeControl localTempEdge)
         {
-            var connectionsOut = _edgeStartNode.GetConnectionPoints();
+            var connectionsOut = localTempEdge.From.GetConnectionPoints();
             var connectionsIn = localTempEdge.To.GetConnectionPoints();
 
-            double nodeX1 = Canvas.GetLeft(_edgeStartNode);
-            double nodeY1 = Canvas.GetTop(_edgeStartNode);
-            double nodeX2 = nodeX1 + _edgeStartNode.ActualWidth;
-            double nodeY2 = nodeY1 + _edgeStartNode.ActualHeight;
+            double nodeX1 = Canvas.GetLeft(localTempEdge.From);
+            double nodeY1 = Canvas.GetTop(localTempEdge.From);
+            double nodeX2 = nodeX1 + localTempEdge.From.ActualWidth;
+            double nodeY2 = nodeY1 + localTempEdge.From.ActualHeight;
 
             double nodeX3 = Canvas.GetLeft(localTempEdge.To);
             double nodeY3 = Canvas.GetTop(localTempEdge.To);
@@ -741,6 +765,8 @@ namespace FlowEditor
                     Canvas.SetTop(labelBox, labelPos.Y);
                 }
             }
+
+
         }
 
         private void Edge_DeleteRequested(object sender, EventArgs e)
