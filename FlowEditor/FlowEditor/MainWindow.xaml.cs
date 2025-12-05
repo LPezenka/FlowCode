@@ -640,10 +640,9 @@ namespace FlowEditor
                     existingPoints[i],
                     new Point(nodeX1, nodeY2),
                     new Point(nodeX2, nodeY2)
-
                     );
 
-                if (bottomHit)
+                if (bottomHit ||bottomHitTargetNode)
                 {
                     reRoute = true;
                 }
@@ -1099,6 +1098,9 @@ namespace FlowEditor
             LoadEdges(doc);
             InvalidateVisual();
             UpdateTerminals();
+
+            foreach (EdgeControl edge in edges)
+                CheckSelfIntersection(edge);
 
         }
 

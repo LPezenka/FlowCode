@@ -39,9 +39,9 @@ nameof(TargetNode), typeof(Node), typeof(ProcessNodeControl), new PropertyMetada
         public override List<Point> GetConnectionPoints() => new()
         {
   
-            new Point(ActualWidth / 2, 0),                // Top (Eingang)
-            new Point(ActualWidth / 2, ActualHeight),     // Bottom (Ausgang)
-            new Point(ActualWidth, ActualHeight / 2)      // Right (Prozedur-Ziel
+            new Point(ActualWidth / 2, -1),                // Top (Eingang)
+            new Point(ActualWidth / 2, ActualHeight + 1),     // Bottom (Ausgang)
+            new Point(ActualWidth + 1, ActualHeight / 2)      // Right (Prozedur-Ziel
         };
     }
 

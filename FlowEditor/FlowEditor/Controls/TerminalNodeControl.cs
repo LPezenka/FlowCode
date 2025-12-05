@@ -108,8 +108,8 @@ namespace FlowEditor.Controls
 
         public override List<Point> GetConnectionPoints() => new()
         {
-            new Point(ActualWidth / 2, 0),               // Eingang oben
-            new Point(ActualWidth / 2, ActualHeight)     // Ausgang unten
+            new Point(ActualWidth / 2, -1),               // Eingang oben
+            new Point(ActualWidth / 2, ActualHeight + 1)     // Ausgang unten
         };
 
         protected override void OnMouseDoubleClick(MouseButtonEventArgs e)

@@ -12,19 +12,23 @@ So far, the following nodes can be processed:
 - predefined process nodes 
 - terminal nodes
 
-Loops can be modelled with decision nodes.
+Loops can be modelled with decision nodes as either for-loops, do-while loops or while loops. No support for foreach loops is implemented at the time, nor is it planned for the near future.
 
 An input handler can be passed to the ActionNode class to handle input. Likewise, an output handler ca be passed to handle output. Currently, two output handlers have been implemented:
 - OutputWindow : opens a popup window containing the message
 - OutputControl : Custom dragable WPF control on top of the canvas that displays a ListBox containing all previous messages.
 
 #### To Do
-- Compound expressions on the right hand side of the assignment operator are currently not supported. For example, y = x + 1 would have to be modelled as y = 0, and then y = x + 1.
-- Edge routing for better overview and decreased Edge / Node intersections
+- Support for arrays and lists is missing
 - Support for template strings is missing
+- Due to the mechanics of the variable type inferrence, a variable called lineInput remains in the scope. This might take some restructuring to solve
 
 ### Frontend 
 Flowcharts can be modelled in a WPF application. All currently supported node types can be used.
+
+![For Loop](/Screenshots/For-Loop.png.png "For Loop in FlowCode")
+
+
 
 ![Euclidean Algorithm as Flowchart](/Screenshots/Euklid.png "Euclidean Algorithm in FlowCode")
 
