@@ -1,8 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <VisualTreeNetwork>
-  <Node ID="8b0ab919-1e14-4500-8a13-ee10600c0827" Code="Ausgabe: &quot;Zahl eingeben&quot;" Position="1839.8857142857144,-3.114285714285689" Type="Sequence" />
-  <Node ID="bd73a616-c494-4352-8c51-cfdcf74a358d" Code="zahl = Eingabe" Position="1834.1714285714284,132.5142857142857" Type="Sequence" />
-  <Edge ToIndex="0" FromIndex="1" From="8b0ab919-1e14-4500-8a13-ee10600c0827" To="bd73a616-c494-4352-8c51-cfdcf74a358d" Label="" />
   <Node ID="1808cfc1-8439-477c-9fc5-353581a84a69" Code="zahl == 1 || zahl == 2" Position="300.00000000000006,334.9999999999999" OnTrue="7781651d-e2df-4fe8-ad6a-42d1593eab30" OnFalse="0931e48f-51f1-45a6-b02c-a3dc0cfd4be4" Type="Decision" />
   <Node ID="7781651d-e2df-4fe8-ad6a-42d1593eab30" Code="Ausgabe: &quot;Primzahl&quot;" Position="107,495" Type="Sequence" />
   <Edge ToIndex="0" FromIndex="1" From="1808cfc1-8439-477c-9fc5-353581a84a69" To="7781651d-e2df-4fe8-ad6a-42d1593eab30" Label="Ja" />
@@ -21,14 +18,17 @@
   <Edge ToIndex="0" FromIndex="1" From="6a80d793-7759-42ad-8251-c6b3d2436f60" To="9d75fd43-4345-4dfb-a268-e08adc567099" Label="" />
   <Node ID="ad4e72bc-91a9-4427-9cbf-d6be8c0e01a6" Code="Start/End" Position="295.7142857142856,68.28571428571433" FunctionName="IsPrime" ReturnVariable="" InputVariables="zahl" Type="Terminal" />
   <Edge ToIndex="0" FromIndex="1" From="ad4e72bc-91a9-4427-9cbf-d6be8c0e01a6" To="1808cfc1-8439-477c-9fc5-353581a84a69" Label="" />
+  <Node ID="d4630766-b7c6-4d2c-a9c5-d6f46883779a" Code="n &lt; 100" Position="1299.4285714285713,647.1190476190477" OnTrue="0c058208-d8aa-4c18-9ef2-47320af9fbec" OnFalse="afada419-d603-4ef6-8252-c96a97f78cf7" Type="Decision" />
+  <Node ID="0c058208-d8aa-4c18-9ef2-47320af9fbec" Code="IsPrime(n)" Position="1478.4999999999998,1001.6666666666665" Type="PredefinedProcess" />
+  <Edge ToIndex="0" FromIndex="2" From="d4630766-b7c6-4d2c-a9c5-d6f46883779a" To="0c058208-d8aa-4c18-9ef2-47320af9fbec" Label="Ja" />
+  <Node ID="d93dd358-46a8-47a4-ab45-a92539937a07" Code="n = n + 1" Position="1092.3571428571424,196.90476190476176" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="0c058208-d8aa-4c18-9ef2-47320af9fbec" To="d93dd358-46a8-47a4-ab45-a92539937a07" Label="" />
+  <Node ID="afada419-d603-4ef6-8252-c96a97f78cf7" Code="Ausgabe: &quot;Fertig&quot;" Position="1129.1666666666667,929.1666666666667" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="d4630766-b7c6-4d2c-a9c5-d6f46883779a" To="afada419-d603-4ef6-8252-c96a97f78cf7" Label="Nein" />
+  <Node ID="efd007a9-36a6-4b06-bf98-a375a55072cf" Code="Ausgabe: n" Position="1084.1666666666667,475.8333333333332" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="d93dd358-46a8-47a4-ab45-a92539937a07" To="efd007a9-36a6-4b06-bf98-a375a55072cf" Label="" />
+  <Edge ToIndex="0" FromIndex="1" From="efd007a9-36a6-4b06-bf98-a375a55072cf" To="d4630766-b7c6-4d2c-a9c5-d6f46883779a" Label="" />
   <Root ID="4b9e623f-0bf4-4163-9e50-cd1d9e33e0c1" />
-  <Node ID="4b9e623f-0bf4-4163-9e50-cd1d9e33e0c1" Code="int n = 1" Position="1072.428571428571,53.28571428571428" Type="Sequence" />
-  <Node ID="844c9fb2-74a7-4dc5-a970-1e11d054cec2" Code="IsPrime(n)" Position="1071.4285714285713,252.28571428571428" Type="PredefinedProcess" />
-  <Edge ToIndex="0" FromIndex="1" From="4b9e623f-0bf4-4163-9e50-cd1d9e33e0c1" To="844c9fb2-74a7-4dc5-a970-1e11d054cec2" Label="" />
-  <Node ID="d93dd358-46a8-47a4-ab45-a92539937a07" Code="n = n + 1" Position="1072.7142857142856,437.14285714285717" Type="Sequence" />
-  <Edge ToIndex="0" FromIndex="1" From="844c9fb2-74a7-4dc5-a970-1e11d054cec2" To="d93dd358-46a8-47a4-ab45-a92539937a07" Label="" />
-  <Node ID="d4630766-b7c6-4d2c-a9c5-d6f46883779a" Code="n &lt; 100" Position="1214.4285714285713,691.2857142857143" OnFalse="ba735526-5510-4e19-910b-2e64abfb4f95" Type="Decision" />
-  <Edge ToIndex="0" FromIndex="1" From="d93dd358-46a8-47a4-ab45-a92539937a07" To="d4630766-b7c6-4d2c-a9c5-d6f46883779a" Label="Ja" />
-  <Node ID="ba735526-5510-4e19-910b-2e64abfb4f95" Code="Node(2)" Position="1575.428571428571,847.2857142857144" Type="Sequence" />
-  <Edge ToIndex="0" FromIndex="2" From="d4630766-b7c6-4d2c-a9c5-d6f46883779a" To="ba735526-5510-4e19-910b-2e64abfb4f95" Label="Nein" />
+  <Node ID="4b9e623f-0bf4-4163-9e50-cd1d9e33e0c1" Code="n = 1" Position="1084.0952380952378,12.452380952380949" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="4b9e623f-0bf4-4163-9e50-cd1d9e33e0c1" To="d93dd358-46a8-47a4-ab45-a92539937a07" Label="" />
 </VisualTreeNetwork>
