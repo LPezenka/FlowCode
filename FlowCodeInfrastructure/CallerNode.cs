@@ -46,7 +46,7 @@ namespace FlowCodeInfrastructure
                 for (int i = 0; i < vars.Length; i++)
                 {
                     var v = vars[i];
-                    var tv = terminatorNode.InputVariables[i];
+                    //var tv = terminatorNode.InputVariables[i];
 
                     var stateVariable = state.Variables.Where(x => x.Name == v.Trim()).FirstOrDefault();
                     if (stateVariable != null)

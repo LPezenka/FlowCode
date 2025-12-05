@@ -1208,7 +1208,7 @@ namespace FlowEditor
 
         public void OnNext(string value)
         {
-            Console.Write("Message to observers: " + value);
+            //Console.Write("Message to observers: " + value);
         }
 
         private void DiagramCanvas_MouseWheel(object sender, MouseWheelEventArgs e)

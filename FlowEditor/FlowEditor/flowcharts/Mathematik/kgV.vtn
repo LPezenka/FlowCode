@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualTreeNetwork>
+  <Root ID="b499431d-93b5-4831-af8f-13427e129c1f" />
+  <Node ID="b499431d-93b5-4831-af8f-13427e129c1f" Code="x = 5" Position="256.25,30" Type="Sequence" />
+  <Node ID="743dcf46-0118-4376-bbd7-a9c946be6e0c" Code="y = 3" Position="258.125,191.25" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="b499431d-93b5-4831-af8f-13427e129c1f" To="743dcf46-0118-4376-bbd7-a9c946be6e0c" Label="" />
+  <Node ID="534784c2-9244-4b5c-a785-d51146426f48" Code="k = kgV(x,y)" Position="256.25,345.625" Type="PredefinedProcess" />
+  <Edge ToIndex="0" FromIndex="1" From="743dcf46-0118-4376-bbd7-a9c946be6e0c" To="534784c2-9244-4b5c-a785-d51146426f48" Label="" />
+  <Node ID="78d10fdf-8027-4c29-956a-6e10eea44032" Code="Ausgabe: k" Position="261.875,511.875" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="534784c2-9244-4b5c-a785-d51146426f48" To="78d10fdf-8027-4c29-956a-6e10eea44032" Label="" />
+  <Node ID="5dc9b7aa-fdf2-4e94-a15e-31d1343561f3" Code="Start/End" Position="1222,715.5714285714284" FunctionName="Max" ReturnVariable="" InputVariables="a,b" Type="Terminal" />
+  <Node ID="0c186301-1dce-4081-8f81-eb425cdadec6" Code="a &gt; b" Position="1253,910.9999999999999" OnTrue="a5e2d11e-aea0-48b4-948c-65b751212eb7" OnFalse="53d7ad1e-5f51-499c-bf3a-0480f48fbe83" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="1" From="5dc9b7aa-fdf2-4e94-a15e-31d1343561f3" To="0c186301-1dce-4081-8f81-eb425cdadec6" Label="" />
+  <Node ID="a5e2d11e-aea0-48b4-948c-65b751212eb7" Code="max = a" Position="1067,1073.9999999999998" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="0c186301-1dce-4081-8f81-eb425cdadec6" To="a5e2d11e-aea0-48b4-948c-65b751212eb7" Label="Ja" />
+  <Node ID="53d7ad1e-5f51-499c-bf3a-0480f48fbe83" Code="max = b" Position="1444.9999999999998,1086.9999999999998" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="0c186301-1dce-4081-8f81-eb425cdadec6" To="53d7ad1e-5f51-499c-bf3a-0480f48fbe83" Label="Nein" />
+  <Node ID="f8ae7441-1561-4a51-a3ac-f5254d89ccf3" Code="Start/End" Position="1228,1246.9999999999998" FunctionName="" ReturnVariable="max" InputVariables="" Type="Terminal" />
+  <Edge ToIndex="0" FromIndex="1" From="a5e2d11e-aea0-48b4-948c-65b751212eb7" To="f8ae7441-1561-4a51-a3ac-f5254d89ccf3" Label="" />
+  <Edge ToIndex="0" FromIndex="1" From="53d7ad1e-5f51-499c-bf3a-0480f48fbe83" To="f8ae7441-1561-4a51-a3ac-f5254d89ccf3" Label="" />
+  <Node ID="6c2ef63e-9f39-468c-b9c9-e0629bf0f85d" Code="Start/End" Position="560.1666666666666,31.166666666666686" FunctionName="kgV" ReturnVariable="" InputVariables="a,b" Type="Terminal" />
+  <Node ID="bc7b3114-7fdb-4121-ba6d-5abf7acf1513" Code="max = Max(a,b)" Position="583.452380952381,220.95238095238113" Type="PredefinedProcess" />
+  <Edge ToIndex="0" FromIndex="1" From="6c2ef63e-9f39-468c-b9c9-e0629bf0f85d" To="bc7b3114-7fdb-4121-ba6d-5abf7acf1513" Label="" />
+  <Node ID="9325c6c0-4852-4682-9ea0-192c40b4db66" Code="Start/End" Position="1333.5714285714284,54.28571428571428" FunctionName="Min" ReturnVariable="" InputVariables="a,b" Type="Terminal" />
+  <Node ID="57f2e688-3159-4835-973e-2ff44c80c4e1" Code="a &lt; b" Position="1375.7142857142856,267.8571428571429" OnTrue="c2ad7700-b2b6-4f26-a7e9-b8b24b343a24" OnFalse="fb918567-6d1e-4a5e-a315-ea983b8e4298" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="1" From="9325c6c0-4852-4682-9ea0-192c40b4db66" To="57f2e688-3159-4835-973e-2ff44c80c4e1" Label="" />
+  <Node ID="c2ad7700-b2b6-4f26-a7e9-b8b24b343a24" Code="min = a" Position="1256.4285714285713,442.1428571428571" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="57f2e688-3159-4835-973e-2ff44c80c4e1" To="c2ad7700-b2b6-4f26-a7e9-b8b24b343a24" Label="Ja" />
+  <Node ID="fb918567-6d1e-4a5e-a315-ea983b8e4298" Code="min = b" Position="1500,457.8571428571429" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="57f2e688-3159-4835-973e-2ff44c80c4e1" To="fb918567-6d1e-4a5e-a315-ea983b8e4298" Label="Nein" />
+  <Node ID="0e3788e9-0249-41ac-8bc9-adb1af1f2541" Code="Start/End" Position="1340.7142857142858,588.5714285714286" FunctionName="" ReturnVariable="min" InputVariables="" Type="Terminal" />
+  <Edge ToIndex="0" FromIndex="1" From="c2ad7700-b2b6-4f26-a7e9-b8b24b343a24" To="0e3788e9-0249-41ac-8bc9-adb1af1f2541" Label="" />
+  <Edge ToIndex="0" FromIndex="1" From="fb918567-6d1e-4a5e-a315-ea983b8e4298" To="0e3788e9-0249-41ac-8bc9-adb1af1f2541" Label="" />
+  <Node ID="bf811ae9-87d6-4ed6-8c4e-78c0ecaaf443" Code="min = Min(a,b)" Position="581.9047619047619,375.2380952380952" Type="PredefinedProcess" />
+  <Edge ToIndex="0" FromIndex="1" From="bc7b3114-7fdb-4121-ba6d-5abf7acf1513" To="bf811ae9-87d6-4ed6-8c4e-78c0ecaaf443" Label="" />
+  <Node ID="3ca7fed0-2e2c-4adc-9698-1ed0c73de3cf" Code="i = 1" Position="581.8333333333334,531.8333333333333" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="bf811ae9-87d6-4ed6-8c4e-78c0ecaaf443" To="3ca7fed0-2e2c-4adc-9698-1ed0c73de3cf" Label="" />
+  <Node ID="f7758e54-6e12-438e-9b73-0aa4ded51d9d" Code="kgv = i * max" Position="450.625,872.2916666666666" Type="Sequence" />
+  <Node ID="025513f6-82aa-43ad-9203-a753f8b8b448" Code="Start/End" Position="358.125,1051.2499999999998" FunctionName="" ReturnVariable="kgv" InputVariables="" Type="Terminal" />
+  <Edge ToIndex="0" FromIndex="1" From="f7758e54-6e12-438e-9b73-0aa4ded51d9d" To="025513f6-82aa-43ad-9203-a753f8b8b448" Label="" />
+  <Node ID="e2cab238-bf0c-445a-a019-dbfd020c5f2a" Code="i * max % min == 0" Position="584.333333333333,685.7916666666667" OnTrue="f7758e54-6e12-438e-9b73-0aa4ded51d9d" OnFalse="ace206f2-1096-4eec-89cf-914c775f0d3e" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="1" From="3ca7fed0-2e2c-4adc-9698-1ed0c73de3cf" To="e2cab238-bf0c-445a-a019-dbfd020c5f2a" Label="" />
+  <Edge ToIndex="0" FromIndex="1" From="e2cab238-bf0c-445a-a019-dbfd020c5f2a" To="f7758e54-6e12-438e-9b73-0aa4ded51d9d" Label="Ja" />
+  <Node ID="ace206f2-1096-4eec-89cf-914c775f0d3e" Code="i = i + 1" Position="761.0416666666667,887.0833333333335" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="e2cab238-bf0c-445a-a019-dbfd020c5f2a" To="ace206f2-1096-4eec-89cf-914c775f0d3e" Label="Nein" />
+  <Edge ToIndex="0" FromIndex="1" From="ace206f2-1096-4eec-89cf-914c775f0d3e" To="e2cab238-bf0c-445a-a019-dbfd020c5f2a" Label="" />
+</VisualTreeNetwork>

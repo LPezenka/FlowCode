@@ -74,7 +74,9 @@ namespace FlowEditor
                             nodeMapper.Add(pc, cn);
                             break;
                         case TerminalNodeControl pc:
-                            var inVariables = pc.InputVariables.Split(",").ToList();
+                            List<string> inVariables = new List<string>();
+                            if (pc.InputVariables is not null)
+                                inVariables = pc.InputVariables.Split(",").ToList();
                             TerminatorNode tn = new TerminatorNode()
                             {
                                 ID = $"Node{nodeId++}",

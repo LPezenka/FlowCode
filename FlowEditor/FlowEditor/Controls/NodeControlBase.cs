@@ -92,6 +92,7 @@ namespace FlowEditor.Controls
 
         public int? GetNextFreeInputIndex()
         {
+            // TODO: fix this
             for (int i = 0; i < FirstOutputIndex; i++)
             {
                 return i; // allow multiple edges on inputs

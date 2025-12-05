@@ -125,8 +125,11 @@ namespace FlowEditor
                 x.Add(functionName);
                 XAttribute returnVariable = new XAttribute("ReturnVariable", tnc.ReturnVariable);
                 x.Add(returnVariable);
-                XAttribute inputVariables = new XAttribute("InputVariables", tnc.InputVariables);
-                x.Add(inputVariables);
+                if (tnc.InputVariables is not null)
+                {
+                    XAttribute inputVariables = new XAttribute("InputVariables", tnc.InputVariables);
+                    x.Add(inputVariables);
+                }
             }
             else if (node is ProcessNodeControl pn)
             {
