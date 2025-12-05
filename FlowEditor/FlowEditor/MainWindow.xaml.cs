@@ -631,8 +631,16 @@ namespace FlowEditor
                 bool bottomHit = LineLineIntersection(
                     existingPoints[i - 1],
                     existingPoints[i],
+                    new Point(nodeX3, nodeY4),
+                    new Point(nodeX4, nodeY4)
+                    );
+
+                bool bottomHitTargetNode = LineLineIntersection(
+                    existingPoints[i - 1],
+                    existingPoints[i],
                     new Point(nodeX1, nodeY2),
                     new Point(nodeX2, nodeY2)
+
                     );
 
                 if (bottomHit)

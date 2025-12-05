@@ -1,10 +1,10 @@
 [
   {
-    "Text": "Eine Kopfgesteuerte Schleife (For-Schleife oder Zählschleife) braucht eine Initialisierung, eine Bedingung (mit ja / nein zu beantworten), einen Schleifenrumpf und ein Inkrement (eine Aktualisierung)",
+    "Text": "Eine kopfgesteuerte Schleife (For-Schleife oder Zählschleife) braucht eine Initialisierung, eine Bedingung (mit ja / nein zu beantworten), einen Schleifenrumpf und ein Inkrement (eine Aktualisierung)",
     "Source": "./Hints/For-Loop-With-Output.png"
   },
   {
-    "Text": "Noch ein Tipp",
-    "Source": "Play.jpg"
+    "Text": "Eine fußgesteuerte Schleife (Do-While Schleife) braucht eine Initialisierung, eine Bedingung (mit ja / nein zu beantworten), einen Schleifenrumpf und ein Inkrement (eine Aktualisierung)",
+    "Source": "Hints/do-while-loop.png"
   }
 ]

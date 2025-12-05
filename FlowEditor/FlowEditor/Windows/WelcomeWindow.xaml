@@ -17,10 +17,10 @@
         </Grid.ColumnDefinitions>
         <TextBlock TextWrapping="Wrap" Padding="15px" x:Name="HelpText" Grid.Column="0" Grid.Row="0" Text="Lorem Ipsum et dolor something this is simply a help text"></TextBlock>
         <Image Stretch="Fill" x:Name="HelpImage" Grid.Row="0" Grid.Column="1" Source="/res/compile.jpg" Width="300" Height="300"></Image>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-            <Button x:Name="Previous" Content="Vorheriger Tipp" Click="Previous_Click"></Button>
-            <Button x:Name="OkButton" Content="OK" Click="OkButton_Click"></Button>
-            <Button Content="Nächster Tipp" Click="Button_Click"></Button>
-        </StackPanel>
+        <DockPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <Button DockPanel.Dock="Left" x:Name="Previous" Content="Vorheriger Tipp" Click="Previous_Click"></Button>
+            <Button DockPanel.Dock="Left" Width="300px" x:Name="OkButton" Content="OK" Click="OkButton_Click"></Button>
+            <Button DockPanel.Dock="Right" Content="Nächster Tipp" Click="Button_Click"></Button>
+        </DockPanel>
     </Grid>
 </Window>
