@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualTreeNetwork>
+  <Node ID="39d1d126-0321-49c2-bbbb-ba2e76066111" Code="zahl == 1" Position="394.8666666666667,378.3111111111109" OnTrue="d9e8d15b-c329-490a-8557-afa729cc9bed" OnFalse="a7aeea6b-6e1c-4bd4-81ad-bfa73a9c469b" Type="Decision" />
+  <Node ID="d9e8d15b-c329-490a-8557-afa729cc9bed" Code="Ausgabe: &quot;Fertig&quot;" Position="150.8888888888889,526" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="39d1d126-0321-49c2-bbbb-ba2e76066111" To="d9e8d15b-c329-490a-8557-afa729cc9bed" Label="Ja" />
+  <Node ID="a7aeea6b-6e1c-4bd4-81ad-bfa73a9c469b" Code="zahl % i == 0" Position="602.1999999999999,555.8000000000001" OnTrue="6e0d7a67-89a6-44f9-960c-c4eb7a6e704c" OnFalse="6636adbb-80b3-4382-80c8-8fb3ac030fed" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="2" From="39d1d126-0321-49c2-bbbb-ba2e76066111" To="a7aeea6b-6e1c-4bd4-81ad-bfa73a9c469b" Label="Nein" />
+  <Root ID="da7092fc-c04e-4c82-a4b3-0267fcff113e" />
+  <Node ID="da7092fc-c04e-4c82-a4b3-0267fcff113e" Code="zahl = Eingabe" Position="402.4,42" Type="Sequence" />
+  <Node ID="fac79e5c-d706-42cf-b419-6e56c08f7b9f" Code="i = 2" Position="403,219.59999999999997" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="da7092fc-c04e-4c82-a4b3-0267fcff113e" To="fac79e5c-d706-42cf-b419-6e56c08f7b9f" Label="" />
+  <Edge ToIndex="0" FromIndex="1" From="fac79e5c-d706-42cf-b419-6e56c08f7b9f" To="39d1d126-0321-49c2-bbbb-ba2e76066111" Label="" />
+  <Node ID="6636adbb-80b3-4382-80c8-8fb3ac030fed" Code="i = i + 1" Position="432.0666666666666,810.5999999999999" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="a7aeea6b-6e1c-4bd4-81ad-bfa73a9c469b" To="6636adbb-80b3-4382-80c8-8fb3ac030fed" Label="Nein" />
+  <Edge ToIndex="0" FromIndex="1" From="6636adbb-80b3-4382-80c8-8fb3ac030fed" To="a7aeea6b-6e1c-4bd4-81ad-bfa73a9c469b" Label="" />
+  <Node ID="6e0d7a67-89a6-44f9-960c-c4eb7a6e704c" Code="Ausgabe: i" Position="747.6,746.2444444444446" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="a7aeea6b-6e1c-4bd4-81ad-bfa73a9c469b" To="6e0d7a67-89a6-44f9-960c-c4eb7a6e704c" Label="Ja" />
+  <Node ID="1941d3c3-4998-426d-9816-66147b1e1375" Code="zahl = zahl / i" Position="748.4000000000004,878.8888888888889" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="6e0d7a67-89a6-44f9-960c-c4eb7a6e704c" To="1941d3c3-4998-426d-9816-66147b1e1375" Label="" />
+  <Edge ToIndex="0" FromIndex="1" From="1941d3c3-4998-426d-9816-66147b1e1375" To="39d1d126-0321-49c2-bbbb-ba2e76066111" Label="" />
+</VisualTreeNetwork>
