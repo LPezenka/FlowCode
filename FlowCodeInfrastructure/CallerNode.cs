@@ -40,7 +40,6 @@ namespace FlowCodeInfrastructure
                 TerminatorNode terminatorNode = TargetNode as TerminatorNode;
                 if (terminatorNode is null) return; // Improper function name
 
-                //TODO: Refresh Call Stack
                 StackDisplay?.Push(TargetNode.Code);
 
                 for (int i = 0; i < vars.Length; i++)
@@ -101,7 +100,6 @@ namespace FlowCodeInfrastructure
             ScriptState = state;
             ScriptOptions = options;
 
-            //TODO: Refresh Call Stack
             StackDisplay?.Pop();
 
             //Run(Next);

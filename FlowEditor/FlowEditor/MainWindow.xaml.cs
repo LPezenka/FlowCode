@@ -969,8 +969,13 @@ namespace FlowEditor
             //}
         }
 
-        private void LogError(string messsage)
+        private void LogError(string message)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Encountered an error:");
+            Console.WriteLine(message);
+            Console.WriteLine("Dumped network to file");
+
             if (!Directory.Exists("./dump"))
                     Directory.CreateDirectory("./dump");
                 XMLWriter.SaveXML("./dump/error.vtdump", edges);
@@ -1020,9 +1025,9 @@ namespace FlowEditor
             foreach (var c in doc.Root.Elements("Node"))
             {
                 //Console.WriteLine(c);
-                var id = c.Attribute("ID").Value;
-                var code = c.Attribute("Code").Value;
-                var position = Point.Parse(c.Attribute("Position").Value);
+                var id = c.Attribute("ID")?.Value;
+                var code = c.Attribute("Code")?.Value;
+                var position = Point.Parse(c.Attribute("Position")?.Value);
                 var nodeType = c.Attribute("Type")?.Value;
                 NodeControlBase node; //= new RectangleNodeControl();
 

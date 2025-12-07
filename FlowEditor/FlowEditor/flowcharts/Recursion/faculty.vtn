@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualTreeNetwork>
+  <Node ID="4a96611b-0beb-4a5c-81a9-72295d72b0ac" Code="Start/End" Position="211.59999999999997,41.20000000000002" FunctionName="Fac" ReturnVariable="" InputVariables="n" Type="Terminal" />
+  <Node ID="eb14c74b-61c0-4e05-b6f8-51757740a1f8" Code="n == 1" Position="349.2,270.99999999999994" OnTrue="56a8e55c-5d7b-4e2a-b8f8-b126bcf70483" OnFalse="c54dfb0b-55b0-4237-989c-8a6a7320559a" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="1" From="4a96611b-0beb-4a5c-81a9-72295d72b0ac" To="eb14c74b-61c0-4e05-b6f8-51757740a1f8" Label="" />
+  <Node ID="56a8e55c-5d7b-4e2a-b8f8-b126bcf70483" Code="Start/End" Position="99.59999999999997,494" FunctionName="" ReturnVariable="n" InputVariables="" Type="Terminal" />
+  <Edge ToIndex="0" FromIndex="1" From="eb14c74b-61c0-4e05-b6f8-51757740a1f8" To="56a8e55c-5d7b-4e2a-b8f8-b126bcf70483" Label="Ja" />
+  <Node ID="c54dfb0b-55b0-4237-989c-8a6a7320559a" Code="p = n - 1" Position="524.4000000000001,389.00000000000006" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="eb14c74b-61c0-4e05-b6f8-51757740a1f8" To="c54dfb0b-55b0-4237-989c-8a6a7320559a" Label="Nein" />
+  <Node ID="38e1630d-c51e-438e-b252-d8df10877da6" Code="r = Fac(p)" Position="533.1999999999999,513.9999999999999" Type="PredefinedProcess" />
+  <Edge ToIndex="0" FromIndex="1" From="c54dfb0b-55b0-4237-989c-8a6a7320559a" To="38e1630d-c51e-438e-b252-d8df10877da6" Label="" />
+  <Node ID="a488db99-ab84-439c-869b-9317242701af" Code="r = r * n" Position="533.2,649.8" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="38e1630d-c51e-438e-b252-d8df10877da6" To="a488db99-ab84-439c-869b-9317242701af" Label="" />
+  <Node ID="1cb8c60e-fef3-499a-b9ae-7b00641e24c7" Code="Start/End" Position="504,800" FunctionName="" ReturnVariable="r" InputVariables="" Type="Terminal" />
+  <Edge ToIndex="0" FromIndex="1" From="a488db99-ab84-439c-869b-9317242701af" To="1cb8c60e-fef3-499a-b9ae-7b00641e24c7" Label="" />
+  <Node ID="b8314dbf-cf28-40f2-a5da-2d6d2e84ca3d" Code="a = Fac(p)" Position="839,414" Type="PredefinedProcess" />
+  <Node ID="3fea2cf8-9fba-4b4b-8b9e-bc2c697f0ac7" Code="Ausgabe: a" Position="839.0000000000001,571" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="b8314dbf-cf28-40f2-a5da-2d6d2e84ca3d" To="3fea2cf8-9fba-4b4b-8b9e-bc2c697f0ac7" Label="" />
+  <Root ID="4a1b6e02-bef3-4451-9b2c-31f971664027" />
+  <Node ID="4a1b6e02-bef3-4451-9b2c-31f971664027" Code="p = 5" Position="846,271.00000000000006" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="4a1b6e02-bef3-4451-9b2c-31f971664027" To="b8314dbf-cf28-40f2-a5da-2d6d2e84ca3d" Label="" />
+</VisualTreeNetwork>

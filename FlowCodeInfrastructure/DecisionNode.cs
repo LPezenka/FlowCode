@@ -13,8 +13,8 @@ namespace FlowCodeInfrastructure
         public override void Evaluate()
         {
             if (Code == null) return;
-            try
-            {
+            //try
+            //{
                 //Code = "bool bresult = (" + Code.Replace(";","") + ");";
                 //Code.Replace(";;", ";");
 
@@ -28,11 +28,12 @@ namespace FlowCodeInfrastructure
                     Next = OnTrue;
                 else
                     Next = OnFalse;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
+            //}
+            //catch (Exception ex)
+            //{
+                //Console.WriteLine(ex.ToString());
+                //throw ex;
+            //}
         }
     }
 }

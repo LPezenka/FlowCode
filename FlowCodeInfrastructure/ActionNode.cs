@@ -131,9 +131,7 @@ namespace FlowCodeInfrastructure
                             ScriptState newState = ScriptState.ContinueWithAsync(code, ScriptOptions).Result;
                             var v = newState.Variables.Where(x => x.Name == "lineInput").FirstOrDefault();
 
-
-
-                            var vVal = v.Value.ToString();
+                            var vVal = v?.Value.ToString();
                             string postProcess = InferType(varName, vVal, out string vType);
 
                             ScriptState = ScriptState.ContinueWithAsync(postProcess, ScriptOptions).Result;
@@ -141,9 +139,6 @@ namespace FlowCodeInfrastructure
                         }
                         else
                         {
-
-
-                            // TODO: Consider moving this or find another way to get rid of lineInput
                             ScriptState = ScriptState.ContinueWithAsync(code, ScriptOptions).Result;
                             //ScriptState.Variables.Remove(ScriptState.Variables.Where(ssv => ssv.Name == "lineInput").FirstOrDefault());
                         }
@@ -218,7 +213,7 @@ namespace FlowCodeInfrastructure
             }
 
             var v = ScriptState.Variables.Where(x => x.Name == filterName).FirstOrDefault();
-            string varType = "string;";
+            //string varType = "string;";
             initVariable = true;
             return (scriptState, code);
         }

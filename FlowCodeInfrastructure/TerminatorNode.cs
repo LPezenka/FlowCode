@@ -19,7 +19,7 @@ namespace FlowCodeInfrastructure
             try
             {
                 if (!string.IsNullOrWhiteSpace(ResultVariable))
-                    ReturnValue = ScriptState.Variables.Where(x => x.Name == ResultVariable).FirstOrDefault().Value;
+                    ReturnValue = ScriptState.Variables.Where(x => x.Name == ResultVariable).FirstOrDefault()?.Value;
                 //ReturnName = ResultVariable;
             }
             catch (Exception ex)
