@@ -134,33 +134,7 @@ namespace FlowCodeInfrastructure
 
 
                             var vVal = v.Value.ToString();
-                            string varType = "string;";
-                            if (int.TryParse(vVal, out int intValue)) varType = "int";
-                            else if (float.TryParse(vVal, out float f)) varType = "float";
-                            else if (bool.TryParse(vVal, out bool boolValue)) varType = "bool";
-                            else if (char.TryParse(vVal, out char charValue)) varType = "char";
-                            else varType = "string";
-                            string postProcess = string.Empty;
-
-                            // TODO: Implement support for arrays and / or lists
-                            switch (varType)
-                            {
-                                case "float":
-                                    postProcess = $"{varType} {varName} = float.Parse(\"{vVal}\");";
-                                    break;
-                                case "bool":
-                                    postProcess = $"{varType} {varName} = bool.Parse(\"{vVal}\");";
-                                    break;
-                                case "char":
-                                    postProcess = $"{varType} {varName} = char.Parse(\"{vVal}\");";
-                                    break;
-                                case "int":
-                                    postProcess = $"{varType} {varName} = int.Parse(\"{vVal}\");";
-                                    break;
-                                default:
-                                    postProcess = $"string {varName} = \"{vVal}\";";
-                                    break;
-                            }
+                            string postProcess = InferType(varName, vVal, out string vType);
 
                             ScriptState = ScriptState.ContinueWithAsync(postProcess, ScriptOptions).Result;
                             //Code = originalCode;
@@ -188,6 +162,42 @@ namespace FlowCodeInfrastructure
                 // TODO: log to file
                 throw ex;
             }
+        }
+
+        private static string InferType(string varName, string? vVal, out string vType)
+        {
+            string varType = "string;";
+            if (int.TryParse(vVal, out int intValue)) varType = "int";
+            else if (float.TryParse(vVal, out float f)) varType = "float";
+            else if (bool.TryParse(vVal, out bool boolValue)) varType = "bool";
+            else if (char.TryParse(vVal, out char charValue)) varType = "char";
+            else varType = "string";
+            vType = varType;
+
+
+            string postProcess = string.Empty;
+
+            // TODO: Implement support for arrays and / or lists
+            switch (varType)
+            {
+                case "float":
+                    postProcess = $"{varType} {varName} = float.Parse(\"{vVal}\");";
+                    break;
+                case "bool":
+                    postProcess = $"{varType} {varName} = bool.Parse(\"{vVal}\");";
+                    break;
+                case "char":
+                    postProcess = $"{varType} {varName} = char.Parse(\"{vVal}\");";
+                    break;
+                case "int":
+                    postProcess = $"{varType} {varName} = int.Parse(\"{vVal}\");";
+                    break;
+                default:
+                    postProcess = $"string {varName} = \"{vVal}\";";
+                    break;
+            }
+
+            return postProcess;
         }
 
         private (ScriptState, string) HandleInput(ScriptState scriptState, string code, ref bool initVariable, ref bool customInput, ref string varName)

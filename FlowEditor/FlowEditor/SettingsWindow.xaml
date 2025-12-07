@@ -21,6 +21,8 @@
             <StackPanel Orientation="Vertical" Margin="10">
                 <CheckBox x:Name="EnableCustomInput" Content="Enable Custom Input" Margin="5"/>
                 <CheckBox x:Name="EnableCustomOutput" Content="Enable Custom Output" Margin="5"/>
+                <Label Content="Process Delay in ms"></Label>
+                    <Slider x:Name="Delay" Maximum="1000" Minimum="0" TickFrequency="1" ValueChanged="Delay_ValueChanged"></Slider>
             </StackPanel>
         </GroupBox>
 

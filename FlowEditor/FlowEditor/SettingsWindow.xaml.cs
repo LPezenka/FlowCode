@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlowCodeInfrastructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,7 @@ namespace FlowEditor
         public override void EndInit()
         {
             this.Height = this.Width = double.NaN; // Auto size
+            Delay.Value = Node.Delay;
             base.EndInit();
         }
 
@@ -54,6 +56,11 @@ namespace FlowEditor
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
+        }
+
+        private void Delay_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Node.Delay = (int)e.NewValue;
         }
     }
 }
