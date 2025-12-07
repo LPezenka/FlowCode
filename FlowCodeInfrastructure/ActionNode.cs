@@ -124,42 +124,57 @@ namespace FlowCodeInfrastructure
                     }
                     else
                     {
-                        // TODO: Consider moving this or find another way to get rid of lineInput
-                        ScriptState = ScriptState.ContinueWithAsync(code, ScriptOptions).Result;
-                    }
-                    if (initVariable)
-                    {
-                        var v = ScriptState.Variables.Where(x => x.Name == "lineInput").FirstOrDefault();
-                        var vVal = v.Value.ToString();
-                        string varType = "string;";
-                        if (int.TryParse(vVal, out int intValue)) varType = "int";
-                        else if (float.TryParse(vVal, out float f)) varType = "float";
-                        else if (bool.TryParse(vVal, out bool boolValue)) varType = "bool";
-                        else if (char.TryParse(vVal, out char charValue)) varType = "char";
-                        else varType = "string";
-                        string postProcess = string.Empty;
-                        switch (varType)
-                        {
-                            case "float":
-                                postProcess = $"{varType} {varName} = float.Parse(lineInput);";
-                                break;
-                            case "bool":
-                                postProcess = $"{varType} {varName} = bool.Parse(lineInput);";
-                                break;
-                            case "char":
-                                postProcess = $"{varType} {varName} = char.Parse(lineInput);";
-                                break;
-                            case "int":
-                                postProcess = $"{varType} {varName} = int.Parse(lineInput);";
-                                break;
-                            default:
-                                postProcess = $"string {varName} = lineInput;";
-                                break;
-                        }
 
-                        ScriptState = ScriptState.ContinueWithAsync(postProcess, ScriptOptions).Result;
-                        //Code = originalCode;
+                        if (initVariable)
+                        {
+                            // First, execute the lineInput in a new State
+                            ScriptState newState = ScriptState.ContinueWithAsync(code, ScriptOptions).Result;
+                            var v = newState.Variables.Where(x => x.Name == "lineInput").FirstOrDefault();
+
+
+
+                            var vVal = v.Value.ToString();
+                            string varType = "string;";
+                            if (int.TryParse(vVal, out int intValue)) varType = "int";
+                            else if (float.TryParse(vVal, out float f)) varType = "float";
+                            else if (bool.TryParse(vVal, out bool boolValue)) varType = "bool";
+                            else if (char.TryParse(vVal, out char charValue)) varType = "char";
+                            else varType = "string";
+                            string postProcess = string.Empty;
+
+                            // TODO: Implement support for arrays and / or lists
+                            switch (varType)
+                            {
+                                case "float":
+                                    postProcess = $"{varType} {varName} = float.Parse(\"{vVal}\");";
+                                    break;
+                                case "bool":
+                                    postProcess = $"{varType} {varName} = bool.Parse(\"{vVal}\");";
+                                    break;
+                                case "char":
+                                    postProcess = $"{varType} {varName} = char.Parse(\"{vVal}\");";
+                                    break;
+                                case "int":
+                                    postProcess = $"{varType} {varName} = int.Parse(\"{vVal}\");";
+                                    break;
+                                default:
+                                    postProcess = $"string {varName} = \"{vVal}\";";
+                                    break;
+                            }
+
+                            ScriptState = ScriptState.ContinueWithAsync(postProcess, ScriptOptions).Result;
+                            //Code = originalCode;
+                        }
+                        else
+                        {
+
+
+                            // TODO: Consider moving this or find another way to get rid of lineInput
+                            ScriptState = ScriptState.ContinueWithAsync(code, ScriptOptions).Result;
+                            //ScriptState.Variables.Remove(ScriptState.Variables.Where(ssv => ssv.Name == "lineInput").FirstOrDefault());
+                        }
                     }
+                    
                     variableLogger?.LogVariables(ScriptState.Variables);
                 }
             }
