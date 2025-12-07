@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualTreeNetwork>
+  <Node ID="6dfe49e7-c8bb-4b43-b967-c89cfcab06b7" Code="jahr % 4 == 0" Position="400,315" OnTrue="0485f421-c7d6-4b3a-8098-78c3caf9f53f" OnFalse="fade4316-a8d0-412f-968c-04b9f67988d2" Type="Decision" />
+  <Node ID="fade4316-a8d0-412f-968c-04b9f67988d2" Code="Ausgabe: &quot;Kein Schaltjahr&quot;" Position="226.39999999999998,519.8" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="6dfe49e7-c8bb-4b43-b967-c89cfcab06b7" To="fade4316-a8d0-412f-968c-04b9f67988d2" Label="Nein" />
+  <Node ID="0485f421-c7d6-4b3a-8098-78c3caf9f53f" Code="jahr % 400 == 0" Position="593.6,483.20000000000005" OnTrue="58bceccc-390e-4b33-9657-aba44b02e062" OnFalse="376bcb7e-d72d-430e-8d51-e2ad7dd04785" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="2" From="6dfe49e7-c8bb-4b43-b967-c89cfcab06b7" To="0485f421-c7d6-4b3a-8098-78c3caf9f53f" Label="Ja" />
+  <Root ID="ca33dff8-a971-4dfd-b5fd-0abf195ecda3" />
+  <Node ID="ca33dff8-a971-4dfd-b5fd-0abf195ecda3" Code="jahr = Eingabe" Position="400,130" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="ca33dff8-a971-4dfd-b5fd-0abf195ecda3" To="6dfe49e7-c8bb-4b43-b967-c89cfcab06b7" Label="" />
+  <Node ID="58bceccc-390e-4b33-9657-aba44b02e062" Code="Ausgabe: Schaltjahr" Position="771.2,682.8" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="0485f421-c7d6-4b3a-8098-78c3caf9f53f" To="58bceccc-390e-4b33-9657-aba44b02e062" Label="Ja" />
+  <Node ID="376bcb7e-d72d-430e-8d51-e2ad7dd04785" Code="jahr % 100 == 0" Position="412.57142857142856,678.4285714285714" OnTrue="67e5d821-3c39-42fd-a463-7a5bcba3f30f" OnFalse="b4c905ab-803a-4980-abfa-0b50bd9476c9" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="1" From="0485f421-c7d6-4b3a-8098-78c3caf9f53f" To="376bcb7e-d72d-430e-8d51-e2ad7dd04785" Label="Nein" />
+  <Node ID="67e5d821-3c39-42fd-a463-7a5bcba3f30f" Code="Ausgabe; &quot;Kein Schaltjahr&quot;" Position="576,899.7142857142858" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="376bcb7e-d72d-430e-8d51-e2ad7dd04785" To="67e5d821-3c39-42fd-a463-7a5bcba3f30f" Label="Ja" />
+  <Node ID="b4c905ab-803a-4980-abfa-0b50bd9476c9" Code="Ausgabe: &quot;Schaltjahr&quot;" Position="245.7142857142856,798.1428571428571" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="376bcb7e-d72d-430e-8d51-e2ad7dd04785" To="b4c905ab-803a-4980-abfa-0b50bd9476c9" Label="Nein" />
+</VisualTreeNetwork>

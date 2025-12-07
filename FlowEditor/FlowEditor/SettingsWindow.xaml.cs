@@ -1,6 +1,7 @@
 ﻿using FlowCodeInfrastructure;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,7 +51,16 @@ namespace FlowEditor
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            // TODO: Information is not saved to config file. Fix that
+            OkButton_Click(sender, e);
+            var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var settings = configFile.AppSettings.Settings;
 
+            ConfigurationManager.AppSettings["KeyWordYes"] = FlowCodeInfrastructure.Config.GetKeyword(FlowCodeInfrastructure.Config.KeyWord.True);
+            ConfigurationManager.AppSettings["KeyWordNo"] = FlowCodeInfrastructure.Config.GetKeyword(FlowCodeInfrastructure.Config.KeyWord.False);
+            
+            configFile.Save(ConfigurationSaveMode.Modified);
+//            ConfigurationManager.RefreshSection(configFile.AppSettings.CurrentConfiguration.);
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)

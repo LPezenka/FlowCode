@@ -28,25 +28,25 @@
 
         <GroupBox Header="Semantics" Grid.Row="0" Grid.Column="1"  Margin="10">
             <StackPanel Orientation="Vertical" Margin="10">
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Yes Keyword:"></Label>
-                    <TextBox x:Name="TextBoxYesKeyword" Text="Ja" Margin="5" HorizontalAlignment="Stretch"/>
-                </StackPanel>
+                <DockPanel>
+                    <Label Content="Yes Keyword:" DockPanel.Dock="Left"></Label>
+                    <TextBox x:Name="TextBoxYesKeyword" Text="Ja" Margin="5" HorizontalAlignment="Stretch" DockPanel.Dock="Right"/>
+                </DockPanel>
 
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="No Keyword:"></Label>
-                    <TextBox x:Name="TextBoxNoKeyword" Text="Nein" Margin="5" HorizontalAlignment="Stretch"/>
-                </StackPanel>
+                <DockPanel>
+                    <Label Content="No Keyword:" DockPanel.Dock="Left"></Label>
+                    <TextBox x:Name="TextBoxNoKeyword" Text="Nein" Margin="5" HorizontalAlignment="Stretch" DockPanel.Dock="Right"/>
+                </DockPanel>
 
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Input Keyword:"></Label>
-                    <TextBox x:Name="TextBoxInputKeyword" Text="Eingabe" Margin="5" HorizontalAlignment="Stretch"/>
-                </StackPanel>
+                <DockPanel>
+                    <Label Content="Input Keyword:" DockPanel.Dock="Left"></Label>
+                    <TextBox x:Name="TextBoxInputKeyword" Text="Eingabe" Margin="5" HorizontalAlignment="Stretch" DockPanel.Dock="Right"/>
+                </DockPanel>
 
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Output Keyword:"></Label>
-                    <TextBox x:Name="TextBoxOutputKeyword" Text="Nein" Margin="5" HorizontalAlignment="Stretch"/>
-                </StackPanel>
+                <DockPanel>
+                    <Label Content="Output Keyword:" DockPanel.Dock="Left"></Label>
+                    <TextBox  DockPanel.Dock="Right" x:Name="TextBoxOutputKeyword" Text="Ausgabe" Margin="5" HorizontalAlignment="Stretch"/>
+                </DockPanel>
 
             </StackPanel>
         </GroupBox>
@@ -62,11 +62,11 @@
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Variable Box ARGB color"></Label>
-                    <TextBlock Text="Format: #ARGB" Margin="5"/>
+                    <TextBlock Text="Format: #ARGB" Foreground="LightGray" Margin="5"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Output Box ARGB color"></Label>
-                    <TextBlock Text="Format: #ARGB" Margin="5"/>
+                    <TextBlock Text="Format: #ARGB" Foreground="LightGray" Margin="5"/>
                 </StackPanel>
             </StackPanel>
         </GroupBox>
