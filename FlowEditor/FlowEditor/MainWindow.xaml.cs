@@ -27,6 +27,7 @@ using System.Configuration;
 using FlowEditor.Windows;
 using System.Security.Cryptography.Xml;
 using System.Numerics;
+using System.Printing;
 
 namespace FlowEditor
 {
@@ -118,9 +119,10 @@ namespace FlowEditor
             Config.SetKeyWord(Config.KeyWord.Output, "Ausgabe");
 
             DiagramCanvas.MouseDown += MainWindow_MouseDown;
-            //DiagramCanvas.MouseRightButtonDown += DiagramCanvas_MouseRightButtonDown;
-            //DiagramCanvas.MouseRightButtonUp += DiagramCanvas_MouseRightButtonUp;
+            DiagramCanvas.MouseRightButtonDown += DiagramCanvas_MouseRightButtonDown;
+            DiagramCanvas.MouseRightButtonUp += DiagramCanvas_MouseRightButtonUp;
             //DiagramCanvas.MouseMove += DiagramCanvas_MouseMove;
+            DiagramCanvas.MouseMove += DiagramCanvasMove;
 
             _outputLogger = new OutputControl();
             Overlay.Children.Add(_outputLogger);
@@ -145,6 +147,30 @@ namespace FlowEditor
             //DecisionNodeControl.TemplateBrush = new SolidColorBrush(Color.FromArgb(0xff, 0xf6, 0xae, 0x2d));
             //ProcessNodeControl.TemplateBrush = new SolidColorBrush(Color.FromArgb(0xff, 0x86, 0xbb, 0xd8));
             //TerminalNodeControl.TemplateBrush = new SolidColorBrush(Color.FromArgb(0xff, 0xf2, 0x64, 0x19));
+        }
+
+        private void DiagramCanvas_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            isPanning = false;
+        }
+
+        Point panStart;
+        bool isPanning = false;
+        private void DiagramCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+           if (!isPanning)
+           {
+                isPanning = true;
+                panStart = e.GetPosition(DiagramCanvas);
+           }
+            else
+            {
+                var pos = e.GetPosition(DiagramCanvas);
+                Point translate = new Point(panStart.X - pos.X,
+                    panStart.Y - pos.Y);
+                PanNodes(translate.X, translate.Y);
+                panStart = pos;
+            }
         }
 
 
@@ -478,6 +504,25 @@ namespace FlowEditor
             MouseLeftButtonUp += MainWindow_MouseLeftButtonUp;
         }
 
+        private void DiagramCanvasMove(object sender, MouseEventArgs e)
+        {
+                if (e.RightButton == MouseButtonState.Pressed)
+                {
+                    if (!isPanning)
+                    {
+                        isPanning = true;
+                        panStart = e.GetPosition(DiagramCanvas);
+                    }
+                    else
+                    {
+                        var pos = e.GetPosition(DiagramCanvas);
+                        Point translate = new Point(panStart.X - pos.X,
+                            panStart.Y - pos.Y);
+                        PanNodes(-translate.X, -translate.Y);
+                        panStart = pos;
+                    }
+                }
+        }
 
         private void MainWindow_MouseMove(object sender, MouseEventArgs e)
         {
