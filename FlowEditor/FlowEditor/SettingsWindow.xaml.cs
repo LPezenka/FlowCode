@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -53,14 +54,16 @@ namespace FlowEditor
         {
             // TODO: Information is not saved to config file. Fix that
             OkButton_Click(sender, e);
-            var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            var settings = configFile.AppSettings.Settings;
+            //var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            //var settings = configFile.AppSettings.Settings;
+
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
 
             ConfigurationManager.AppSettings["KeyWordYes"] = FlowCodeInfrastructure.Config.GetKeyword(FlowCodeInfrastructure.Config.KeyWord.True);
             ConfigurationManager.AppSettings["KeyWordNo"] = FlowCodeInfrastructure.Config.GetKeyword(FlowCodeInfrastructure.Config.KeyWord.False);
-            
-            configFile.Save(ConfigurationSaveMode.Modified);
-//            ConfigurationManager.RefreshSection(configFile.AppSettings.CurrentConfiguration.);
+
+            configuration.Save(ConfigurationSaveMode.Full, true);
+            ConfigurationManager.RefreshSection("appSettings");
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)

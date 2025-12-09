@@ -1,5 +1,21 @@
 [
   {
+    "Text": "Wenn Du auf Play drückst, wird der aktuell betrachtete Knoten mit einem grünen Rahmen hervorgehoben. Somit siehst Du immer, wo Dein Programm gerade steht!",
+    "Source": "Hints/highlight.png"
+  },
+  {
+    "Text": "Ein doppelter Mausklick auf einen Knoten macht diesen zum Startknoten. Die Ausführung Deines Programms startet dann immer mit diesem Knoten. Der Startknoten ist durch einen dicken roten Rand hervorgehoben.",
+    "Source": "Hints/startnode.png"
+  },
+  {
+    "Text": "Verwende Terminalsymbole (Ovale), um Funktionen und Unterprogramme zu modellieren. Im Feld 'InputVariables' trägst Du die Variablen ein, die als Parameter übernommen werden sollen. Willst Du eine Variable zurückliefern, so trägst Du sie im Feld 'Return Variable' ein. Das entspricht dem Schlüsselwort 'return' in C#. Für die entsprechenden Felder musst Du den richtigen Typ von Terminalsymbol (Start/End) auswählen.",
+    "Source": "Hints/terminals.png"
+  },
+  {
+    "Text": "Um eine Funktion oder ein Unterprogramm aufzurufen, verwendest Du einen 'Predefined process' Knoten, also das Rechteck mit den vertikalen Balken. Der Code entspricht dann dem, was Du in C# tun würdest, folgt also dem Schema [Variable] = [Funktionsname]([Parameter, getrennt durch Komma])",
+    "Source": "Hints/processcalls.png"
+  },
+  {
     "Text": "Eine kopfgesteuerte Schleife (For-Schleife oder Zählschleife) braucht eine Initialisierung, eine Bedingung (mit ja / nein zu beantworten), einen Schleifenrumpf und ein Inkrement (eine Aktualisierung)",
     "Source": "./Hints/For-Loop-With-Output.png"
   },
@@ -13,6 +29,6 @@
   },
   {
     "Text": "Im Aufrufsfenster siehst Du zu jedem Zeitpunkt, welche Unterprogramme und Funktionen bisher aufgerufen wurden und in welcher Reihenfolge. Das macht das Verständnis von rekursiven Algorithmen viel einfacher!",
-    "Source":  "Hints/fibonacci.png"
+    "Source": "Hints/fibonacci.png"
   }
 ]

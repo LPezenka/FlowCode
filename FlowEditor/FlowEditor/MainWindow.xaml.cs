@@ -1372,7 +1372,6 @@ namespace FlowEditor
         }
 
         // Pan with WASD and arrow keys
-        // TODO: Implement mouse panning
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             double offsetX = 0.0;

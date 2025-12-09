@@ -34,7 +34,7 @@ namespace FlowCodeInfrastructure
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine(ex.ToString());
+                //Console.Error.WriteLine(ex.ToString());
                 XMLWriter.SaveXML(this, "dump/error.dump");
                 ErrorLogger.LogError(ex.Message);
             }
