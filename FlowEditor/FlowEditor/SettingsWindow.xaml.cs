@@ -74,6 +74,7 @@ namespace FlowEditor
         private void Delay_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Node.Delay = (int)e.NewValue;
+            Config.Delay = Node.Delay;
         }
     }
 }

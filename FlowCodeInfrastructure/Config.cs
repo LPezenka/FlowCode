@@ -22,6 +22,8 @@ namespace FlowCodeInfrastructure
             Console.WriteLine("Saving configuration...");
         }
 
+        public static int Delay { get; set; }
+
         public enum KeyWord
         {
             Function,
