@@ -1401,8 +1401,14 @@ namespace FlowEditor
                 var l = Canvas.GetLeft(n);
                 var t = Canvas.GetTop(n);
 
-                Canvas.SetLeft(n, l + offsetX);
-                Canvas.SetTop(n, t + offsetY);
+                var newX = l + offsetX;
+                var newY = t + offsetY;
+
+                // This is necessary to update node positions on Pan; otherwise, the saved graph gets cluttered
+                n.NodeData.Position = new Point(newX, newY);
+
+                Canvas.SetLeft(n, newX);
+                Canvas.SetTop(n, newY);
             }
 
 

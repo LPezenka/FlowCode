@@ -1,50 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <VisualTreeNetwork>
-  <Node ID="cd863889-f8d5-4a16-a7fb-e430d13c08d5" Code="Start/End" Position="581.5,286.5" FunctionName="ggT" ReturnVariable="" InputVariables="a,b" Type="Terminal" />
-  <Node ID="0c1fe8f4-4cd6-4b50-8590-ebca95b6a420" Code="b == 0" Position="606.5,446.99999999999994" OnTrue="fa979b4e-04ab-48aa-bb24-1c6414f4a92c" OnFalse="4a3b0132-a306-4684-b895-ccb5b8cf59fa" Type="Decision" />
+  <Node ID="cd863889-f8d5-4a16-a7fb-e430d13c08d5" Code="Start/End" Position="1108.9380952380943,142.73809523809575" FunctionName="ggT" ReturnVariable="" InputVariables="a,b" Type="Terminal" />
+  <Node ID="0c1fe8f4-4cd6-4b50-8590-ebca95b6a420" Code="b == 0" Position="1131.2714285714283,340.8761904761908" OnTrue="fa979b4e-04ab-48aa-bb24-1c6414f4a92c" OnFalse="4a3b0132-a306-4684-b895-ccb5b8cf59fa" Type="Decision" />
   <Edge ToIndex="0" FromIndex="1" From="cd863889-f8d5-4a16-a7fb-e430d13c08d5" To="0c1fe8f4-4cd6-4b50-8590-ebca95b6a420" Label="" />
-  <Node ID="fa979b4e-04ab-48aa-bb24-1c6414f4a92c" Code="g = a" Position="303.125,561.875" Type="Sequence" />
+  <Node ID="fa979b4e-04ab-48aa-bb24-1c6414f4a92c" Code="g = a" Position="676.6297619047624,468.88452380952464" Type="Sequence" />
   <Edge ToIndex="0" FromIndex="1" From="0c1fe8f4-4cd6-4b50-8590-ebca95b6a420" To="fa979b4e-04ab-48aa-bb24-1c6414f4a92c" Label="Ja" />
-  <Node ID="5875ae5f-dbdf-43a6-bcd1-d87a34dffe6a" Code="Start/End" Position="264.375,716.875" FunctionName="" ReturnVariable="g" InputVariables="" Type="Terminal" />
-  <Edge ToIndex="0" FromIndex="1" From="fa979b4e-04ab-48aa-bb24-1c6414f4a92c" To="5875ae5f-dbdf-43a6-bcd1-d87a34dffe6a" Label="" />
-  <Node ID="4a3b0132-a306-4684-b895-ccb5b8cf59fa" Code="b % 2 == 1" Position="721.25,608.75" OnTrue="e7020e1b-f790-4e50-88ae-25c90ed850d9" OnFalse="f2fb0a1c-1a9c-4833-ac79-2817d8cfcc6e" Type="Decision" />
+  <Node ID="4a3b0132-a306-4684-b895-ccb5b8cf59fa" Code="b % 2 == 1" Position="1161.4880952380959,596.7595238095247" OnTrue="e7020e1b-f790-4e50-88ae-25c90ed850d9" OnFalse="f2fb0a1c-1a9c-4833-ac79-2817d8cfcc6e" Type="Decision" />
   <Edge ToIndex="0" FromIndex="2" From="0c1fe8f4-4cd6-4b50-8590-ebca95b6a420" To="4a3b0132-a306-4684-b895-ccb5b8cf59fa" Label="Nein" />
-  <Node ID="e7020e1b-f790-4e50-88ae-25c90ed850d9" Code="b &gt;= a" Position="534.1666666666667,765.0000000000001" OnTrue="4b06fdfd-53c8-44b8-a75c-453831a11daa" OnFalse="5ced8d6d-99b0-477b-979d-3eccd6370c3f" Type="Decision" />
+  <Node ID="e7020e1b-f790-4e50-88ae-25c90ed850d9" Code="b &gt;= a" Position="891.6619047619047,791.4476190476195" OnTrue="4b06fdfd-53c8-44b8-a75c-453831a11daa" OnFalse="5ced8d6d-99b0-477b-979d-3eccd6370c3f" Type="Decision" />
   <Edge ToIndex="0" FromIndex="1" From="4a3b0132-a306-4684-b895-ccb5b8cf59fa" To="e7020e1b-f790-4e50-88ae-25c90ed850d9" Label="Ja" />
-  <Node ID="4b06fdfd-53c8-44b8-a75c-453831a11daa" Code="c = b - a" Position="372.49999999999983,958.3333333333334" Type="Sequence" />
+  <Node ID="4b06fdfd-53c8-44b8-a75c-453831a11daa" Code="c = b - a" Position="681.5380952380946,967.4095238095243" Type="Sequence" />
   <Edge ToIndex="0" FromIndex="1" From="e7020e1b-f790-4e50-88ae-25c90ed850d9" To="4b06fdfd-53c8-44b8-a75c-453831a11daa" Label="Ja" />
-  <Node ID="f0a132d5-31ec-49de-addd-32d196cb9095" Code="g = ggT(a,c)" Position="370.8333333333333,1090.8333333333335" Type="PredefinedProcess" />
-  <Edge ToIndex="0" FromIndex="1" From="4b06fdfd-53c8-44b8-a75c-453831a11daa" To="f0a132d5-31ec-49de-addd-32d196cb9095" Label="" />
-  <Node ID="5ced8d6d-99b0-477b-979d-3eccd6370c3f" Code="c = a - b" Position="417.9166666666667,382.5" Type="Sequence" />
+  <Node ID="5ced8d6d-99b0-477b-979d-3eccd6370c3f" Code="c = a - b" Position="1098.3833333333337,969.6333333333342" Type="Sequence" />
   <Edge ToIndex="0" FromIndex="2" From="e7020e1b-f790-4e50-88ae-25c90ed850d9" To="5ced8d6d-99b0-477b-979d-3eccd6370c3f" Label="Nein" />
-  <Node ID="4d2b6c7f-d416-4da7-afff-056556ad6a6d" Code="g = ggT(b,c)" Position="418.75,515.8333333333334" Type="PredefinedProcess" />
+  <Node ID="4d2b6c7f-d416-4da7-afff-056556ad6a6d" Code="g = ggT(b,c)" Position="1099.9023809523808,1130.6238095238116" Type="PredefinedProcess" />
   <Edge ToIndex="0" FromIndex="1" From="5ced8d6d-99b0-477b-979d-3eccd6370c3f" To="4d2b6c7f-d416-4da7-afff-056556ad6a6d" Label="" />
-  <Node ID="9bf0596a-9b8d-4b3f-9b55-6a933789203b" Code="Start/End" Position="233,338.9999999999999" FunctionName="" ReturnVariable="g" InputVariables="" Type="Terminal" />
-  <Edge ToIndex="0" FromIndex="1" From="f0a132d5-31ec-49de-addd-32d196cb9095" To="9bf0596a-9b8d-4b3f-9b55-6a933789203b" Label="" />
+  <Node ID="9bf0596a-9b8d-4b3f-9b55-6a933789203b" Code="Start/End" Position="879.790476190476,1291.84761904762" FunctionName="" ReturnVariable="g" InputVariables="" Type="Terminal" />
   <Edge ToIndex="0" FromIndex="1" From="4d2b6c7f-d416-4da7-afff-056556ad6a6d" To="9bf0596a-9b8d-4b3f-9b55-6a933789203b" Label="" />
-  <Node ID="f2fb0a1c-1a9c-4833-ac79-2817d8cfcc6e" Code="a % 2 == 1" Position="461.53846153846143,236.15384615384613" OnTrue="9ba2f416-35c1-4e24-b208-b6d222bf24fe" OnFalse="46aa542c-17c0-414f-9947-0e30643e80e9" Type="Decision" />
+  <Node ID="f2fb0a1c-1a9c-4833-ac79-2817d8cfcc6e" Code="a % 2 == 1" Position="1511.605128205129,726.6014652014654" OnTrue="9ba2f416-35c1-4e24-b208-b6d222bf24fe" OnFalse="46aa542c-17c0-414f-9947-0e30643e80e9" Type="Decision" />
   <Edge ToIndex="0" FromIndex="2" From="4a3b0132-a306-4684-b895-ccb5b8cf59fa" To="f2fb0a1c-1a9c-4833-ac79-2817d8cfcc6e" Label="Nein" />
-  <Node ID="9ba2f416-35c1-4e24-b208-b6d222bf24fe" Code="c = b / 2.0" Position="580.3846153846154,426.9230769230768" Type="Sequence" />
+  <Node ID="9ba2f416-35c1-4e24-b208-b6d222bf24fe" Code="c = b / 2.0" Position="1709.9941391941397,1196.2278388278396" Type="Sequence" />
   <Edge ToIndex="0" FromIndex="2" From="f2fb0a1c-1a9c-4833-ac79-2817d8cfcc6e" To="9ba2f416-35c1-4e24-b208-b6d222bf24fe" Label="Ja" />
-  <Node ID="8f167b22-563f-44bb-ad09-8ab5934a0a6a" Code="g = ggT(a,c)" Position="573.8461538461539,455.7692307692308" Type="PredefinedProcess" />
-  <Edge ToIndex="0" FromIndex="1" From="9ba2f416-35c1-4e24-b208-b6d222bf24fe" To="8f167b22-563f-44bb-ad09-8ab5934a0a6a" Label="" />
-  <Node ID="46aa542c-17c0-414f-9947-0e30643e80e9" Code="c = a / 2.0" Position="357.3076923076923,328.46153846153845" Type="Sequence" />
+  <Node ID="46aa542c-17c0-414f-9947-0e30643e80e9" Code="c = a / 2.0" Position="1365.3172161172167,909.1948717948723" Type="Sequence" />
   <Edge ToIndex="0" FromIndex="1" From="f2fb0a1c-1a9c-4833-ac79-2817d8cfcc6e" To="46aa542c-17c0-414f-9947-0e30643e80e9" Label="Nein" />
-  <Node ID="803a4812-0132-4b8c-9b64-81d7b5327c16" Code="d = b / 2.0" Position="357.6923076923077,475.3846153846153" Type="Sequence" />
+  <Node ID="803a4812-0132-4b8c-9b64-81d7b5327c16" Code="d = b / 2.0" Position="1361.358974358975,1066.8608058608063" Type="Sequence" />
   <Edge ToIndex="0" FromIndex="1" From="46aa542c-17c0-414f-9947-0e30643e80e9" To="803a4812-0132-4b8c-9b64-81d7b5327c16" Label="" />
-  <Node ID="2152355b-7b33-4fbe-87d3-8b30ad7a63f3" Code="g = ggT(c,d)" Position="358.0769230769231,335" Type="PredefinedProcess" />
-  <Edge ToIndex="0" FromIndex="1" From="803a4812-0132-4b8c-9b64-81d7b5327c16" To="2152355b-7b33-4fbe-87d3-8b30ad7a63f3" Label="" />
-  <Node ID="ffe29723-8140-471e-8705-f397bfa2f7b8" Code="g = g * 2" Position="355,468.07692307692304" Type="Sequence" />
-  <Edge ToIndex="0" FromIndex="1" From="2152355b-7b33-4fbe-87d3-8b30ad7a63f3" To="ffe29723-8140-471e-8705-f397bfa2f7b8" Label="" />
-  <Node ID="270d5e86-8321-4f4c-badd-d7d37a0de3d6" Code="Start/End" Position="539.375,651.875" FunctionName="" ReturnVariable="g" InputVariables="" Type="Terminal" />
+  <Node ID="8f167b22-563f-44bb-ad09-8ab5934a0a6a" Code="g = ggT(a,c)" Position="1710.7699633699642,1342.559706959708" Type="PredefinedProcess" />
+  <Node ID="270d5e86-8321-4f4c-badd-d7d37a0de3d6" Code="Start/End" Position="1615.0130952380957,1672.9511904761926" FunctionName="" ReturnVariable="g" InputVariables="" Type="Terminal" />
   <Edge ToIndex="0" FromIndex="1" From="8f167b22-563f-44bb-ad09-8ab5934a0a6a" To="270d5e86-8321-4f4c-badd-d7d37a0de3d6" Label="" />
-  <Edge ToIndex="0" FromIndex="1" From="ffe29723-8140-471e-8705-f397bfa2f7b8" To="270d5e86-8321-4f4c-badd-d7d37a0de3d6" Label="" />
   <Root ID="fdf8286d-aeb9-432f-9184-57de5f04ff97" />
-  <Node ID="fdf8286d-aeb9-432f-9184-57de5f04ff97" Code="a = 209865" Position="350,465" Type="Sequence" />
-  <Node ID="256c0204-7720-4f10-b792-3e761075a65c" Code="b = 209797" Position="350,580" Type="Sequence" />
+  <Node ID="fdf8286d-aeb9-432f-9184-57de5f04ff97" Code="a = 209865" Position="301.63809523809493,938.0761904761904" Type="Sequence" />
+  <Node ID="256c0204-7720-4f10-b792-3e761075a65c" Code="b = 209797" Position="301.63809523809516,1082.0761904761905" Type="Sequence" />
   <Edge ToIndex="0" FromIndex="1" From="fdf8286d-aeb9-432f-9184-57de5f04ff97" To="256c0204-7720-4f10-b792-3e761075a65c" Label="" />
-  <Node ID="cea7e4bc-797e-4e2c-8f0e-f0b35dc0b1f0" Code="g = ggT(a,b)" Position="349.99999999999994,742.5" Type="PredefinedProcess" />
+  <Node ID="cea7e4bc-797e-4e2c-8f0e-f0b35dc0b1f0" Code="g = ggT(a,b)" Position="301.63809523809493,1216.5761904761916" Type="PredefinedProcess" />
   <Edge ToIndex="0" FromIndex="1" From="256c0204-7720-4f10-b792-3e761075a65c" To="cea7e4bc-797e-4e2c-8f0e-f0b35dc0b1f0" Label="" />
-  <Node ID="57ed3b31-a8d9-4b07-ba68-ce612439a8b1" Code="Ausgabe: g" Position="363.33333333333337,919.1666666666667" Type="Sequence" />
+  <Node ID="57ed3b31-a8d9-4b07-ba68-ce612439a8b1" Code="Ausgabe: g" Position="306.9714285714284,1390.2428571428572" Type="Sequence" />
   <Edge ToIndex="0" FromIndex="1" From="cea7e4bc-797e-4e2c-8f0e-f0b35dc0b1f0" To="57ed3b31-a8d9-4b07-ba68-ce612439a8b1" Label="" />
+  <Edge ToIndex="0" FromIndex="1" From="9ba2f416-35c1-4e24-b208-b6d222bf24fe" To="8f167b22-563f-44bb-ad09-8ab5934a0a6a" Label="" />
+  <Node ID="ffe29723-8140-471e-8705-f397bfa2f7b8" Code="g = g * 2" Position="1357.3809523809525,1346.8959706959713" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="ffe29723-8140-471e-8705-f397bfa2f7b8" To="270d5e86-8321-4f4c-badd-d7d37a0de3d6" Label="" />
+  <Node ID="2152355b-7b33-4fbe-87d3-8b30ad7a63f3" Code="g = ggT(c,d)" Position="1359.2293040293048,1207.8476190476204" Type="PredefinedProcess" />
+  <Edge ToIndex="0" FromIndex="1" From="2152355b-7b33-4fbe-87d3-8b30ad7a63f3" To="ffe29723-8140-471e-8705-f397bfa2f7b8" Label="" />
+  <Edge ToIndex="0" FromIndex="1" From="803a4812-0132-4b8c-9b64-81d7b5327c16" To="2152355b-7b33-4fbe-87d3-8b30ad7a63f3" Label="" />
+  <Node ID="f0a132d5-31ec-49de-addd-32d196cb9095" Code="g = ggT(a,c)" Position="681.4714285714286,1109.5095238095253" Type="PredefinedProcess" />
+  <Edge ToIndex="0" FromIndex="1" From="f0a132d5-31ec-49de-addd-32d196cb9095" To="9bf0596a-9b8d-4b3f-9b55-6a933789203b" Label="" />
+  <Edge ToIndex="0" FromIndex="1" From="4b06fdfd-53c8-44b8-a75c-453831a11daa" To="f0a132d5-31ec-49de-addd-32d196cb9095" Label="" />
+  <Node ID="5875ae5f-dbdf-43a6-bcd1-d87a34dffe6a" Code="Start/End" Position="644.1242063492064,597.7734126984135" FunctionName="" ReturnVariable="g" InputVariables="" Type="Terminal" />
+  <Edge ToIndex="0" FromIndex="1" From="fa979b4e-04ab-48aa-bb24-1c6414f4a92c" To="5875ae5f-dbdf-43a6-bcd1-d87a34dffe6a" Label="" />
 </VisualTreeNetwork>
