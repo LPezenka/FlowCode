@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualTreeNetwork>
+  <Root ID="30283ed6-f1fc-4e06-a055-2ea40d0f831a" />
+  <Node ID="30283ed6-f1fc-4e06-a055-2ea40d0f831a" Code="number = 0" Position="512.6476190476187,49.75873015873029" Type="Sequence" />
+  <Node ID="83d67f48-7e36-469e-9c68-63fea5c1f005" Code="number = new Random().Next(0,101)" Position="512.7365079365076,183.3365079365081" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="30283ed6-f1fc-4e06-a055-2ea40d0f831a" To="83d67f48-7e36-469e-9c68-63fea5c1f005" Label="" />
+  <Node ID="467cfad5-338d-40c3-b58e-1c0d076b62d5" Code="i = 0" Position="511.84761904761876,327.66984126984136" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="83d67f48-7e36-469e-9c68-63fea5c1f005" To="467cfad5-338d-40c3-b58e-1c0d076b62d5" Label="" />
+  <Node ID="6551b668-8f94-4c3f-adf0-fb1a56ea8f93" Code="i &lt; numbre" Position="511.84761904761876,465.55873015873044" OnTrue="b3852b3e-1641-433e-87d6-e2f5d301a65c" OnFalse="0c296edf-1a95-4634-9cd6-511107754ed8" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="1" From="467cfad5-338d-40c3-b58e-1c0d076b62d5" To="6551b668-8f94-4c3f-adf0-fb1a56ea8f93" Label="" />
+  <Node ID="b3852b3e-1641-433e-87d6-e2f5d301a65c" Code="Ausgabe: i" Position="659.8476190476185,604.5587301587304" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="6551b668-8f94-4c3f-adf0-fb1a56ea8f93" To="b3852b3e-1641-433e-87d6-e2f5d301a65c" Label="Ja" />
+  <Node ID="e943397a-729f-4776-97df-f8077f19f6d9" Code="i ++" Position="661.6253968253964,748.0031746031752" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="b3852b3e-1641-433e-87d6-e2f5d301a65c" To="e943397a-729f-4776-97df-f8077f19f6d9" Label="" />
+  <Edge ToIndex="0" FromIndex="1" From="e943397a-729f-4776-97df-f8077f19f6d9" To="6551b668-8f94-4c3f-adf0-fb1a56ea8f93" Label="" />
+  <Node ID="0c296edf-1a95-4634-9cd6-511107754ed8" Code="Ausgabe: &quot;Fertig&quot;" Position="257.02222222222184,684.5111111111116" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="6551b668-8f94-4c3f-adf0-fb1a56ea8f93" To="0c296edf-1a95-4634-9cd6-511107754ed8" Label="Nein" />
+</VisualTreeNetwork>
