@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualTreeNetwork>
+  <Root ID="0020b178-6136-4192-84c5-27d638a35205" />
+  <Node ID="0020b178-6136-4192-84c5-27d638a35205" Code="a = 3" Position="400,130" Type="Sequence" />
+  <Node ID="c8e6d33f-d84a-41e1-ba98-1229efbf1660" Code="s = &quot;&quot;" Position="400,245" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="0020b178-6136-4192-84c5-27d638a35205" To="c8e6d33f-d84a-41e1-ba98-1229efbf1660" Label="" />
+  <Node ID="5c5d68b0-6eb3-474f-822a-d12047418430" Code="s = $&quot;a: {a}&quot;" Position="400,360" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="c8e6d33f-d84a-41e1-ba98-1229efbf1660" To="5c5d68b0-6eb3-474f-822a-d12047418430" Label="" />
+  <Node ID="ca58963a-374f-44b1-875c-5e8467391bdb" Code="Ausgabe: s" Position="400,475" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="5c5d68b0-6eb3-474f-822a-d12047418430" To="ca58963a-374f-44b1-875c-5e8467391bdb" Label="" />
+</VisualTreeNetwork>
