@@ -8,6 +8,10 @@
     "Source": "Hints/startnode.png"
   },
   {
+    "Text": "Eine Alternative (Rautensymbol) braucht eine Bedingung, die sich mit Ja oder Nein beantworten lässt. Dann braucht sie jeweils einen Pfad für die beiden Fälle - also einen für den Fall, dass die Bedingung zutrifft und einen Pfad für den Fall, dass sie nicht zutrifft. Achte darauf, die Kanten entsprechend mit Ja oder Nein zu beschriften. Die Pfade können sich im weiteren Programmverlauf treffen, müssen es aber nicht.",
+    "Source": "Hints/animalquiz.png"
+  },
+  {
     "Text": "Verwende Terminalsymbole (Ovale), um Funktionen und Unterprogramme zu modellieren. Im Feld 'InputVariables' trägst Du die Variablen ein, die als Parameter übernommen werden sollen. Willst Du eine Variable zurückliefern, so trägst Du sie im Feld 'Return Variable' ein. Das entspricht dem Schlüsselwort 'return' in C#. Für die entsprechenden Felder musst Du den richtigen Typ von Terminalsymbol (Start/End) auswählen.",
     "Source": "Hints/terminals.png"
   },

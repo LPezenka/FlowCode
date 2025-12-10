@@ -78,6 +78,9 @@
     <None Update="field.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Hints\animalquiz.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Hints\do-while-loop.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

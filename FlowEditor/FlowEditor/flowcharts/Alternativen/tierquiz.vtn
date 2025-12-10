@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualTreeNetwork>
+  <Root ID="2ee0ab0f-291e-4044-88b1-2245737e1ea1" />
+  <Node ID="2ee0ab0f-291e-4044-88b1-2245737e1ea1" Code="Ausgabe: &quot;Welches Tier bist Du?&quot;" Position="911.0871128871127,202.22426462426532" Type="Sequence" />
+  <Node ID="4e55145d-d256-494f-923c-9cbd10877acb" Code="Ausgabe: &quot;Magst Du Wasser? (j/n)&quot;" Position="911.0871128871127,317.22426462426495" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="2ee0ab0f-291e-4044-88b1-2245737e1ea1" To="4e55145d-d256-494f-923c-9cbd10877acb" Label="" />
+  <Node ID="d9ed25a7-6606-40dc-9aa0-0f5946e078be" Code="wasser = Eingabe" Position="911.0871128871127,432.22426462426523" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="4e55145d-d256-494f-923c-9cbd10877acb" To="d9ed25a7-6606-40dc-9aa0-0f5946e078be" Label="" />
+  <Node ID="d13deed2-a601-493d-8709-c237bdf1c05c" Code="wasser == 'j'" Position="910.2871128871125,562.0242646242649" OnTrue="2a21d8d3-f25c-496d-9e7f-d98c9ed3e2fd" OnFalse="d794c885-6815-4913-ae86-c4f7727f997c" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="1" From="d9ed25a7-6606-40dc-9aa0-0f5946e078be" To="d13deed2-a601-493d-8709-c237bdf1c05c" Label="" />
+  <Node ID="2a21d8d3-f25c-496d-9e7f-d98c9ed3e2fd" Code="Ausgabe: &quot;Hast Du Federn? (j/n)&quot;" Position="709.3093351093348,742.8909312909318" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="d13deed2-a601-493d-8709-c237bdf1c05c" To="2a21d8d3-f25c-496d-9e7f-d98c9ed3e2fd" Label="Ja" />
+  <Node ID="c50f6aa5-10cf-4c89-8ab1-43fb7c098c60" Code="federn = Eingabe" Position="709.3093351093348,895.2242646242655" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="2a21d8d3-f25c-496d-9e7f-d98c9ed3e2fd" To="c50f6aa5-10cf-4c89-8ab1-43fb7c098c60" Label="" />
+  <Node ID="936958a5-5d71-4291-9a01-49810725ecd5" Code="federn == 'j'" Position="709.9760017760016,1058.4464868464875" OnFalse="e0f40e58-3201-472e-a1d9-030155b0b7c7" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="1" From="c50f6aa5-10cf-4c89-8ab1-43fb7c098c60" To="936958a5-5d71-4291-9a01-49810725ecd5" Label="" />
+  <Node ID="e0f40e58-3201-472e-a1d9-030155b0b7c7" Code="Ausgabe: &quot;Du bist ein Fisch&quot;" Position="872.579176379176,1248.0496614496624" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="936958a5-5d71-4291-9a01-49810725ecd5" To="e0f40e58-3201-472e-a1d9-030155b0b7c7" Label="Nein" />
+  <Node ID="b11db73e-86ff-42bb-805b-8e5dbb049588" Code="Ausgabe: &quot;Du bist eine Ente&quot;" Position="537.2648906648903,1249.3353757353766" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="936958a5-5d71-4291-9a01-49810725ecd5" To="b11db73e-86ff-42bb-805b-8e5dbb049588" Label="Nein" />
+  <Node ID="d794c885-6815-4913-ae86-c4f7727f997c" Code="Ausgabe: &quot;Hast Du Fell? (j/n)&quot;" Position="1143.3093351093353,747.6687090687103" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="d13deed2-a601-493d-8709-c237bdf1c05c" To="d794c885-6815-4913-ae86-c4f7727f997c" Label="Nein" />
+  <Node ID="ff1af131-2a3f-46f7-9385-c9da536eac25" Code="fell = Eingabe" Position="1143.1477189477187,896.1838605838625" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="d794c885-6815-4913-ae86-c4f7727f997c" To="ff1af131-2a3f-46f7-9385-c9da536eac25" Label="" />
+  <Node ID="58b9aa0a-9f42-4bf9-b0b0-a19b50f06ea5" Code="fell == 'j'" Position="1259.7560439560439,1077.824175824177" OnTrue="fe4da919-70d3-499c-af5e-fe445e87dfe9" OnFalse="30338b46-82d5-4e8c-b685-e809c85093f8" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="1" From="ff1af131-2a3f-46f7-9385-c9da536eac25" To="58b9aa0a-9f42-4bf9-b0b0-a19b50f06ea5" Label="" />
+  <Node ID="fe4da919-70d3-499c-af5e-fe445e87dfe9" Code="Ausgabe: &quot;Du bist ein Bär&quot;" Position="1113.571428571429,1249.2857142857151" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="58b9aa0a-9f42-4bf9-b0b0-a19b50f06ea5" To="fe4da919-70d3-499c-af5e-fe445e87dfe9" Label="Ja" />
+  <Node ID="30338b46-82d5-4e8c-b685-e809c85093f8" Code="Ausgabe: &quot;Du bist ein Elephant&quot;" Position="1438.5714285714275,1249.2857142857151" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="58b9aa0a-9f42-4bf9-b0b0-a19b50f06ea5" To="30338b46-82d5-4e8c-b685-e809c85093f8" Label="Nein" />
+</VisualTreeNetwork>
