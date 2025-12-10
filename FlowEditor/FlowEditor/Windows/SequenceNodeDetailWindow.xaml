@@ -1,0 +1,26 @@
+﻿<Window x:Class="FlowEditor.Windows.SequenceNodeDetailWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FlowEditor.Windows" xmlns:controls="clr-namespace:FlowEditor.Controls" d:DataContext="{d:DesignInstance Type=controls:SequenceNodeControl}"
+        mc:Ignorable="d"
+        Title="ActionNodeDetailWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="9*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Content="Code:" Grid.Row="0" Grid.Column="0"></Label>
+        <TextBox TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding NodeData.Title,Mode=TwoWay}" x:Name="Code" Grid.Row="1" Grid.Column="0" Background="AliceBlue"></TextBox>
+        <Label Content="Code Fragments" Grid.Row="0" Grid.Column="1"></Label>
+        <ListBox x:Name="CodeFragments" Grid.Row="1" Grid.Column="1">
+        </ListBox>
+        <Button Content="Ok" Grid.Row="2" Grid.Column="1" Click="Button_Click"></Button>
+    </Grid>
+</Window>

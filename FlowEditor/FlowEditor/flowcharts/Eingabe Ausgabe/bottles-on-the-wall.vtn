@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualTreeNetwork>
+  <Node ID="b67df59f-24f8-4e2a-9324-04fdde75eff2" Code="i++" Position="464.8000000000005,560.4000000000005" Type="Sequence" />
+  <Node ID="9d76a6ae-5d13-4312-b86b-08253fc45a85" Code="i &lt; bottles" Position="286.40000000000043,32.199999999999335" OnTrue="39be40fa-9ca6-4def-9f66-ef35e78f068c" OnFalse="c277f9d2-4da4-41a8-9193-aed43a30060b" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="1" From="b67df59f-24f8-4e2a-9324-04fdde75eff2" To="9d76a6ae-5d13-4312-b86b-08253fc45a85" Label="" />
+  <Node ID="4f2117f8-bad4-4d9f-badb-4125195cd0d9" Code="output = &quot;&quot;" Position="291.2000000000004,-102.4000000000002" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="4f2117f8-bad4-4d9f-badb-4125195cd0d9" To="9d76a6ae-5d13-4312-b86b-08253fc45a85" Label="" />
+  <Node ID="c277f9d2-4da4-41a8-9193-aed43a30060b" Code="Ausgabe: &quot;No more bottles on the wall&quot;" Position="113.6000000000003,245.80000000000078" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="9d76a6ae-5d13-4312-b86b-08253fc45a85" To="c277f9d2-4da4-41a8-9193-aed43a30060b" Label="Nein" />
+  <Node ID="39be40fa-9ca6-4def-9f66-ef35e78f068c" Code="output = $&quot;{bottles} of beer on the wall.&quot;" Position="474.4000000000002,217.40000000000057" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="9d76a6ae-5d13-4312-b86b-08253fc45a85" To="39be40fa-9ca6-4def-9f66-ef35e78f068c" Label="Ja" />
+  <Node ID="2b714a78-6890-43ed-ad28-a8adf620eb97" Code="i = 0" Position="301.6000000000005,-251.99999999999926" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="2b714a78-6890-43ed-ad28-a8adf620eb97" To="4f2117f8-bad4-4d9f-badb-4125195cd0d9" Label="" />
+  <Node ID="8067f3fd-9d9b-445d-895d-c8566026d07e" Code="bottles = Eingabe" Position="296.8000000000004,-382.99999999999903" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="8067f3fd-9d9b-445d-895d-c8566026d07e" To="2b714a78-6890-43ed-ad28-a8adf620eb97" Label="" />
+  <Root ID="cf916695-0c30-47d8-83d6-8a5648375054" />
+  <Node ID="cf916695-0c30-47d8-83d6-8a5648375054" Code="Ausgabe: &quot;How many bottles?&quot;" Position="296.00000000000045,-509.19999999999845" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="cf916695-0c30-47d8-83d6-8a5648375054" To="8067f3fd-9d9b-445d-895d-c8566026d07e" Label="" />
+  <Node ID="69c2f586-79c8-4d1a-890c-8e318dcf8fbc" Code="Ausgabe: output" Position="465.60000000000025,406.4000000000005" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="69c2f586-79c8-4d1a-890c-8e318dcf8fbc" To="b67df59f-24f8-4e2a-9324-04fdde75eff2" Label="" />
+  <Edge ToIndex="0" FromIndex="1" From="39be40fa-9ca6-4def-9f66-ef35e78f068c" To="69c2f586-79c8-4d1a-890c-8e318dcf8fbc" Label="" />
+</VisualTreeNetwork>

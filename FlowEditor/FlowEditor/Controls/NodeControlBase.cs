@@ -24,6 +24,16 @@ namespace FlowEditor.Controls
         //public static Brush TemplateBrush { get; set; }
         public Brush OriginalBackground { get; set; } = Brushes.Gray;
         public Node NodeData { get; set; }
+
+        public string Code
+        {
+            get => NodeData.Title;
+            set 
+            { 
+                NodeData.Title = value;
+                NotifyPropertyChanged(nameof(Code)); 
+            }
+        }
         protected int FirstOutputIndex { get; set; } = 1; // Standard: ein Eingang bei Index 0
         public abstract List<Point> GetConnectionPoints();
 

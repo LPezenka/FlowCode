@@ -91,6 +91,7 @@ namespace FlowEditor
 
         public MainWindow()
         {
+
             WelcomeWindow ww = new WelcomeWindow("./res/tips.json");
             ww.ShowDialog();
 
@@ -117,6 +118,16 @@ namespace FlowEditor
             Config.SetKeyWord(Config.KeyWord.Function, "Function");
             Config.SetKeyWord(Config.KeyWord.Input, "Eingabe");
             Config.SetKeyWord(Config.KeyWord.Output, "Ausgabe");
+
+            // Test for the new Detail window. This makes coding somewhat more comfortable for lines lines
+            // Also, provides predefined code snippets
+            // Need to find the best way to open this
+            //SequenceNodeControl an = new SequenceNodeControl();
+            //an.NodeData = new Controls.Node();
+            //an.NodeData.Title = "Hello, World";
+
+            //SequenceNodeDetailWindow anwnd = new SequenceNodeDetailWindow(an);
+            //anwnd.ShowDialog();
 
             DiagramCanvas.MouseDown += MainWindow_MouseDown;
             DiagramCanvas.MouseRightButtonDown += DiagramCanvas_MouseRightButtonDown;
@@ -281,8 +292,12 @@ namespace FlowEditor
             {
                 DeleteSelectedNode();
             }
+            else if (e.Key==Key.F2)
+            {
+                OpenDetailWindow();;
+            }
 
-            base.OnKeyDown(e);
+                base.OnKeyDown(e);
         }
 
         private void DeleteSelectedNode()
@@ -1184,6 +1199,17 @@ namespace FlowEditor
 
         }
 
+        private void OpenDetailWindow()
+        {
+            SequenceNodeControl snc = NodeControlBase.LastSelected as SequenceNodeControl;
+            if (snc is not null)
+            {
+                    SequenceNodeDetailWindow sndwnd = new SequenceNodeDetailWindow(snc);
+                    sndwnd.ShowDialog();
+                
+            }
+        }
+
         private void LoadEdges(XDocument doc)
         {
             foreach (var e in doc.Root.Elements("Edge"))
@@ -1391,6 +1417,7 @@ namespace FlowEditor
                     offsetX = 10.0;
                 PanNodes(offsetX, offsetY);
             }
+            
 
         }
 
