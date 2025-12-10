@@ -63,11 +63,15 @@ namespace FlowCodeInfrastructure
                         if (type == "System.Boolean") type = "bool";
                         else if (type == "System.Int32") type = "int";
                         else if (type == "System.Char") type = "char";
+                        else if (type == "System.String") type = "string";
+                        else if (type == "System.Double") type = "double";
+                        else if (type == "System.Single") type = "float";
 
                         if (val == "True") val = "true";
                         else if (val == "False") val = "false";
 
                         if (type == "char") val = $"'{val}'";
+                        else if (type == "string") val = $"\"{val}\"";
 
                         result += $"{type} {name} = {val};\n";
                     }
@@ -101,6 +105,7 @@ namespace FlowCodeInfrastructure
             ScriptOptions = options;
 
             StackDisplay?.Pop();
+            // TODO: Maybe clear the StackDisplay completely before entering the function, and reset after that.
 
             //Run(Next);
             //}

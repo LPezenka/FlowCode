@@ -74,7 +74,7 @@ namespace FlowCodeInfrastructure
                     }
                 }
                 else
-                    code = $"string lineInput = \"{rightHandPart.Trim()}\";";
+                    code = $"string lineInput = \"{rightHandPart.Replace("\"", "").Trim()}\";";
             }
             initVariable = true;
             return (ScriptState, code);
@@ -172,6 +172,7 @@ namespace FlowCodeInfrastructure
             string varType = "string;";
             if (int.TryParse(vVal, out int intValue)) varType = "int";
             else if (float.TryParse(vVal, out float f)) varType = "float";
+            else if (double.TryParse(vVal, out double d)) varType = "double";
             else if (bool.TryParse(vVal, out bool boolValue)) varType = "bool";
             else if (char.TryParse(vVal, out char charValue)) varType = "char";
             else varType = "string";
@@ -185,6 +186,9 @@ namespace FlowCodeInfrastructure
             {
                 case "float":
                     postProcess = $"{varType} {varName} = float.Parse(\"{vVal}\");";
+                    break;
+                case "double":
+                    postProcess = $"{varType} {varName} = double.Parse(\"{vVal}\");";
                     break;
                 case "bool":
                     postProcess = $"{varType} {varName} = bool.Parse(\"{vVal}\");";
