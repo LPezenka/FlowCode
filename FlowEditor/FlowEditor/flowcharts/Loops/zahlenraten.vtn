@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualTreeNetwork>
+  <Node ID="ee8644c9-1dc3-4856-ab4f-ff1ef8856fb3" Code="guess == magicNumber" Position="412.8888888888889,463.2222222222222" OnTrue="b5f623a4-6e36-44eb-93b2-9ddaa435b58a" OnFalse="7d8202aa-db64-4363-b6f3-2758b13ddba3" Type="Decision" />
+  <Node ID="7d8202aa-db64-4363-b6f3-2758b13ddba3" Code="Ausgabe: &quot;Leider falsch&quot;" Position="705.3333333333333,571.1111111111111" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="ee8644c9-1dc3-4856-ab4f-ff1ef8856fb3" To="7d8202aa-db64-4363-b6f3-2758b13ddba3" Label="Nein" />
+  <Node ID="345f29e8-6e18-45e2-860b-195869aee482" Code="Ausgabe: &quot;Zahl raten:&quot;" Position="412.8888888888889,163.22222222222217" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="7d8202aa-db64-4363-b6f3-2758b13ddba3" To="345f29e8-6e18-45e2-860b-195869aee482" Label="" />
+  <Node ID="c396299b-18fa-4e1a-8208-b63bdb7e39e9" Code="guess = Eingabe" Position="412.8888888888889,278.2222222222222" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="345f29e8-6e18-45e2-860b-195869aee482" To="c396299b-18fa-4e1a-8208-b63bdb7e39e9" Label="" />
+  <Edge ToIndex="0" FromIndex="1" From="c396299b-18fa-4e1a-8208-b63bdb7e39e9" To="ee8644c9-1dc3-4856-ab4f-ff1ef8856fb3" Label="" />
+  <Node ID="b5f623a4-6e36-44eb-93b2-9ddaa435b58a" Code="Ausgabe: &quot;Erraten!&quot;" Position="221.68888888888875,659.0888888888887" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="ee8644c9-1dc3-4856-ab4f-ff1ef8856fb3" To="b5f623a4-6e36-44eb-93b2-9ddaa435b58a" Label="Ja" />
+  <Root ID="4a98dc0a-193f-4d42-bc05-3e71178b7013" />
+  <Node ID="4a98dc0a-193f-4d42-bc05-3e71178b7013" Code="magicNumber = 7" Position="412.8888888888889,9.11111111111105" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="4a98dc0a-193f-4d42-bc05-3e71178b7013" To="345f29e8-6e18-45e2-860b-195869aee482" Label="" />
+</VisualTreeNetwork>

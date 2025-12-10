@@ -25,7 +25,7 @@ namespace FlowCodeInfrastructure
             if (Regex.IsMatch(code, @"(?<!\=)\=(?!\=)") == false)
                 return (scriptState, code);
 
-            initVariable = false;
+            //initVariable = false;
             var parts = code.Split("=");
             // TODO: something a = b == c doesn't work because of the split
             // fix that by finding the first occurence and manually taking substrings
@@ -132,7 +132,15 @@ namespace FlowCodeInfrastructure
                             var v = newState.Variables.Where(x => x.Name == "lineInput").FirstOrDefault();
 
                             var vVal = v?.Value.ToString();
-                            string postProcess = InferType(varName, vVal, out string vType);
+
+                            var existing = ScriptState.Variables.Where(x => x.Name == varName).FirstOrDefault();
+
+                            string postProcess = string.Empty;
+                            postProcess = InferType(varName, vVal, out string vType);
+
+                            if (existing is not null)
+                                //Remove variable type, as it was already set in the past
+                                postProcess = string.Join(" ", postProcess.Split(" ").Skip(1));
 
                             ScriptState = ScriptState.ContinueWithAsync(postProcess, ScriptOptions).Result;
                             //Code = originalCode;
