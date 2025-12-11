@@ -23,7 +23,7 @@ namespace FlowEditor.Windows
 
     public partial class SequenceNodeDetailWindow : Window
     {
-        public List<string> Snippets = ["Forward()", "Left()", "PickupBox()", "PlaceBox()"];
+        public List<string> Snippets { get; set; } = ["Forward()", "Left()", "PickupBox()", "PlaceBox()"];
         public SequenceNodeControl Node { get; set; }
 
         public SequenceNodeDetailWindow(SequenceNodeControl node)
