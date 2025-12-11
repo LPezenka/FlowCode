@@ -21,6 +21,7 @@ namespace FlowEditor.Windows
     /// </summary>
     public partial class ProcessNodeDetailWindow : Window
     {
+        public static Dictionary<string, string> Signatures { get; set; }
         public ProcessNodeControl Node { get; set; }
         private List<string> registeredVariables;
         public static List<string> FunctionNames { get; set; }
@@ -31,7 +32,7 @@ namespace FlowEditor.Windows
             registeredVariables = new List<string>();
             InitializeComponent();
             RegisteredVariables.ItemsSource = registeredVariables;
-            Functions.ItemsSource = FunctionNames;
+            Functions.ItemsSource = Signatures.Keys;
             Functions.Items.Refresh();
         }
 
@@ -51,6 +52,7 @@ namespace FlowEditor.Windows
         private void Button_Ok_Click(object sender, RoutedEventArgs e)
         {
             Node.Code = Call.Text;
+            DialogResult = true;
         }
 
         private void TargetName_TextChanged(object sender, TextChangedEventArgs e)
@@ -64,13 +66,18 @@ namespace FlowEditor.Windows
             registeredVariables.Remove(selected);
             RegisteredVariables.Items.Refresh();
             UpdateCall();
-
-            // TODO: Add Function Signature to label Signature On SelectedItemChanged()
         }
 
         private void Functions_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             TargetName.Text = Functions.SelectedItem as string;
+        }
+
+        private void Functions_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string function = Functions.SelectedItem as string;
+            string signature = Signatures[function];
+            Signature.Content = signature;
         }
     }
 }

@@ -21,7 +21,7 @@
             <TextBox x:Name="TargetName" Text="" TextChanged="TargetName_TextChanged"></TextBox>
 
             <Label Content="Known Predefined Processes" HorizontalAlignment="Right" Foreground="Gray"></Label>
-        <ListBox x:Name="Functions"  MouseDoubleClick="Functions_MouseDoubleClick">
+        <ListBox x:Name="Functions"  MouseDoubleClick="Functions_MouseDoubleClick" SelectionChanged="Functions_SelectionChanged">
         </ListBox>
             <Label Content="Signature" HorizontalAlignment="Right" Foreground="Gray"></Label>
             <Label x:Name="Signature"></Label>

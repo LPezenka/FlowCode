@@ -303,8 +303,12 @@ namespace FlowEditor
 
         private void GatherFunctions()
         {
-            var terminals = canvasNodes.Where(x => x.GetType() == typeof(TerminalNodeControl)).Select(x => (x as TerminalNodeControl).FunctionName).ToList();
-            ProcessNodeDetailWindow.FunctionNames = terminals;
+            var signatures = canvasNodes.Where(x => x.GetType() == typeof(TerminalNodeControl)).Select(x => new KeyValuePair<string, string>((x as TerminalNodeControl).FunctionName,
+                $"{(x as TerminalNodeControl).FunctionName}({string.Join(",", (x as TerminalNodeControl).InputVariables)})")).ToDictionary<string,string>();
+            //var terminals = canvasNodes.Where(x => x.GetType() == typeof(TerminalNodeControl)).Select(x => (x as TerminalNodeControl).FunctionName).ToList();
+            //ProcessNodeDetailWindow.FunctionNames = terminals;
+            ProcessNodeDetailWindow.Signatures = signatures;
+
         }
 
         private void DeleteSelectedNode()
