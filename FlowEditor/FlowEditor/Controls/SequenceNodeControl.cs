@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlowEditor.Windows;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -13,6 +14,15 @@ namespace FlowEditor.Controls
 {
     public class SequenceNodeControl : NodeControlBase
     {
+
+        //public static Window DetailWindow { get; set; }
+        public override void ShowDetailWindow()
+        {
+            SequenceNodeDetailWindow sdWnd = new SequenceNodeDetailWindow(this);
+            sdWnd.ShowDialog();
+            //DetailWindow?.ShowDialog();
+        }
+
         static SequenceNodeControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(SequenceNodeControl),

@@ -1010,6 +1010,8 @@ namespace FlowEditor
             ActionNode.InputHandler = new InputHandler();
             ActionNode.OutputHandler = _outputLogger;// new OutputHandler();
 
+            //SequenceNodeControl.DetailWindow = new SequenceNodeDetailWindow();
+
             // Start network parsing in new thread. This is necessary in order to highlight the nodes
             // in the GUI using Dispatcher.Invoke()
             Thread t = new Thread(() =>
@@ -1201,12 +1203,14 @@ namespace FlowEditor
 
         private void OpenDetailWindow()
         {
-            SequenceNodeControl snc = NodeControlBase.LastSelected as SequenceNodeControl;
+            var snc = NodeControlBase.LastSelected;
+            //SequenceNodeControl snc = NodeControlBase.LastSelected as SequenceNodeControl;
             if (snc is not null)
             {
-                    SequenceNodeDetailWindow sndwnd = new SequenceNodeDetailWindow(snc);
-                    sndwnd.ShowDialog();
-                
+                snc.ShowDetailWindow();
+                //SequenceNodeDetailWindow sndwnd = new SequenceNodeDetailWindow(snc);
+                //sndwnd.ShowDialog();
+                //snc.InvalidateVisual();
             }
         }
 

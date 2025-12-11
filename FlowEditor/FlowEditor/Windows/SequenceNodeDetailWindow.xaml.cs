@@ -57,11 +57,17 @@ namespace FlowEditor.Windows
             Code.Text = fragment;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Ok_Click(object sender, RoutedEventArgs e)
         {
             // TODO: Fix binding
-            Node.NodeData.Title = Code.Text;
+
+            Node.Code = Code.Text;
             DialogResult = true;
+        }
+
+        private void Button_Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
         }
     }
 }

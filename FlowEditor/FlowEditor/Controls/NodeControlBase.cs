@@ -28,12 +28,13 @@ namespace FlowEditor.Controls
         public string Code
         {
             get => NodeData.Title;
-            set 
-            { 
+            set
+            {
                 NodeData.Title = value;
-                NotifyPropertyChanged(nameof(Code)); 
+                NotifyPropertyChanged(nameof(Code));
             }
         }
+
         protected int FirstOutputIndex { get; set; } = 1; // Standard: ein Eingang bei Index 0
         public abstract List<Point> GetConnectionPoints();
 
@@ -43,8 +44,14 @@ namespace FlowEditor.Controls
         public event EventHandler HighlightRequested;
         public event EventHandler ToggleDeletionZone;
         public event PropertyChangedEventHandler? PropertyChanged;
+        //public static Window DetailWindow { get; set; }
 
         public bool IsRoot { get; set; }
+
+        public virtual void ShowDetailWindow()
+        {
+
+        }
 
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "Background")
         {

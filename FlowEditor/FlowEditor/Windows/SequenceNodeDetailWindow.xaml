@@ -21,6 +21,7 @@
         <Label Content="Code Fragments" Grid.Row="0" Grid.Column="1"></Label>
         <ListBox x:Name="CodeFragments" Grid.Row="1" Grid.Column="1">
         </ListBox>
-        <Button Content="Ok" Grid.Row="2" Grid.Column="1" Click="Button_Click"></Button>
+        <Button Content="Ok" Grid.Row="2" Grid.Column="0" Click="Button_Ok_Click"></Button>
+        <Button Content="Cancel" Grid.Row="2" Grid.Column="1" Click="Button_Cancel_Click"></Button>
     </Grid>
 </Window>
