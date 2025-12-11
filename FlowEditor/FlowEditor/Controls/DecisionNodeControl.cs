@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlowEditor.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,15 @@ namespace FlowEditor.Controls
             {
                 DefaultStyleKeyProperty.OverrideMetadata(typeof(DecisionNodeControl),
                     new FrameworkPropertyMetadata(typeof(DecisionNodeControl)));
+        }
+
+        public override void ShowDetailWindow()
+        {
+            List<string> snippets = ["CellHasBox()", "CanMove()", "i < n"];
+            
+            
+            SequenceNodeDetailWindow sndWnd = new SequenceNodeDetailWindow(this, snippets);
+            sndWnd.ShowDialog();
         }
 
             public override List<Point> GetConnectionPoints() => new()

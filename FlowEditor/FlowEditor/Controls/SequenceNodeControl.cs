@@ -1,4 +1,5 @@
-﻿using FlowEditor.Windows;
+﻿using FlowCodeInfrastructure;
+using FlowEditor.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -18,7 +19,13 @@ namespace FlowEditor.Controls
         //public static Window DetailWindow { get; set; }
         public override void ShowDetailWindow()
         {
-            SequenceNodeDetailWindow sdWnd = new SequenceNodeDetailWindow(this);
+            List<string> snippets = ["Forward()", "Left()", "PickupBox()", "PlaceBox()"];
+            snippets.Add($"v = {Config.GetKeyword(Config.KeyWord.Input)}");
+            snippets.Add($"{Config.GetKeyword(Config.KeyWord.Output)}: v");
+            snippets.Add("i = 0");
+            snippets.Add("s = \"\"");
+
+            SequenceNodeDetailWindow sdWnd = new SequenceNodeDetailWindow(this, snippets);
             sdWnd.ShowDialog();
             //DetailWindow?.ShowDialog();
         }

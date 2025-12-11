@@ -109,12 +109,7 @@ namespace FlowEditor.Controls
 
         public int? GetNextFreeInputIndex()
         {
-            // TODO: fix this
-            for (int i = 0; i < FirstOutputIndex; i++)
-            {
-                return i; // allow multiple edges on inputs
-            }
-            return null;
+            return 0; // just one input index per node
         }
 
         protected override void OnRender(DrawingContext drawingContext)

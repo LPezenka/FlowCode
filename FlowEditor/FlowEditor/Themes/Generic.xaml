@@ -209,7 +209,7 @@
                              Points="0.5,0 1,0.5 0.5,1 0,0.5"
                              Stretch="Fill"
                              RenderTransformOrigin="0.5,0.5"/>
-                            <TextBox Text="{Binding NodeData.Title, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                            <TextBox Text="{Binding Code, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                       HorizontalAlignment="Center"
                                       VerticalAlignment="Center"
                                       FontSize="12"

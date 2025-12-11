@@ -23,11 +23,13 @@ namespace FlowEditor.Windows
 
     public partial class SequenceNodeDetailWindow : Window
     {
-        public List<string> Snippets { get; set; } = ["Forward()", "Left()", "PickupBox()", "PlaceBox()"];
-        public SequenceNodeControl Node { get; set; }
+        public List<string> Snippets { get; set; }
+        public NodeControlBase Node { get; set; }
 
-        public SequenceNodeDetailWindow(SequenceNodeControl node)
+        public SequenceNodeDetailWindow(NodeControlBase node, List<string> snippets = null)
         {
+            if (snippets is not null)
+                Snippets = snippets;
             InitializeComponent();
 
             /*foreach (var f in FlowCodeInfrastructure.Config.KeywordMapper)
@@ -41,10 +43,7 @@ namespace FlowEditor.Windows
                 this.DataContext = Node;
             }
 
-            Snippets.Add($"v = {Config.GetKeyword(Config.KeyWord.Input)}");
-            Snippets.Add($"{Config.GetKeyword(Config.KeyWord.Output)}: v");
-            Snippets.Add("i = 0");
-            Snippets.Add("s = \"\"");
+            
 
             CodeFragments.ItemsSource = Snippets;
             CodeFragments.Items.Refresh();

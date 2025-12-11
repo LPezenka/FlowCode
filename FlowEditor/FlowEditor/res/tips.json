@@ -20,6 +20,10 @@
     "Source": "Hints/processcalls.png"
   },
   {
+    "Text": "Wenn Du einen Sequenz- oder Entscheidungsknoten auswählst, gelangst Du mit der Taste F2 in die Codeansicht. Hier kannst Du längere Anweisungen schreiben, die sich in der Standardansicht nicht ausgehen. Außerdem bekommst Du nützliche Codefragmente, um Probleme schneller lösen zu können. Klicke einfach doppelt auf die Codezeile auf der rechten Seite, um sie ins Codefenster zu übertragen.",
+    "Source": "Hints/F2Window.png"     
+  },
+  {
     "Text": "Eine kopfgesteuerte Schleife (For-Schleife oder Zählschleife) braucht eine Initialisierung, eine Bedingung (mit ja / nein zu beantworten), einen Schleifenrumpf und ein Inkrement (eine Aktualisierung)",
     "Source": "./Hints/For-Loop-With-Output.png"
   },
