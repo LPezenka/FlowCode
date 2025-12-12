@@ -124,10 +124,10 @@ namespace FlowEditor.Controls
 
                 if (_hoveredConnectionPointIndex == i)
                 {
-                    drawingContext.DrawEllipse(null, new Pen(Brushes.Blue, 2), point, 7, 7);
+                    drawingContext.DrawEllipse(null, new Pen(Brushes.Blue, 2), point, 8, 8);
                 }
 
-                drawingContext.DrawEllipse(brush, null, point, 5, 5);
+                drawingContext.DrawEllipse(brush, null, point, 6, 6);
             }
         }
 

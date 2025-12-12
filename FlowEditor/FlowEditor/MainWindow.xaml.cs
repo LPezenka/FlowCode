@@ -30,6 +30,8 @@ using System.Numerics;
 using System.Printing;
 
 // TODO: Drag Nodes onto canvas
+// TODO: Replace edge labels by dropdowns or buttons to toggle state
+// TODO: draw onTrue edge green, onFalse edge red
 
 
 namespace FlowEditor
@@ -476,8 +478,10 @@ namespace FlowEditor
 
                     if (existing.LabelBox != null)
                     {
+                        DiagramCanvas.Children.Remove(existing.StateButton);
                         DiagramCanvas.Children.Remove(existing.LabelBox);
                         existing.LabelBox = null;
+                        existing.StateButton = null;
                     }
 
                     edges.Remove(existing);
@@ -763,6 +767,17 @@ namespace FlowEditor
                 TextAlignment = TextAlignment.Center
             };
 
+            var stateButton = new Button()
+            {
+                Content = FlowCodeInfrastructure.Config.GetKeyword(Config.KeyWord.True),
+                Width = 80,
+                Background = Brushes.White,
+                BorderBrush = Brushes.Gray,
+                BorderThickness = new Thickness(1),
+                FontSize = 12,
+                Padding = new Thickness(2)
+            };
+
             // Position Label
             var start = localTempEdge.From.TranslatePoint(
                 localTempEdge.From.GetConnectionPoints()[localTempEdge.FromIndex ?? 0], DiagramCanvas);
@@ -774,11 +789,19 @@ namespace FlowEditor
             Canvas.SetLeft(labelBox, labelPos.X);
             Canvas.SetTop(labelBox, labelPos.Y);
 
+            Canvas.SetLeft(stateButton, labelPos.X);
+            Canvas.SetTop(stateButton, labelPos.Y);
+
+
             labelBox.TextChanged += (s, ev) => localTempEdge.Label = labelBox.Text;
+            stateButton.Click += localTempEdge.StateButtonClicked;
 
             DiagramCanvas.Children.Add(labelBox);
+            DiagramCanvas.Children.Add(stateButton);
 
             localTempEdge.LabelBox = labelBox;
+            localTempEdge.StateButton = stateButton;
+
         }
 
         private void CleanupTemporaryEdge()
@@ -817,6 +840,7 @@ namespace FlowEditor
 
                 if (edge.LabelBox != null)
                 {
+                    DiagramCanvas.Children.Remove(edge.StateButton);
                     DiagramCanvas.Children.Remove(edge.LabelBox);
                     edge.LabelBox = null;
                 }
@@ -1207,8 +1231,10 @@ namespace FlowEditor
                 edge.From?.UnregisterOutputEdge(edge.FromIndex ?? 0);
                 if (edge.LabelBox != null)
                 {
+                    DiagramCanvas.Children.Remove(edge.StateButton);
                     DiagramCanvas.Children.Remove(edge.LabelBox);
                     edge.LabelBox = null;
+                    edge.StateButton = null;
                 }
                 DiagramCanvas.Children.Remove(edge);
                 edges.Remove(edge);

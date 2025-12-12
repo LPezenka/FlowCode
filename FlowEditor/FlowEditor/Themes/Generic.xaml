@@ -280,7 +280,7 @@
                     <Border BorderBrush="{TemplateBinding Background}" BorderThickness="3" Width="180" Height="200">
                         <StackPanel>
                             <Label x:Name="Heading" Background="{TemplateBinding Background}" FontSize="16" Foreground="White">Ausgabe:</Label>
-                        <ListBox x:Name="Messages" ItemsSource="{Binding OutputMessages, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="300"></ListBox>
+                            <ListBox x:Name="Messages" ItemsSource="{Binding OutputMessages, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="150"></ListBox>
                         </StackPanel>
                     </Border>
                 </ControlTemplate>

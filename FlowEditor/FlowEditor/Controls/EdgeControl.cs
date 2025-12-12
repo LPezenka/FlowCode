@@ -21,6 +21,7 @@ namespace FlowEditor.Controls
 
     public class EdgeControl : Control
     {
+        public Button StateButton { get; set; }
         public TextBox LabelBox { get; set; }
         public NodeControlBase From { get; set; }
         public NodeControlBase To { get; set; }
@@ -210,11 +211,17 @@ namespace FlowEditor.Controls
 
             if (From.GetType() == typeof(SequenceNodeControl) || From.GetType() == typeof(TerminalNodeControl)) 
             {
+                if (StateButton is not null)
+                    StateButton.Visibility = Visibility.Collapsed;
+
                 if (LabelBox is not null)
                     LabelBox.Visibility = Visibility.Collapsed;
             }
             else if (From.GetType() == typeof(ProcessNodeControl) && FromIndex != 2)
             {
+                if (StateButton is not null)
+                    StateButton.Visibility = Visibility.Collapsed;
+
                 if (LabelBox is not null)
                     LabelBox.Visibility = Visibility.Collapsed;
             }
@@ -233,10 +240,17 @@ namespace FlowEditor.Controls
             {
                 Canvas.SetLeft(LabelBox, LabelPosition.X);
                 Canvas.SetTop(LabelBox, LabelPosition.Y);
+
+                    
+            }
+            if (StateButton is not null)
+            {
+                Canvas.SetLeft(StateButton, LabelPosition.X);
+                Canvas.SetTop(StateButton, LabelPosition.Y);
             }
 
-            // Compute arrowhead based on last segment of the polyline
-            Point arrowStart = points[points.Count - 2];
+                // Compute arrowhead based on last segment of the polyline
+                Point arrowStart = points[points.Count - 2];
             Point arrowEnd = points[points.Count - 1];
             DrawArrowHead(drawingContext, arrowStart, arrowEnd);
         }
@@ -400,6 +414,14 @@ namespace FlowEditor.Controls
 
 
             return null;
+        }
+
+        internal void StateButtonClicked(object sender, RoutedEventArgs e)
+        {
+            StateButton.Content = StateButton.Content ==
+            FlowCodeInfrastructure.Config.GetKeyword(Config.KeyWord.True) ? FlowCodeInfrastructure.Config.GetKeyword(Config.KeyWord.False) : FlowCodeInfrastructure.Config.GetKeyword(Config.KeyWord.True);
+            if (LabelBox is not null)
+                LabelBox.Text = StateButton.Content.ToString();
         }
     }
 }
