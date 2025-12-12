@@ -371,6 +371,8 @@ namespace FlowEditor
             if (nodePosition != null)
             {
                 position = (Point)nodePosition;
+                if (NodeControlBase.LastSelected is not null)
+                    NodeControlBase.LastSelected.SetActive(false);
             }
             else
             {
@@ -391,11 +393,9 @@ namespace FlowEditor
                     _lastNodePosition.Y + _offset);
                 }
                 
-                
-                NodeControlBase.LastSelected = node;
                 node.NodeData.Position = position;
             }
-
+            NodeControlBase.LastSelected = node;
             _lastNodePosition = position;
 
             Canvas.SetLeft(node, position.X);
