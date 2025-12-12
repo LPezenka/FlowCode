@@ -30,7 +30,6 @@ namespace FlowEditor
             TextBoxNoKeyword.Text = FlowCodeInfrastructure.Config.GetKeyword(FlowCodeInfrastructure.Config.KeyWord.False);
             TextBoxInputKeyword.Text = FlowCodeInfrastructure.Config.GetKeyword(FlowCodeInfrastructure.Config.KeyWord.Input);
             TextBoxOutputKeyword.Text = FlowCodeInfrastructure.Config.GetKeyword(FlowCodeInfrastructure.Config.KeyWord.Output);
-
         }
 
         public override void EndInit()
