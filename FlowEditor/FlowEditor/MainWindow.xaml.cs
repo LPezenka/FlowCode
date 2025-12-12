@@ -118,6 +118,7 @@ namespace FlowEditor
             Config.SetKeyWord(Config.KeyWord.Function, "Function");
             Config.SetKeyWord(Config.KeyWord.Input, "Eingabe");
             Config.SetKeyWord(Config.KeyWord.Output, "Ausgabe");
+            Config.Load();
 
             // Test for the new Detail window. This makes coding somewhat more comfortable for lines lines
             // Also, provides predefined code snippets

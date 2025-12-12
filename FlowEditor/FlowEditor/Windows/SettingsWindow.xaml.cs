@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static FlowCodeInfrastructure.Config;
 
 namespace FlowEditor
 {
@@ -25,6 +26,11 @@ namespace FlowEditor
         public SettingsWindow()
         {
             InitializeComponent();
+            TextBoxYesKeyword.Text = FlowCodeInfrastructure.Config.GetKeyword(FlowCodeInfrastructure.Config.KeyWord.True);
+            TextBoxNoKeyword.Text = FlowCodeInfrastructure.Config.GetKeyword(FlowCodeInfrastructure.Config.KeyWord.False);
+            TextBoxInputKeyword.Text = FlowCodeInfrastructure.Config.GetKeyword(FlowCodeInfrastructure.Config.KeyWord.Input);
+            TextBoxOutputKeyword.Text = FlowCodeInfrastructure.Config.GetKeyword(FlowCodeInfrastructure.Config.KeyWord.Output);
+
         }
 
         public override void EndInit()
@@ -64,6 +70,9 @@ namespace FlowEditor
 
             configuration.Save(ConfigurationSaveMode.Full, true);
             ConfigurationManager.RefreshSection("appSettings");
+
+            FlowCodeInfrastructure.Config.Save();
+
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
