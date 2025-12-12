@@ -50,6 +50,7 @@ namespace FlowEditor.Controls
                 if (t is not null)
                 {
                     var polygon = t.FindName("BorderPolygon", this) as Polygon;
+                    if (polygon is null) return;
                     if (active)
                     {
                         polygon.StrokeThickness = 9;

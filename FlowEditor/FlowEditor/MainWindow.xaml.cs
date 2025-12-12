@@ -374,10 +374,25 @@ namespace FlowEditor
             }
             else
             {
-                position = new Point(
-                _lastNodePosition.X,
-                _lastNodePosition.Y + node.Height + _offset);
+                //position;
 
+                if (NodeControlBase.LastSelected is not null)
+                {
+                    _offset = (int)(NodeControlBase.LastSelected.ActualHeight * 1.25);
+                    position.X = Canvas.GetLeft(NodeControlBase.LastSelected);
+                    position.Y = Canvas.GetTop(NodeControlBase.LastSelected) + _offset;
+                    NodeControlBase.LastSelected.SetActive(false);
+                }
+                else
+                {
+                    //_offset = 50;
+                    position = new Point(
+                    _lastNodePosition.X,
+                    _lastNodePosition.Y + _offset);
+                }
+                
+                
+                NodeControlBase.LastSelected = node;
                 node.NodeData.Position = position;
             }
 
@@ -393,6 +408,7 @@ namespace FlowEditor
             //node.MouseDoubleClick += node.
             DiagramCanvas.Children.Add(node);
             canvasNodes.Add(node);
+            node.SetActive(true);
         }
 
         private void CheckAndUpdateEdges()
@@ -606,11 +622,11 @@ namespace FlowEditor
                 Foreground = new SolidColorBrush(Color.FromArgb(alphaText, rText, gText, bText)),
                 NodeData = new Controls.Node
                 {
-                    Title = $"ProcessCall({_nodeCount++})",
-                    Position = new Point(50 + _nodeCount * 20, 50 + _nodeCount * 20)
+                    Title = $"ProcessCall({_nodeCount++})"
+                    //Position = new Point(50 + _nodeCount * 20, 50 + _nodeCount * 20)
                 }
             };
-            AddNode(processNode, processNode.NodeData.Position);
+            AddNode(processNode, null);
         }
 
         private void MainWindow_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
