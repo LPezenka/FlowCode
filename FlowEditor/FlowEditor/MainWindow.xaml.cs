@@ -83,15 +83,22 @@ namespace FlowEditor
         /// </summary>
         private double scaleValue = 1.0f;
 
-
+        /// <summary>
+        /// Represents the internal deletion zone used for managing resource cleanup operations.
+        /// </summary>
         private DeleteZone _deletionZone;
+
+        /// <summary>
+        /// Provides access to the output logger used for recording or displaying log messages.
+        /// </summary>
+        /// <remarks>This field is intended for internal use to manage logging output. Use the associated
+        /// public properties or methods to interact with logging functionality.</remarks>
         private OutputControl _outputLogger;
         private OutputControl _variableLogger;
         private OutputControl _callStack;
 
         public MainWindow()
         {
-
             WelcomeWindow ww = new WelcomeWindow("./res/tips.json");
             ww.ShowDialog();
 
@@ -187,9 +194,6 @@ namespace FlowEditor
             Canvas.SetLeft(_callStack, Overlay.ActualWidth - 700);
             Canvas.SetTop(_callStack, 60);
 
-
-            //Canvas.SetLeft(_variableLogger, DiagramCanvas.ActualWidth - 500);
-            //Canvas.SetTop(_variableLogger, 60);
             _variableLogger.SetTitle("Variables");
             _variableLogger.Background = Brushes.Blue;
 
@@ -210,14 +214,10 @@ namespace FlowEditor
             _deletionZone.Visibility = Visibility.Hidden;
         }
 
-
         public void ToggleDeleteZone(bool active)
         {
             _deletionZone.Visibility = Visibility.Visible;
         }
-
-
-
 
         protected override void OnRender(DrawingContext drawingContext)
         {
@@ -229,7 +229,6 @@ namespace FlowEditor
         {
             ResetDeletionZone();
             RepositionOutput();
-
         }
 
         private void ResetDeletionZone()
@@ -396,7 +395,6 @@ namespace FlowEditor
             }
         }
 
-
         private void AddDecisionNode_Click(object sender, RoutedEventArgs e)
         {
             byte alpha, r, g, b;
@@ -469,11 +467,6 @@ namespace FlowEditor
                     .OfType<EdgeControl>()
                     .FirstOrDefault(edge => edge.From == _edgeStartNode && edge.FromIndex == _edgeStartIndex);
 
-                //if (existing != null)
-                //{
-                //    DiagramCanvas.Children.Remove(existing);
-                //    _edges.Remove(existing);
-                //}
                 if (existing != null)
                 {
                     DiagramCanvas.Children.Remove(existing);
@@ -556,9 +549,6 @@ namespace FlowEditor
             };
 
             AddNode(terminator, terminator.NodeData.Position);
-
-            //if (!string.IsNullOrWhiteSpace(terminator.FunctionName))
-            //    ProcessNodeDetailWindow.FunctionNames.Add(terminator.FunctionName);
         }
         private void AddFunctionNode_Click(object sender, RoutedEventArgs e)
         {
@@ -618,10 +608,6 @@ namespace FlowEditor
                 // Label erzeugen
                 GenerateEdgeLabel(localTempEdge);
                 CheckSelfIntersection(localTempEdge);
-
-                // InvalidateVisual();
-
-                //_edgeLabels.Add(localTempEdge, labelBox);
             }
             else
             {
@@ -644,7 +630,6 @@ namespace FlowEditor
             //double nodeY1 = Canvas.GetTop(_edgeStartNode);
             //double nodeX2 = nodeX1 + _edgeStartNode.ActualWidth;
             //double nodeY2 = nodeY1 + _edgeStartNode.ActualHeight;
-
 
             double nodeX1 = Canvas.GetLeft(localTempEdge.From);
             double nodeY1 = Canvas.GetTop(localTempEdge.From);
@@ -673,20 +658,6 @@ namespace FlowEditor
             bool reRoute = false;
             for (int i = 1; i < existingPoints.Count; i++)
             {
-                //double x1 = localTempEdge.ControlPoints[i - 1].X;
-                //double y1 = localTempEdge.ControlPoints[i - 1].Y;
-                //double x2 = localTempEdge.ControlPoints[i].X;
-                //double y2 = localTempEdge.ControlPoints[i].Y;
-
-
-
-                //bool leftHit = LineLineIntersection(
-                //    localTempEdge.ControlPoints[i-1],
-                //    localTempEdge.ControlPoints[i],
-                //    new Point(nodeX1, nodeY1),
-                //    new Point(nodeX1, nodeY2)
-                //    );
-
                 bool bottomHit = LineLineIntersection(
                     existingPoints[i - 1],
                     existingPoints[i],
@@ -718,11 +689,6 @@ namespace FlowEditor
             }
 
             UpdateEdges();
-            //localTempEdge.ControlPoints.RemoveAt(0);
-            //localTempEdge.ControlPoints.RemoveAt(localTempEdge.ControlPoints.Count - 1);
-            //localTempEdge.ControlPoints.Remove(lineStart);
-            //localTempEdge.ControlPoints.Remove(lineEnd);
-
         }
 
         private void RerouteEdge(EdgeControl localTempEdge)
@@ -837,8 +803,6 @@ namespace FlowEditor
                     Canvas.SetTop(labelBox, labelPos.Y);
                 }
             }
-
-
         }
 
         private void Edge_DeleteRequested(object sender, EventArgs e)
@@ -856,12 +820,6 @@ namespace FlowEditor
                 DiagramCanvas.Children.Remove(edge);
 
                 edges.Remove(edge);
-
-                //if (_edgeLabels.TryGetValue(edge, out var label))
-                //{
-                //    DiagramCanvas.Children.Remove(label);
-                //    _edgeLabels.Remove(edge);
-                //}
             }
         }
 
@@ -905,7 +863,6 @@ namespace FlowEditor
             vtn.Generate(nodes, edges, currentRoot);
         }
 
-
         private void SaveBitmap(string path)
         {
             AddNodeButton.Visibility = Visibility.Collapsed;
@@ -934,32 +891,6 @@ namespace FlowEditor
             }
         }
 
-        //private void ExportBitmap(string path, Canvas target)
-        //{
-        //    Rect bounds = VisualTreeHelper.GetDescendantBounds(target);
-
-        //    RenderTargetBitmap rtb = new RenderTargetBitmap((Int32)bounds.Width, (Int32)bounds.Height, 96, 96, PixelFormats.Pbgra32);
-
-        //    DrawingVisual dv = new DrawingVisual();
-
-        //    using (DrawingContext dc = dv.RenderOpen())
-        //    {
-        //        VisualBrush vb = new VisualBrush(target);
-        //        dc.DrawRectangle(vb, null, new Rect(new Point(), bounds.Size));
-        //    }
-
-        //    rtb.Render(dv);
-
-        //    PngBitmapEncoder png = new PngBitmapEncoder();
-
-        //    png.Frames.Add(BitmapFrame.Create(rtb));
-
-        //    using (Stream stm = File.Create(path))
-        //    {
-        //        png.Save(stm);
-        //    }
-        //}
-
         private void Run_Click(object sender, RoutedEventArgs e)
         {
             _outputLogger?.Reset();
@@ -971,7 +902,6 @@ namespace FlowEditor
             }
             vtn.ErrorLogger = this;
 
-            
             NodeControlBase.LastSelected?.SetActive(false);
             _deletionZone.Visibility = Visibility.Hidden;
 
@@ -1002,20 +932,8 @@ namespace FlowEditor
             // Start network parsing in new thread. This is necessary in order to highlight the nodes
             // in the GUI using Dispatcher.Invoke()
             Thread t = new Thread(() =>
-            {
-                vtn.Evaluate();
-                //FlowCodeInfrastructure.Node.Run(vtn.RootNode);
-            });
-            //try
-            //{
-                t.Start();
-            //}
-            //catch(Exception ex)
-            //{
-            //    if (!Directory.Exists("./dump"))
-            //        Directory.CreateDirectory("./dump");
-            //    XMLWriter.SaveXML("./dump/error.vtdump", edges);
-            //}
+            {vtn.Evaluate();});
+            t.Start();
         }
 
         private void LogError(string message)
@@ -1046,7 +964,6 @@ namespace FlowEditor
             }
         }
 
-
         private void MenuItemLoad_Click(object sender, RoutedEventArgs e)
         {
             var ofd = new OpenFileDialog();
@@ -1056,7 +973,6 @@ namespace FlowEditor
                 LoadXML(ofd.FileName);
             }
         }
-
 
         private void LoadXML(string fname)
         {
@@ -1141,9 +1057,6 @@ namespace FlowEditor
                         node.Foreground = new SolidColorBrush(Color.FromArgb(alphaText, rText, gText, bText));
                         node.OriginalBackground = new SolidColorBrush(Color.FromArgb(alpha, r, g, b));
 
-                        //if (!string.IsNullOrWhiteSpace((fName)))
-                        //    ProcessNodeDetailWindow.FunctionNames.Add(fName);
-
                         break;
                     default:
                         node = new SequenceNodeControl();
@@ -1180,7 +1093,7 @@ namespace FlowEditor
             }
 
 
-            InvalidateVisual();
+            //InvalidateVisual();
             LoadEdges(doc);
             InvalidateVisual();
             UpdateTerminals();
@@ -1193,13 +1106,9 @@ namespace FlowEditor
         private void OpenDetailWindow()
         {
             var snc = NodeControlBase.LastSelected;
-            //SequenceNodeControl snc = NodeControlBase.LastSelected as SequenceNodeControl;
             if (snc is not null)
             {
                 snc.ShowDetailWindow();
-                //SequenceNodeDetailWindow sndwnd = new SequenceNodeDetailWindow(snc);
-                //sndwnd.ShowDialog();
-                //snc.InvalidateVisual();
             }
         }
 
@@ -1263,17 +1172,6 @@ namespace FlowEditor
                 XMLWriter.SaveXML(sfd.FileName, edges);
             }
         }
-
-        public void OnCompleted()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnError(Exception error)
-        {
-            throw new NotImplementedException();
-        }
-
 
         public void OnNext(string value)
         {
@@ -1340,21 +1238,6 @@ namespace FlowEditor
             }
         }
 
-        private void DeleteZone_DragLeave(object sender, DragEventArgs e)
-        {
-
-        }
-
-        private void DeleteZone_DragOver(object sender, DragEventArgs e)
-        {
-
-        }
-
-        private void DeleteZone_Drop(object sender, DragEventArgs e)
-        {
-
-        }
-
         void IErrorLogger.LogError(string messsage)
         {
             Application.Current.Dispatcher.Invoke(() =>
@@ -1384,7 +1267,6 @@ namespace FlowEditor
                 }
             }
         }
-
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ResetDeletionZone();
@@ -1399,25 +1281,23 @@ namespace FlowEditor
             var focussed = FocusManager.GetFocusedElement(this) as TextBox;
             if (focussed is null)
             {
-
                 if (e.Key == Key.W || e.Key == Key.Up) // pan up
                     offsetY = -10.0;
-                if (e.Key == Key.A || e.Key == Key.Left) // pan left
+                else if (e.Key == Key.A || e.Key == Key.Left) // pan left
                     offsetX = -10.0;
-                if (e.Key == Key.S || e.Key == Key.Down) // pan down
+                else if (e.Key == Key.S || e.Key == Key.Down) // pan down
                     offsetY = 10.0;
-                if (e.Key == Key.D || e.Key == Key.Right) // pan right
+                else if (e.Key == Key.D || e.Key == Key.Right) // pan right
                     offsetX = 10.0;
-                if (e.Key == Key.S && Keyboard.Modifiers == ModifierKeys.Control)
+                else if (e.Key == Key.S && Keyboard.Modifiers == ModifierKeys.Control)
                 {
                     MenuItemSave_Click(null, null);
                 }
-                if (e.Key == Key.F5)
-                    Run_Click(null, null);
-                PanNodes(offsetX, offsetY);
+                if (offsetX != 0.0 && offsetY != 0.0)
+                    PanNodes(offsetX, offsetY);
             }
-            
-
+            if (e.Key == Key.F5)
+                Run_Click(null, null);
         }
 
         private void PanNodes(double offsetX, double offsetY)
@@ -1437,7 +1317,6 @@ namespace FlowEditor
                 Canvas.SetTop(n, newY);
             }
 
-
             foreach (EdgeControl e in edges)
             {
                 for (int i = 0; i < e.ControlPoints.Count; i++)
@@ -1453,5 +1332,3 @@ namespace FlowEditor
         }
     }
 }
-
-

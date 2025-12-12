@@ -117,7 +117,7 @@ namespace FlowEditor.Controls
             if (TerminalType?.ToLower() == "start")
             {
                 IsRoot = !IsRoot;
-                Background = IsRoot ? Brushes.LightGreen : Brushes.Transparent;
+                //Background = IsRoot ? Brushes.LightGreen : Brushes.Transparent;
             }
             base.OnMouseDoubleClick(e);
         }
