@@ -295,10 +295,21 @@ namespace FlowEditor
             }
             else if (e.Key==Key.F2)
             {
-                OpenDetailWindow();;
+                GatherFunctions();
+                OpenDetailWindow();
             }
 
                 base.OnKeyDown(e);
+        }
+
+        private void GatherFunctions()
+        {
+            var signatures = canvasNodes.Where(x => x.GetType() == typeof(TerminalNodeControl)).Select(x => new KeyValuePair<string, string>((x as TerminalNodeControl).FunctionName,
+                $"{(x as TerminalNodeControl).FunctionName}({string.Join(",", (x as TerminalNodeControl).InputVariables)})")).ToDictionary<string,string>();
+            //var terminals = canvasNodes.Where(x => x.GetType() == typeof(TerminalNodeControl)).Select(x => (x as TerminalNodeControl).FunctionName).ToList();
+            //ProcessNodeDetailWindow.FunctionNames = terminals;
+            ProcessNodeDetailWindow.Signatures = signatures;
+
         }
 
         private void DeleteSelectedNode()
@@ -329,6 +340,11 @@ namespace FlowEditor
 
             DiagramCanvas.Children.Remove(NodeControlBase.LastSelected);
             canvasNodes.Remove(NodeControlBase.LastSelected);
+
+            if (NodeControlBase.LastSelected is TerminalNodeControl tn)
+            {
+                    ProcessNodeDetailWindow.FunctionNames.Remove(tn.FunctionName);
+            }
 
             NodeControlBase.LastSelected = null;
         }
@@ -573,6 +589,9 @@ namespace FlowEditor
             };
 
             AddNode(terminator, terminator.NodeData.Position);
+
+            //if (!string.IsNullOrWhiteSpace(terminator.FunctionName))
+            //    ProcessNodeDetailWindow.FunctionNames.Add(terminator.FunctionName);
         }
         private void AddFunctionNode_Click(object sender, RoutedEventArgs e)
         {
@@ -1135,7 +1154,7 @@ namespace FlowEditor
                         GetNodeColorColor("ProcessTextColor", out alphaText, out rText, out gText, out bText);
                         node.Foreground = new SolidColorBrush(Color.FromArgb(alphaText, rText, gText, bText));
                         node.OriginalBackground = new SolidColorBrush(Color.FromArgb(alpha, r, g, b));
-
+                        
                         break;
                     case "Terminal":
                         var fName = c.Attribute("FunctionName")?.Value;
@@ -1155,6 +1174,8 @@ namespace FlowEditor
                         node.Foreground = new SolidColorBrush(Color.FromArgb(alphaText, rText, gText, bText));
                         node.OriginalBackground = new SolidColorBrush(Color.FromArgb(alpha, r, g, b));
 
+                        //if (!string.IsNullOrWhiteSpace((fName)))
+                        //    ProcessNodeDetailWindow.FunctionNames.Add(fName);
 
                         break;
                     default:

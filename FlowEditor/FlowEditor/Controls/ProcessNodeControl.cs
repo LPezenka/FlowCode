@@ -1,4 +1,5 @@
 ﻿using FlowEditor.Controls;
+using FlowEditor.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +9,17 @@ using System.Windows;
 
 namespace FlowEditor.Controls
 {
-    internal class ProcessNodeControl : NodeControlBase
+    public class ProcessNodeControl : NodeControlBase
     {
         // New Control: ProcessControl
         public static readonly DependencyProperty TargetNodeProperty = DependencyProperty.Register(
 nameof(TargetNode), typeof(Node), typeof(ProcessNodeControl), new PropertyMetadata(null));
 
+        public override void ShowDetailWindow()
+        {
+            ProcessNodeDetailWindow pndwnd = new ProcessNodeDetailWindow(this);
+            pndwnd.ShowDialog();
+        }
 
         public Node TargetNode
         {
