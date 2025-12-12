@@ -19,7 +19,7 @@ namespace FlowEditor.Controls
         //public static Window DetailWindow { get; set; }
         public override void ShowDetailWindow()
         {
-            List<string> snippets = ["Forward()", "Left()", "PickupBox()", "PlaceBox()"];
+            List<string> snippets = ["Forward()", "Left()", "PickUpBox()", "PlaceBox()"];
             snippets.Add($"v = {Config.GetKeyword(Config.KeyWord.Input)}");
             snippets.Add($"{Config.GetKeyword(Config.KeyWord.Output)}: v");
             snippets.Add("i = 0");
@@ -45,8 +45,8 @@ namespace FlowEditor.Controls
         {
             new Point(ActualWidth / 2, -1),             // Eingang: Mitte oben
                 new Point(ActualWidth / 2, ActualHeight + 1),   // Ausgang: Mitte unten
-            new Point(0, ActualHeight / 2),
-            new Point(ActualWidth, ActualHeight / 2)
+            //new Point(0, ActualHeight / 2),
+            //new Point(ActualWidth, ActualHeight / 2)
             //new Point(ActualWidth / 2, 0),
             //new Point(ActualWidth / 2, ActualHeight),
             //new Point(0, ActualHeight / 2),

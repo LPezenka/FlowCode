@@ -29,6 +29,9 @@ using System.Security.Cryptography.Xml;
 using System.Numerics;
 using System.Printing;
 
+// TODO: Drag Nodes onto canvas
+
+
 namespace FlowEditor
 {
     public partial class MainWindow : Window, IErrorLogger
