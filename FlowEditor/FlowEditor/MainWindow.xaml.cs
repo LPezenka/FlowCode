@@ -150,15 +150,6 @@ namespace FlowEditor
 
             FlowCodeInfrastructure.Node.variableLogger = _variableLogger;
             FlowCodeInfrastructure.CallerNode.StackDisplay = _callStack;
-            //oc.ShowOutput("Hallo");
-            //oc.ShowOutput("Welt");
-
-            
-
-            //SequenceNodeControl.TemplateBrush = new SolidColorBrush(Color.FromArgb(0xff, 0x33, 0x65, 0x8a));
-            //DecisionNodeControl.TemplateBrush = new SolidColorBrush(Color.FromArgb(0xff, 0xf6, 0xae, 0x2d));
-            //ProcessNodeControl.TemplateBrush = new SolidColorBrush(Color.FromArgb(0xff, 0x86, 0xbb, 0xd8));
-            //TerminalNodeControl.TemplateBrush = new SolidColorBrush(Color.FromArgb(0xff, 0xf2, 0x64, 0x19));
         }
 
         private void DiagramCanvas_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
@@ -184,46 +175,6 @@ namespace FlowEditor
                 panStart = pos;
             }
         }
-
-
-        //private void DiagramCanvas_MouseMove(object sender, MouseEventArgs e)
-        //{
-        //    if (_isDragged == false)
-        //        return;
-
-        //    base.OnMouseMove(e);
-        //    if (e.RightButton == MouseButtonState.Pressed && IsMouseCaptured)
-        //    {
-
-        //        var pos = e.GetPosition(this);
-        //        var matrix =  mt.Matrix; // it's a struct
-        //        matrix.Translate(pos.X - _last.X, pos.Y - _last.Y);
-        //        mt.Matrix = matrix;
-        //        _last = pos;
-
-        //    }
-        //}
-
-        //private void DiagramCanvas_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
-        //{
-        //    base.OnMouseRightButtonUp(e);
-        //    ReleaseMouseCapture();
-        //    _isDragged = false;
-        //}
-
-        //bool _isDragged = false;
-        //Point _last;
-        //private void DiagramCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    base.OnMouseRightButtonDown(e);
-        //    CaptureMouse();
-        //    //_last = e.GetPosition(canvas);
-        //    _last = e.GetPosition(this);
-
-        //    _isDragged = true;
-        //    _outputLogger.ShowOutput("_isDragged = true!");
-        //}
-
 
         private void RepositionOutput()
         {
@@ -1013,12 +964,12 @@ namespace FlowEditor
         {
             _outputLogger?.Reset();
             GenerateNetwork();
-            vtn.ErrorLogger = this;
             if (currentRoot == null)
             {
                 MessageBox.Show("No root node selected!");
                 return;
             }
+            vtn.ErrorLogger = this;
 
             
             NodeControlBase.LastSelected?.SetActive(false);
@@ -1457,6 +1408,12 @@ namespace FlowEditor
                     offsetY = 10.0;
                 if (e.Key == Key.D || e.Key == Key.Right) // pan right
                     offsetX = 10.0;
+                if (e.Key == Key.S && Keyboard.Modifiers == ModifierKeys.Control)
+                {
+                    MenuItemSave_Click(null, null);
+                }
+                if (e.Key == Key.F5)
+                    Run_Click(null, null);
                 PanNodes(offsetX, offsetY);
             }
             
