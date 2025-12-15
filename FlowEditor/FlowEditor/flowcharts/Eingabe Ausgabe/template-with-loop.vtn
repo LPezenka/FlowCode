@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualTreeNetwork>
+  <Node ID="07fc8b01-9f9f-41af-9780-83cb3efc81eb" Code="i &gt; 0" Position="269,298.0000000000001" OnTrue="f369332c-2e10-424d-a836-a1c18d581b24" OnFalse="bed852f4-4a6c-4288-8f52-4c0f5fc77328" Type="Decision" />
+  <Node ID="bed852f4-4a6c-4288-8f52-4c0f5fc77328" Code="Ausgabe: output" Position="143.5,489.5000000000001" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="07fc8b01-9f9f-41af-9780-83cb3efc81eb" To="bed852f4-4a6c-4288-8f52-4c0f5fc77328" Label="Nein" />
+  <Root ID="b22c2d9a-3c3a-4dee-985a-c8576754090a" />
+  <Node ID="b22c2d9a-3c3a-4dee-985a-c8576754090a" Code="i = 10" Position="269,15.000000000000085" Type="Sequence" />
+  <Node ID="d7784298-25ab-4a6c-a346-f75816bc4e8c" Code="output = &quot;&quot;" Position="269,156.00000000000009" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="b22c2d9a-3c3a-4dee-985a-c8576754090a" To="d7784298-25ab-4a6c-a346-f75816bc4e8c" Label="Ja" />
+  <Edge ToIndex="0" FromIndex="1" From="d7784298-25ab-4a6c-a346-f75816bc4e8c" To="07fc8b01-9f9f-41af-9780-83cb3efc81eb" Label="Ja" />
+  <Node ID="f369332c-2e10-424d-a836-a1c18d581b24" Code="output = $&quot;{output} {i}&quot;" Position="475.5,502.5000000000001" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="07fc8b01-9f9f-41af-9780-83cb3efc81eb" To="f369332c-2e10-424d-a836-a1c18d581b24" Label="Ja" />
+  <Node ID="48c3b247-00d0-42e1-b9ef-963f2030c50a" Code="i--" Position="475.6666666666666,639.6666666666669" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="f369332c-2e10-424d-a836-a1c18d581b24" To="48c3b247-00d0-42e1-b9ef-963f2030c50a" Label="Ja" />
+  <Edge ToIndex="0" FromIndex="1" From="48c3b247-00d0-42e1-b9ef-963f2030c50a" To="07fc8b01-9f9f-41af-9780-83cb3efc81eb" Label="Ja" />
+</VisualTreeNetwork>

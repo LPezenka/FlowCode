@@ -108,6 +108,9 @@
     <None Update="Hints\startnode.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Hints\template-strings.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Hints\terminals.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

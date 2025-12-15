@@ -104,8 +104,7 @@ namespace FlowEditor
 
         public MainWindow()
         {
-            WelcomeWindow ww = new WelcomeWindow("./res/tips.json");
-            ww.ShowDialog();
+            ShowTipsScreen();
 
             this.WindowState = WindowState.Maximized;
             InitializeComponent();
@@ -162,6 +161,12 @@ namespace FlowEditor
 
             FlowCodeInfrastructure.Node.variableLogger = _variableLogger;
             FlowCodeInfrastructure.CallerNode.StackDisplay = _callStack;
+        }
+
+        private static void ShowTipsScreen()
+        {
+            WelcomeWindow ww = new WelcomeWindow("./res/tips.json");
+            ww.ShowDialog();
         }
 
         private void DiagramCanvas_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
@@ -1325,15 +1330,23 @@ namespace FlowEditor
                     offsetY = 10.0;
                 else if (e.Key == Key.D || e.Key == Key.Right) // pan right
                     offsetX = 10.0;
-                else if (e.Key == Key.S && Keyboard.Modifiers == ModifierKeys.Control)
-                {
-                    MenuItemSave_Click(null, null);
-                }
                 if (offsetX != 0.0 && offsetY != 0.0)
                     PanNodes(offsetX, offsetY);
             }
             if (e.Key == Key.F5)
                 Run_Click(null, null);
+            else if (e.Key == Key.F1)
+            {
+                ShowTipsScreen();
+            }
+            else if (e.Key == Key.S && Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                MenuItemSave_Click(null, null);
+            }
+            else if (e.Key == Key.L && Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                MenuItemLoad_Click(null, null);
+            }
         }
 
         private void PanNodes(double offsetX, double offsetY)
