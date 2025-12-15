@@ -31,9 +31,11 @@ A for loop (or counting loop) requires initialization, a boolean condition (answ
 
 ![For Loop](/Screenshots/For-Loop-With-Output.png "For Loop in FlowCode")
 
-![Fibonacci Sequence](/Screenshots/Fibonacci.png "Fibonacci Sequence in FlowCode")
+Recursive algorithms can be implemented by defining subprocesses and functions. The following graphics show two classical examples of recursive algorithms, the Fibonacci Sequence and the Eulidean Algorithm for the calculation of the greates common denominator of two numbers, implemented in FlowCode.
 
+![Fibonacci Sequence](/Screenshots/Fibonacci.png "Fibonacci Sequence in FlowCode")
 ![Euclidean Algorithm as Flowchart](/Screenshots/Euklid.png "Euclidean Algorithm in FlowCode")
 
+CargoTrucker is a C# implementation of the Java Hamster model implemented by Dr. Kerer at HTL Wien West. The library and visual playground is available [here](https://sites.google.com/htlwienwest.at/cargotrucker/startseite?pli=1&authuser=0). FlowCode is fully integrated with Cargo Trucker and allows students to learn computer science and programming concepts in a clearly structured, gamified manner, with instant visual feedback.
 
 ![CargoTrucker & FlowCode](/Screenshots/Cargotrucker.png "Integration of FlowCode with Cargotrucker")
