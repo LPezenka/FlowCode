@@ -26,9 +26,12 @@ An input handler can be passed to the ActionNode class to handle input. Likewise
 ### Frontend 
 Flowcharts can be modelled in a WPF application. All currently supported node types can be used.
 
+
+A for loop (or counting loop) requires initialization, a boolean condition (answered with true/false), a loop body, and an increment (an update). The following graphic illustrates the implementation of a simple counting loop in FlowCode:
+
 ![For Loop](/Screenshots/For-Loop-With-Output.png "For Loop in FlowCode")
 
-
+![Fibonacci Sequence](/Hints/fibonacci.png "Fibonacci Sequence in FlowCode")
 
 ![Euclidean Algorithm as Flowchart](/Screenshots/Euklid.png "Euclidean Algorithm in FlowCode")
 
