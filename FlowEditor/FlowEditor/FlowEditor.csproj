@@ -81,6 +81,9 @@
     <None Update="field.json.old">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Hints\alternatives.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Hints\animalquiz.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

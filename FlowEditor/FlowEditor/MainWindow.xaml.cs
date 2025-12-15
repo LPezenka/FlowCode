@@ -290,6 +290,7 @@ namespace FlowEditor
             foreach (var edge in edgesToDelete)
             {
                 edges.Remove(edge);
+                DiagramCanvas.Children.Remove(edge.StateButton);
                 DiagramCanvas.Children.Remove(edge);
             }
 
@@ -597,7 +598,7 @@ namespace FlowEditor
             {
                 localTempEdge.To = targetNode;
                 localTempEdge.ToIndex = targetNode.GetNextFreeInputIndex();
-
+                localTempEdge.Label = Config.GetKeyword(Config.KeyWord.True);
                 if (localTempEdge.To == localTempEdge.From)
                 {
                     CleanupTemporaryEdge();
