@@ -268,11 +268,18 @@ namespace FlowEditor
 
         private void GatherFunctions()
         {
-            var signatures = canvasNodes.Where(x => x.GetType() == typeof(TerminalNodeControl)).Select(x => new KeyValuePair<string, string>((x as TerminalNodeControl).FunctionName,
-                $"{(x as TerminalNodeControl).FunctionName}({string.Join(",", (x as TerminalNodeControl).InputVariables)})")).ToDictionary<string,string>();
-            //var terminals = canvasNodes.Where(x => x.GetType() == typeof(TerminalNodeControl)).Select(x => (x as TerminalNodeControl).FunctionName).ToList();
-            //ProcessNodeDetailWindow.FunctionNames = terminals;
-            ProcessNodeDetailWindow.Signatures = signatures;
+            try
+            {
+                var signatures = canvasNodes.Where(x => x.GetType() == typeof(TerminalNodeControl)).Select(x => new KeyValuePair<string, string>((x as TerminalNodeControl).FunctionName,
+                    $"{(x as TerminalNodeControl).FunctionName}({string.Join(",", (x as TerminalNodeControl).InputVariables)})")).ToDictionary<string, string>();
+                //var terminals = canvasNodes.Where(x => x.GetType() == typeof(TerminalNodeControl)).Select(x => (x as TerminalNodeControl).FunctionName).ToList();
+                //ProcessNodeDetailWindow.FunctionNames = terminals;
+                ProcessNodeDetailWindow.Signatures = signatures;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
         }
 
@@ -781,7 +788,7 @@ namespace FlowEditor
 
             var stateButton = new Button()
             {
-                Content = FlowCodeInfrastructure.Config.GetKeyword(Config.KeyWord.True),
+                Content = localTempEdge.Label,
                 Width = 80,
                 Background = Brushes.White,
                 BorderBrush = Brushes.Gray,
