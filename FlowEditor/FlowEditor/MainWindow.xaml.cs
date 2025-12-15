@@ -221,7 +221,10 @@ namespace FlowEditor
 
         public void ToggleDeleteZone(bool active)
         {
-            _deletionZone.Visibility = Visibility.Visible;
+            if (active)
+                _deletionZone.Visibility = Visibility.Visible;
+            else
+                _deletionZone.Visibility = Visibility.Hidden;
         }
 
         protected override void OnRender(DrawingContext drawingContext)
@@ -247,6 +250,7 @@ namespace FlowEditor
             if (e.Key == Key.Delete)
             {
                 DeleteSelectedNode();
+                ToggleDeleteZone(false);
             }
             else if (e.Key==Key.F2)
             {
