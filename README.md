@@ -31,7 +31,7 @@ A for loop (or counting loop) requires initialization, a boolean condition (answ
 
 ![For Loop](/Screenshots/For-Loop-With-Output.png "For Loop in FlowCode")
 
-![Fibonacci Sequence](/Hints/fibonacci.png "Fibonacci Sequence in FlowCode")
+![Fibonacci Sequence](/Screenshots/Fibonacci.png "Fibonacci Sequence in FlowCode")
 
 ![Euclidean Algorithm as Flowchart](/Screenshots/Euklid.png "Euclidean Algorithm in FlowCode")
 
