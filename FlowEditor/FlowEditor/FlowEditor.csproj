@@ -36,11 +36,10 @@
   </ItemGroup>
 
   <ItemGroup>
-	  <Reference Include="CargoTrucker.Client">
-		  <HintPath>..\..\FlowNode\lib\CargoTrucker.Client.dll</HintPath>
-		  <Private>True</Private>
-		  <EmbedInteropTypes>False</EmbedInteropTypes>
-	  </Reference>
+    <Reference Include="CargoTrucker.Client">
+      <HintPath>..\..\Dependencies\CargoTrucker.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>

@@ -951,6 +951,7 @@ namespace FlowEditor
             _deletionZone.Visibility = Visibility.Hidden;
 
             ScriptOptions scriptOptions = ScriptOptions.Default;
+            FlowCodeInfrastructure.Network.ResetCargoTrucker();
 
             //Add reference to mscorlib
             var mscorlib = typeof(System.Object).Assembly;
