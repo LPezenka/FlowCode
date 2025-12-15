@@ -291,6 +291,7 @@ namespace FlowEditor
             {
                 edges.Remove(edge);
                 DiagramCanvas.Children.Remove(edge.StateButton);
+                DiagramCanvas.Children.Remove(edge.LabelBox);
                 DiagramCanvas.Children.Remove(edge);
             }
 
@@ -303,6 +304,7 @@ namespace FlowEditor
             }
 
             NodeControlBase.LastSelected = null;
+            ToggleDeleteZone(false);
         }
 
         private void Dz_MouseEnter(object sender, MouseEventArgs e)
