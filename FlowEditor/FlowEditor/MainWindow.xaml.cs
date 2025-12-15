@@ -299,8 +299,6 @@ namespace FlowEditor
                     to.UnregisterOutputEdge((int)tidx);
 
                 edgesToDelete.Add(edge);
-
-
             }
 
             foreach (var edge in edgesToDelete)
@@ -316,6 +314,7 @@ namespace FlowEditor
 
             if (NodeControlBase.LastSelected is TerminalNodeControl tn)
             {
+                if (ProcessNodeDetailWindow.FunctionNames is not null)
                     ProcessNodeDetailWindow.FunctionNames.Remove(tn.FunctionName);
             }
 
@@ -1385,6 +1384,11 @@ namespace FlowEditor
             }
 
             UpdateEdges();
+        }
+
+        private void ShowTips_Click(object sender, RoutedEventArgs e)
+        {
+            ShowTipsScreen();
         }
     }
 }
