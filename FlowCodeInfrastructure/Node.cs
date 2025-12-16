@@ -10,6 +10,7 @@ namespace FlowCodeInfrastructure
 {
     public abstract class Node
     {
+        internal static bool InterruptProcess { get; set; } = false;
         public static IVariableLogger variableLogger { get; set; } = null;
         public static int Delay { get; set; } = 500;
         public IHighlightable GraphicalNode;
@@ -51,7 +52,13 @@ namespace FlowCodeInfrastructure
                 {
                   current.GraphicalNode.SetActive(false);
                 }
-                current = current.Next;
+                if (!InterruptProcess) 
+                    current = current.Next;
+                else
+                {
+                    InterruptProcess = false;
+                    return;
+                }
             }
         }
     }

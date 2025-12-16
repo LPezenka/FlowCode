@@ -116,6 +116,9 @@
     <None Update="Hints\variableview.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="res\stop.jpeg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="res\tips.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -1392,5 +1392,10 @@ namespace FlowEditor
         {
             ShowTipsScreen();
         }
+
+        private void StopNetwork(object sender, RoutedEventArgs e)
+        {
+            Network.InterruptProcess();
+        }
     }
 }

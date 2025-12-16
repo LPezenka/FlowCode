@@ -46,5 +46,11 @@ namespace FlowCodeInfrastructure
                 ErrorLogger.LogError(ex.Message);
             }
         }
+
+        public static void InterruptProcess()
+        {
+            Node.InterruptProcess = true;
+        }
+
     }
 }

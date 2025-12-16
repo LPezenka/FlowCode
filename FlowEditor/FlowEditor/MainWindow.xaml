@@ -147,6 +147,15 @@ VerticalAlignment="Top"
 Margin="10" Click="Run_Click">
                         <Image Width="80" Height="80" Source="/res/Play-button.png" Stretch="Uniform"/>
                     </Button>
+                    <Button                     Width="92" Height="92"
+                    Background="White"
+HorizontalAlignment="Left"
+VerticalAlignment="Top"
+Margin="10" Click="StopNetwork">
+                        <Image Source="/res/stop.jpeg" Width="80" Height="80">
+                            
+                        </Image>
+                    </Button>
                 </StackPanel>
             </Canvas>
             <!--<Border x:Name="DeleteZone"
