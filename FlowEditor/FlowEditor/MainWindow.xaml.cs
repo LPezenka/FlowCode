@@ -32,7 +32,7 @@ using System.Printing;
 // TODO: Drag Nodes onto canvas
 // TODO: Replace edge labels by dropdowns or buttons to toggle state
 // TODO: draw onTrue edge green, onFalse edge red
-
+// TODO: consider connecting nodes by clicking rather than dragging an edge
 
 namespace FlowEditor
 {
@@ -618,6 +618,7 @@ namespace FlowEditor
                 localTempEdge.Label = Config.GetKeyword(Config.KeyWord.True);
                 if (localTempEdge.To == localTempEdge.From)
                 {
+                    DiagramCanvas.Children.Remove(localTempEdge);
                     CleanupTemporaryEdge();
                     return;
                 }
