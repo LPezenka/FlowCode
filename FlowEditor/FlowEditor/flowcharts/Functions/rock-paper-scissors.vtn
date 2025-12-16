@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualTreeNetwork>
+  <Node ID="fdf1b8ee-6dff-450d-ab22-5b15f1fff9ab" Code="i = 0" Position="1737.5467252389828,-620.8305470243546" Type="Sequence" />
+  <Node ID="0a77d52c-1999-439b-87c5-c2dd4a2e76e1" Code="i = new Random().Next(0,3)" Position="1721.013391905651,-490.43054702435467" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="fdf1b8ee-6dff-450d-ab22-5b15f1fff9ab" To="0a77d52c-1999-439b-87c5-c2dd4a2e76e1" Label="Ja" />
+  <Node ID="255d06b1-3c58-4a3b-8e0b-52d3b2a081bb" Code="Start/End" Position="1706.3467252389844,-808.8305470243525" FunctionName="Random" ReturnVariable="" InputVariables="" Type="Terminal" />
+  <Edge ToIndex="0" FromIndex="1" From="255d06b1-3c58-4a3b-8e0b-52d3b2a081bb" To="fdf1b8ee-6dff-450d-ab22-5b15f1fff9ab" Label="Ja" />
+  <Node ID="07f6dc14-8e1c-442e-b5ea-7cc4810f02aa" Code="i == 0" Position="1759.9467252389848,-313.63054702435403" OnTrue="1ffc1d48-3f2e-4b7f-aabb-ce1a41e05613" OnFalse="d4a38877-beec-4f6f-8bfa-824e3a9fadfe" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="1" From="0a77d52c-1999-439b-87c5-c2dd4a2e76e1" To="07f6dc14-8e1c-442e-b5ea-7cc4810f02aa" Label="Ja" />
+  <Node ID="1ffc1d48-3f2e-4b7f-aabb-ce1a41e05613" Code="res = &quot;Schere&quot;" Position="1939.1467252389828,-80.83054702435403" Type="Sequence" />
+  <Node ID="5089328d-dd07-4c00-8854-2fc53d60c145" Code="Start/End" Position="1759.1467252389846,227.96945297564946" FunctionName="" ReturnVariable="res" InputVariables="" Type="Terminal" />
+  <Edge ToIndex="0" FromIndex="1" From="1ffc1d48-3f2e-4b7f-aabb-ce1a41e05613" To="5089328d-dd07-4c00-8854-2fc53d60c145" Label="Ja" />
+  <Node ID="d4a38877-beec-4f6f-8bfa-824e3a9fadfe" Code="i == 1" Position="1542.3467252389848,-76.83054702435432" OnTrue="5704d0da-f0ed-4170-b456-cd82065341db" OnFalse="efebc096-46c1-411a-938b-8aa81a82eeda" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="1" From="07f6dc14-8e1c-442e-b5ea-7cc4810f02aa" To="d4a38877-beec-4f6f-8bfa-824e3a9fadfe" Label="Nein" />
+  <Node ID="5704d0da-f0ed-4170-b456-cd82065341db" Code="res = &quot;Stein&quot;" Position="1723.1467252389841,60.76945297564964" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="d4a38877-beec-4f6f-8bfa-824e3a9fadfe" To="5704d0da-f0ed-4170-b456-cd82065341db" Label="Ja" />
+  <Edge ToIndex="0" FromIndex="1" From="5704d0da-f0ed-4170-b456-cd82065341db" To="5089328d-dd07-4c00-8854-2fc53d60c145" Label="Ja" />
+  <Node ID="efebc096-46c1-411a-938b-8aa81a82eeda" Code="res = &quot;Papier&quot;" Position="1399.9467252389861,98.36945297564911" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="d4a38877-beec-4f6f-8bfa-824e3a9fadfe" To="efebc096-46c1-411a-938b-8aa81a82eeda" Label="Nein" />
+  <Edge ToIndex="0" FromIndex="1" From="efebc096-46c1-411a-938b-8aa81a82eeda" To="5089328d-dd07-4c00-8854-2fc53d60c145" Label="Ja" />
+  <Root ID="b84a9784-9df5-4274-8033-de7c137f1bc8" />
+  <Node ID="b84a9784-9df5-4274-8033-de7c137f1bc8" Code="zeichen = &quot;&quot;" Position="756.546725238984,-709.4305470243543" Type="Sequence" />
+  <Node ID="e730f816-72d2-4cc0-9ea5-0c4b694239df" Code="zeichen = Random()" Position="755.2610109532693,-513.7162613100684" Type="PredefinedProcess" />
+  <Edge ToIndex="0" FromIndex="1" From="b84a9784-9df5-4274-8033-de7c137f1bc8" To="e730f816-72d2-4cc0-9ea5-0c4b694239df" Label="Ja" />
+  <Node ID="9883db80-1e75-43ee-b65e-f40083054bb5" Code="Ausgabe: zeichen" Position="753.2610109532698,-353.23054702435337" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="e730f816-72d2-4cc0-9ea5-0c4b694239df" To="9883db80-1e75-43ee-b65e-f40083054bb5" Label="Ja" />
+  <Edge ToIndex="0" FromIndex="2" From="07f6dc14-8e1c-442e-b5ea-7cc4810f02aa" To="1ffc1d48-3f2e-4b7f-aabb-ce1a41e05613" Label="Ja" />
+  <Node ID="e791f526-e980-4d77-a265-430a7cf7e8d4" Code="spielerwahl = Eingabe" Position="752.5181538104111,-200.63054702435392" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="9883db80-1e75-43ee-b65e-f40083054bb5" To="e791f526-e980-4d77-a265-430a7cf7e8d4" Label="Ja" />
+  <Node ID="7536cb90-d50a-4ae9-b70c-e78a3ac92fb0" Code="spielerwahl == zeichen" Position="751.2280439203023,-78.49428328808973" OnTrue="e791f526-e980-4d77-a265-430a7cf7e8d4" OnFalse="8e83a452-5ece-4f7c-a645-654213a6d756" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="1" From="e791f526-e980-4d77-a265-430a7cf7e8d4" To="7536cb90-d50a-4ae9-b70c-e78a3ac92fb0" Label="Ja" />
+  <Edge ToIndex="0" FromIndex="2" From="7536cb90-d50a-4ae9-b70c-e78a3ac92fb0" To="e791f526-e980-4d77-a265-430a7cf7e8d4" Label="Ja" />
+  <Node ID="8e83a452-5ece-4f7c-a645-654213a6d756" Code="spielerwahl == &quot;Schere&quot; &amp;&amp; zeichen == &quot;Stein&quot; " Position="549.206991288725,24.453085132964006" OnTrue="0fc5ce4d-6bb2-45a6-b5db-37d3df5f5d0f" OnFalse="30eec006-bfa2-4837-bcfc-54a32608bef2" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="1" From="7536cb90-d50a-4ae9-b70c-e78a3ac92fb0" To="8e83a452-5ece-4f7c-a645-654213a6d756" Label="Nein" />
+  <Node ID="0fc5ce4d-6bb2-45a6-b5db-37d3df5f5d0f" Code="Ausgabe: &quot;Du gewinnst&quot;" Position="788.406991288723,134.0530851329662" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="8e83a452-5ece-4f7c-a645-654213a6d756" To="0fc5ce4d-6bb2-45a6-b5db-37d3df5f5d0f" Label="Ja" />
+  <Node ID="30eec006-bfa2-4837-bcfc-54a32608bef2" Code="spielerwahl == &quot;Stein&quot; &amp;&amp;  zeichen == &quot;Schere&quot;" Position="360.4069912887248,121.25308513296535" OnTrue="616d22bd-afba-455c-999e-0a28a2eff17a" OnFalse="68a3321a-5dec-4d12-a0d1-4cc866afd5a3" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="1" From="8e83a452-5ece-4f7c-a645-654213a6d756" To="30eec006-bfa2-4837-bcfc-54a32608bef2" Label="Nein" />
+  <Node ID="616d22bd-afba-455c-999e-0a28a2eff17a" Code="Ausgabe: &quot;Computer gewinnt&quot;" Position="558.8069912887252,324.45308513296885" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="30eec006-bfa2-4837-bcfc-54a32608bef2" To="616d22bd-afba-455c-999e-0a28a2eff17a" Label="Ja" />
+  <Node ID="68a3321a-5dec-4d12-a0d1-4cc866afd5a3" Code="spielerwahl == &quot;Papier&quot; &amp;&amp; zeichen ==&quot;Stein&quot;" Position="109.20699128872457,223.65308513296884" OnTrue="8f74b5af-f386-43f1-8169-fd2682ff6050" OnFalse="6b57cbd2-271e-421b-bbe2-334e3102e6fb" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="1" From="30eec006-bfa2-4837-bcfc-54a32608bef2" To="68a3321a-5dec-4d12-a0d1-4cc866afd5a3" Label="Nein" />
+  <Node ID="8f74b5af-f386-43f1-8169-fd2682ff6050" Code="Ausgabe: &quot;Du gewinnst!&quot;" Position="268.40699128872507,398.05308513296944" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="68a3321a-5dec-4d12-a0d1-4cc866afd5a3" To="8f74b5af-f386-43f1-8169-fd2682ff6050" Label="Ja" />
+  <Node ID="6b57cbd2-271e-421b-bbe2-334e3102e6fb" Code="Ausgabe: &quot;Computer gewinnt !&quot;" Position="-53.19300871127467,410.05308513296853" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="68a3321a-5dec-4d12-a0d1-4cc866afd5a3" To="6b57cbd2-271e-421b-bbe2-334e3102e6fb" Label="Nein" />
+</VisualTreeNetwork>
