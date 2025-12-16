@@ -32,8 +32,11 @@ namespace FlowEditor.Windows
             registeredVariables = new List<string>();
             InitializeComponent();
             RegisteredVariables.ItemsSource = registeredVariables;
-            Functions.ItemsSource = Signatures.Keys;
-            Functions.Items.Refresh();
+            if (Signatures is not null)
+            {
+                Functions.ItemsSource = Signatures.Keys;
+                Functions.Items.Refresh();
+            }
         }
 
         private void Button_AddVariable_Click(object sender, RoutedEventArgs e)

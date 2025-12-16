@@ -270,7 +270,9 @@ namespace FlowEditor
         {
             try
             {
-                var signatures = canvasNodes.Where(x => x.GetType() == typeof(TerminalNodeControl)).Select(x => new KeyValuePair<string, string>((x as TerminalNodeControl).FunctionName,
+                var signatures = canvasNodes.Where(x => x.GetType() == typeof(TerminalNodeControl)).
+                    Where(x=> string.IsNullOrWhiteSpace((x as TerminalNodeControl).FunctionName) == false)
+                    .Select(x => new KeyValuePair<string, string>((x as TerminalNodeControl).FunctionName,
                     $"{(x as TerminalNodeControl).FunctionName}({string.Join(",", (x as TerminalNodeControl).InputVariables)})")).ToDictionary<string, string>();
                 //var terminals = canvasNodes.Where(x => x.GetType() == typeof(TerminalNodeControl)).Select(x => (x as TerminalNodeControl).FunctionName).ToList();
                 //ProcessNodeDetailWindow.FunctionNames = terminals;
