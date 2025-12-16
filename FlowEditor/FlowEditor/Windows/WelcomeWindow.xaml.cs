@@ -69,7 +69,7 @@ namespace FlowEditor.Windows
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             _tipCounter++;
-            if (_tipCounter > _tips.Count)
+            if (_tipCounter == _tips.Count)
                 _tipCounter = 0;
             DisplayHint();
         }
@@ -78,7 +78,7 @@ namespace FlowEditor.Windows
         {
             _tipCounter--;
             if (_tipCounter < 0)
-                _tipCounter = _tips.Count;
+                _tipCounter = _tips.Count - 1;
             DisplayHint();
         }
     }

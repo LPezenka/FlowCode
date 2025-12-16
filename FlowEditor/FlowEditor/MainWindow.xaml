@@ -85,15 +85,15 @@
                 <RowDefinition Height="9*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>-->
-            
+
             <ScrollViewer Grid.Column="0" Grid.Row="0" Height="Auto">
-            <Canvas x:Name="DiagramCanvas" Background="{StaticResource ListBackgroundBrush}" MouseWheel="DiagramCanvas_MouseWheel">
+                <Canvas x:Name="DiagramCanvas" Background="{StaticResource ListBackgroundBrush}" MouseWheel="DiagramCanvas_MouseWheel">
                     <!--<Canvas.RenderTransform>
                         <MatrixTransform x:Name="mt"/>
                     </Canvas.RenderTransform>-->
                 </Canvas>
 
-                </ScrollViewer>
+            </ScrollViewer>
             <Canvas x:Name="Overlay" Grid.Column="0" Grid.Row="0" Background="{x:Null}" Width="Auto" Height="Auto">
                 <StackPanel>
                     <Button
@@ -103,9 +103,7 @@
                 VerticalAlignment="Top"
                 Margin="10"
                 Click="AddNode_Click"
-                    
-
-                    >
+                    ToolTip="Neue Sequenz">
                         <Image Source="/res/process.png"/>
                     </Button>
                     <Button
@@ -114,7 +112,8 @@
     HorizontalAlignment="Left"
     VerticalAlignment="Top"
     Margin="10"
-    Click="AddDecisionNode_Click">
+    Click="AddDecisionNode_Click"
+                        ToolTip="Neue Verzweigung">
                         <Image Source="/res/decision.png"/>
                     </Button>
 
@@ -124,7 +123,8 @@
     HorizontalAlignment="Left"
     VerticalAlignment="Top"
     Margin="10"
-    Click="AddFunctionNode_Click">
+    Click="AddFunctionNode_Click"
+                        ToolTip="Neuer Aufruf">
                         <Image Source="/res/predefined.png"/>
                     </Button>
 
@@ -135,6 +135,7 @@
   VerticalAlignment="Top"
   Margin="10"
   Click="AddTerminatorNode_Click"
+                        ToolTip="Neues Unterprogramm oder Endzustand"
                     Background="White">
                         <Image Source="/res/terminal.png"/>
                     </Button>
@@ -144,7 +145,8 @@
                     Background="White"
 HorizontalAlignment="Left"
 VerticalAlignment="Top"
-Margin="10" Click="Run_Click">
+Margin="10" Click="Run_Click"
+                        ToolTip="Ausführen">
                         <Image Width="80" Height="80" Source="/res/Play-button.png" Stretch="Uniform"/>
                     </Button>
                     <Button                     Width="92" Height="92"
@@ -153,7 +155,7 @@ HorizontalAlignment="Left"
 VerticalAlignment="Top"
 Margin="10" Click="StopNetwork">
                         <Image Source="/res/stop.jpeg" Width="80" Height="80">
-                            
+
                         </Image>
                     </Button>
                 </StackPanel>
@@ -172,7 +174,9 @@ Margin="10" Click="StopNetwork">
             DragOver="DeleteZone_DragOver"
             Drop="DeleteZone_Drop">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    --><!-- Replace with your bin icon --><!--
+                    -->
+            <!-- Replace with your bin icon -->
+            <!--
                     <TextBlock Text="🗑" FontSize="32" HorizontalAlignment="Center" />
                     <TextBlock x:Name="DeleteZoneText"
                        Text="Drop here to delete"
