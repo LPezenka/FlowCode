@@ -17,7 +17,8 @@
 
   <ItemGroup>
     <Reference Include="CargoTrucker.Client">
-      <HintPath>..\FlowNode\lib\CargoTrucker.Client.dll</HintPath>
+      <HintPath>..\Dependencies\CargoTrucker.Client.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
 

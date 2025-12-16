@@ -7,6 +7,11 @@
     "Text": "Ein doppelter Mausklick auf einen Knoten macht diesen zum Startknoten. Die Ausführung Deines Programms startet dann immer mit diesem Knoten. Der Startknoten ist durch einen dicken roten Rand hervorgehoben.",
     "Source": "Hints/startnode.png"
   },
+
+  {
+    "Text": "Template Strings sind eine gute Methode, um statische Texte und Variablen formatiert in einem String zu kombinieren. Um einen Template String zu verwenden, kannst Du einfach die C# Notation nutzen. Beispielsweise führt s = \"Hallo\", name = \"Linus\", template = $\"{s} {name}\" zu \"Hallo Linus\"",
+    "Source":  "Hints/template-strings.png"
+  },
   {
     "Text": "Eine Alternative (Rautensymbol) braucht eine Bedingung, die sich mit Ja oder Nein beantworten lässt. Dann braucht sie jeweils einen Pfad für die beiden Fälle - also einen für den Fall, dass die Bedingung zutrifft und einen Pfad für den Fall, dass sie nicht zutrifft. Die Pfade können sich im weiteren Programmverlauf treffen, müssen es aber nicht.",
     "Source": "Hints/animalquiz.png"

@@ -19,6 +19,13 @@ namespace FlowCodeInfrastructure
             Edges = new List<Edge>();
             RootNode = null;
         }
+
+        public static void ResetCargoTrucker()
+        {
+            CargoTrucker.Client.GameApi.ReloadField();
+            //CargoTrucker.Client.GameApi.
+        }
+
         public void FromDrawIOFile(string fname)
         {
             var dion = new DrawIONetwork();

@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using FlowEditor.Windows;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -129,6 +130,12 @@ namespace FlowEditor.Controls
                 node.InvalidateVisual();
                 node.TerminalType = e.NewValue as string;
             }
+        }
+
+        public override void ShowDetailWindow()
+        {
+            TerminalDetailWindow sndWnd = new TerminalDetailWindow(this);
+            sndWnd.ShowDialog();
         }
     }
 }

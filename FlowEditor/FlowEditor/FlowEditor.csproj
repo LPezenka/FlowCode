@@ -36,11 +36,10 @@
   </ItemGroup>
 
   <ItemGroup>
-	  <Reference Include="CargoTrucker.Client">
-		  <HintPath>..\..\FlowNode\lib\CargoTrucker.Client.dll</HintPath>
-		  <Private>True</Private>
-		  <EmbedInteropTypes>False</EmbedInteropTypes>
-	  </Reference>
+    <Reference Include="CargoTrucker.Client">
+      <HintPath>..\..\Dependencies\CargoTrucker.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
@@ -106,6 +105,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Hints\startnode.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Hints\template-strings.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Hints\terminals.png">

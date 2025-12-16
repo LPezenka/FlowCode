@@ -104,8 +104,7 @@ namespace FlowEditor
 
         public MainWindow()
         {
-            WelcomeWindow ww = new WelcomeWindow("./res/tips.json");
-            ww.ShowDialog();
+            ShowTipsScreen();
 
             this.WindowState = WindowState.Maximized;
             InitializeComponent();
@@ -162,6 +161,12 @@ namespace FlowEditor
 
             FlowCodeInfrastructure.Node.variableLogger = _variableLogger;
             FlowCodeInfrastructure.CallerNode.StackDisplay = _callStack;
+        }
+
+        private static void ShowTipsScreen()
+        {
+            WelcomeWindow ww = new WelcomeWindow("./res/tips.json");
+            ww.ShowDialog();
         }
 
         private void DiagramCanvas_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
@@ -221,7 +226,10 @@ namespace FlowEditor
 
         public void ToggleDeleteZone(bool active)
         {
-            _deletionZone.Visibility = Visibility.Visible;
+            if (active)
+                _deletionZone.Visibility = Visibility.Visible;
+            else
+                _deletionZone.Visibility = Visibility.Hidden;
         }
 
         protected override void OnRender(DrawingContext drawingContext)
@@ -247,6 +255,7 @@ namespace FlowEditor
             if (e.Key == Key.Delete)
             {
                 DeleteSelectedNode();
+                ToggleDeleteZone(false);
             }
             else if (e.Key==Key.F2)
             {
@@ -259,11 +268,18 @@ namespace FlowEditor
 
         private void GatherFunctions()
         {
-            var signatures = canvasNodes.Where(x => x.GetType() == typeof(TerminalNodeControl)).Select(x => new KeyValuePair<string, string>((x as TerminalNodeControl).FunctionName,
-                $"{(x as TerminalNodeControl).FunctionName}({string.Join(",", (x as TerminalNodeControl).InputVariables)})")).ToDictionary<string,string>();
-            //var terminals = canvasNodes.Where(x => x.GetType() == typeof(TerminalNodeControl)).Select(x => (x as TerminalNodeControl).FunctionName).ToList();
-            //ProcessNodeDetailWindow.FunctionNames = terminals;
-            ProcessNodeDetailWindow.Signatures = signatures;
+            try
+            {
+                var signatures = canvasNodes.Where(x => x.GetType() == typeof(TerminalNodeControl)).Select(x => new KeyValuePair<string, string>((x as TerminalNodeControl).FunctionName,
+                    $"{(x as TerminalNodeControl).FunctionName}({string.Join(",", (x as TerminalNodeControl).InputVariables)})")).ToDictionary<string, string>();
+                //var terminals = canvasNodes.Where(x => x.GetType() == typeof(TerminalNodeControl)).Select(x => (x as TerminalNodeControl).FunctionName).ToList();
+                //ProcessNodeDetailWindow.FunctionNames = terminals;
+                ProcessNodeDetailWindow.Signatures = signatures;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
         }
 
@@ -283,8 +299,6 @@ namespace FlowEditor
                     to.UnregisterOutputEdge((int)tidx);
 
                 edgesToDelete.Add(edge);
-
-
             }
 
             foreach (var edge in edgesToDelete)
@@ -300,6 +314,7 @@ namespace FlowEditor
 
             if (NodeControlBase.LastSelected is TerminalNodeControl tn)
             {
+                if (ProcessNodeDetailWindow.FunctionNames is not null)
                     ProcessNodeDetailWindow.FunctionNames.Remove(tn.FunctionName);
             }
 
@@ -772,7 +787,7 @@ namespace FlowEditor
 
             var stateButton = new Button()
             {
-                Content = FlowCodeInfrastructure.Config.GetKeyword(Config.KeyWord.True),
+                Content = localTempEdge.Label,
                 Width = 80,
                 Background = Brushes.White,
                 BorderBrush = Brushes.Gray,
@@ -936,6 +951,7 @@ namespace FlowEditor
             _deletionZone.Visibility = Visibility.Hidden;
 
             ScriptOptions scriptOptions = ScriptOptions.Default;
+            FlowCodeInfrastructure.Network.ResetCargoTrucker();
 
             //Add reference to mscorlib
             var mscorlib = typeof(System.Object).Assembly;
@@ -1321,15 +1337,23 @@ namespace FlowEditor
                     offsetY = 10.0;
                 else if (e.Key == Key.D || e.Key == Key.Right) // pan right
                     offsetX = 10.0;
-                else if (e.Key == Key.S && Keyboard.Modifiers == ModifierKeys.Control)
-                {
-                    MenuItemSave_Click(null, null);
-                }
                 if (offsetX != 0.0 && offsetY != 0.0)
                     PanNodes(offsetX, offsetY);
             }
             if (e.Key == Key.F5)
                 Run_Click(null, null);
+            else if (e.Key == Key.F1)
+            {
+                ShowTipsScreen();
+            }
+            else if (e.Key == Key.S && Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                MenuItemSave_Click(null, null);
+            }
+            else if (e.Key == Key.L && Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                MenuItemLoad_Click(null, null);
+            }
         }
 
         private void PanNodes(double offsetX, double offsetY)
@@ -1361,6 +1385,11 @@ namespace FlowEditor
             }
 
             UpdateEdges();
+        }
+
+        private void ShowTips_Click(object sender, RoutedEventArgs e)
+        {
+            ShowTipsScreen();
         }
     }
 }
