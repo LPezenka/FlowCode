@@ -67,10 +67,6 @@ namespace FlowCodeInfrastructure
                     if (tv is not null)
                     {
                         code = $"string lineInput = \"{tv.Value.ToString().Trim()}\"";
-                        //scriptState
-                        //code = //rightHandCode +
-                        //System.Environment.NewLine +
-                        //    $"string lineInput = tv.ToString()";
                     }
                 }
                 else
@@ -102,58 +98,51 @@ namespace FlowCodeInfrastructure
                 // TODO: change all Code to code
                 //Code = code;
 
-                if (code.Contains(Config.GetKeyword(Config.KeyWord.Function)))
+                // This is going to be a line of code for the scripting engine
+                if (!customInput && !customOutput && !code.EndsWith(';'))
+                    code = $"{code};";
+
+                if (customInput)
                 {
-                    // TODO: Improve Logging. Simply writing to the console won't do
-                    //Console.WriteLine($"Entering {Code}");
+                    code = "string lineInput = \"" + InputHandler.ReadInput("Bitte Wert eingeben: ") + "\";";
+                }
+
+                if (customOutput)
+                {
+                    OutputHandler.ShowOutput(outputText);
                 }
                 else
                 {
-                    // This is going to be a line of code for the scripting engine
-                    if (!customInput && !customOutput && !code.EndsWith(';'))
-                        code = $"{code};";
 
-                    if (customInput)
+                    if (initVariable)
                     {
-                        code = "string lineInput = \"" + InputHandler.ReadInput("Bitte Wert eingeben: ") + "\";";
-                    }
+                        // First, execute the lineInput in a new State
+                        ScriptState newState = ScriptState.ContinueWithAsync(code, ScriptOptions).Result;
+                        var v = newState.Variables.Where(x => x.Name == "lineInput").FirstOrDefault();
 
-                    if (customOutput)
-                    {
-                        OutputHandler.ShowOutput(outputText);
+                        var vVal = v?.Value.ToString();
+
+                        var existing = ScriptState.Variables.Where(x => x.Name == varName).FirstOrDefault();
+
+                        string postProcess = string.Empty;
+                        postProcess = InferType(varName, vVal, out string vType);
+
+                        if (existing is not null)
+                            //Remove variable type, as it was already set in the past
+                            postProcess = string.Join(" ", postProcess.Split(" ").Skip(1));
+
+                        ScriptState = ScriptState.ContinueWithAsync(postProcess, ScriptOptions).Result;
+                        //Code = originalCode;
                     }
                     else
                     {
-
-                        if (initVariable)
-                        {
-                            // First, execute the lineInput in a new State
-                            ScriptState newState = ScriptState.ContinueWithAsync(code, ScriptOptions).Result;
-                            var v = newState.Variables.Where(x => x.Name == "lineInput").FirstOrDefault();
-
-                            var vVal = v?.Value.ToString();
-
-                            var existing = ScriptState.Variables.Where(x => x.Name == varName).FirstOrDefault();
-
-                            string postProcess = string.Empty;
-                            postProcess = InferType(varName, vVal, out string vType);
-
-                            if (existing is not null)
-                                //Remove variable type, as it was already set in the past
-                                postProcess = string.Join(" ", postProcess.Split(" ").Skip(1));
-
-                            ScriptState = ScriptState.ContinueWithAsync(postProcess, ScriptOptions).Result;
-                            //Code = originalCode;
-                        }
-                        else
-                        {
-                            ScriptState = ScriptState.ContinueWithAsync(code, ScriptOptions).Result;
-                            //ScriptState.Variables.Remove(ScriptState.Variables.Where(ssv => ssv.Name == "lineInput").FirstOrDefault());
-                        }
+                        ScriptState = ScriptState.ContinueWithAsync(code, ScriptOptions).Result;
+                        //ScriptState.Variables.Remove(ScriptState.Variables.Where(ssv => ssv.Name == "lineInput").FirstOrDefault());
                     }
-                    
-                    variableLogger?.LogVariables(ScriptState.Variables);
                 }
+
+                variableLogger?.LogVariables(ScriptState.Variables);
+
             }
             catch (CompilationErrorException cee)
             {
@@ -182,6 +171,7 @@ namespace FlowCodeInfrastructure
             string postProcess = string.Empty;
 
             // TODO: Implement support for arrays and / or lists
+            // TODO: try simply -> var something = something
             switch (varType)
             {
                 case "float":
@@ -243,14 +233,7 @@ namespace FlowCodeInfrastructure
                 }
                 else
                 {
-                    var parts = Code.Split(new[] { ':' }, 2);
-                    varName = parts[1].Trim();
-                    var filterName = varName;
-                    var v = ScriptState.Variables.Where(x => x.Name == filterName).FirstOrDefault();
-                    if (v is not null)
-                    {
-                        outputText = v.Value.ToString();
-                    }
+                    varName = HandleVariableOutput(ref outputText);
                 }
                 customOutput = true;
             }
@@ -264,5 +247,19 @@ namespace FlowCodeInfrastructure
             return (scriptState, code);
         }
 
+        private string HandleVariableOutput(ref string outputText)
+        {
+            string varName;
+            var parts = Code.Split(new[] { ':' }, 2);
+            varName = parts[1].Trim();
+            var filterName = varName;
+            var v = ScriptState.Variables.Where(x => x.Name == filterName).FirstOrDefault();
+            if (v is not null)
+            {
+                outputText = v.Value.ToString();
+            }
+
+            return varName;
+        }
     }
 }

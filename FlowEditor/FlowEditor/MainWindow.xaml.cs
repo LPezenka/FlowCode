@@ -572,12 +572,12 @@ namespace FlowEditor
                 NodeData = new Controls.Node
                 {
                     Title = "Start/End",
-                    Position = new Point(50 + _nodeCount * 20, 50 + _nodeCount * 20)
+                    //Position = new Point(50 + _nodeCount * 20, 50 + _nodeCount * 20)
                 },
                 TerminalType = "Start"
             };
 
-            AddNode(terminator, terminator.NodeData.Position);
+            AddNode(terminator, null);
         }
         private void AddFunctionNode_Click(object sender, RoutedEventArgs e)
         {
@@ -993,6 +993,9 @@ namespace FlowEditor
             Console.WriteLine("Encountered an error:");
             Console.WriteLine(message);
             Console.WriteLine("Dumped network to file");
+
+            File.AppendAllText("./error.log", $"\n{DateTime.Now.ToShortTimeString()}: - {message}");
+
 
             if (!Directory.Exists("./dump"))
                     Directory.CreateDirectory("./dump");
