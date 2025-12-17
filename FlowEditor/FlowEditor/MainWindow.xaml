@@ -149,7 +149,7 @@ Margin="10" Click="Run_Click"
                         ToolTip="Ausführen">
                         <Image Width="80" Height="80" Source="/res/Play-button.png" Stretch="Uniform"/>
                     </Button>
-                    <Button                     Width="92" Height="92"
+                    <Button x:Name="StopButton" Visibility="Collapsed"                   Width="92" Height="92"
                     Background="White"
 HorizontalAlignment="Left"
 VerticalAlignment="Top"

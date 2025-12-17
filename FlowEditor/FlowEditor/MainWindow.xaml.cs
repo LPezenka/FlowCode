@@ -918,6 +918,7 @@ namespace FlowEditor
                 MessageBox.Show("No root node selected!");
                 return;
             }
+            StopButton.Visibility = Visibility.Visible;
             vtn.ErrorLogger = this;
 
             NodeControlBase.LastSelected?.SetActive(false);
@@ -951,8 +952,19 @@ namespace FlowEditor
             // Start network parsing in new thread. This is necessary in order to highlight the nodes
             // in the GUI using Dispatcher.Invoke()
             Thread t = new Thread(() =>
-            {vtn.Evaluate();});
+            {
+                vtn.Evaluate();
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    OnEvaluationFinished();
+                });
+            });
             t.Start();
+        }
+
+        private void OnEvaluationFinished()
+        {
+            StopButton.Visibility = Visibility.Collapsed;
         }
 
         private void LogError(string message)
@@ -1371,6 +1383,7 @@ namespace FlowEditor
         private void StopNetwork(object sender, RoutedEventArgs e)
         {
             Network.InterruptProcess();
+            StopButton.Visibility = Visibility.Collapsed;
         }
     }
 }

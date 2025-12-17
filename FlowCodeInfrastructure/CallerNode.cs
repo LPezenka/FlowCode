@@ -106,7 +106,7 @@ namespace FlowCodeInfrastructure
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+                throw e;
             }
             //finally
             //{
