@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualTreeNetwork>
+  <Node ID="97480820-a6ec-490b-939e-37479389c18b" Code="Start/End" Position="562.4,90.39999999999998" FunctionName="PrintWelcome" ReturnVariable="" InputVariables="name" Type="Terminal" />
+  <Node ID="ea86e03a-b8fe-41de-95de-65e6548e1f30" Code="s = &quot;&quot;" Position="592.8,289.59999999999997" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="97480820-a6ec-490b-939e-37479389c18b" To="ea86e03a-b8fe-41de-95de-65e6548e1f30" Label="Ja" />
+  <Node ID="c304cc24-b113-4585-80bf-409b576cd16e" Code="s = $&quot;Willkommen, {name}&quot;" Position="592.8,401.59999999999997" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="ea86e03a-b8fe-41de-95de-65e6548e1f30" To="c304cc24-b113-4585-80bf-409b576cd16e" Label="Ja" />
+  <Node ID="e38e0786-c776-4b94-95a5-db9dfa3cc4a1" Code="Ausgabe: s" Position="592.8,513.5999999999999" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="c304cc24-b113-4585-80bf-409b576cd16e" To="e38e0786-c776-4b94-95a5-db9dfa3cc4a1" Label="Ja" />
+  <Node ID="d19f9425-a0a8-4f1c-8007-d2c4e7d1dfd1" Code="Start/End" Position="563.1999999999999,648.7999999999997" FunctionName="" ReturnVariable="" InputVariables="" Type="Terminal" />
+  <Edge ToIndex="0" FromIndex="1" From="e38e0786-c776-4b94-95a5-db9dfa3cc4a1" To="d19f9425-a0a8-4f1c-8007-d2c4e7d1dfd1" Label="Ja" />
+  <Node ID="6caf352b-ed8f-4a81-ad38-aac692932438" Code="name = Eingabe" Position="198.39999999999998,185.59999999999982" Type="Sequence" />
+  <Node ID="5f60ab27-cce0-4af5-b861-d07da7ceac2e" Code="PrintWelcome(name)" Position="198.39999999999998,316.79999999999995" Type="PredefinedProcess" />
+  <Edge ToIndex="0" FromIndex="1" From="6caf352b-ed8f-4a81-ad38-aac692932438" To="5f60ab27-cce0-4af5-b861-d07da7ceac2e" Label="Ja" />
+  <Root ID="835b597a-cf65-42a1-92d0-6eba3cee7d4d" />
+  <Node ID="835b597a-cf65-42a1-92d0-6eba3cee7d4d" Code="Ausgabe: &quot;Bitte Name eingeben&quot;" Position="198.39999999999998,55.19999999999976" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="835b597a-cf65-42a1-92d0-6eba3cee7d4d" To="6caf352b-ed8f-4a81-ad38-aac692932438" Label="Ja" />
+</VisualTreeNetwork>

@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <VisualTreeNetwork>
   <Root ID="8ad48a52-4340-4eca-8127-7d28a14c939b" />
-  <Node ID="8ad48a52-4340-4eca-8127-7d28a14c939b" Code="a = 1" Position="284,29.99999999999997" Type="Sequence" />
-  <Node ID="74bc59dd-d010-43e4-92ed-857a47f04e06" Code="a = Increase(a)" Position="283,157" Type="PredefinedProcess" />
+  <Node ID="8ad48a52-4340-4eca-8127-7d28a14c939b" Code="a = 1" Position="173.60000000000002,177.99999999999997" Type="Sequence" />
+  <Node ID="74bc59dd-d010-43e4-92ed-857a47f04e06" Code="a = Increase(a)" Position="172.60000000000002,305" Type="PredefinedProcess" />
   <Edge ToIndex="0" FromIndex="1" From="8ad48a52-4340-4eca-8127-7d28a14c939b" To="74bc59dd-d010-43e4-92ed-857a47f04e06" Label="" />
-  <Node ID="8f1b0beb-093b-42e6-9f13-e73f2f8b4e1a" Code="Ausgabe: a" Position="285,286.5" Type="Sequence" />
+  <Node ID="8f1b0beb-093b-42e6-9f13-e73f2f8b4e1a" Code="Ausgabe: a" Position="174.60000000000002,434.5" Type="Sequence" />
   <Edge ToIndex="0" FromIndex="1" From="74bc59dd-d010-43e4-92ed-857a47f04e06" To="8f1b0beb-093b-42e6-9f13-e73f2f8b4e1a" Label="" />
-  <Node ID="d96a1caa-7e40-4aa2-a7fa-603c2f210cac" Code="Start/End" Position="643,53" FunctionName="Increase" ReturnVariable="" Type="Terminal" />
-  <Node ID="354b81a1-adf2-4b5f-996f-941531d1368f" Code="a = a + 1" Position="642,194" Type="Sequence" />
-  <Edge ToIndex="0" FromIndex="1" From="d96a1caa-7e40-4aa2-a7fa-603c2f210cac" To="354b81a1-adf2-4b5f-996f-941531d1368f" Label="" />
-  <Node ID="dd80c1ba-15a5-493e-9a2e-f29519a407a8" Code="Start/End" Position="644,333.5" FunctionName="" ReturnVariable="a" Type="Terminal" />
+  <Node ID="354b81a1-adf2-4b5f-996f-941531d1368f" Code="a = a + 1" Position="525.2000000000002,321.2" Type="Sequence" />
+  <Node ID="dd80c1ba-15a5-493e-9a2e-f29519a407a8" Code="Start/End" Position="492.0000000000001,457.5" FunctionName="" ReturnVariable="a" Type="Terminal" />
   <Edge ToIndex="0" FromIndex="1" From="354b81a1-adf2-4b5f-996f-941531d1368f" To="dd80c1ba-15a5-493e-9a2e-f29519a407a8" Label="" />
+  <Node ID="d96a1caa-7e40-4aa2-a7fa-603c2f210cac" Code="Start/End" Position="500.60000000000014,148.99999999999997" FunctionName="Increase" ReturnVariable="" Type="Terminal" />
+  <Edge ToIndex="0" FromIndex="1" From="d96a1caa-7e40-4aa2-a7fa-603c2f210cac" To="354b81a1-adf2-4b5f-996f-941531d1368f" Label="Ja" />
 </VisualTreeNetwork>

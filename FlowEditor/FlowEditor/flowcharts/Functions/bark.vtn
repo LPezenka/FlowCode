@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualTreeNetwork>
+  <Node ID="d7ab6a81-cb82-4aee-8507-e03cc3c69354" Code="Start/End" Position="400,40" FunctionName="Bark" ReturnVariable="" InputVariables="" Type="Terminal" />
+  <Node ID="3e7a8338-4ab9-4566-9698-b542ba212530" Code="Ausgabe: &quot;Woof, Woof!&quot;" Position="429.6,234.39999999999995" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="d7ab6a81-cb82-4aee-8507-e03cc3c69354" To="3e7a8338-4ab9-4566-9698-b542ba212530" Label="Ja" />
+  <Node ID="735830f3-9bdf-4130-ab2c-002b6be158d2" Code="Start/End" Position="396,365.59999999999997" FunctionName="" ReturnVariable="" InputVariables="" Type="Terminal" />
+  <Edge ToIndex="0" FromIndex="1" From="3e7a8338-4ab9-4566-9698-b542ba212530" To="735830f3-9bdf-4130-ab2c-002b6be158d2" Label="Ja" />
+</VisualTreeNetwork>

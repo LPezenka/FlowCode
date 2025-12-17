@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualTreeNetwork>
+  <Node ID="20086be7-0750-4023-b725-f5230da7db08" Code="Ausgabe: s" Position="675.1999999999998,545.6000000000001" Type="Sequence" />
+  <Node ID="d520dcf0-f3a5-4bda-a628-9100b6544cd3" Code="Start/End" Position="641.6000000000004,676.0000000000009" FunctionName="" ReturnVariable="" InputVariables="" Type="Terminal" />
+  <Edge ToIndex="0" FromIndex="1" From="20086be7-0750-4023-b725-f5230da7db08" To="d520dcf0-f3a5-4bda-a628-9100b6544cd3" Label="Ja" />
+  <Node ID="b15ebe74-1376-4de9-b4cf-24d4f25a96df" Code="s = $&quot;{factor1} * {factor2} = {result}&quot;" Position="675.1999999999998,433.6000000000001" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="b15ebe74-1376-4de9-b4cf-24d4f25a96df" To="20086be7-0750-4023-b725-f5230da7db08" Label="Ja" />
+  <Node ID="71fdc60b-db2b-43da-a8ab-d80aa0a45c28" Code="s = &quot;&quot;" Position="675.1999999999998,321.60000000000014" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="71fdc60b-db2b-43da-a8ab-d80aa0a45c28" To="b15ebe74-1376-4de9-b4cf-24d4f25a96df" Label="Ja" />
+  <Node ID="489d6d64-9e6a-4bd5-aba5-116917cd7dcd" Code="result = factor1 * factor2" Position="675.1999999999998,209.60000000000016" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="489d6d64-9e6a-4bd5-aba5-116917cd7dcd" To="71fdc60b-db2b-43da-a8ab-d80aa0a45c28" Label="Ja" />
+  <Node ID="b533fe0a-6ec7-4474-a479-534454b6714b" Code="Start/End" Position="645.5999999999999,10.400000000000176" FunctionName="DisplayMultiplication" ReturnVariable="" InputVariables="factor1, factor2" Type="Terminal" />
+  <Edge ToIndex="0" FromIndex="1" From="b533fe0a-6ec7-4474-a479-534454b6714b" To="489d6d64-9e6a-4bd5-aba5-116917cd7dcd" Label="Ja" />
+  <Node ID="e5678c39-8811-41a3-9713-62da713aee0e" Code="DisplayMultiplication(number1,number2)" Position="233.60000000000008,467.80000000000064" Type="PredefinedProcess" />
+  <Node ID="4a9c8ed2-4cc9-42c5-8010-c6a3a088d977" Code="Start/End" Position="199.2000000000001,603.0000000000006" FunctionName="" ReturnVariable="" InputVariables="" Type="Terminal" />
+  <Edge ToIndex="0" FromIndex="1" From="e5678c39-8811-41a3-9713-62da713aee0e" To="4a9c8ed2-4cc9-42c5-8010-c6a3a088d977" Label="Ja" />
+  <Node ID="1564a48c-4a12-4080-b942-46164858aaea" Code="number2 = Eingabe" Position="233.60000000000008,355.80000000000064" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="1564a48c-4a12-4080-b942-46164858aaea" To="e5678c39-8811-41a3-9713-62da713aee0e" Label="Ja" />
+  <Node ID="e80a7f37-b54e-4c10-bee4-c2e9c0bdf9e6" Code="number1 = Eingabe" Position="233.60000000000008,243.8000000000006" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="e80a7f37-b54e-4c10-bee4-c2e9c0bdf9e6" To="1564a48c-4a12-4080-b942-46164858aaea" Label="Ja" />
+  <Root ID="74280d89-7bc7-4dde-9349-0afacc31d83d" />
+  <Node ID="74280d89-7bc7-4dde-9349-0afacc31d83d" Code="Start/End" Position="203.2000000000001,41.40000000000052" FunctionName="Main" ReturnVariable="" InputVariables="" Type="Terminal" />
+  <Edge ToIndex="0" FromIndex="1" From="74280d89-7bc7-4dde-9349-0afacc31d83d" To="e80a7f37-b54e-4c10-bee4-c2e9c0bdf9e6" Label="Ja" />
+</VisualTreeNetwork>

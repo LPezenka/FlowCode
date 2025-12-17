@@ -39,9 +39,6 @@ namespace FlowEditor.Windows
             if (Node is null)
                 return;
 
-            if (!string.IsNullOrWhiteSpace(Node.FunctionName))
-                FunctionName.Text = Node.FunctionName;
-
             InParamsList = new List<string>();
             if (!string.IsNullOrWhiteSpace(Node.InputVariables))
             {
@@ -51,6 +48,10 @@ namespace FlowEditor.Windows
             }
             
             InitializeComponent();
+
+            if (!string.IsNullOrWhiteSpace(Node.FunctionName))
+                FunctionName.Text = Node.FunctionName;
+
             InParams.ItemsSource = InParamsList;
             InParams.Items.Refresh();
             this.DataContext = this;
