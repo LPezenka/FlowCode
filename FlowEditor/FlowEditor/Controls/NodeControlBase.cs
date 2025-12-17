@@ -12,10 +12,6 @@ using System.Xml.Linq;
 
 namespace FlowEditor.Controls
 {
-    // FlowchartControlLibrary/NodeControlBase.cs
-
-
-
     public abstract class NodeControlBase : Control, IHighlightable, INotifyPropertyChanged
     {
 
@@ -140,12 +136,8 @@ namespace FlowEditor.Controls
             SetActive(true);
             LastSelected = this;
             ToggleDeletionZone?.Invoke(this, EventArgs.Empty);
-            //Application.Current.Dispatcher.Invoke(() =>
-            //{
-            //}
 
-
-                var pos = e.GetPosition(this);
+            var pos = e.GetPosition(this);
             var points = GetConnectionPoints();
             for (int i = 0; i < points.Count; i++)
             {
@@ -171,16 +163,6 @@ namespace FlowEditor.Controls
 
         protected override void OnMouseDoubleClick(MouseButtonEventArgs e)
         {
-            //IsRoot = !IsRoot;
-            //if (IsRoot)
-            //{
-            //    this.Background = Brushes.LightGray;
-            //}
-            //else
-            //{
-            //    this.Background = Brushes.Transparent;
-            //}
-            //    base.OnMouseDoubleClick(e);
             RootRequested?.Invoke(this, EventArgs.Empty);
             e.Handled = true;
             
@@ -234,11 +216,8 @@ namespace FlowEditor.Controls
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-
                 if (active)
                 {
-                    //HighlightRequested?.Invoke(this, EventArgs.Empty);
-                    //Background = Brushes.Magenta;
                     BorderBrush = Brushes.LightGreen;
                     BorderThickness = new Thickness(9.0);
                     NotifyPropertyChanged("Background");
@@ -246,28 +225,11 @@ namespace FlowEditor.Controls
                 }
                 else
                 {
-                    //if (!IsRoot)
-                    //{
-                        Background = OriginalBackground;// Brushes.White;
-                        BorderBrush = Brushes.Black;
-                        BorderThickness = new Thickness(1.0);
-                        //Background = Brushes.Gold;
-                    //}
-                    //else
-                    //{
-                    //    //Background = Brushes.Gold;
-                    //    //Background = OriginalBackground;
-                    //    //BorderBrush = Brushes.Black;
-                    //    //BorderThickness = new Thickness(1.0);
-                    //}
-                    //Task.Run(async () =>
-                    //{
-                    //await Task.Delay(100);
-                    //Dispatcher.Invoke(() =>
+                    Background = OriginalBackground;// Brushes.White;
+                    BorderBrush = Brushes.Black;
+                    BorderThickness = new Thickness(1.0);
                     NotifyPropertyChanged("Background");
-                    //);
-                        InvalidateVisual();
-                    //});
+                    InvalidateVisual();
                 }
             });
             

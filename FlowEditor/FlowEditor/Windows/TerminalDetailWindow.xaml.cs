@@ -1,7 +1,9 @@
 ﻿using FlowEditor.Controls;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,15 +20,27 @@ namespace FlowEditor.Windows
     /// <summary>
     /// Interaktionslogik für TerminalDetailWindow.xaml
     /// </summary>
-    public partial class TerminalDetailWindow : Window
+    public partial class TerminalDetailWindow : Window, INotifyPropertyChanged
     {
         public List<string> InParamsList { get; set; }
         public TerminalNodeControl Node { get; set; }
+
+        public string Signature 
+        { 
+            get
+            {
+                return $"{FunctionName.Text}({string.Join(",",InParamsList)})";
+
+            } 
+        }
         public TerminalDetailWindow(NodeControlBase node)
         {
             Node = node as TerminalNodeControl;
             if (Node is null)
                 return;
+
+            if (!string.IsNullOrWhiteSpace(Node.FunctionName))
+                FunctionName.Text = Node.FunctionName;
 
             InParamsList = new List<string>();
             if (!string.IsNullOrWhiteSpace(Node.InputVariables))
@@ -39,9 +53,13 @@ namespace FlowEditor.Windows
             InitializeComponent();
             InParams.ItemsSource = InParamsList;
             InParams.Items.Refresh();
-
+            this.DataContext = this;
             this.ResizeMode = ResizeMode.NoResize;
         }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+    => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
         private void AddNewInParam(object sender, RoutedEventArgs e)
         {
@@ -50,6 +68,7 @@ namespace FlowEditor.Windows
             InParamsList.Add(paramName);
             FocusManager.SetFocusedElement(this, NewInParam);
             InParams.Items.Refresh();
+            OnPropertyChanged(nameof(Signature));
         }
 
         private void Ok(object sender, RoutedEventArgs e)
@@ -62,6 +81,11 @@ namespace FlowEditor.Windows
         private void Cancel(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
+        }
+
+        private void FunctionName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            OnPropertyChanged(nameof(Signature));
         }
     }
 }

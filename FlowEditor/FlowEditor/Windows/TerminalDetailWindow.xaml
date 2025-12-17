@@ -12,27 +12,37 @@
 
 
         <StackPanel Orientation="Vertical">
-        <Label Content="Function Name"></Label>
-            <TextBox x:Name="FunctionName" Width="300"></TextBox>
+            <Label Content="Function Name" HorizontalAlignment="Right"></Label>
+            <TextBox x:Name="FunctionName" TextChanged="FunctionName_TextChanged" TabIndex="0"></TextBox>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="0 25 0 0">
+        <StackPanel Margin="0 25 0 0">
             <StackPanel Orientation="Vertical">
-                <Label Content="New In Parameter"></Label>
-                <StackPanel Orientation="Horizontal">
-                    <TextBox x:Name="NewInParam" Width="150"></TextBox>
-                    <Button Content="+" Click="AddNewInParam"></Button>
-                </StackPanel>
+                <Label Content="New In Parameter" HorizontalAlignment="Right"></Label>
+                <DockPanel LastChildFill="True">
+                    <Button Content="+" Click="AddNewInParam" DockPanel.Dock="Right" TabIndex="2"></Button>
+                    <TextBox x:Name="NewInParam" DockPanel.Dock="Left" TabIndex="1"></TextBox>
+                </DockPanel>
             </StackPanel>
             <StackPanel>
-                <ListBox x:Name="InParams" Height="80" Width="150"></ListBox>
+                    <Label Content="Parameters" HorizontalAlignment="Right"></Label>
+                    <ListBox x:Name="InParams" Height="80"></ListBox>
                 <Button Content="Remove" ></Button>
             </StackPanel>
         </StackPanel>
 
-        <StackPanel Margin="0 25 0 0" Orientation="Horizontal">
-            <Button Content="Ok" Width="150" Click="Ok"></Button>
-            <Button Content="Cancel" Width="150" Click="Cancel"></Button>
-        </StackPanel>
+            <StackPanel>
+                <Label Content="Signature:"></Label>
+                <Label Content="{Binding Path=Signature}"></Label>
+            </StackPanel>
+        
+        <Grid Margin="0 25 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+            <Button Content="Ok" Click="Ok" Grid.Row="0" Grid.Column="0" TabIndex="4"></Button>
+                <Button Content="Cancel" Click="Cancel" Grid.Row="0" Grid.Column="1" TabIndex="5"></Button>
+        </Grid>
     </StackPanel>
     </Grid>
 </Window>
