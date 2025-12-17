@@ -48,6 +48,7 @@ namespace FlowEditor.Windows
             string paramName = NewInParam.Text;
             NewInParam.Text = string.Empty;
             InParamsList.Add(paramName);
+            FocusManager.SetFocusedElement(this, NewInParam);
             InParams.Items.Refresh();
         }
 

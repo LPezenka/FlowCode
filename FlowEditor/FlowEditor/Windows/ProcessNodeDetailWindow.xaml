@@ -5,41 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlowEditor.Windows"
         mc:Ignorable="d"
-        Title="ProcessNodeDetailWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="5*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Row="0" Grid.Column="0">
+        Title="ProcessNodeDetailWindow" SizeToContent="WidthAndHeight">
+    <StackPanel>
+        <StackPanel>
             <Label Content="Target Function" HorizontalAlignment="Right" Foreground="Gray"></Label>
             <TextBox x:Name="TargetName" Text="" TextChanged="TargetName_TextChanged"></TextBox>
-
             <Label Content="Known Predefined Processes" HorizontalAlignment="Right" Foreground="Gray"></Label>
-        <ListBox x:Name="Functions"  MouseDoubleClick="Functions_MouseDoubleClick" SelectionChanged="Functions_SelectionChanged">
-        </ListBox>
+            <ListBox x:Name="Functions" Height="60" MouseDoubleClick="Functions_MouseDoubleClick" SelectionChanged="Functions_SelectionChanged"></ListBox>
             <Label Content="Signature" HorizontalAlignment="Right" Foreground="Gray"></Label>
             <Label x:Name="Signature"></Label>
         </StackPanel>
-        <Button Grid.Row="3" Grid.Column="0" Content="Ok" Click="Button_Ok_Click"></Button>
-        <Button Grid.Row="3" Grid.Column="1" Content="Cancel"></Button>
-        <StackPanel Grid.Row="0" Grid.Column="1">
+        
+        <StackPanel>
             <Label Content="New Variable" HorizontalAlignment="Right" Foreground="Gray"></Label>
-            <TextBox x:Name="NewVariable"></TextBox>
-            <Button Content="Add" Click="Button_AddVariable_Click"></Button>
-            <Label Content="Variables" HorizontalAlignment="Right" Foreground="Gray"></Label>
-                <ListBox BorderBrush="Red" x:Name="RegisteredVariables"  Height="60px"></ListBox>
+            <DockPanel LastChildFill="True">
+                <TextBox x:Name="NewVariable" Width="150" DockPanel.Dock="Left"></TextBox>
+                <Button Content="Add" Click="Button_AddVariable_Click" DockPanel.Dock="Right"></Button>
+            </DockPanel>
+        <Label Content="Variables" HorizontalAlignment="Right" Foreground="Gray"></Label>
+            <StackPanel Orientation="Horizontal">    
+                <ListBox BorderBrush="Red" x:Name="RegisteredVariables"  Height="60" Width="150"></ListBox>
                 <Button Content="Remove" Click="Button_RemoveVar_Click"></Button>
+            </StackPanel>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <Label Content="Call:"></Label>
-            <TextBox x:Name="Call"></TextBox>
+        <DockPanel LastChildFill="True">
+            <Label Content="Call:" DockPanel.Dock="Left"></Label>
+            <TextBox x:Name="Call" DockPanel.Dock="Right"></TextBox>
+        </DockPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Ok" Click="Button_Ok_Click"></Button>
+            <Button Content="Cancel"></Button>
         </StackPanel>
-    </Grid>
+
+    </StackPanel>
 </Window>

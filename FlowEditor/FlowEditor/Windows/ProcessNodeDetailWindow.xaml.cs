@@ -43,6 +43,8 @@ namespace FlowEditor.Windows
         {
             registeredVariables.Add(NewVariable.Text);
             RegisteredVariables.Items.Refresh();
+            NewVariable.Text = string.Empty;
+            FocusManager.SetFocusedElement(this, NewVariable);
             UpdateCall();
         }
 

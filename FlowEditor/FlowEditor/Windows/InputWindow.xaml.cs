@@ -26,7 +26,9 @@ namespace FlowEditor
         public InputWindow(string prompt)
         {
             InitializeComponent();
+            FocusManager.SetFocusedElement(this, TextBoxInput);
             this.SizeToContent = SizeToContent.WidthAndHeight;
+            this.ResizeMode = ResizeMode.NoResize;
         }
 
         private void ButtonConfirm_Click(object sender, RoutedEventArgs e)
@@ -36,15 +38,15 @@ namespace FlowEditor
             DialogResult = true;
         }
 
-        //public IDisposable Subscribe(IObserver<string> observer)
-        //{
-        //    Observer = observer;
-        //    return this;
-        //}
-
         public void Dispose()
         {
 
+        }
+
+        private void TextBoxInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+                ButtonConfirm_Click(null, null);
         }
     }
 }

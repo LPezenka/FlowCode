@@ -8,7 +8,7 @@
         Title="InputWindow" Height="Auto" Width="Auto">
     <StackPanel>
         <Label x:Name="LabelOutput">Lorem Ipsum</Label>
-        <TextBox x:Name="TextBoxInput"></TextBox>
+        <TextBox x:Name="TextBoxInput" KeyDown="TextBoxInput_KeyDown"></TextBox>
         <Button x:Name="ButtonConfirm" Click="ButtonConfirm_Click">OK</Button>
     </StackPanel>
 </Window>
