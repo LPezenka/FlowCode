@@ -149,6 +149,7 @@ namespace FlowEditor
 
             _outputLogger = new OutputControl();
             Overlay.Children.Add(_outputLogger);
+            _outputLogger.Width=400;
 
             _variableLogger = new OutputControl();
             Overlay.Children.Add(_variableLogger);
@@ -193,8 +194,9 @@ namespace FlowEditor
             }
         }
 
-        private void RepositionOutput()
+        private void PositionOutput()
         {
+            _outputLogger.Width = Overlay.ActualWidth / 5;
             Canvas.SetLeft(_outputLogger, Overlay.ActualWidth - 300);
             Canvas.SetTop(_outputLogger, 60);
 
@@ -235,13 +237,13 @@ namespace FlowEditor
         protected override void OnRender(DrawingContext drawingContext)
         {
             ResetDeletionZone();
-            RepositionOutput();
+            PositionOutput();
         }
 
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
         {
             ResetDeletionZone();
-            RepositionOutput();
+            //PositionOutput();
         }
 
         private void ResetDeletionZone()
@@ -1243,7 +1245,7 @@ namespace FlowEditor
             ScaleTransform scaleTransform = new ScaleTransform(scaleValue, scaleValue);
             DiagramCanvas.LayoutTransform = scaleTransform;
             ResetDeletionZone();
-            RepositionOutput();
+            //PositionOutput();
         }
 
         private void MenuItemNew_Click(object sender, RoutedEventArgs e)

@@ -274,10 +274,11 @@
 
     <Style TargetType="{x:Type fc:OutputControl}">
         <Setter Property="Background" Value="red" />
+        <Setter Property="Width" Value="180"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type fc:OutputControl}">
-                    <Border BorderBrush="{TemplateBinding Background}" BorderThickness="3" Width="180" Height="200">
+                    <Border BorderBrush="{TemplateBinding Background}" BorderThickness="3" Width="{TemplateBinding Width}" Height="200">
                         <StackPanel>
                             <Label x:Name="Heading" Background="{TemplateBinding Background}" FontSize="16" Foreground="White">Ausgabe:</Label>
                             <ListBox x:Name="Messages" ItemsSource="{Binding OutputMessages, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="150"></ListBox>

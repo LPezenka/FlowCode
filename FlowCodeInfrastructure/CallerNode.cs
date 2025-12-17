@@ -87,14 +87,20 @@ namespace FlowCodeInfrastructure
                     {
                         //var idx = state.Variables.IndexOf(existingVar);
                         //state.Variables[idx] = o;
+                        string parenthesis = string.Empty;
                         if (existingVar.Type == typeof(string))
-                            state = state.ContinueWithAsync($"{ReturnTarget} = \"{TerminatorNode.ReturnValue}\"").Result;
-                        else
-                            state = state.ContinueWithAsync($"{ReturnTarget} = {TerminatorNode.ReturnValue}").Result;
+                            parenthesis = "\"";
+                        //if (existingVar.Type == typeof(string))
+                        //    state = state.ContinueWithAsync($"{ReturnTarget} = \"{TerminatorNode.ReturnValue}\"").Result;
+                        //else
+                            state = state.ContinueWithAsync($"{ReturnTarget} = {parenthesis}{TerminatorNode.ReturnValue}{parenthesis}").Result;
                     }
                     else
                     {
-                        state = state.ContinueWithAsync($"{TerminatorNode.ReturnValue.GetType()} {ReturnTarget} = {TerminatorNode.ReturnValue};").Result;
+                        string parenthesis = string.Empty; 
+                        if (TerminatorNode.ReturnValue.GetType() == typeof(string)) 
+                            parenthesis = "\"";
+                        state = state.ContinueWithAsync($"{TerminatorNode.ReturnValue.GetType()} {ReturnTarget} = {parenthesis}{TerminatorNode.ReturnValue}{parenthesis};").Result;
                     }
                 }
             }
