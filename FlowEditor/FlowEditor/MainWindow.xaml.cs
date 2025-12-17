@@ -1296,7 +1296,7 @@ namespace FlowEditor
 
                     if (f.EndsWith(".vtn"))
                         LoadXML(f);
-                    else if (f == "field.json") // Maybe not smart
+                    else if (f.EndsWith("field.json")) // Maybe not smart
                     {
                         File.Replace(f, "field.json", "field.json.old");
                     }

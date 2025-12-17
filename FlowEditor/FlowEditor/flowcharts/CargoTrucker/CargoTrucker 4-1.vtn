@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualTreeNetwork>
+  <Root ID="1f531822-91c3-4e3f-99f9-79fd03189cc6" />
+  <Node ID="1f531822-91c3-4e3f-99f9-79fd03189cc6" Code="Ausgabe: &quot;Gib die Anzahl der Felder an, die der Lieferwagen nach vorne fahren soll&quot;" Position="368.4753246753246,93.47086247086224" Type="Sequence" />
+  <Node ID="c242cdc1-e98e-46a7-9b20-88012b2d6397" Code="Eingabe: n" Position="368.09070929070924,217.41445221445207" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="1f531822-91c3-4e3f-99f9-79fd03189cc6" To="c242cdc1-e98e-46a7-9b20-88012b2d6397" Label="Ja" />
+  <Node ID="ffd497ed-c30c-4d96-acef-2545b71d39d1" Code="i = 0" Position="368.01378621378615,342.56829836829814" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="c242cdc1-e98e-46a7-9b20-88012b2d6397" To="ffd497ed-c30c-4d96-acef-2545b71d39d1" Label="Ja" />
+  <Node ID="5b94d7aa-9c3a-4c0a-93f5-1e5f91394a50" Code="i &lt; n" Position="368.01378621378615,514.5682983682982" OnTrue="db5a1235-9c64-4460-b464-89efa8d14007" OnFalse="c0d27c07-ca42-41a6-8b4b-78ea1889052c" Type="Decision" />
+  <Edge ToIndex="0" FromIndex="1" From="ffd497ed-c30c-4d96-acef-2545b71d39d1" To="5b94d7aa-9c3a-4c0a-93f5-1e5f91394a50" Label="Ja" />
+  <Node ID="db5a1235-9c64-4460-b464-89efa8d14007" Code="Forward()" Position="512.0137862137861,687.9016317016308" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="2" From="5b94d7aa-9c3a-4c0a-93f5-1e5f91394a50" To="db5a1235-9c64-4460-b464-89efa8d14007" Label="Ja" />
+  <Node ID="a05400d3-5df0-45b0-9155-8da4732febab" Code="i++" Position="512.0137862137861,799.9016317016308" Type="Sequence" />
+  <Edge ToIndex="0" FromIndex="1" From="db5a1235-9c64-4460-b464-89efa8d14007" To="a05400d3-5df0-45b0-9155-8da4732febab" Label="Ja" />
+  <Edge ToIndex="0" FromIndex="1" From="a05400d3-5df0-45b0-9155-8da4732febab" To="5b94d7aa-9c3a-4c0a-93f5-1e5f91394a50" Label="Ja" />
+  <Node ID="c0d27c07-ca42-41a6-8b4b-78ea1889052c" Code="Start/End" Position="153.27532467532467,759.8708624708615" FunctionName="" ReturnVariable="" InputVariables="" Type="Terminal" />
+  <Edge ToIndex="0" FromIndex="1" From="5b94d7aa-9c3a-4c0a-93f5-1e5f91394a50" To="c0d27c07-ca42-41a6-8b4b-78ea1889052c" Label="Nein" />
+</VisualTreeNetwork>
