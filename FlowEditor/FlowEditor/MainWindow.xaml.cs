@@ -30,7 +30,6 @@ using System.Numerics;
 using System.Printing;
 
 // TODO: Drag Nodes onto canvas
-// TODO: Replace edge labels by dropdowns or buttons to toggle state
 // TODO: draw onTrue edge green, onFalse edge red
 // TODO: consider connecting nodes by clicking rather than dragging an edge
 
@@ -41,27 +40,27 @@ namespace FlowEditor
         /// <summary>
         /// Vertical spacing (in pixels) used when auto-placing newly added nodes below the last one.
         /// </summary>
-        private int _offset = 25;
+        private int verticalOffset = 25;
 
         /// <summary>
         /// Incremental counter used to generate unique node titles and default positions.
         /// </summary>
-        private int _nodeCount = 0;
+        private int nodeCount = 0;
 
         /// <summary>
         /// Node where an interactive edge creation (drag) was started.
         /// </summary>
-        private NodeControlBase _edgeStartNode = null;
+        private NodeControlBase edgeStartNode = null;
 
         /// <summary>
         /// Connection point index on the start node for the interactive edge creation.
         /// </summary>
-        private int? _edgeStartIndex = null;
+        private int? edgeStartIndex = null;
 
         /// <summary>
         /// Temporary edge shown while the user is dragging to connect two nodes.
         /// </summary>
-        private EdgeControl _temporaryEdge = null;
+        private EdgeControl temporaryEdge = null;
 
         /// <summary>
         /// Collection of all committed edges currently present on the canvas.
@@ -81,7 +80,7 @@ namespace FlowEditor
         /// <summary>
         /// Remembered position used as the baseline for auto-placing the next node.
         /// </summary>
-        private Point _lastNodePosition;
+        private Point lastNodePosition;
 
         /// <summary>
         /// Current zoom scale applied to the diagram canvas via LayoutTransform.
@@ -91,16 +90,16 @@ namespace FlowEditor
         /// <summary>
         /// Represents the internal deletion zone used for managing resource cleanup operations.
         /// </summary>
-        private DeleteZone _deletionZone;
+        private DeleteZone deletionZone;
 
         /// <summary>
         /// Provides access to the output logger used for recording or displaying log messages.
         /// </summary>
         /// <remarks>This field is intended for internal use to manage logging output. Use the associated
         /// public properties or methods to interact with logging functionality.</remarks>
-        private OutputControl _outputLogger;
-        private OutputControl _variableLogger;
-        private OutputControl _callStack;
+        private OutputControl outputLogger;
+        private OutputControl variableLogger;
+        private OutputControl callStack;
 
         public MainWindow()
         {
@@ -108,21 +107,18 @@ namespace FlowEditor
 
             this.WindowState = WindowState.Maximized;
             InitializeComponent();
-            _lastNodePosition = new Point(Application.Current.MainWindow.Width / 2, 15);
+            lastNodePosition = new Point(Application.Current.MainWindow.Width / 2, 15);
             //DeleteZone 
-            _deletionZone = new DeleteZone();
+            deletionZone = new DeleteZone();
             //dz.DragEnter += dz.OnDragEnter;
-            _deletionZone.MouseEnter += Dz_MouseEnter;
-            _deletionZone.MouseLeave += Dz_MouseLeave;
-            _deletionZone.MouseDown += _dz_MouseDown;
-            _deletionZone.Visibility = Visibility.Hidden;
-            //_dz.BackgroundColor = Brushes.Red;
-            //_dz.AllowDrop = true;
+            deletionZone.MouseEnter += Dz_MouseEnter;
+            deletionZone.MouseLeave += Dz_MouseLeave;
+            deletionZone.MouseDown += DeletionZone_MouseDown;
+            deletionZone.Visibility = Visibility.Hidden;
 
-            Canvas.SetLeft(_deletionZone, 400);
-            Canvas.SetTop(_deletionZone, 400);
-            Overlay.Children.Add(_deletionZone);
-
+            Canvas.SetLeft(deletionZone, 400);
+            Canvas.SetTop(deletionZone, 400);
+            Overlay.Children.Add(deletionZone);
 
             Config.SetKeyWord(Config.KeyWord.True, "Ja");
             Config.SetKeyWord(Config.KeyWord.False, "Nein");
@@ -147,21 +143,18 @@ namespace FlowEditor
             //DiagramCanvas.MouseMove += DiagramCanvas_MouseMove;
             DiagramCanvas.MouseMove += DiagramCanvasMove;
 
-            _outputLogger = new OutputControl();
-            Overlay.Children.Add(_outputLogger);
-            _outputLogger.Width=400;
+            outputLogger = new OutputControl();
+            Overlay.Children.Add(outputLogger);
+            outputLogger.Width=400;
 
-            _variableLogger = new OutputControl();
-            Overlay.Children.Add(_variableLogger);
+            variableLogger = new OutputControl();
+            Overlay.Children.Add(variableLogger);
 
-            _callStack = new OutputControl();
-            Overlay.Children.Add(_callStack);
+            callStack = new OutputControl();
+            Overlay.Children.Add(callStack);
 
-
-            //Canvas.SetZIndex(_variableLogger, -10);
-
-            FlowCodeInfrastructure.Node.variableLogger = _variableLogger;
-            FlowCodeInfrastructure.CallerNode.StackDisplay = _callStack;
+            FlowCodeInfrastructure.Node.variableLogger = variableLogger;
+            FlowCodeInfrastructure.CallerNode.StackDisplay = callStack;
         }
 
         private static void ShowTipsScreen()
@@ -196,25 +189,24 @@ namespace FlowEditor
 
         private void PositionOutput()
         {
-            _outputLogger.Width = Overlay.ActualWidth / 5;
-            Canvas.SetLeft(_outputLogger, Overlay.ActualWidth - 300);
-            Canvas.SetTop(_outputLogger, 60);
+            outputLogger.Width = Overlay.ActualWidth / 5;
+            Canvas.SetLeft(outputLogger, Overlay.ActualWidth - 300);
+            Canvas.SetTop(outputLogger, 60);
 
-            Canvas.SetLeft(_variableLogger, Overlay.ActualWidth - 500);
-            Canvas.SetTop(_variableLogger, 60);
+            Canvas.SetLeft(variableLogger, Overlay.ActualWidth - 500);
+            Canvas.SetTop(variableLogger, 60);
 
-            Canvas.SetLeft(_callStack, Overlay.ActualWidth - 700);
-            Canvas.SetTop(_callStack, 60);
+            Canvas.SetLeft(callStack, Overlay.ActualWidth - 700);
+            Canvas.SetTop(callStack, 60);
 
-            _variableLogger.SetTitle("Variables");
-            _variableLogger.Background = Brushes.Blue;
+            variableLogger.SetTitle("Variables");
+            variableLogger.Background = Brushes.Blue;
 
-            _callStack.SetTitle("Call Stack");
-            _callStack.Background = Brushes.Green;
-
+            callStack.SetTitle("Call Stack");
+            callStack.Background = Brushes.Green;
         }
 
-        private void _dz_MouseDown(object sender, MouseButtonEventArgs e)
+        private void DeletionZone_MouseDown(object sender, MouseButtonEventArgs e)
         {
             DeleteSelectedNode();
             ToggleDeleteZone(false);
@@ -223,15 +215,15 @@ namespace FlowEditor
         private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
         {
             NodeControlBase.LastSelected?.SetActive(false);
-            _deletionZone.Visibility = Visibility.Hidden;
+            deletionZone.Visibility = Visibility.Hidden;
         }
 
         public void ToggleDeleteZone(bool active)
         {
             if (active)
-                _deletionZone.Visibility = Visibility.Visible;
+                deletionZone.Visibility = Visibility.Visible;
             else
-                _deletionZone.Visibility = Visibility.Hidden;
+                deletionZone.Visibility = Visibility.Hidden;
         }
 
         protected override void OnRender(DrawingContext drawingContext)
@@ -243,13 +235,12 @@ namespace FlowEditor
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
         {
             ResetDeletionZone();
-            //PositionOutput();
         }
 
         private void ResetDeletionZone()
         {
-            Canvas.SetLeft(_deletionZone, Overlay.ActualWidth - _deletionZone.ActualWidth);
-            Canvas.SetTop(_deletionZone, Overlay.ActualHeight - _deletionZone.ActualHeight);
+            Canvas.SetLeft(deletionZone, Overlay.ActualWidth - deletionZone.ActualWidth);
+            Canvas.SetTop(deletionZone, Overlay.ActualHeight - deletionZone.ActualHeight);
         }
 
         protected override void OnKeyDown(KeyEventArgs e)
@@ -264,8 +255,7 @@ namespace FlowEditor
                 GatherFunctions();
                 OpenDetailWindow();
             }
-
-                base.OnKeyDown(e);
+            base.OnKeyDown(e);
         }
 
         private void GatherFunctions()
@@ -276,8 +266,7 @@ namespace FlowEditor
                     Where(x=> string.IsNullOrWhiteSpace((x as TerminalNodeControl).FunctionName) == false)
                     .Select(x => new KeyValuePair<string, string>((x as TerminalNodeControl).FunctionName,
                     $"{(x as TerminalNodeControl).FunctionName}({string.Join(",", (x as TerminalNodeControl).InputVariables)})")).ToDictionary<string, string>();
-                //var terminals = canvasNodes.Where(x => x.GetType() == typeof(TerminalNodeControl)).Select(x => (x as TerminalNodeControl).FunctionName).ToList();
-                //ProcessNodeDetailWindow.FunctionNames = terminals;
+
                 ProcessNodeDetailWindow.Signatures = signatures;
             }
             catch(Exception ex)
@@ -328,22 +317,16 @@ namespace FlowEditor
 
         private void Dz_MouseEnter(object sender, MouseEventArgs e)
         {
-
-            //throw new NotImplementedException();
-            _deletionZone.BackgroundColor = Brushes.Red;
+            deletionZone.BackgroundColor = Brushes.Red;
         }
 
         private void Dz_MouseLeave(object sender, MouseEventArgs e)
         {
-            _deletionZone.BackgroundColor = Brushes.Transparent;
+            deletionZone.BackgroundColor = Brushes.Transparent;
         }
 
         private void AddNode(NodeControlBase node, Point? nodePosition)
         {
-            //node.Width = 240;
-            //node.Height = 90;
-            //node.Width = double.NaN;
-            //node.Height = double.NaN;
             Point position;
             if (nodePosition != null)
             {
@@ -353,27 +336,24 @@ namespace FlowEditor
             }
             else
             {
-                //position;
-
                 if (NodeControlBase.LastSelected is not null)
                 {
-                    _offset = (int)(NodeControlBase.LastSelected.ActualHeight * 1.25);
+                    verticalOffset = (int)(NodeControlBase.LastSelected.ActualHeight * 1.25);
                     position.X = Canvas.GetLeft(NodeControlBase.LastSelected);
-                    position.Y = Canvas.GetTop(NodeControlBase.LastSelected) + _offset;
+                    position.Y = Canvas.GetTop(NodeControlBase.LastSelected) + verticalOffset;
                     NodeControlBase.LastSelected.SetActive(false);
                 }
                 else
                 {
-                    //_offset = 50;
                     position = new Point(
-                    _lastNodePosition.X,
-                    _lastNodePosition.Y + _offset);
+                    lastNodePosition.X,
+                    lastNodePosition.Y + verticalOffset);
                 }
                 
                 node.NodeData.Position = position;
             }
             NodeControlBase.LastSelected = node;
-            _lastNodePosition = position;
+            lastNodePosition = position;
 
             Canvas.SetLeft(node, position.X);
             Canvas.SetTop(node, position.Y);
@@ -413,7 +393,6 @@ namespace FlowEditor
 
             if (currentRoot != null)
             {
-                //currentRoot.Background = Brushes.Gold;
                 currentRoot.BorderBrush = Brushes.OrangeRed;
                 currentRoot.BorderThickness = new Thickness(9.0);
                 currentRoot.IsRoot = true;
@@ -424,8 +403,7 @@ namespace FlowEditor
 
         private void AddDecisionNode_Click(object sender, RoutedEventArgs e)
         {
-            byte alpha, r, g, b;
-            GetNodeColorColor("DecisionNodeColor", out alpha, out r, out g, out b);
+            GetNodeColorColor("DecisionNodeColor", out byte alpha, out byte r, out byte g, out byte b);
             GetNodeColorColor("DecisionTextColor", out byte alphaText, out byte rText, out byte gText, out byte bText);
 
             var decisionNode = new DecisionNodeControl
@@ -436,8 +414,7 @@ namespace FlowEditor
                 Foreground = new SolidColorBrush(Color.FromArgb(alphaText, rText, gText, bText)),
                 NodeData = new Controls.Node
                 {
-                    Title = $"Decision Node({_nodeCount++})",
-                    //Position = null //new Point(50 + _nodeCounter * 20, 50 + _nodeCounter * 20)
+                    Title = $"Decision Node({nodeCount++})",
                 }
             };
 
@@ -447,7 +424,7 @@ namespace FlowEditor
         private static void GetNodeColorColor(string nodeType, out byte alpha, out byte r, out byte g, out byte b)
         {
             var nodeColor = ConfigurationManager.AppSettings[nodeType];
-            alpha = byte.Parse(nodeColor.Substring(0, 2), NumberStyles.HexNumber);
+            alpha = byte.Parse(nodeColor[..2], NumberStyles.HexNumber);
             r = byte.Parse(nodeColor.Substring(2, 2), NumberStyles.HexNumber);
             g = byte.Parse(nodeColor.Substring(4, 2), NumberStyles.HexNumber);
             b = byte.Parse(nodeColor.Substring(6, 2), NumberStyles.HexNumber);
@@ -462,37 +439,34 @@ namespace FlowEditor
             {
                 Width = 180,
                 Height = 90,
-                //OriginalBackground = SequenceNodeControl.TemplateBrush,
-                //33658aff
                 OriginalBackground = new SolidColorBrush(Color.FromArgb(alpha, r,g,b)),// Color.FromArgb(0xff, 0x33, 0x65, 0x8a)),
                 Foreground = new SolidColorBrush(Color.FromArgb(alphaText, rText, gText, bText)),
                 NodeData = new Controls.Node
                 {
-                    Title = $"Node({_nodeCount++})",
-                    //Position = new Point(50 + _nodeCounter * 20, 50 + _nodeCounter * 20)
+                    Title = $"Node({nodeCount++})",
                 }
             };
-            AddNode(node, null);// node.NodeData.Position);
+            AddNode(node, null);
         }
 
         private void Node_ConnectionPointClicked(object sender, ConnectionPointClickedEventArgs e)
         {
-            if (_temporaryEdge != null)
+            if (temporaryEdge != null)
             {
-                DiagramCanvas.Children.Remove(_temporaryEdge);
-                _temporaryEdge = null;
+                DiagramCanvas.Children.Remove(temporaryEdge);
+                temporaryEdge = null;
             }
             
-            _edgeStartNode = e.Node;
-            _edgeStartIndex = e.ConnectionPointIndex;
+            edgeStartNode = e.Node;
+            edgeStartIndex = e.ConnectionPointIndex;
 
-            if (_edgeStartNode != null && _edgeStartIndex.HasValue)
+            if (edgeStartNode != null && edgeStartIndex.HasValue)
             {
-                _edgeStartNode.UnregisterOutputEdge(_edgeStartIndex.Value);
+                edgeStartNode.UnregisterOutputEdge(edgeStartIndex.Value);
 
                 var existing = DiagramCanvas.Children
                     .OfType<EdgeControl>()
-                    .FirstOrDefault(edge => edge.From == _edgeStartNode && edge.FromIndex == _edgeStartIndex);
+                    .FirstOrDefault(edge => edge.From == edgeStartNode && edge.FromIndex == edgeStartIndex);
 
                 if (existing != null)
                 {
@@ -510,16 +484,16 @@ namespace FlowEditor
                 }
             }
 
-            _temporaryEdge = new EdgeControl
+            temporaryEdge = new EdgeControl
             {
-                From = _edgeStartNode,
-                FromIndex = _edgeStartIndex,
+                From = edgeStartNode,
+                FromIndex = edgeStartIndex,
                 To = null
             };
-            Panel.SetZIndex(_temporaryEdge, -1);
+            Panel.SetZIndex(temporaryEdge, -1);
 
-            _temporaryEdge.Label = string.Empty;
-            DiagramCanvas.Children.Add(_temporaryEdge);
+            temporaryEdge.Label = string.Empty;
+            DiagramCanvas.Children.Add(temporaryEdge);
 
             MouseMove += MainWindow_MouseMove;
             MouseLeftButtonUp += MainWindow_MouseLeftButtonUp;
@@ -547,11 +521,11 @@ namespace FlowEditor
 
         private void MainWindow_MouseMove(object sender, MouseEventArgs e)
         {
-            if (_temporaryEdge != null)
+            if (temporaryEdge != null)
             {
                 Point pos = e.GetPosition(DiagramCanvas);
-                _temporaryEdge.CurrentMousePosition = pos;
-                _temporaryEdge.InvalidateVisual();
+                temporaryEdge.CurrentMousePosition = pos;
+                temporaryEdge.InvalidateVisual();
             }
         }
 
@@ -592,7 +566,7 @@ namespace FlowEditor
                 Foreground = new SolidColorBrush(Color.FromArgb(alphaText, rText, gText, bText)),
                 NodeData = new Controls.Node
                 {
-                    Title = $"ProcessCall({_nodeCount++})"
+                    Title = $"ProcessCall({nodeCount++})"
                     //Position = new Point(50 + _nodeCount * 20, 50 + _nodeCount * 20)
                 }
             };
@@ -601,9 +575,9 @@ namespace FlowEditor
 
         private void MainWindow_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            var localTempEdge = _temporaryEdge; // Kopie
+            var localTempEdge = temporaryEdge; // Kopie
 
-            if (localTempEdge == null || _edgeStartNode == null || !_edgeStartIndex.HasValue)
+            if (localTempEdge == null || edgeStartNode == null || !edgeStartIndex.HasValue)
             {
                 CleanupTemporaryEdge();
                 return;
@@ -627,12 +601,12 @@ namespace FlowEditor
                     return;
                 }
 
-                _edgeStartNode.RegisterOutputEdge(_edgeStartIndex.Value, localTempEdge);
+                edgeStartNode.RegisterOutputEdge(edgeStartIndex.Value, localTempEdge);
 
                 edges.Add(localTempEdge);
                 localTempEdge.DeleteRequested += Edge_DeleteRequested;
 
-                _edgeStartNode.NodeMoved += (s, ev) => UpdateEdges();
+                edgeStartNode.NodeMoved += (s, ev) => UpdateEdges();
                 targetNode.NodeMoved += (s, ev) => UpdateEdges();
 
                 // Label erzeugen
@@ -656,16 +630,10 @@ namespace FlowEditor
             //var connectionsOut = _edgeStartNode.GetConnectionPoints();
             var connectionsIn = localTempEdge.To.GetConnectionPoints();
 
-            //double nodeX1 = Canvas.GetLeft(_edgeStartNode);
-            //double nodeY1 = Canvas.GetTop(_edgeStartNode);
-            //double nodeX2 = nodeX1 + _edgeStartNode.ActualWidth;
-            //double nodeY2 = nodeY1 + _edgeStartNode.ActualHeight;
-
             double nodeX1 = Canvas.GetLeft(localTempEdge.From);
             double nodeY1 = Canvas.GetTop(localTempEdge.From);
             double nodeX2 = nodeX1 + localTempEdge.From.ActualWidth;
             double nodeY2 = nodeY1 + localTempEdge.From.ActualHeight;
-
 
             double nodeX3 = Canvas.GetLeft(localTempEdge.To);
             double nodeY3 = Canvas.GetTop(localTempEdge.To);
@@ -829,9 +797,9 @@ namespace FlowEditor
 
         private void CleanupTemporaryEdge()
         {
-            _temporaryEdge = null;
-            _edgeStartNode = null;
-            _edgeStartIndex = null;
+            temporaryEdge = null;
+            edgeStartNode = null;
+            edgeStartIndex = null;
 
             MouseMove -= MainWindow_MouseMove;
             MouseLeftButtonUp -= MainWindow_MouseLeftButtonUp;
@@ -943,7 +911,7 @@ namespace FlowEditor
 
         private void Run_Click(object sender, RoutedEventArgs e)
         {
-            _outputLogger?.Reset();
+            outputLogger?.Reset();
             GenerateNetwork();
             if (currentRoot == null)
             {
@@ -953,7 +921,7 @@ namespace FlowEditor
             vtn.ErrorLogger = this;
 
             NodeControlBase.LastSelected?.SetActive(false);
-            _deletionZone.Visibility = Visibility.Hidden;
+            deletionZone.Visibility = Visibility.Hidden;
 
             ScriptOptions scriptOptions = ScriptOptions.Default;
             FlowCodeInfrastructure.Network.ResetCargoTrucker();
@@ -976,7 +944,7 @@ namespace FlowEditor
             ActionNode.ScriptState = result;
             ActionNode.ScriptOptions = scriptOptions;
             ActionNode.InputHandler = new InputHandler();
-            ActionNode.OutputHandler = _outputLogger;// new OutputHandler();
+            ActionNode.OutputHandler = outputLogger;// new OutputHandler();
 
             //SequenceNodeControl.DetailWindow = new SequenceNodeDetailWindow();
 

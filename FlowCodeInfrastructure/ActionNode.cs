@@ -18,7 +18,6 @@ namespace FlowCodeInfrastructure
         public static ScriptState ScriptState { get; set; }
         public static ScriptOptions ScriptOptions { get; set; }
 
-
         private (ScriptState, string) HandleAssignment(ScriptState scriptState, string code, ref bool initVariable, ref string varName)
         {
             // Jump out of method if there is no assignment in the code
@@ -93,10 +92,6 @@ namespace FlowCodeInfrastructure
                 (ScriptState, code) = HandleOutput(ScriptState, code, ref initVariable, ref customOutput, ref outputText, ref varName);
                 (ScriptState, code) = HandleInput(ScriptState, code, ref initVariable, ref customInput, ref varName);
                 (ScriptState, code) = HandleAssignment(ScriptState, code, ref initVariable, ref varName);
-
-                // Temporary assignment to keep stuff working
-                // TODO: change all Code to code
-                //Code = code;
 
                 // This is going to be a line of code for the scripting engine
                 if (!customInput && !customOutput && !code.EndsWith(';'))
@@ -207,7 +202,7 @@ namespace FlowCodeInfrastructure
             var filterName = varName;
             if (InputHandler is null)
             {
-                code = "string lineInput = Console.ReadLine(); ";
+                code = "string lineInput = Console.ReadLine();";
             }
             else
             {
@@ -229,7 +224,7 @@ namespace FlowCodeInfrastructure
             {
                 if (code.Contains("\"")) // This is simply a string
                 {
-                    outputText = Code.Split(":")[1].Trim().Replace("\"", "");
+                    outputText = code.Split(":")[1].Trim().Replace("\"", "");
                 }
                 else
                 {

@@ -26,32 +26,24 @@ namespace FlowCodeInfrastructure
             Node current = n;
             while (current != null)
             {
-                //long ticks = DateTime.Now.Ticks;
-
                 if (current.GraphicalNode != null)
-                {
                     current.GraphicalNode.SetActive(true);
-                }
-                //if (current.GetType() == typeof(CallerNode) || current.Next.GetType() == typeof(CallerNode))
-                //    Console.WriteLine("Calling...");
+                
+
                 try
                 {
                     current.Evaluate();
                 }
                 catch (Exception ex)
                 {
-                    //Console.WriteLine(ex.ToString());
                     throw ex;
                 }
+
                 // Add a delay.Should be specified as a class Level Config
-                //DateTime dt = new DateTime(DateTime.Now.Ticks - ticks);
-                //while (dt.Second < 4)
-                //    dt = new DateTime(DateTime.Now.Ticks - ticks);
                 Thread.Sleep(Delay); 
                 if (current.GraphicalNode != null)
-                {
                   current.GraphicalNode.SetActive(false);
-                }
+
                 if (!InterruptProcess) 
                     current = current.Next;
                 else

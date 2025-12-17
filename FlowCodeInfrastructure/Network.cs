@@ -23,7 +23,6 @@ namespace FlowCodeInfrastructure
         public static void ResetCargoTrucker()
         {
             CargoTrucker.Client.GameApi.ReloadField();
-            //CargoTrucker.Client.GameApi.
         }
 
         public void FromDrawIOFile(string fname)
@@ -41,7 +40,6 @@ namespace FlowCodeInfrastructure
             }
             catch (Exception ex)
             {
-                //Console.Error.WriteLine(ex.ToString());
                 XMLWriter.SaveXML(this, "dump/error.dump");
                 ErrorLogger.LogError(ex.Message);
             }
