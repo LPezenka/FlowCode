@@ -21,3 +21,22 @@ Complexity: Easy
 The following concepts are implemented:
 - input / output (displaying the message)
 - template strings (to generate the output message)
+
+### template-strings-with-loop
+This example extends the previous one by adding a loop and combining the numbers from 1...10 in a template string before displaying the string
+Complexity: Easy
+
+The following concepts are implemented:
+- input / output (displaying the message)
+- template strings (to generate the output message)
+- loops (for loop)
+
+### bottles-on-the-wall
+This example is an implementation of the classical folk ong "99 bottles of beer". A variable is initialized with a user-specified number of beer bottles and decremented in a loop. Each iteration of the loop displays a message indicating how many bottles are left.
+Complexity: Easy
+
+The following concepts are implemented:
+- input / output (displaying the message)
+- template strings (to generate the output message)
+- loops (for loop)
+- arithmetics (for calculating the remaining number of bottles on the wall)
