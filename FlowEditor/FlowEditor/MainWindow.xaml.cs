@@ -1298,7 +1298,15 @@ namespace FlowEditor
                         LoadXML(f);
                     else if (f.EndsWith("field.json")) // Maybe not smart
                     {
-                        File.Replace(f, "field.json", "field.json.old");
+
+                        //File.Replace(f, "./field.json", "./field.json.old");
+                        var dest = Path.GetFullPath("./field.json");
+                        var backup = dest + ".old";
+
+                        if (File.Exists(dest))
+                            File.Copy(dest, backup, overwrite: true);
+
+                        File.Copy(f, dest, overwrite: true);   // keeps f intact
                     }
                 }
             }
