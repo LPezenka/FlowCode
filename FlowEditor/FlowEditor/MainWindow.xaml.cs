@@ -32,6 +32,7 @@ using System.Printing;
 // TODO: Drag Nodes onto canvas
 // TODO: draw onTrue edge green, onFalse edge red
 // TODO: consider connecting nodes by clicking rather than dragging an edge
+// TODO: Think about following the currently active node with the camera during flowchart evaluation
 
 namespace FlowEditor
 {
@@ -1298,19 +1299,25 @@ namespace FlowEditor
                         LoadXML(f);
                     else if (f.EndsWith("field.json")) // Maybe not smart
                     {
-
-                        //File.Replace(f, "./field.json", "./field.json.old");
-                        var dest = Path.GetFullPath("./field.json");
-                        var backup = dest + ".old";
-
-                        if (File.Exists(dest))
-                            File.Copy(dest, backup, overwrite: true);
-
-                        File.Copy(f, dest, overwrite: true);   // keeps f intact
+                        LoadCargoTruckerField(f);
+                        MessageBox.Show("Field Loaded", "Success", MessageBoxButton.OK);
                     }
                 }
             }
         }
+
+        private static void LoadCargoTruckerField(string f)
+        {
+            //File.Replace(f, "./field.json", "./field.json.old");
+            var dest = Path.GetFullPath("./field.json");
+            var backup = dest + ".old";
+
+            if (File.Exists(dest))
+                File.Copy(dest, backup, overwrite: true);
+
+            File.Copy(f, dest, overwrite: true);   // keeps f intact
+        }
+
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ResetDeletionZone();
@@ -1392,6 +1399,19 @@ namespace FlowEditor
         {
             Network.InterruptProcess();
             StopButton.Visibility = Visibility.Collapsed;
+        }
+
+        private void LoadCTField(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.DefaultExt = "json";
+            ofd.Filter = "JSON Files|*.json|All files (*.*)|*.*";
+            if (ofd.ShowDialog() == true)
+            {
+                var f = ofd.FileName;
+                LoadCargoTruckerField(f);
+                MessageBox.Show("Field Loaded","Success",MessageBoxButton.OK);
+            }
         }
     }
 }
