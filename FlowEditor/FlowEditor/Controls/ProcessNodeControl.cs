@@ -46,8 +46,8 @@ nameof(TargetNode), typeof(Node), typeof(ProcessNodeControl), new PropertyMetada
         {
   
             new Point(ActualWidth / 2, -1),                // Top (Eingang)
-            new Point(ActualWidth / 2, ActualHeight + 1),     // Bottom (Ausgang)
-            new Point(ActualWidth + 1, ActualHeight / 2)      // Right (Prozedur-Ziel
+            new Point(ActualWidth / 2, ActualHeight + 1)//,     // Bottom (Ausgang)
+            //new Point(ActualWidth + 1, ActualHeight / 2)      // Right (Prozedur-Ziel
         };
     }
 

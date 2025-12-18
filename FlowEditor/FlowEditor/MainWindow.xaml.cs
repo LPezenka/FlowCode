@@ -33,6 +33,7 @@ using System.Printing;
 // TODO: draw onTrue edge green, onFalse edge red
 // TODO: consider connecting nodes by clicking rather than dragging an edge
 // TODO: Think about following the currently active node with the camera during flowchart evaluation
+// TODO: Load code snippets from file
 
 namespace FlowEditor
 {

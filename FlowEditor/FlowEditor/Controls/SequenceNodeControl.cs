@@ -23,6 +23,7 @@ namespace FlowEditor.Controls
             snippets.Add($"v = {Config.GetKeyword(Config.KeyWord.Input)}");
             snippets.Add($"{Config.GetKeyword(Config.KeyWord.Output)}: v");
             snippets.Add("i = 0");
+            snippets.Add("i++");
             snippets.Add("s = \"\"");
 
             SequenceNodeDetailWindow sdWnd = new SequenceNodeDetailWindow(this, snippets);

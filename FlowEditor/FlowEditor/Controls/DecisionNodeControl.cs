@@ -27,7 +27,7 @@ namespace FlowEditor.Controls
 
         public override void ShowDetailWindow()
         {
-            List<string> snippets = ["CellHasBox()", "CanMove()", "i < n"];
+            List<string> snippets = ["CellHasBox()", "CanMove()", "TruckIsEmpty()", "i < n", "i > 0"];
             
             
             SequenceNodeDetailWindow sndWnd = new SequenceNodeDetailWindow(this, snippets);
