@@ -59,7 +59,6 @@ namespace FlowEditor.Windows
         private void Button_Ok_Click(object sender, RoutedEventArgs e)
         {
             // TODO: Fix binding
-
             Node.Code = Code.Text;
             DialogResult = true;
         }

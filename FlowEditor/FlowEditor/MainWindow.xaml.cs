@@ -531,7 +531,6 @@ namespace FlowEditor
             }
         }
 
-
         private void AddTerminatorNode_Click(object sender, RoutedEventArgs e)
         {
             GetNodeColorColor("TerminatorNodeColor", out byte alpha, out byte r, out byte g, out byte b);
@@ -541,14 +540,11 @@ namespace FlowEditor
             {
                 Width = 240,
                 Height = 160,
-            //    OriginalBackground =  new SolidColorBrush(
-            //Color.FromArgb(0xff, 0xf6, 0xae, 0x2d)),
                 OriginalBackground = new SolidColorBrush( Color.FromArgb(alpha,r,g,b) ),//Color.FromArgb(0xff, 0xf2, 0x64, 0x19)),
                 Foreground = new SolidColorBrush(Color.FromArgb(alphaText, rText, gText, bText)),
                 NodeData = new Controls.Node
                 {
-                    Title = "Start/End",
-                    //Position = new Point(50 + _nodeCount * 20, 50 + _nodeCount * 20)
+                    Title = "Start/End"
                 },
                 TerminalType = "Start"
             };
@@ -569,7 +565,6 @@ namespace FlowEditor
                 NodeData = new Controls.Node
                 {
                     Title = $"ProcessCall({nodeCount++})"
-                    //Position = new Point(50 + _nodeCount * 20, 50 + _nodeCount * 20)
                 }
             };
             AddNode(processNode, null);
@@ -829,7 +824,6 @@ namespace FlowEditor
             if (sender is EdgeControl edge)
             {
                 edge.From?.UnregisterOutputEdge(edge.FromIndex ?? 0);
-                //DiagramCanvas.Children.Remove(edge);
 
                 if (edge.LabelBox != null)
                 {
@@ -971,11 +965,14 @@ namespace FlowEditor
 
         private void LogError(string message)
         {
+            var c = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Encountered an error:");
             Console.WriteLine(message);
             Console.WriteLine("Dumped network to file");
+            Console.ForegroundColor = c;
 
+            MessageBox.Show(message);
             File.AppendAllText("./error.log", $"\n{DateTime.Now.ToShortTimeString()}: - {message}");
 
 
@@ -1042,7 +1039,6 @@ namespace FlowEditor
                             Width = 180,
                             Height = 90
                         };
-                        //node.OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0x33, 0x65, 0x8a));
                         GetNodeColorColor("SequenceNodeColor", out alpha, out r, out g, out b);
                         GetNodeColorColor("SequenceTextColor", out alphaText, out rText, out gText, out bText);
                         node.Foreground = new SolidColorBrush(Color.FromArgb(alphaText, rText, gText, bText));
@@ -1059,7 +1055,6 @@ namespace FlowEditor
                         node.Foreground = new SolidColorBrush(Color.FromArgb(alphaText, rText, gText, bText));
                         node.OriginalBackground = new SolidColorBrush(Color.FromArgb(alpha, r, g, b));
 
-                        //node.OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0xf6, 0xae, 0x2d));
                         break;
                     case "PredefinedProcess":
                         node = new ProcessNodeControl()
@@ -1067,8 +1062,7 @@ namespace FlowEditor
                             Width = 180,
                             Height = 90
                         };
-                        //node.OriginalBackground = new SolidColorBrush(Color.FromArgb(0xff, 0x86, 0xbb, 0xd8));
-
+                        
                         GetNodeColorColor("ProcessNodeColor", out alpha, out r, out g, out b);
                         GetNodeColorColor("ProcessTextColor", out alphaText, out rText, out gText, out bText);
                         node.Foreground = new SolidColorBrush(Color.FromArgb(alphaText, rText, gText, bText));
@@ -1111,10 +1105,7 @@ namespace FlowEditor
                     Title = code,
                     Position = position
                 };
-                //node.Width = 60;
-                //node.Height = 40;
-
-
+                
                 if (rootId != string.Empty)
                     if (node.NodeData.Id == Guid.Parse(rootId))
                     {
@@ -1128,8 +1119,6 @@ namespace FlowEditor
                 this.Height));
             }
 
-
-            //InvalidateVisual();
             LoadEdges(doc);
             InvalidateVisual();
             UpdateTerminals();
