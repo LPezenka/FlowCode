@@ -30,7 +30,6 @@ namespace FlowEditor.Windows
             get
             {
                 return $"{FunctionName.Text}({string.Join(",",InParamsList)})";
-
             } 
         }
         public TerminalDetailWindow(NodeControlBase node)

@@ -24,7 +24,6 @@ namespace FlowCodeInfrastructure
             if (Regex.IsMatch(code, @"(?<!\=)\=(?!\=)") == false)
                 return (scriptState, code);
 
-            //initVariable = false;
             var parts = code.Split("=");
             // TODO: something a = b == c doesn't work because of the split
             // fix that by finding the first occurence and manually taking substrings
@@ -141,12 +140,10 @@ namespace FlowCodeInfrastructure
             }
             catch (CompilationErrorException cee)
             {
-                // TODO: log to file
                 throw cee;
             }
             catch (Exception ex)
             {
-                // TODO: log to file
                 throw ex;
             }
         }
@@ -161,7 +158,6 @@ namespace FlowCodeInfrastructure
             else if (char.TryParse(vVal, out char charValue)) varType = "char";
             else varType = "string";
             vType = varType;
-
 
             string postProcess = string.Empty;
 
