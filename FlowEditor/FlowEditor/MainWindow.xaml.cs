@@ -100,6 +100,10 @@ namespace FlowEditor
         /// <remarks>This field is intended for internal use to manage logging output. Use the associated
         /// public properties or methods to interact with logging functionality.</remarks>
         private OutputControl outputLogger;
+
+        /// <summary>
+        /// 
+        /// </summary>
         private OutputControl variableLogger;
         private OutputControl callStack;
 
@@ -978,6 +982,12 @@ namespace FlowEditor
 
             File.AppendAllText("./error.log", $"\n{DateTime.Now.ToShortTimeString()}: - {message}");
 
+
+            // check string against regex to see whether it contains the error code
+            // the error code is always preceded by "error"
+
+
+            outputLogger?.ShowOutput($"Fehler: {message}");
 
             if (!Directory.Exists("./dump"))
                     Directory.CreateDirectory("./dump");
