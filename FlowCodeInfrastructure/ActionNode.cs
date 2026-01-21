@@ -20,7 +20,14 @@ namespace FlowCodeInfrastructure
 
         private (ScriptState, string) HandleAssignment(ScriptState scriptState, string code, ref bool initVariable, ref string varName)
         {
-            //TODO: Atm, +=, -=, *=, /= are not supported
+
+            if (Regex.IsMatch(code, @"(?<!\+)\+=(?!\=)") ||
+                Regex.IsMatch(code, @"(?<!\-)\-=(?!\=)") ||
+                Regex.IsMatch(code, @"(?<!\*)\*=(?!\=)") ||
+                Regex.IsMatch(code, @"(?<!\/)\/=(?!\=)"))
+            {
+                return (scriptState, code);
+            }
 
             // Jump out of method if there is no assignment in the code
             if (Regex.IsMatch(code, @"(?<!\=)\=(?!\=)") == false)
