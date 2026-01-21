@@ -25,6 +25,9 @@ namespace FlowEditor.Controls
             snippets.Add("i = 0");
             snippets.Add("i++");
             snippets.Add("s = \"\"");
+            snippets.Add("list = []");
+            snippets.Add("list.Add(i)");
+            snippets.Add("n = list.Count");
 
             SequenceNodeDetailWindow sdWnd = new SequenceNodeDetailWindow(this, snippets);
             sdWnd.ShowDialog();

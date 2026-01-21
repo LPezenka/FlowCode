@@ -105,6 +105,10 @@ namespace FlowEditor
         /// 
         /// </summary>
         private OutputControl variableLogger;
+
+        /// <summary>
+        /// 
+        /// </summary>
         private OutputControl callStack;
 
         public MainWindow()
@@ -132,16 +136,6 @@ namespace FlowEditor
             Config.SetKeyWord(Config.KeyWord.Input, "Eingabe");
             Config.SetKeyWord(Config.KeyWord.Output, "Ausgabe");
             Config.Load();
-
-            // Test for the new Detail window. This makes coding somewhat more comfortable for lines lines
-            // Also, provides predefined code snippets
-            // Need to find the best way to open this
-            //SequenceNodeControl an = new SequenceNodeControl();
-            //an.NodeData = new Controls.Node();
-            //an.NodeData.Title = "Hello, World";
-
-            //SequenceNodeDetailWindow anwnd = new SequenceNodeDetailWindow(an);
-            //anwnd.ShowDialog();
 
             DiagramCanvas.MouseDown += MainWindow_MouseDown;
             DiagramCanvas.MouseRightButtonDown += DiagramCanvas_MouseRightButtonDown;
