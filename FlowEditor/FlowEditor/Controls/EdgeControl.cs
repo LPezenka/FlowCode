@@ -69,79 +69,6 @@ namespace FlowEditor.Controls
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            //base.OnRender(drawingContext);
-
-            //if (From == null) return;
-
-            //Point start = From.TranslatePoint(From.GetConnectionPoints()[(int)(FromIndex ?? 0)], this);
-            //Point end;
-
-            //if (To != null && ToIndex.HasValue)
-            //{
-            //    end = To.TranslatePoint(To.GetConnectionPoints()[(int)ToIndex], this);
-            //}
-            //else if (CurrentMousePosition.HasValue)
-            //{
-            //    end = CurrentMousePosition.Value;
-            //}
-            //else
-            //{
-            //    return;
-            //}
-
-            //var pen = new Pen(Brushes.Black, 2);
-            //drawingContext.DrawLine(pen, start, end);
-            //DrawArrowHead(drawingContext, start, end);
-
-            //if (!string.IsNullOrWhiteSpace(Label))
-            //{
-            //    var mid = new Point((start.X + end.X) / 2, (start.Y + end.Y) / 2);
-            //    var formattedText = new FormattedText(
-            //        Label,
-            //        System.Globalization.CultureInfo.CurrentCulture,
-            //        FlowDirection.LeftToRight,
-            //        new Typeface("Segoe UI"),
-            //        12,
-            //        Brushes.Black,
-            //        VisualTreeHelper.GetDpi(this).PixelsPerDip);
-
-            //    drawingContext.DrawText(formattedText, mid);
-            //    LabelPosition = new Point((start.X + end.X) / 2 - 40, (start.Y + end.Y) / 2 - 10);
-            //    InvalidateArrange();
-            //    UpdateLayout();
-            //}
-
-            //base.OnRender(drawingContext);
-
-            //if (From == null || FromIndex == null)
-            //    return;
-
-            //Point start = From.TranslatePoint(From.GetConnectionPoints()[(int)FromIndex], Application.Current.MainWindow);
-            //Point end;
-
-            //if (To != null && ToIndex != null)
-            //{
-            //    end = To.TranslatePoint(To.GetConnectionPoints()[(int)ToIndex], Application.Current.MainWindow);
-            //}
-            //else if (CurrentMousePosition.HasValue)
-            //{
-            //    end = CurrentMousePosition.Value;
-            //}
-            //else return;
-
-            //var pen = new Pen(Brushes.Black, 2);
-            //drawingContext.DrawLine(pen, start, end);
-
-            //LabelPosition = new Point((start.X + end.X) / 2 - 40, (start.Y + end.Y) / 2 - 10);
-            //InvalidateArrange();
-
-            //if (LabelBox != null)
-            //{
-            //    Canvas.SetLeft(LabelBox, LabelPosition.X);
-            //    Canvas.SetTop(LabelBox, LabelPosition.Y);
-            //}
-
-            //DrawArrowHead(drawingContext, start, end);
             base.OnRender(drawingContext);
 
             if (From == null || FromIndex == null)
@@ -153,13 +80,16 @@ namespace FlowEditor.Controls
             SolidColorBrush edgeColor = Brushes.Black;
             if (LabelBox != null && LabelBox.Text == Config.GetKeyword(Config.KeyWord.True))
             {
-                edgeColor = Brushes.Green;
-                LabelBox.Foreground = Brushes.Green;
+                edgeColor = Brushes.LightGreen;
+                StateButton.Foreground = Brushes.LightGreen;
+                //LabelBox.Background = LabelBox.Background;
                 //LabelBox.InvalidateVisual();
             }
             else if (LabelBox != null && LabelBox.Text == Config.GetKeyword(Config.KeyWord.False))
             {
-                LabelBox.Foreground = Brushes.Red;
+                edgeColor = Brushes.Red;
+                StateButton.Foreground = Brushes.Red;
+                //LabelBox.Background = LabelBox.Background;
                 //LabelBox.InvalidateVisual();
                 edgeColor = Brushes.Red;
             }
@@ -255,6 +185,8 @@ namespace FlowEditor.Controls
                 Point arrowStart = points[points.Count - 2];
             Point arrowEnd = points[points.Count - 1];
             DrawArrowHead(drawingContext, arrowStart, arrowEnd);
+            //if (LabelBox is not null && LabelBox.Visibility == Visibility.Visible)
+                //LabelBox.Foreground = edgeColor;
         }
 
 
