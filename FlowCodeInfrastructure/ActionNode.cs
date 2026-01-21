@@ -20,6 +20,8 @@ namespace FlowCodeInfrastructure
 
         private (ScriptState, string) HandleAssignment(ScriptState scriptState, string code, ref bool initVariable, ref string varName)
         {
+            //TODO: Atm, +=, -=, *=, /= are not supported
+
             // Jump out of method if there is no assignment in the code
             if (Regex.IsMatch(code, @"(?<!\=)\=(?!\=)") == false)
                 return (scriptState, code);
@@ -74,6 +76,9 @@ namespace FlowCodeInfrastructure
             return (ScriptState, code);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Evaluate()
         {
             if (Code == null)
@@ -151,14 +156,29 @@ namespace FlowCodeInfrastructure
         private static string InferType(string varName, string? vVal, out string vType)
         {
             string varType = "string;";
-            if (int.TryParse(vVal, out int intValue)) varType = "int";
-            else if (float.TryParse(vVal, out float f)) varType = "float";
-            else if (double.TryParse(vVal, out double d)) varType = "double";
-            else if (bool.TryParse(vVal, out bool boolValue)) varType = "bool";
-            else if (char.TryParse(vVal, out char charValue)) varType = "char";
-            else varType = "string";
-            vType = varType;
 
+            if (vVal is not null && vVal.Contains("["))
+            {
+                vVal = vVal.Replace("\"", "");
+                varType = "List";
+
+                int openingBracketIndex = vVal.IndexOf('[');
+                int closingBracketIndex = vVal.IndexOf(']');
+                int delimiterIndex = vVal.IndexOf(',', vVal.IndexOf('['));
+                var first = vVal.Substring(openingBracketIndex + 1, Math.Min(closingBracketIndex, delimiterIndex) - 1);
+                string localtype = InferType("temp", first.Trim(), out string inferredType);
+                vType = $"List<{inferredType}>";
+            }
+            else 
+            {
+                if (int.TryParse(vVal, out int intValue)) varType = "int";
+                else if (float.TryParse(vVal, out float f)) varType = "float";
+                else if (double.TryParse(vVal, out double d)) varType = "double";
+                else if (bool.TryParse(vVal, out bool boolValue)) varType = "bool";
+                else if (char.TryParse(vVal, out char charValue)) varType = "char";
+                else varType = "string";
+                vType = varType;
+            }
             string postProcess = string.Empty;
 
             // TODO: Implement support for arrays and / or lists
@@ -179,6 +199,9 @@ namespace FlowCodeInfrastructure
                     break;
                 case "int":
                     postProcess = $"{varType} {varName} = int.Parse(\"{vVal}\");";
+                    break;
+                case "List":
+                    postProcess = $"{vType} {varName} = {vVal};";
                     break;
                 default:
                     postProcess = $"string {varName} = \"{vVal}\";";
