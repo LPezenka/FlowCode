@@ -82,15 +82,11 @@ namespace FlowEditor.Controls
             {
                 edgeColor = Brushes.LightGreen;
                 StateButton.Foreground = Brushes.LightGreen;
-                //LabelBox.Background = LabelBox.Background;
-                //LabelBox.InvalidateVisual();
             }
             else if (LabelBox != null && LabelBox.Text == Config.GetKeyword(Config.KeyWord.False))
             {
                 edgeColor = Brushes.Red;
                 StateButton.Foreground = Brushes.Red;
-                //LabelBox.Background = LabelBox.Background;
-                //LabelBox.InvalidateVisual();
                 edgeColor = Brushes.Red;
             }
 
@@ -113,14 +109,10 @@ namespace FlowEditor.Controls
             // Gather all points to form the polyline
             List<Point> points = new List<Point> { start };
 
-            //List<Point> points = new() { start };
-
-
             if (ControlPoints == null || ControlPoints.Count == 0)
             {
                 ConnectionDirection? startDir = GetConnectionDirection(From, FromIndex ?? 0);
                 ConnectionDirection? endDir = GetConnectionDirection(To, ToIndex ?? 0);
-
 
                 var routed = RouteOrthogonally(start, end, startDir, endDir);
                 points.AddRange(routed);
@@ -130,18 +122,51 @@ namespace FlowEditor.Controls
                 points.AddRange(ControlPoints);
             }
 
-
             points.Add(end);
-
-
-            for (int i = 0; i < points.Count - 1; i++)
-            {
-                drawingContext.DrawLine(pen, points[i], points[i + 1]);
-            }
+            DrawLineSegments(drawingContext, pen, points);
 
             // Compute label position at the middle of the polyline
 
-            if (From.GetType() == typeof(SequenceNodeControl) || From.GetType() == typeof(TerminalNodeControl)) 
+            // Toggle StateButton visibility based on wheter or not the edge connects a decision node
+            ToggleButtonVisibility();
+
+            Point labelPos;
+            int middleIndex = (points.Count - 1) / 2;
+            Point lp1 = points[middleIndex];
+            Point lp2 = points[middleIndex + 1];
+            labelPos = new Point((lp1.X + lp2.X) / 2 - 40, (lp1.Y + lp2.Y) / 2 - 10);
+
+            LabelPosition = labelPos;
+            InvalidateArrange();
+
+            // Position state button in the middle of the edge
+            PositionStateButton();
+
+            // Compute arrowhead based on last segment of the polyline
+            Point arrowStart = points[points.Count - 2];
+            Point arrowEnd = points[points.Count - 1];
+            DrawArrowHead(drawingContext, arrowStart, arrowEnd);
+            //if (LabelBox is not null && LabelBox.Visibility == Visibility.Visible)
+            //LabelBox.Foreground = edgeColor;
+        }
+
+        private void PositionStateButton()
+        {
+            if (LabelBox != null)
+            {
+                Canvas.SetLeft(LabelBox, LabelPosition.X);
+                Canvas.SetTop(LabelBox, LabelPosition.Y);
+            }
+            if (StateButton is not null)
+            {
+                Canvas.SetLeft(StateButton, LabelPosition.X);
+                Canvas.SetTop(StateButton, LabelPosition.Y);
+            }
+        }
+
+        private void ToggleButtonVisibility()
+        {
+            if (From.GetType() == typeof(SequenceNodeControl) || From.GetType() == typeof(TerminalNodeControl))
             {
                 if (StateButton is not null)
                     StateButton.Visibility = Visibility.Collapsed;
@@ -157,38 +182,15 @@ namespace FlowEditor.Controls
                 if (LabelBox is not null)
                     LabelBox.Visibility = Visibility.Collapsed;
             }
-
-
-                Point labelPos;
-            int middleIndex = (points.Count - 1) / 2;
-            Point lp1 = points[middleIndex];
-            Point lp2 = points[middleIndex + 1];
-            labelPos = new Point((lp1.X + lp2.X) / 2 - 40, (lp1.Y + lp2.Y) / 2 - 10);
-
-            LabelPosition = labelPos;
-            InvalidateArrange();
-
-            if (LabelBox != null)
-            {
-                Canvas.SetLeft(LabelBox, LabelPosition.X);
-                Canvas.SetTop(LabelBox, LabelPosition.Y);
-
-                    
-            }
-            if (StateButton is not null)
-            {
-                Canvas.SetLeft(StateButton, LabelPosition.X);
-                Canvas.SetTop(StateButton, LabelPosition.Y);
-            }
-
-                // Compute arrowhead based on last segment of the polyline
-                Point arrowStart = points[points.Count - 2];
-            Point arrowEnd = points[points.Count - 1];
-            DrawArrowHead(drawingContext, arrowStart, arrowEnd);
-            //if (LabelBox is not null && LabelBox.Visibility == Visibility.Visible)
-                //LabelBox.Foreground = edgeColor;
         }
 
+        private static void DrawLineSegments(DrawingContext drawingContext, Pen pen, List<Point> points)
+        {
+            for (int i = 0; i < points.Count - 1; i++)
+            {
+                drawingContext.DrawLine(pen, points[i], points[i + 1]);
+            }
+        }
 
         private void DrawArrowHead(DrawingContext dc, Point start, Point end)
         {
