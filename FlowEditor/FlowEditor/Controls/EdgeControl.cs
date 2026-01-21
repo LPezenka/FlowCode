@@ -150,6 +150,20 @@ namespace FlowEditor.Controls
             Point start = From.TranslatePoint(From.GetConnectionPoints()[(int)FromIndex], this);// Application.Current.MainWindow);
             Point end;
 
+            SolidColorBrush edgeColor = Brushes.Black;
+            if (LabelBox != null && LabelBox.Text == Config.GetKeyword(Config.KeyWord.True))
+            {
+                edgeColor = Brushes.Green;
+                LabelBox.Foreground = Brushes.Green;
+                //LabelBox.InvalidateVisual();
+            }
+            else if (LabelBox != null && LabelBox.Text == Config.GetKeyword(Config.KeyWord.False))
+            {
+                LabelBox.Foreground = Brushes.Red;
+                //LabelBox.InvalidateVisual();
+                edgeColor = Brushes.Red;
+            }
+
             if (To != null && ToIndex != null)
             {
                 end = To.TranslatePoint(To.GetConnectionPoints()[(int)ToIndex], this); // Application.Current.MainWindow);
@@ -160,7 +174,7 @@ namespace FlowEditor.Controls
             }
             else return;
 
-            var pen = new Pen(Brushes.Black, 2);
+            var pen = new Pen(edgeColor, 2);
             if (From.GetType() == typeof(ProcessNodeControl) && FromIndex == 2)
             {
                 pen.DashStyle = DashStyles.DashDotDot;
@@ -194,18 +208,6 @@ namespace FlowEditor.Controls
             {
                 drawingContext.DrawLine(pen, points[i], points[i + 1]);
             }
-
-            //if (ControlPoints != null && ControlPoints.Count > 0)
-            //{
-            //    points.AddRange(ControlPoints);
-            //}
-            //points.Add(end);
-
-            // Draw the polyline
-            //for (int i = 0; i < points.Count - 1; i++)
-            //{
-            //    drawingContext.DrawLine(pen, points[i], points[i + 1]);
-            //}
 
             // Compute label position at the middle of the polyline
 
@@ -422,6 +424,7 @@ namespace FlowEditor.Controls
             FlowCodeInfrastructure.Config.GetKeyword(Config.KeyWord.True) ? FlowCodeInfrastructure.Config.GetKeyword(Config.KeyWord.False) : FlowCodeInfrastructure.Config.GetKeyword(Config.KeyWord.True);
             if (LabelBox is not null)
                 LabelBox.Text = StateButton.Content.ToString();
+            this.InvalidateVisual();
         }
     }
 }

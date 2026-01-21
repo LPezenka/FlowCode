@@ -18,6 +18,16 @@ namespace FlowCodeInfrastructure
         public static ScriptState ScriptState { get; set; }
         public static ScriptOptions ScriptOptions { get; set; }
 
+        /// <summary>
+        /// Handles assignments in the code line
+        /// Differentiates between new variable assignments and existing variable assignments
+        /// Skips compound assignments (+=, -=, *=, /=)
+        /// </summary>
+        /// <param name="scriptState"></param>
+        /// <param name="code"></param>
+        /// <param name="initVariable"></param>
+        /// <param name="varName"></param>
+        /// <returns></returns>
         private (ScriptState, string) HandleAssignment(ScriptState scriptState, string code, ref bool initVariable, ref string varName)
         {
 
@@ -49,6 +59,14 @@ namespace FlowCodeInfrastructure
             return (scriptState, code);
         }
 
+        /// <summary>
+        /// Handles assignment to a new variable.
+        /// </summary>
+        /// <param name="scriptState"></param>
+        /// <param name="code"></param>
+        /// <param name="initVariable"></param>
+        /// <param name="rightHandPart"></param>
+        /// <returns></returns>
         private static (ScriptState, string) HandleAssignmentToNew(ScriptState scriptState, string code, ref bool initVariable, string rightHandPart)
         {
             var rightHandVariable = rightHandPart.Trim();
@@ -188,8 +206,6 @@ namespace FlowCodeInfrastructure
             }
             string postProcess = string.Empty;
 
-            // TODO: Implement support for arrays and / or lists
-            // TODO: try simply -> var something = something
             switch (varType)
             {
                 case "float":
