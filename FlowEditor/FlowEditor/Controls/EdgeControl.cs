@@ -35,8 +35,6 @@ namespace FlowEditor.Controls
         private ControlPointVisual _draggingPoint = null;
         private Point _lastMousePos;
 
-
-
         public Point LabelPosition
         {
             get { return (Point)GetValue(LabelPositionProperty); }
