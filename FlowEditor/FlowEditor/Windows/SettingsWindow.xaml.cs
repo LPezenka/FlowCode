@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -66,11 +67,26 @@ namespace FlowEditor
 
             ConfigurationManager.AppSettings["KeyWordYes"] = FlowCodeInfrastructure.Config.GetKeyword(FlowCodeInfrastructure.Config.KeyWord.True);
             ConfigurationManager.AppSettings["KeyWordNo"] = FlowCodeInfrastructure.Config.GetKeyword(FlowCodeInfrastructure.Config.KeyWord.False);
+            ConfigurationManager.AppSettings["KeyWordInput"] = FlowCodeInfrastructure.Config.GetKeyword(FlowCodeInfrastructure.Config.KeyWord.Input);
+            ConfigurationManager.AppSettings["KeyWordOutput"] = FlowCodeInfrastructure.Config.GetKeyword(FlowCodeInfrastructure.Config.KeyWord.Output);
 
             configuration.Save(ConfigurationSaveMode.Full, true);
             ConfigurationManager.RefreshSection("appSettings");
 
             FlowCodeInfrastructure.Config.Save();
+
+
+            string settingString = string.Empty;
+            ConfigurationManager.AppSettings.AllKeys.ToList().ForEach(key =>
+            {
+                settingString += $"{key}: {ConfigurationManager.AppSettings[key]}\n";
+            });
+            if (!Directory.Exists("./config"))
+                Directory.CreateDirectory("./config");
+            if (!File.Exists("./config/settings.config"))
+                File.Create("./config/settings.config").Close();
+
+            File.WriteAllText("./config/settings.config", settingString);
 
         }
 

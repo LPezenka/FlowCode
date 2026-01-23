@@ -2,6 +2,7 @@
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Resources;
@@ -27,6 +28,27 @@ namespace FlowCodeInfrastructure
         public override void Evaluate()
         {
             Call();
+        }
+
+        string MapToShortName(string typeName)
+        {
+            switch (typeName)
+            {
+                case "System.Boolean":
+                    return "bool";
+                case "System.Int32":
+                    return "int";
+                case "System.Char":
+                    return "char";
+                case "System.String":
+                    return "string";
+                case "System.Double":
+                    return "double";
+                case "System.Single":
+                    return "float";
+                default:
+                    return typeName;
+            }
         }
 
         public void Call()
@@ -59,6 +81,7 @@ namespace FlowCodeInfrastructure
                             name = stateVariable.Name;
 
                         //string name = tv; // stateVariable.Name.ToString();
+                        //if 
 
                         if (type == "System.Boolean") type = "bool";
                         else if (type == "System.Int32") type = "int";
@@ -66,6 +89,18 @@ namespace FlowCodeInfrastructure
                         else if (type == "System.String") type = "string";
                         else if (type == "System.Double") type = "double";
                         else if (type == "System.Single") type = "float";
+                        else if (stateVariable.Type.GetInterfaces().Contains(typeof(IList)))
+                        {
+                            //type = "var"; // Let's try. Nope.
+                            Type itemType = stateVariable.Type.IsGenericType ? stateVariable.Type.GetGenericArguments()[0] : typeof(object);
+                            type = $"System.Collections.Generic.List<{MapToShortName(itemType.FullName)}>";
+                            IList list = (IList)stateVariable.Value;
+                            string[] vs = new string[list.Count];
+                            foreach (var item in list)
+                                vs[list.IndexOf(item)] = item.ToString();
+
+                            val = "[" + string.Join(",", vs) + "]";
+                        }
 
                         if (val == "True") val = "true";
                         else if (val == "False") val = "false";

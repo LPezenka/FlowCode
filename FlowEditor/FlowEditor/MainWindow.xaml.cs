@@ -155,6 +155,29 @@ namespace FlowEditor
 
             FlowCodeInfrastructure.Node.variableLogger = variableLogger;
             FlowCodeInfrastructure.CallerNode.StackDisplay = callStack;
+
+            outputLogger.Visibility = Visibility.Hidden;
+            variableLogger.Visibility = Visibility.Hidden;
+            callStack.Visibility = Visibility.Hidden;
+
+
+            LoadSettingsFile();
+        }
+
+        void LoadSettingsFile()
+        {
+            if (File.Exists("./config/settings.config"))
+            {
+                var lines = File.ReadAllLines("./config/settings.config");
+                foreach (var line in lines)
+                {
+                    var parts = line.Split(':');
+                    if (parts.Length == 2)
+                    {
+                        ConfigurationManager.AppSettings[parts[0].Trim()] = parts[1].Trim();
+                    }
+                }
+            }
         }
 
         private static void ShowTipsScreen()
@@ -942,6 +965,10 @@ namespace FlowEditor
             ActionNode.OutputHandler = outputLogger;// new OutputHandler();
 
             //SequenceNodeControl.DetailWindow = new SequenceNodeDetailWindow();
+
+            outputLogger.Visibility = Visibility.Visible;
+            variableLogger.Visibility = Visibility.Visible;
+            callStack.Visibility = Visibility.Visible;
 
             // Start network parsing in new thread. This is necessary in order to highlight the nodes
             // in the GUI using Dispatcher.Invoke()
