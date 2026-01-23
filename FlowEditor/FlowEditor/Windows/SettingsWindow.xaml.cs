@@ -58,11 +58,8 @@ namespace FlowEditor
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Information is not saved to config file. Fix that
             OkButton_Click(sender, e);
-            //var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            //var settings = configFile.AppSettings.Settings;
-
+            
             Configuration configuration = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
 
             ConfigurationManager.AppSettings["KeyWordYes"] = FlowCodeInfrastructure.Config.GetKeyword(FlowCodeInfrastructure.Config.KeyWord.True);

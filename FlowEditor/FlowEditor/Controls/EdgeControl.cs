@@ -75,18 +75,7 @@ namespace FlowEditor.Controls
             Point start = From.TranslatePoint(From.GetConnectionPoints()[(int)FromIndex], this);// Application.Current.MainWindow);
             Point end;
 
-            SolidColorBrush edgeColor = Brushes.Black;
-            if (LabelBox != null && LabelBox.Text == Config.GetKeyword(Config.KeyWord.True))
-            {
-                edgeColor = Brushes.LightGreen;
-                StateButton.Foreground = Brushes.LightGreen;
-            }
-            else if (LabelBox != null && LabelBox.Text == Config.GetKeyword(Config.KeyWord.False))
-            {
-                edgeColor = Brushes.Red;
-                StateButton.Foreground = Brushes.Red;
-                edgeColor = Brushes.Red;
-            }
+            
 
             if (To != null && ToIndex != null)
             {
@@ -95,14 +84,14 @@ namespace FlowEditor.Controls
             else if (CurrentMousePosition.HasValue)
             {
                 end = CurrentMousePosition.Value;
+
             }
             else return;
 
-            var pen = new Pen(edgeColor, 2);
-            if (From.GetType() == typeof(ProcessNodeControl) && FromIndex == 2)
-            {
-                pen.DashStyle = DashStyles.DashDotDot;
-            }
+            //if (From.GetType() == typeof(ProcessNodeControl) && FromIndex == 2)
+            //{
+            //    pen.DashStyle = DashStyles.DashDotDot;
+            //}
 
             // Gather all points to form the polyline
             List<Point> points = new List<Point> { start };
@@ -121,12 +110,25 @@ namespace FlowEditor.Controls
             }
 
             points.Add(end);
-            DrawLineSegments(drawingContext, pen, points);
 
-            // Compute label position at the middle of the polyline
 
             // Toggle StateButton visibility based on wheter or not the edge connects a decision node
             ToggleButtonVisibility();
+
+            SolidColorBrush edgeColor = Brushes.Black;
+            if (LabelBox != null && (StateButton.Content as string) == Config.GetKeyword(Config.KeyWord.True) && StateButton.Visibility == Visibility.Visible)
+            {
+                edgeColor = Brushes.LightGreen;
+                StateButton.Foreground = Brushes.LightGreen;
+            }
+            else if (LabelBox != null && (StateButton.Content as string) == Config.GetKeyword(Config.KeyWord.False) && StateButton.Visibility == Visibility.Visible)
+            {
+                edgeColor = Brushes.Red;
+                StateButton.Foreground = Brushes.Red;
+            }
+            var pen = new Pen(edgeColor, 2);
+            // Compute label position at the middle of the polyline
+            DrawLineSegments(drawingContext, pen, points);
 
             Point labelPos;
             int middleIndex = (points.Count - 1) / 2;
@@ -164,21 +166,31 @@ namespace FlowEditor.Controls
 
         private void ToggleButtonVisibility()
         {
-            if (From.GetType() == typeof(SequenceNodeControl) || From.GetType() == typeof(TerminalNodeControl))
+            if (From.GetType() == typeof(DecisionNodeControl))
             {
                 if (StateButton is not null)
-                    StateButton.Visibility = Visibility.Collapsed;
-
+                    StateButton.Visibility = Visibility.Visible;
                 if (LabelBox is not null)
-                    LabelBox.Visibility = Visibility.Collapsed;
+                    LabelBox.Visibility = Visibility.Visible;
             }
-            else if (From.GetType() == typeof(ProcessNodeControl) && FromIndex != 2)
+            else
             {
-                if (StateButton is not null)
-                    StateButton.Visibility = Visibility.Collapsed;
+                if (From.GetType() == typeof(SequenceNodeControl) || From.GetType() == typeof(TerminalNodeControl))
+                {
+                    if (StateButton is not null)
+                        StateButton.Visibility = Visibility.Collapsed;
 
-                if (LabelBox is not null)
-                    LabelBox.Visibility = Visibility.Collapsed;
+                    if (LabelBox is not null)
+                        LabelBox.Visibility = Visibility.Collapsed;
+                }
+                else if (From.GetType() == typeof(ProcessNodeControl) && FromIndex != 2)
+                {
+                    if (StateButton is not null)
+                        StateButton.Visibility = Visibility.Collapsed;
+
+                    if (LabelBox is not null)
+                        LabelBox.Visibility = Visibility.Collapsed;
+                }
             }
         }
 

@@ -784,7 +784,8 @@ namespace FlowEditor
                 BorderBrush = Brushes.Gray,
                 BorderThickness = new Thickness(1),
                 FontSize = 12,
-                Padding = new Thickness(2)
+                Padding = new Thickness(2),
+                Visibility = Visibility.Hidden
             };
 
             // Position Label
@@ -822,6 +823,10 @@ namespace FlowEditor
             MouseMove -= MainWindow_MouseMove;
             MouseLeftButtonUp -= MainWindow_MouseLeftButtonUp;
         }
+
+        /// <summary>
+        /// Updates the visual representation and label positions of all edges in the diagram.
+        /// </summary>
         private void UpdateEdges()
         {
             foreach (var edge in edges)

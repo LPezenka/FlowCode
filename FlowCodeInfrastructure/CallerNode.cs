@@ -25,11 +25,20 @@ namespace FlowCodeInfrastructure
             TargetNode = target;
         }
 
+        /// <summary>
+        /// Executes the evaluation logic for the current instance.
+        /// </summary>
         public override void Evaluate()
         {
             Call();
         }
 
+        /// <summary>
+        /// Map full type names to C# short names
+        /// Used for type inference in scripting
+        /// </summary>
+        /// <param name="typeName"></param>
+        /// <returns></returns>
         string MapToShortName(string typeName)
         {
             switch (typeName)
@@ -51,6 +60,14 @@ namespace FlowCodeInfrastructure
             }
         }
 
+        /// <summary>
+        /// Executes the target script node, initializing variables and handling return values as required by the node's
+        /// configuration.
+        /// </summary>
+        /// <remarks>This method prepares the script execution environment by mapping variable values and
+        /// types, then runs the target node's code. If the node produces a return value, it is assigned to the
+        /// appropriate variable in the script state. The method also manages the execution stack display if
+        /// present.</remarks>
         public void Call()
         {
             var state = ScriptState;
@@ -67,7 +84,6 @@ namespace FlowCodeInfrastructure
                 for (int i = 0; i < vars.Length; i++)
                 {
                     var v = vars[i];
-                    //var tv = terminatorNode.InputVariables[i];
 
                     var stateVariable = state.Variables.Where(x => x.Name == v.Trim()).FirstOrDefault();
                     if (stateVariable != null)
@@ -79,19 +95,9 @@ namespace FlowCodeInfrastructure
                             name = terminatorNode.InputVariables[i];
                         else
                             name = stateVariable.Name;
-
-                        //string name = tv; // stateVariable.Name.ToString();
-                        //if 
-
-                        if (type == "System.Boolean") type = "bool";
-                        else if (type == "System.Int32") type = "int";
-                        else if (type == "System.Char") type = "char";
-                        else if (type == "System.String") type = "string";
-                        else if (type == "System.Double") type = "double";
-                        else if (type == "System.Single") type = "float";
-                        else if (stateVariable.Type.GetInterfaces().Contains(typeof(IList)))
+ 
+                        if (stateVariable.Type.GetInterfaces().Contains(typeof(IList)))
                         {
-                            //type = "var"; // Let's try. Nope.
                             Type itemType = stateVariable.Type.IsGenericType ? stateVariable.Type.GetGenericArguments()[0] : typeof(object);
                             type = $"System.Collections.Generic.List<{MapToShortName(itemType.FullName)}>";
                             IList list = (IList)stateVariable.Value;
@@ -101,6 +107,7 @@ namespace FlowCodeInfrastructure
 
                             val = "[" + string.Join(",", vs) + "]";
                         }
+                        else type = MapToShortName(type);
 
                         if (val == "True") val = "true";
                         else if (val == "False") val = "false";
@@ -116,18 +123,14 @@ namespace FlowCodeInfrastructure
                 //var rval = state.Variables.Where(x => x.Name == ReturnTarget);
                 if (TerminatorNode.ReturnValue  != null)
                 {
-                    //var o = TerminatorNode.ReturnValue;
                     var existingVar = state.Variables.Where(x => x.Name == ReturnTarget).FirstOrDefault();
                     if (existingVar != null)
                     {
-                        //var idx = state.Variables.IndexOf(existingVar);
-                        //state.Variables[idx] = o;
+
                         string parenthesis = string.Empty;
                         if (existingVar.Type == typeof(string))
                             parenthesis = "\"";
-                        //if (existingVar.Type == typeof(string))
-                        //    state = state.ContinueWithAsync($"{ReturnTarget} = \"{TerminatorNode.ReturnValue}\"").Result;
-                        //else
+
                             state = state.ContinueWithAsync($"{ReturnTarget} = {parenthesis}{TerminatorNode.ReturnValue}{parenthesis}").Result;
                     }
                     else
@@ -143,16 +146,12 @@ namespace FlowCodeInfrastructure
             {
                 throw e;
             }
-            //finally
-            //{
+
             ScriptState = state;
             ScriptOptions = options;
 
             StackDisplay?.Pop();
             // TODO: Maybe clear the StackDisplay completely before entering the function, and reset after that.
-
-            //Run(Next);
-            //}
         }
 
     }
