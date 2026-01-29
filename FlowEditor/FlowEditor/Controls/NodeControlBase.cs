@@ -1,14 +1,10 @@
 ﻿using Interfaces;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Security.Policy;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Xml.Linq;
 
 namespace FlowEditor.Controls
 {
@@ -75,14 +71,14 @@ namespace FlowEditor.Controls
         {
             for (int i = FirstOutputIndex; i < GetConnectionPoints().Count; i++)
             {
-                if (!occupiedOutputEdges.ContainsKey(i))
+                if (!occupiedOutputEdges.TryGetValue(i, out EdgeControl? value))
                 {
                     existingEdge = null;
                     return i;
                 }
                 else
                 {
-                    existingEdge = occupiedOutputEdges[i];
+                    existingEdge = value;
                     return i;
                 }
             }

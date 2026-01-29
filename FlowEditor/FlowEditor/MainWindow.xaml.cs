@@ -1355,8 +1355,7 @@ namespace FlowEditor
             double offsetX = 0.0;
             double offsetY = 0.0;
 
-            var focussed = FocusManager.GetFocusedElement(this) as TextBox;
-            if (focussed is null)
+            if (FocusManager.GetFocusedElement(this) is not TextBox focussed)
             {
                 if (e.Key == Key.W || e.Key == Key.Up) // pan up
                     offsetY = -10.0;
@@ -1429,9 +1428,11 @@ namespace FlowEditor
 
         private void LoadCTField(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.DefaultExt = "json";
-            ofd.Filter = "JSON Files|*.json|All files (*.*)|*.*";
+            OpenFileDialog ofd = new()
+            {
+                DefaultExt = "json",
+                Filter = "JSON Files|*.json|All files (*.*)|*.*"
+            };
             if (ofd.ShowDialog() == true)
             {
                 var f = ofd.FileName;

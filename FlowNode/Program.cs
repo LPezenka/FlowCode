@@ -39,7 +39,7 @@ var primaryNode = dion.Nodes.Select(x => x).Where(x => x.ID == "UQ2DM836Tyy0t1lE
 
 Node.Run(primaryNode);
 
-XmlNode GetRootNode(XmlNode node)
+static XmlNode GetRootNode(XmlNode node)
 {
     if (node.Name == "root")
         return node;

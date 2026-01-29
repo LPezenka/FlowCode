@@ -43,8 +43,7 @@ namespace FlowEditor.Controls
                 var t = this.Template;
                 if (t is not null)
                 {
-                    var polygon = t.FindName("BorderPolygon", this) as Polygon;
-                    if (polygon is null) return;
+                    if (t.FindName("BorderPolygon", this) is not Polygon polygon) return;
                     if (active)
                     {
                         polygon.StrokeThickness = 9;
@@ -59,7 +58,7 @@ namespace FlowEditor.Controls
                 //    StrokeThickness = 9;
                 //else
                 //    StrokeThickness = 1;
-                NotifyPropertyChanged("StrokeThickness");
+                NotifyPropertyChanged(nameof(StrokeThickness));
             });
             }
     }

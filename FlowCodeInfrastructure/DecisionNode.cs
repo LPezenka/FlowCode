@@ -9,7 +9,7 @@
             if (Code == null) return;
 
             if (Code.EndsWith(';'))
-                Code = Code.Substring(0, Code.Length - 1);
+                Code = Code[..^1];
             ScriptState = ScriptState.ContinueWithAsync<bool>(Code, ScriptOptions).Result;
             var v = (bool)ScriptState.ReturnValue;
 
