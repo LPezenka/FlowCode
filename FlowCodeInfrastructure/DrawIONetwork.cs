@@ -29,11 +29,13 @@ namespace FlowCodeInfrastructure
                 string style = node.Attributes["style"]?.InnerText;
                 if (edge != null)
                 {
-                    Edge e = new Edge();
-                    e.ID = id;
-                    e.Source = source;
-                    e.Target = target;
-                    e.Text = code;
+                    Edge e = new Edge
+                    {
+                        ID = id,
+                        Source = source,
+                        Target = target,
+                        Text = code
+                    };
                     Edges.Add(e);
                 }
                 else
@@ -72,14 +74,14 @@ namespace FlowCodeInfrastructure
                     else if (n.GetType() == typeof(TerminatorNode))
                     {
                         code = code.Replace("return ", "");
-                        (n as TerminatorNode).ResultVariable = code;
+                        ((TerminatorNode)n).ResultVariable = code;
                     }
 
                     if (code != null)
                     {
                         code = code.Replace("&gt;", ">");
                         code = code.Replace("&lt;", "<");
-                        if (code.Length > 0) code = code + ";";
+                        if (code.Length > 0) code = $"{code};";
                     }
 
                     n.Code = code;
@@ -123,7 +125,7 @@ namespace FlowCodeInfrastructure
                 else if (dn.GetType() == typeof(CallerNode))
                 {
                     var target = Nodes.Where(x => x.Code != null && x.Code.Contains($"{Config.GetKeyword(Config.KeyWord.Function)} {(dn as CallerNode).ReturnSource}")).FirstOrDefault();
-                    (dn as CallerNode).TargetNode = target;
+                    ((CallerNode)dn).TargetNode = target;
                 }
             }
 

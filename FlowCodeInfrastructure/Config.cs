@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 
 namespace FlowCodeInfrastructure
 {
@@ -18,7 +13,7 @@ namespace FlowCodeInfrastructure
             {
                 XDocument doc = XDocument.Load("./infrastructureconfig.xml");
 
-                string rootId = string.Empty;
+                //string rootId = string.Empty;
                 
                 foreach (var c in doc.Root.Elements("KeyWord"))
                 {
@@ -47,7 +42,7 @@ namespace FlowCodeInfrastructure
             delay.Add(d);
             root.Add(delay);
             
-            foreach (var keyword in KeywordMapper)
+            foreach (var keyword in keywordMapper)
             {
                 XElement kw = new XElement("KeyWord");
                 XAttribute k = new XAttribute("Key", keyword.Key);
@@ -82,14 +77,14 @@ namespace FlowCodeInfrastructure
             Output
         }
 
-        public static Dictionary<KeyWord, string> KeywordMapper = new();
+        private static Dictionary<KeyWord, string> keywordMapper = new();
 
 
         public static string GetKeyword(KeyWord key)
         {
-            if (KeywordMapper.ContainsKey(key))
+            if (keywordMapper.ContainsKey(key))
             {
-                return KeywordMapper[key];
+                return keywordMapper[key];
             }
             else
             {
@@ -99,13 +94,9 @@ namespace FlowCodeInfrastructure
 
         public static void SetKeyWord(KeyWord key, string value)
         {
-            if (KeywordMapper.ContainsKey(key))
+            if (!keywordMapper.TryAdd(key, value))
             {
-                KeywordMapper[key] = value;
-            }
-            else
-            {
-                KeywordMapper.Add(key, value);
+                keywordMapper[key] = value;
             }
         }
     }

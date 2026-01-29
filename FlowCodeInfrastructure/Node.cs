@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Interfaces;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using Interfaces;
 
 namespace FlowCodeInfrastructure
 {
     public abstract class Node
     {
         internal static bool InterruptProcess { get; set; } = false;
-        public static IVariableLogger variableLogger { get; set; } = null;
+        public static IVariableLogger VariableLogger { get; set; } = null;
         public static int Delay { get; set; } = 500;
         public IHighlightable GraphicalNode;
         public Node Next { get; set; }
         public string ID { get; set; }
         public string Parent { get; set; }
-
         public string Code { get; set; }
 
         public abstract void Evaluate();
@@ -26,9 +19,7 @@ namespace FlowCodeInfrastructure
             Node current = n;
             while (current != null)
             {
-                if (current.GraphicalNode != null)
-                    current.GraphicalNode.SetActive(true);
-                
+                current.GraphicalNode?.SetActive(true);
 
                 try
                 {
@@ -41,8 +32,7 @@ namespace FlowCodeInfrastructure
 
                 // Add a delay.Should be specified as a class Level Config
                 Thread.Sleep(Delay); 
-                if (current.GraphicalNode != null)
-                  current.GraphicalNode.SetActive(false);
+                current.GraphicalNode?.SetActive(false);
 
                 if (!InterruptProcess) 
                     current = current.Next;

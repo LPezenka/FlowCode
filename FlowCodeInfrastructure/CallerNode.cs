@@ -1,14 +1,6 @@
 ﻿using Interfaces;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
-using Microsoft.CodeAnalysis.Scripting;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Resources;
-using System.Security;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlowCodeInfrastructure
 {
@@ -39,25 +31,18 @@ namespace FlowCodeInfrastructure
         /// </summary>
         /// <param name="typeName"></param>
         /// <returns></returns>
-        string MapToShortName(string typeName)
+        static string MapToShortName(string typeName)
         {
-            switch (typeName)
+            return typeName switch
             {
-                case "System.Boolean":
-                    return "bool";
-                case "System.Int32":
-                    return "int";
-                case "System.Char":
-                    return "char";
-                case "System.String":
-                    return "string";
-                case "System.Double":
-                    return "double";
-                case "System.Single":
-                    return "float";
-                default:
-                    return typeName;
-            }
+                "System.Boolean" => "bool",
+                "System.Int32" => "int",
+                "System.Char" => "char",
+                "System.String" => "string",
+                "System.Double" => "double",
+                "System.Single" => "float",
+                _ => typeName,
+            };
         }
 
         /// <summary>
@@ -76,8 +61,7 @@ namespace FlowCodeInfrastructure
             {
                 var vars = Variables.Split(",");
                 string result = string.Empty;
-                TerminatorNode terminatorNode = TargetNode as TerminatorNode;
-                if (terminatorNode is null) return; // Improper function name
+                if (TargetNode is not TerminatorNode terminatorNode) return; // Improper function name
 
                 StackDisplay?.Push(TargetNode.Code);
 

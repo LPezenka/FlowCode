@@ -153,7 +153,7 @@ namespace FlowEditor
             callStack = new OutputControl();
             Overlay.Children.Add(callStack);
 
-            FlowCodeInfrastructure.Node.variableLogger = variableLogger;
+            FlowCodeInfrastructure.Node.VariableLogger = variableLogger;
             FlowCodeInfrastructure.CallerNode.StackDisplay = callStack;
 
             outputLogger.Visibility = Visibility.Hidden;

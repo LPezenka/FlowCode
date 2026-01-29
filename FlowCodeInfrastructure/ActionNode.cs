@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.Scripting;
-using CargoTrucker;
+﻿using Microsoft.CodeAnalysis.Scripting;
 using Interfaces;
 using System.Text.RegularExpressions;
 
@@ -28,7 +22,7 @@ namespace FlowCodeInfrastructure
         /// <param name="initVariable"></param>
         /// <param name="varName"></param>
         /// <returns></returns>
-        private (ScriptState, string) HandleAssignment(ScriptState scriptState, string code, ref bool initVariable, ref string varName)
+        private static (ScriptState, string) HandleAssignment(ScriptState scriptState, string code, ref bool initVariable, ref string varName)
         {
 
             if (Regex.IsMatch(code, @"(?<!\+)\+=(?!\=)") ||
@@ -118,7 +112,7 @@ namespace FlowCodeInfrastructure
                 bool customOutput = false;
                 string outputText = string.Empty;
                 string varName = string.Empty;
-                (ScriptState, code) = HandleOutput(ScriptState, code, ref initVariable, ref customOutput, ref outputText, ref varName);
+                (ScriptState, code) = HandleOutput(ScriptState, code, ref customOutput, ref outputText, ref varName);
                 (ScriptState, code) = HandleInput(ScriptState, code, ref initVariable, ref customInput, ref varName);
                 (ScriptState, code) = HandleAssignment(ScriptState, code, ref initVariable, ref varName);
 
@@ -165,7 +159,7 @@ namespace FlowCodeInfrastructure
                     }
                 }
 
-                variableLogger?.LogVariables(ScriptState.Variables);
+                VariableLogger?.LogVariables(ScriptState.Variables);
 
             }
             catch (CompilationErrorException cee)
@@ -180,7 +174,7 @@ namespace FlowCodeInfrastructure
 
         private static string InferType(string varName, string? vVal, out string vType)
         {
-            string varType = "string;";
+            string varType; // = "string;";
 
             if (vVal is not null && vVal.Contains("["))
             {
@@ -191,46 +185,30 @@ namespace FlowCodeInfrastructure
                 int closingBracketIndex = vVal.IndexOf(']');
                 int delimiterIndex = vVal.IndexOf(',', vVal.IndexOf('['));
                 var first = vVal.Substring(openingBracketIndex + 1, Math.Min(closingBracketIndex, delimiterIndex) - 1);
-                string localtype = InferType("temp", first.Trim(), out string inferredType);
+                InferType("temp", first.Trim(), out string inferredType);
                 vType = $"List<{inferredType}>";
             }
             else 
             {
-                if (int.TryParse(vVal, out int intValue)) varType = "int";
-                else if (float.TryParse(vVal, out float f)) varType = "float";
-                else if (double.TryParse(vVal, out double d)) varType = "double";
-                else if (bool.TryParse(vVal, out bool boolValue)) varType = "bool";
-                else if (char.TryParse(vVal, out char charValue)) varType = "char";
+                if (int.TryParse(vVal, out _)) varType = "int";
+                else if (float.TryParse(vVal, out _)) varType = "float";
+                else if (double.TryParse(vVal, out _)) varType = "double";
+                else if (bool.TryParse(vVal, out _)) varType = "bool";
+                else if (char.TryParse(vVal, out _)) varType = "char";
                 else varType = "string";
                 vType = varType;
             }
-            string postProcess = string.Empty;
 
-            switch (varType)
+            string postProcess = varType switch
             {
-                case "float":
-                    postProcess = $"{varType} {varName} = float.Parse(\"{vVal}\");";
-                    break;
-                case "double":
-                    postProcess = $"{varType} {varName} = double.Parse(\"{vVal}\");";
-                    break;
-                case "bool":
-                    postProcess = $"{varType} {varName} = bool.Parse(\"{vVal}\");";
-                    break;
-                case "char":
-                    postProcess = $"{varType} {varName} = char.Parse(\"{vVal}\");";
-                    break;
-                case "int":
-                    postProcess = $"{varType} {varName} = int.Parse(\"{vVal}\");";
-                    break;
-                case "List":
-                    postProcess = $"{vType} {varName} = {vVal};";
-                    break;
-                default:
-                    postProcess = $"string {varName} = \"{vVal}\";";
-                    break;
-            }
-
+                "float" => $"{varType} {varName} = float.Parse(\"{vVal}\");",
+                "double" => $"{varType} {varName} = double.Parse(\"{vVal}\");",
+                "bool" => $"{varType} {varName} = bool.Parse(\"{vVal}\");",
+                "char" => $"{varType} {varName} = char.Parse(\"{vVal}\");",
+                "int" => $"{varType} {varName} = int.Parse(\"{vVal}\");",
+                "List" => $"{vType} {varName} = {vVal};",
+                _ => $"string {varName} = \"{vVal}\";",
+            };
             return postProcess;
         }
 
@@ -257,14 +235,14 @@ namespace FlowCodeInfrastructure
             return (scriptState, code);
         }
 
-        private (ScriptState, string) HandleOutput(ScriptState scriptState, string code, ref bool initVariable, ref bool customOutput, ref string outputText, ref string varName)
+        private (ScriptState, string) HandleOutput(ScriptState scriptState, string code, ref bool customOutput, ref string outputText, ref string varName)
         {
             if (!code.Contains(Config.GetKeyword(Config.KeyWord.Output)))
                 return (scriptState, code);
 
             if (OutputHandler is not null)
             {
-                if (code.Contains("\"")) // This is simply a string
+                if (code.Contains('\"')) // This is simply a string
                 {
                     outputText = code.Split(":")[1].Trim().Replace("\"", "");
                 }
@@ -287,7 +265,7 @@ namespace FlowCodeInfrastructure
         private string HandleVariableOutput(ref string outputText)
         {
             string varName;
-            var parts = Code.Split(new[] { ':' }, 2);
+            string[] parts = Code.Split(new[] { ':' }, 2);
             varName = parts[1].Trim();
             var filterName = varName;
             var v = ScriptState.Variables.Where(x => x.Name == filterName).FirstOrDefault();

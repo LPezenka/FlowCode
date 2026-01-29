@@ -174,8 +174,7 @@ namespace FlowEditor.Controls
             base.OnMouseMove(e);
             if (_isDragging && e.LeftButton == MouseButtonState.Pressed)
             {
-                var parent = Parent as Canvas;
-                if (parent != null)
+                if (Parent is Canvas parent)
                 {
                     Point currentPos = e.GetPosition(parent);
                     double offsetX = currentPos.X - _dragStart.X;

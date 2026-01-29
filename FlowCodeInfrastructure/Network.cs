@@ -47,7 +47,11 @@ namespace FlowCodeInfrastructure
             //);
         }
 
-        public void FromDrawIOFile(string fname)
+        /// <summary>
+        /// Pretty useless. Get rid soon.
+        /// </summary>
+        /// <param name="fname"></param>
+        public static void FromDrawIOFile(string fname)
         {
             var dion = new DrawIONetwork();
             dion.Load(fname);

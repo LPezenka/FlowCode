@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 
 namespace FlowCodeInfrastructure
 {
@@ -110,9 +105,9 @@ namespace FlowCodeInfrastructure
                 type = "PredefinedProcess";
                 string call = pn.Code;
                 string fname = call.Split("(")[0];
-                if (fname.Contains("="))
-                    fname = fname.Split("=")[0].Trim();
-                string variables = call.Split("(")[1].Split(")")[0];
+                if (fname.Contains('='))
+                    fname = fname.Split('=')[0].Trim();
+                string variables = call.Split('(')[1].Split(')')[0];
 
                 XAttribute target = new XAttribute("Target", fname);
                 XAttribute variable = new XAttribute("Variables", variables);

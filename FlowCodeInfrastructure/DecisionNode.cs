@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FlowCodeInfrastructure
+﻿namespace FlowCodeInfrastructure
 {
     public class DecisionNode : ActionNode
     {
@@ -14,7 +8,7 @@ namespace FlowCodeInfrastructure
         {
             if (Code == null) return;
 
-            if (Code.EndsWith(";"))
+            if (Code.EndsWith(';'))
                 Code = Code.Substring(0, Code.Length - 1);
             ScriptState = ScriptState.ContinueWithAsync<bool>(Code, ScriptOptions).Result;
             var v = (bool)ScriptState.ReturnValue;

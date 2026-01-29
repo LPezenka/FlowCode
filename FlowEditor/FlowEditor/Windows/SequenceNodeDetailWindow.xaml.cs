@@ -2,6 +2,7 @@
 using FlowEditor.Controls;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,24 +27,47 @@ namespace FlowEditor.Windows
         public List<string> Snippets { get; set; }
         public NodeControlBase Node { get; set; }
 
+ 
+        public static List<string> StaticSnippets { get; set; }
+
+        /// <summary>
+        /// Load Code Snippets from File
+        /// </summary>
+        /// <param name="path">path of the snippet file</param>
+        public static void Load(string path)
+        {
+            string[] lines = File.Exists(path) ? File.ReadAllLines(path) : null;
+            if (lines is not null)
+            {
+                foreach (string line in lines)
+                {
+                    var s = line.Trim().Replace(";", "");
+                    if (!StaticSnippets.Contains(s))
+                    {
+                        StaticSnippets.Add(s);
+                    }
+                }
+            }
+        }
+
         public SequenceNodeDetailWindow(NodeControlBase node, List<string> snippets = null)
         {
             if (snippets is not null)
                 Snippets = snippets;
-            InitializeComponent();
+            else
+                Snippets = new List<string>();
 
-            /*foreach (var f in FlowCodeInfrastructure.Config.KeywordMapper)
-            {
-                Snippets.Add(f.Value);
-            }*/
+            foreach (string s in StaticSnippets)
+                if (!Snippets.Contains(s))
+                    Snippets.Add(s);
+    
+                InitializeComponent();
 
             if (node is not null)
             {
                 this.Node = node;
                 this.DataContext = Node;
             }
-
-            
 
             CodeFragments.ItemsSource = Snippets;
             CodeFragments.Items.Refresh();

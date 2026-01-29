@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Input;
@@ -31,9 +26,9 @@ namespace FlowEditor.Controls
         public Point? CurrentMousePosition { get; set; }
 
         public List<Point> ControlPoints { get; set; } = new();
-        private List<ControlPointVisual> _controlPointVisuals = new();
-        private ControlPointVisual _draggingPoint = null;
-        private Point _lastMousePos;
+        private List<ControlPointVisual> controlPointVisuals = new();
+        private ControlPointVisual draggingPoint = null;
+        private Point lastMousePos;
 
         public Point LabelPosition
         {
@@ -143,8 +138,8 @@ namespace FlowEditor.Controls
             PositionStateButton();
 
             // Compute arrowhead based on last segment of the polyline
-            Point arrowStart = points[points.Count - 2];
-            Point arrowEnd = points[points.Count - 1];
+            Point arrowStart = points[^2];
+            Point arrowEnd = points[^1];
             DrawArrowHead(drawingContext, arrowStart, arrowEnd);
             //if (LabelBox is not null && LabelBox.Visibility == Visibility.Visible)
             //LabelBox.Foreground = edgeColor;
