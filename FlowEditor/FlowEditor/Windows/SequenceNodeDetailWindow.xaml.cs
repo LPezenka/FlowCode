@@ -30,6 +30,11 @@ namespace FlowEditor.Windows
  
         public static List<string> StaticSnippets { get; set; }
 
+        static SequenceNodeDetailWindow()
+        {
+            StaticSnippets = new List<string>();
+        }
+
         /// <summary>
         /// Load Code Snippets from File
         /// </summary>
@@ -57,9 +62,10 @@ namespace FlowEditor.Windows
             else
                 Snippets = new List<string>();
 
-            foreach (string s in StaticSnippets)
-                if (!Snippets.Contains(s))
-                    Snippets.Add(s);
+            if (StaticSnippets is not null)
+                foreach (string s in StaticSnippets)
+                    if (!Snippets.Contains(s))
+                        Snippets.Add(s);
     
                 InitializeComponent();
 

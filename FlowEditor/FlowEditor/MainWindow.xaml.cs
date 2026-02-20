@@ -162,6 +162,8 @@ namespace FlowEditor
 
 
             LoadSettingsFile();
+
+            SequenceNodeDetailWindow.Load("./Snippets/ActionNode.snippets");
         }
 
         void LoadSettingsFile()
